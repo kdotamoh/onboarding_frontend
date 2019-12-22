@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
 export const Card = styled.div`
-  min-height: 300px;
-  min-width: 250px;
-  background: black;
-  border: 1px solid red;
-  border-radius: 4px;
+  min-height: 350px;
+  min-width: 350px;
+  background: white;
+  z-index: 500;
+  box-shadow: 0 4px 2.5px 0 rgba(0, 0, 0, 0.25);
 `

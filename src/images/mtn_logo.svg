@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="257.938" height="257.941" viewBox="0 0 257.938 257.941">
+    <defs>
+        <style>
+            .cls-1{fill:#fff}.cls-2{fill:#ffcb09}.cls-3{fill:#284a65}.cls-4{fill:#c31612}
+        </style>
+    </defs>
+    <g id="Logo_L" data-name="Logo L" transform="translate(-127.03 -255.029)">
+        <path id="Rectangle_446" d="M0 0h257.939v257.941H0z" class="cls-1" data-name="Rectangle 446" transform="translate(127.031 255.029)"/>
+        <path id="Rectangle_447" d="M0 0h232.148v232.148H0z" class="cls-2" data-name="Rectangle 447" transform="translate(139.926 267.929)"/>
+        <path id="Path_568" d="M256 429.14c60.543 0 109.622-20.208 109.622-45.142S316.542 338.865 256 338.865 146.374 359.07 146.374 384s49.08 45.14 109.626 45.14" class="cls-3" data-name="Path 568"/>
+        <path id="Path_569" d="M283.434 372.865l2.865-11.431h-37.417l-2.864 11.431h12.258l-6.02 24.036h12.9l6.018-24.036z" class="cls-2" data-name="Path 569"/>
+        <path id="Path_570" d="M245.659 361.433h-18.665l-11.883 26.29v-26.29h-18.093l-11.309 45.139h12.431l7.367-29.139v29.139h9.6l14.139-29.139-6.783 29.139h11.884z" class="cls-1" data-name="Path 570"/>
+        <path id="Path_571" d="M326.287 361.433h-11.87l-6.218 24.01-5.663-24.01h-13.014l-11.305 45.139H290.1L296.315 382l6.221 24.568h12.444z" class="cls-1" data-name="Path 571"/>
+        <path id="Path_572" d="M251.448 400.123l-1.617 6.45h12.9l1.617-6.45z" class="cls-4" data-name="Path 572"/>
+    </g>
+</svg>
