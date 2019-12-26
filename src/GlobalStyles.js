@@ -31,6 +31,31 @@ export default createGlobalStyle`
 
   ${fonts}
 
+  // .row {
+  //   display: flex;
+  //   flex-direction: row;
+  //   flex-wrap: wrap;
+  // }
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  // .column {
+  //   flex-basis: 100%;
+  // }
+  
+  .column {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+    text-align: center;
+  }
+
   // #root {
     //   height: 100vh;
     // }

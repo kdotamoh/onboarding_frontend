@@ -13,6 +13,7 @@ import {
   GridMain
 } from 'views/layout'
 import { COLORS } from '../../constants'
+import { Img } from 'components/styled'
 import bgImg from 'images/bg_l_h_bottomright.svg'
 
 const StepOne = styled.div.attrs({
@@ -27,15 +28,15 @@ const StepThree = styled(Navigation).attrs({
   className: 'tour-step-3'
 })``
 
-// StepFour is the UserProfile component in 'components/navigation',
-// to which I've attached the class '.tour-step-4'
-
-const Img = styled.img`
+const BgImg = styled(Img)`
   position: absolute;
   bottom: 0;
   right: 0;
   align-self: flex-end;
 `
+
+// StepFour is the UserProfile component in 'components/navigation',
+// to which I've attached the class '.tour-step-4'
 
 export default class Welcome extends Component {
   state = {
@@ -53,7 +54,7 @@ export default class Welcome extends Component {
     return (
       <React.Fragment>
         <FullPageGrid>
-          <StepThree background={COLORS.MARIGOLD} />
+          <StepThree />
           <GridMain>
             <SplitGrid leftWidth={50} rightWidth={50}>
               <SplitGridLeftColumn background={COLORS.LIGHTER_MARIGOLD}>
@@ -65,7 +66,7 @@ export default class Welcome extends Component {
                 <CenterContent>
                   <StepTwo />
                 </CenterContent>
-                <Img src={bgImg} />
+                <BgImg src={bgImg} />
               </SplitGridRightColumn>
             </SplitGrid>
           </GridMain>

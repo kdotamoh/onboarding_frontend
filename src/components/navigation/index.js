@@ -3,16 +3,26 @@ import styled from 'styled-components'
 import { Link } from '@reach/router'
 import PropTypes from 'prop-types'
 
-import { COLORS, NAV_HEIGHT } from '../../constants'
+import {
+  COLORS,
+  NAV_HEIGHT,
+  PADDING_LEFT,
+  PADDING_RIGHT
+} from '../../constants'
 import logo from 'images/mtn_logo.svg'
 import NavLink from './NavLink'
+import SideNav from './SideNav'
+import SmallNav from './SmallNav'
+
+export { SideNav }
+export { SmallNav }
 
 export const Nav = styled.nav`
   grid-area: nav;
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: ${PADDING_LEFT}rem;
+  padding-right: ${PADDING_RIGHT}rem;
   display: flex;
-  height: ${NAV_HEIGHT}px;
+  height: ${NAV_HEIGHT}rem;
   justify-content: space-between;
   align-items: center;
   background: ${COLORS.MARIGOLD};

@@ -12,6 +12,10 @@ import {
   CenterContent
 } from 'views/layout'
 
+const TranslateCenter = styled(CenterContent)`
+  transform: translateX(-10rem);
+`
+
 const Logo = styled.img``
 
 export default class PreOnboardingLogin extends Component {
@@ -24,9 +28,9 @@ export default class PreOnboardingLogin extends Component {
           </CenterContent>
         </SplitGridLeftColumn>
         <SplitGridRightColumn>
-          <CenterContent>
+          <TranslateCenter>
             <LoginForm />
-          </CenterContent>
+          </TranslateCenter>
         </SplitGridRightColumn>
       </SplitGrid>
     )

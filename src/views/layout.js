@@ -28,6 +28,7 @@ export const SplitGrid = styled.div`
 
 export const SplitGridLeftColumn = styled.section`
   grid-area: left;
+  position: relative;
   background: ${props => (props.background ? props.background : 'white')};
 `
 
@@ -42,6 +43,7 @@ export const SplitGridRightColumn = styled.section`
 export const CenterContent = styled.div`
   height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 `
