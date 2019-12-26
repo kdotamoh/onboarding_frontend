@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { navigate } from '@reach/router'
 
 import { SmallNav } from 'components/navigation'
 import { H4, Container, Img, UL, Button, H3 } from 'components/styled'
@@ -113,7 +114,12 @@ export default class CompanyOverview extends Component {
               </li>
             </UL>
           </InfoBox>
-          <Button color="blue">Next Step ></Button>
+          <Button
+            color="blue"
+            onClick={() => navigate('/preonboarding/compliance')}
+          >
+            Next Step >
+          </Button>
           {/* <BgImgContainer> */}
           <BgImg src={bgImg} />
           {/* </BgImgContainer> */}

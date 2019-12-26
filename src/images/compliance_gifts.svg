@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="84.299" height="85.848" viewBox="0 0 84.299 85.848">
+    <defs>
+        <style>
+            .cls-1{fill:#e6e6e6}.cls-2{fill:#1b5884}.cls-3{fill:#276d9f}.cls-4{fill:#337baf}.cls-5{fill:#edd06f}.cls-6{fill:#c02038}
+        </style>
+    </defs>
+    <g id="Group_990" data-name="Group 990" transform="translate(-639.992 -3031.214)">
+        <ellipse id="Ellipse_71" cx="42.149" cy="3.035" class="cls-1" data-name="Ellipse 71" rx="42.149" ry="3.035" transform="translate(639.992 3110.992)"/>
+        <g id="Group_449" data-name="Group 449" transform="translate(7510.43 -5570.09)">
+            <rect id="Rectangle_462" width="9.232" height="67.703" class="cls-2" data-name="Rectangle 462" rx="4.616" transform="rotate(-60 4027.584 10245.574)"/>
+            <rect id="Rectangle_460" width="7.386" height="62.779" class="cls-3" data-name="Rectangle 460" rx="3" transform="rotate(-60 4025.82 10242.475)"/>
+            <rect id="Rectangle_463" width="11.694" height="67.703" class="cls-2" data-name="Rectangle 463" rx="5.847" transform="rotate(-120 -931.736 6301.814)"/>
+            <rect id="Rectangle_464" width="7.386" height="62.779" class="cls-4" data-name="Rectangle 464" rx="3.693" transform="rotate(-120 -932.754 6297.919)"/>
+            <path id="Rectangle_458" d="M0 0h72v63H0z" class="cls-5" data-name="Rectangle 458" transform="translate(-6864.438 8620.44)"/>
+            <path id="Rectangle_459" d="M0 0h8v63H0z" class="cls-2" data-name="Rectangle 459" transform="translate(-6832.438 8620.44)"/>
+        </g>
+        <path id="Path_612" d="M559.844 244.563a35.281 35.281 0 1 0 35.281 35.281 35.281 35.281 0 0 0-35.281-35.281zm29.169 35.281a29.03 29.03 0 0 1-6.506 18.34l-41-41a29.152 29.152 0 0 1 47.509 22.663zm-58.337 0a29.028 29.028 0 0 1 6.506-18.34l41 41a29.152 29.152 0 0 1-47.509-22.663z" class="cls-6" data-name="Path 612" transform="translate(122.429 2795.788)"/>
+    </g>
+</svg>

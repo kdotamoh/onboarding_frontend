@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="74.299" height="99.933" viewBox="0 0 74.299 99.933">
+    <defs>
+        <style>
+            .cls-1{fill:#e6e6e6}.cls-2{fill:#c02038}.cls-3{fill:#cd4d60}.cls-4{fill:#e6a6af}.cls-5{fill:#90182a}.cls-6{fill:#474747}
+        </style>
+    </defs>
+    <g id="Group_988" data-name="Group 988" transform="translate(-644.992 -1641.255)">
+        <ellipse id="Ellipse_70" cx="37.149" cy="3.035" class="cls-1" data-name="Ellipse 70" rx="37.149" ry="3.035" transform="translate(644.992 1735.117)"/>
+        <g id="Group_444" data-name="Group 444" transform="translate(654.992 1641.255)">
+            <g id="Group_443" data-name="Group 443">
+                <g id="Group_442" data-name="Group 442">
+                    <path id="Path_587" d="M582.573 249.355a21.151 21.151 0 0 0-21.151 21.151v21.152h42.3v-21.152a21.151 21.151 0 0 0-21.149-21.151z" class="cls-2" data-name="Path 587" transform="translate(-555.711 -223.85)"/>
+                    <path id="Path_588" d="M626.924 370.728a4.816 4.816 0 0 0-4.816 4.816v4.816h9.632v-4.816a4.816 4.816 0 0 0-4.816-4.816z" class="cls-3" data-name="Path 588" transform="translate(-600.062 -312.552)"/>
+                    <path id="Path_589" d="M574.885 324.332a2.1 2.1 0 0 0-2.1 2.1v13.794a2.1 2.1 0 1 0 4.2 0v-13.795a2.1 2.1 0 0 0-2.1-2.099z" class="cls-4" data-name="Path 589" transform="translate(-564.016 -278.645)"/>
+                    <path id="Path_590" d="M634.3 154.6a2.1 2.1 0 0 0-2.1 2.1v13.8a2.1 2.1 0 0 0 4.2 0v-13.8a2.1 2.1 0 0 0-2.1-2.1z" class="cls-3" data-name="Path 590" transform="translate(-607.439 -154.602)"/>
+                    <path id="Path_591" d="M701.3 196.142a2.1 2.1 0 0 0-2.968 0l-8.269 8.269-.121.121-1.364 1.364a2.1 2.1 0 0 0 2.968 2.969l1.364-1.364.121-.121 8.269-8.269a2.1 2.1 0 0 0 0-2.969z" class="cls-3" data-name="Path 591" transform="translate(-648.19 -184.511)"/>
+                    <path id="Path_592" d="M553.542 208.864a2.1 2.1 0 0 0 0-2.969l-8.27-8.269-.12-.12-1.364-1.364a2.1 2.1 0 0 0-2.969 2.968l1.364 1.364.12.12 8.269 8.27a2.1 2.1 0 0 0 2.97 0z" class="cls-3" data-name="Path 592" transform="translate(-540.205 -184.511)"/>
+                    <path id="Rectangle_453" d="M5.288 0h37.167a5.288 5.288 0 0 1 5.288 5.288H0A5.288 5.288 0 0 1 5.288 0z" class="cls-5" data-name="Rectangle 453" transform="translate(2.991 67.808)"/>
+                    <path id="Rectangle_454" d="M7.109 0h39.507a7.109 7.109 0 0 1 7.109 7.109H0A7.109 7.109 0 0 1 7.109 0z" class="cls-6" data-name="Rectangle 454" transform="translate(0 73.096)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
