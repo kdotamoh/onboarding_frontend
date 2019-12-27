@@ -5,8 +5,11 @@ import Welcome from './Welcome'
 import Info from './Info'
 import CompanyOverview from './CompanyOverview'
 import Compliance from './Compliance'
+import CodeEthics from './CodeEthics'
+import Introduction from './Introduction'
+import FirstDays from './FirstDays'
 
-export default class index extends Component {
+export default class PreOnboarding extends Component {
   render() {
     return (
       <Router>
@@ -15,6 +18,9 @@ export default class index extends Component {
         <Info path="info" />
         <CompanyOverview path="company-overview" />
         <Compliance path="compliance" />
+        <CodeEthics path="code-of-ethics" />
+        <Introduction path="introduce-yourself" />
+        <FirstDays path="first-three-days" />
       </Router>
     )
   }

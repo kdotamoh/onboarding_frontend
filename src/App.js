@@ -4,6 +4,7 @@ import { Router } from '@reach/router'
 import PreOnboarding from 'pages/preonboarding'
 
 import GlobalStyles from './GlobalStyles'
+import Onboarding from 'pages/onboarding'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <GlobalStyles />
       <Router>
         <PreOnboarding path="preonboarding/*" />
+        <Onboarding path="onboarding/*" />
       </Router>
     </div>
   )
