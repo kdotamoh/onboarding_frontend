@@ -4,6 +4,7 @@ import MTNBrighterSansLight from './MTNBrighterSans-Light.woff2'
 import MTNBrighterSansRegular from './MTNBrighterSans-Regular.woff2'
 import MTNBrighterSansMedium from './MTNBrighterSans-Medium.woff2'
 import MTNBrighterSansBold from './MTNBrighterSans-Bold.woff2'
+import PTSansRegular from './PTSans-Regular.woff2'
 
 export default `
   @font-face {
@@ -38,6 +39,15 @@ export default `
     src: local(MTNBrighterSans-Bold),
       url(${MTNBrighterSansBold}) format('woff2');
     font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+  }
+
+  @font-face {
+    font-family: PTSans-Regular;
+    src: local(PTSans-Regular),
+      url(${PTSansRegular}) format('woff2');
+    font-weight: normal;
     font-style: normal;
     font-stretch: normal;
   }
