@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { navigate } from '@reach/router'
+// import { navigate } from '@reach/router'
 
 import { SmallNav } from 'components/navigation'
-import { H4, Container, Img, Button } from 'components/styled'
+import { H4, Container, Img } from 'components/styled'
 import {
   SplitGrid,
   SplitGridLeftColumn,
@@ -67,13 +67,13 @@ export default class EmployeeDetails extends Component {
           </Hero>
 
           <DetailsForm />
-
+          {/* 
           <Button
             color="blue"
             onClick={() => navigate('/preonboarding/first-three-days')}
           >
             Finish >
-          </Button>
+          </Button> */}
           <BgImgContainer>
             <BgImg src={bgImg} />
           </BgImgContainer>
