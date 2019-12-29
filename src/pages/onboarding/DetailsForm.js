@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Formik, FieldArray, Field } from 'formik'
+import { Formik, FieldArray } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
@@ -8,6 +8,8 @@ import PropTypes from 'prop-types'
 // import { COLORS, INPUT_WIDTH } from '../../constants'
 
 import { Button } from 'components/styled'
+
+import downArrow from 'images/select/down-arrow.svg'
 
 const Form = styled.form`
   display: flex;
@@ -22,16 +24,77 @@ const Form = styled.form`
 
   * {
     font-family: PTSans-Regular;
+    font-size: 85%;
   }
 `
 const Input = styled.input`
   width: 100%;
   border: 0.5px solid #e6e6e6;
   border-radius: 0.02rem;
+  padding: 0.4rem;
 `
+
+const Select = styled(Input)`
+  appearance: none;
+  outline: none;
+
+  background-image: url(${downArrow});
+  background-repeat: no-repeat;
+  background-position-x: calc(100% - 1rem);
+  background-position-y: 50%;
+  background-size: 0.5rem;
+`
+
+const Heading = styled.h4`
+  text-align: left;
+  border-bottom: 0.5px solid #e6e6e6;
+  font-size: 100%;
+  padding-bottom: 0.5rem;
+  margin-top: 2rem;
+`
+
+const FileInput = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  label {
+    color: white;
+    background-color: #666666;
+    padding: 0.3rem;
+    border-radius: 2px;
+    width: 8rem;
+    display: inline-block;
+
+    input[type='file'] {
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+  }
+  p {
+    font-size: 65%;
+    margin: 0 0.5rem;
+  }
+`
+
+// const AddButton = styled.button`
+//   color: white;
+//   background-color: #666666;
+//   padding: 0.3rem;
+//   border-radius: 4px;
+//   width: 2rem;
+//   height: 2rem;
+//   display: inline-block;
+// `
 
 const Label = styled.label`
   text-align: left;
+  margin-top: 1rem;
+  margin-bottom: 0.2rem;
 `
 // const Input = styled.input`
 //   background: white;
@@ -49,14 +112,23 @@ const Label = styled.label`
 const Error = styled.div`
   text-align: left;
   color: red;
-  font-size: 1.2rem;
+  font-size: 70%;
+`
+
+const Divider = styled.hr`
+  border-top: 0.5px solid #e6e6e6;
+  margin-top: 2rem;
 `
 
 const ValidationSchema = Yup.object().shape({
   surname: Yup.string().required('Surname is required'),
   middleName: Yup.string().required('Middle name is required'),
   firstName: Yup.string().required('First name is required'),
-  contactNumber: Yup.number().required('Contact number is required')
+  contactNumber: Yup.number().required('Contact number is required'),
+  // dateOfBirth
+  gender: Yup.mixed()
+    .oneOf(['M', 'F'])
+    .required('Gender is required')
 })
 
 const FormSection = ({ step, children }) => {
@@ -157,23 +229,32 @@ export default class DetailsForm extends Component {
         validationSchema={ValidationSchema}
       >
         {props => (
-          <Form
-            onSubmit={props.handleSubmit}
-            // className="column employee-details-form"
-          >
-            <p>1. Personal Information</p>
+          <Form onSubmit={props.handleSubmit}>
+            <Heading>1. Personal Information</Heading>
 
-            <Label htmlFor="passportPhoto">
-              Upload your passport photograph here
-              <input
-                accept="image/jpeg"
-                type="file"
-                name="passportPhoto"
-                onChange={e => {
-                  props.setFieldValue('passportPhoto', e.currentTarget.files[0])
-                }}
-              />
-            </Label>
+            <Label>Upload your passport photograph here</Label>
+            <FileInput>
+              <label htmlFor="passportPhoto">
+                Upload
+                <input
+                  id="passportPhoto"
+                  accept="image/jpeg"
+                  type="file"
+                  name="passportPhoto"
+                  onChange={e => {
+                    props.setFieldValue(
+                      'passportPhoto',
+                      e.currentTarget.files[0]
+                    )
+                  }}
+                />
+              </label>
+              <p>
+                {props.values.passportPhoto.name
+                  ? props.values.passportPhoto.name
+                  : 'Please upload JPEG format, no larger than 3mb in size'}
+              </p>
+            </FileInput>
 
             <Label htmlFor="surname">Surname</Label>
             <Input
@@ -236,57 +317,76 @@ export default class DetailsForm extends Component {
               ) : null} */}
 
             <Label htmlFor="gender">Gender</Label>
-            <select
+            <Select
+              as="select"
               name="gender"
               onChange={props.handleChange}
               onBlur={props.handleBlur}
               value={props.values.gender}
             >
-              <option value="">Select One</option>
+              <option value=""></option>
               <option value="M">Male</option>
               <option value="F">Female</option>
-            </select>
+            </Select>
             {props.errors.gender && props.touched.gender ? (
               <Error id="feedback">{props.errors.gender}</Error>
             ) : null}
 
             <Label htmlFor="nationality">Nationality</Label>
-            <Input
-              type="text"
+            <Select
+              as="select"
               onChange={props.handleChange}
               onBlur={props.handleBlur}
               value={props.values.nationality}
               name="nationality"
-            />
+            >
+              <option value=""></option>
+              <option value="M">Ghanaian</option>
+              <option value="F">Other</option>
+            </Select>
             {props.errors.nationality && props.touched.nationality ? (
               <Error id="feedback">{props.errors.nationality}</Error>
             ) : null}
 
             <Label htmlFor="region">Region</Label>
-            <Input
+            <Select
+              as="select"
               type="text"
               onChange={props.handleChange}
               onBlur={props.handleBlur}
               value={props.values.region}
               name="region"
-            />
+            >
+              <option value=""></option>
+              <option value="M">Male</option>
+              <option value="F">Female</option>
+            </Select>
             {props.errors.region && props.touched.region ? (
               <Error id="feedback">{props.errors.region}</Error>
             ) : null}
 
-            <Label htmlFor="nationalId">National ID</Label>
-
             <Label htmlFor="nationalId">
-              Upload your passport photograph here
-              <input
-                accept="image/jpeg"
-                type="file"
-                name="nationalId"
-                onChange={e => {
-                  props.setFieldValue('nationalId', e.currentTarget.files[0])
-                }}
-              />
+              National ID details (Voters ID/Passport/Driver’s License/Ghana)
             </Label>
+            <FileInput>
+              <label htmlFor="nationalId">
+                Upload
+                <input
+                  id="nationalId"
+                  accept="image/jpeg"
+                  type="file"
+                  name="nationalId"
+                  onChange={e => {
+                    props.setFieldValue('nationalId', e.currentTarget.files[0])
+                  }}
+                />
+              </label>
+              <p>
+                {props.values.passportPhoto.name
+                  ? props.values.passportPhoto.name
+                  : 'Please upload JPEG format, no larger than 3mb in size'}
+              </p>
+            </FileInput>
             {props.errors.nationalId && props.touched.nationalId ? (
               <Error id="feedback">{props.errors.nationalId}</Error>
             ) : null}
@@ -333,25 +433,32 @@ export default class DetailsForm extends Component {
               Upload Marriage Certificate (if applicable)
             </Label>
 
-            <Label htmlFor="marriageCertificate">
-              Upload your passport photograph here
-              <input
-                accept="image/jpeg"
-                type="file"
-                name="marriageCertificate"
-                onChange={e => {
-                  // prettier-ignore
-                  props.setFieldValue('marriageCertificate', e.currentTarget.files[0])
-                }}
-              />
-            </Label>
+            <FileInput>
+              <label htmlFor="marriageCertificate">
+                Upload
+                <input
+                  accept="image/jpeg"
+                  type="file"
+                  name="marriageCertificate"
+                  onChange={e => {
+                    // prettier-ignore
+                    props.setFieldValue('marriageCertificate', e.currentTarget.files[0])
+                  }}
+                />
+              </label>
+              <p>
+                {props.values.passportPhoto.name
+                  ? props.values.passportPhoto.name
+                  : 'Please upload JPEG format, no larger than 3mb in size'}
+              </p>
+            </FileInput>
             {props.errors.marriageCertificate &&
             props.touched.marriageCertificate ? (
               <Error id="feedback">{props.errors.marriageCertificate}</Error>
             ) : null}
 
             {/* CHILDREN */}
-            <hr />
+            <Divider />
 
             <FieldArray
               name="children"
@@ -359,23 +466,41 @@ export default class DetailsForm extends Component {
                 <React.Fragment>
                   {props.values.children.map((child, id) => (
                     <React.Fragment key={id}>
-                      <Field name={`children.${id}.name`} />
-                      <Field name={`children.${id}.dateOfBirth`} />
-                      <Label htmlFor="">
-                        Upload Birth Certificate (if applicable)
-                        <input
-                          accept="image/jpeg"
-                          type="file"
-                          name={`children.${id}.birthCertificate`}
-                          onChange={event =>
-                            this.handleBirthCertificate(props, event, id)
-                          }
-                        />
+                      <Label htmlFor={`children.${id}.name`}>
+                        Name of Child
                       </Label>
+                      <Input name={`children.${id}.name`} />
+
+                      <Label htmlFor={`children.${id}.dateOfBirth`}>
+                        Date of Birth
+                      </Label>
+                      <Input name={`children.${id}.dateOfBirth`} />
+
+                      <Label>Upload Birth Certificate (if applicable)</Label>
+                      <FileInput>
+                        <label htmlFor={`children.${id}.birthCertificate`}>
+                          Upload
+                          <input
+                            id={`children.${id}.birthCertificate`}
+                            accept="image/jpeg"
+                            type="file"
+                            name={`children.${id}.birthCertificate`}
+                            onChange={event =>
+                              this.handleBirthCertificate(props, event, id)
+                            }
+                          />
+                        </label>
+                        <p>
+                          {props.values.passportPhoto.name
+                            ? props.values.passportPhoto.name
+                            : 'Please upload JPEG format, no larger than 3mb in size'}
+                        </p>
+                      </FileInput>
                     </React.Fragment>
                   ))}
 
-                  <button
+                  {/* <AddButton */}
+                  <Button
                     type="button"
                     onClick={e => {
                       e.preventDefault()
@@ -387,8 +512,8 @@ export default class DetailsForm extends Component {
                       })
                     }}
                   >
-                    Add child
-                  </button>
+                    +
+                  </Button>
 
                   {/* <label htmlFor="parents.father">Date of Birth</label>
 
@@ -452,7 +577,7 @@ export default class DetailsForm extends Component {
               Add child
             </button> */}
 
-            <hr />
+            <Divider />
 
             <Label htmlFor="parents.father">Name of Father</Label>
             <Input
@@ -480,7 +605,7 @@ export default class DetailsForm extends Component {
 
             {/* NEXT OF KIN */}
 
-            <h4>2. Next of Kin Details</h4>
+            <Heading>2. Next of Kin Details</Heading>
 
             <Label htmlFor="nextOfKin.name">Name</Label>
             <Input
@@ -532,7 +657,7 @@ export default class DetailsForm extends Component {
               </Error>
             ) : null}
 
-            <h4>3. Educational Information</h4>
+            <Heading>3. Educational Information</Heading>
 
             {/* // Todo: handle multiple file upload  */}
             <Label htmlFor="educationalCertificates">
@@ -561,20 +686,31 @@ export default class DetailsForm extends Component {
               }}
             />
 
-            <h4>National Service Information</h4>
+            <Heading>4. National Service Information</Heading>
 
-            <Label htmlFor="">Upload National Service Certificate</Label>
-            <input
-              accept="image/jpeg"
-              type="file"
-              name="nationalService.certificate"
-              onChange={e => {
-                // prettier-ignore
-                props.setFieldValue('nationalService.certificate', e.currentTarget.files[0])
-              }}
-            />
+            <Label>Upload National Service Certificate</Label>
+            <FileInput>
+              <label htmlFor="nationalService.certificate">
+                Upload
+                <input
+                  id="nationalService.certificate"
+                  accept="image/jpeg"
+                  type="file"
+                  name="nationalService.certificate"
+                  onChange={e => {
+                    // prettier-ignore
+                    props.setFieldValue('nationalService.certificate', e.currentTarget.files[0])
+                  }}
+                />
+              </label>
+              <p>
+                {props.values.passportPhoto.name
+                  ? props.values.passportPhoto.name
+                  : 'Please upload JPEG format, no larger than 3mb in size'}
+              </p>
+            </FileInput>
 
-            <h4>Residential/Postal Information</h4>
+            <Heading>5. Residential/Postal Information</Heading>
 
             <Label htmlFor="residentialAddress.physical">
               Residential Address (Physical)
@@ -639,7 +775,7 @@ export default class DetailsForm extends Component {
               <Error id="feedback">{props.errors.postalAddress}</Error>
             ) : null}
 
-            <h4>6. Salary Transfer Information</h4>
+            <Heading>6. Salary Transfer Information</Heading>
 
             <Label htmlFor="socialSecurity">Social Security Number</Label>
             <Input
@@ -713,7 +849,7 @@ export default class DetailsForm extends Component {
               <Error id="feedback">{props.errors.bank.sortCode}</Error>
             ) : null}
 
-            <h4>7. Employee Family Line Information</h4>
+            <Heading>7. Employee Family Line Information</Heading>
 
             <Label htmlFor="familyLine.name">
               Name of Family Member to receive monthly airtime (per employee
@@ -762,7 +898,7 @@ export default class DetailsForm extends Component {
               </Error>
             ) : null}
 
-            <h4>8. Medical Insurance</h4>
+            <Heading>8. Medical Insurance</Heading>
             <Label htmlFor="medicalInsurance.provider">
               Select your preferred medical insurance provider:
             </Label>
@@ -789,7 +925,7 @@ export default class DetailsForm extends Component {
               }}
             />
 
-            <h4>9. Fuel Card Option</h4>
+            <Heading>9. Fuel Card Option</Heading>
             <Label htmlFor="medicalInsurance.provider">
               Select your preferred fuel provider:
             </Label>
