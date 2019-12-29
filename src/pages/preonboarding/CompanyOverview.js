@@ -73,7 +73,7 @@ export default class CompanyOverview extends Component {
                   <span>Relationship</span>
                   <span>Innovation</span>
                   <span>Can-do</span>
-                  <a href="">See full values dictionary</a>
+                  <a href="#/">See full values dictionary</a>
                 </div>
               </div>
               <div className="column">
@@ -84,7 +84,7 @@ export default class CompanyOverview extends Component {
                   <span>Complete Accountability</span>
                   <span>Complete Candor</span>
                   <span>Get-It-Done</span>
-                  <a href="">See full vital behaviours dictionary</a>
+                  <a href="#/">See full vital behaviours dictionary</a>
                 </div>
               </div>
             </div>

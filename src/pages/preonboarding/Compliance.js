@@ -114,7 +114,7 @@ export default class Compliance extends Component {
             sections.map((section, id) => (
               <Section key={id}>
                 <H4>{section.heading}</H4>
-                <img src={section.img} />
+                <img alt="" src={section.img} />
                 <p>{section.p}</p>
               </Section>
             ))}
