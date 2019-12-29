@@ -6,6 +6,7 @@ import Info from './Info'
 import CompanyOverview from './CompanyOverview'
 import Compliance from './Compliance'
 import CodeEthics from './CodeEthics'
+import ConditionsService from './ConditionsService'
 import Introduction from './Introduction'
 import FirstDays from './FirstDays'
 
@@ -19,8 +20,9 @@ export default class PreOnboarding extends Component {
         <CompanyOverview path="company-overview" />
         <Compliance path="compliance" />
         <CodeEthics path="code-of-ethics" />
+        <ConditionsService path="conditions-of-service" />
         <Introduction path="introduce-yourself" />
-        <FirstDays path="first-three-days" />
+        <FirstDays path="your-first-three-days" />
       </Router>
     )
   }

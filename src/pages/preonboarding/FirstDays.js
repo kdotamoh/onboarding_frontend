@@ -4,16 +4,11 @@ import { navigate } from '@reach/router'
 
 import { SmallNav } from 'components/navigation'
 import { H4, Container, Img, Button } from 'components/styled'
-import {
-  SplitGrid,
-  SplitGridLeftColumn,
-  SplitGridRightColumn
-} from 'views/layout'
+import { Hero } from 'views/layout'
 
 import bgImg from 'images/bg_l_bottomright.svg'
-import bg from 'images/bg_yellow_m.svg'
 
-import heroImg from 'images/introduce_yourself.svg'
+import heroImg from 'images/first_days_hero.svg'
 // import property from 'images/compliance_property.svg'
 // import ip from 'images/compliance_ip.svg'
 // import whistleblowing from 'images/compliance_whistleblowing.svg'
@@ -32,15 +27,6 @@ const BgImgContainer = styled.div`
   width: 100%;
 `
 
-const Hero = styled.div`
-  background-image: url("${bg}");
-  width: 100%;
-  // height: 100%;
-  min-height: 70rem;
-  background-size: contain;
-  background-repeat: no-repeat;
-`
-
 export default class FirstDays extends Component {
   render() {
     return (
@@ -49,19 +35,15 @@ export default class FirstDays extends Component {
         <Container>
           <H4>Your First Three Days</H4>
           <Hero>
-            <SplitGrid>
-              <SplitGridLeftColumn background="transparent">
-                <p>
-                  We’re super excited and preparing towards your first day. You
-                  will be taken through a three-day formal onboarding programme,
-                  after which your onboarding will continue within your
-                  department.
-                </p>
-              </SplitGridLeftColumn>
-              <SplitGridRightColumn background="transparent">
-                <img src={heroImg} alt="" />
-              </SplitGridRightColumn>
-            </SplitGrid>
+            <div className="row">
+              <p className="column">
+                We’re super excited and preparing towards your first day. You
+                will be taken through a three-day formal onboarding programme,
+                after which your onboarding will continue within your
+                department.
+              </p>
+              <img className="column" src={heroImg} alt="" />
+            </div>
           </Hero>
 
           <Button

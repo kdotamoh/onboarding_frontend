@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 import { NAV_HEIGHT } from '../constants'
 
+import heroBg from 'images/bg_yellow_m.svg'
+
 export const FullPageGrid = styled.div`
   height: 100vh;
   display: grid;
@@ -46,4 +48,31 @@ export const CenterContent = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+`
+
+export const Hero = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url(${props => (props.bgImg ? props.bgImg : heroBg)});
+  width: 100%;
+  min-height: 55rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  div {
+    width: 70%;
+    transform: translateY(-2.5rem);
+
+    p {
+      text-align: left;
+      justify-content: center;
+      font-size: 140%;
+    }
+
+    img {
+      align-items: start;
+    }
+  }
 `

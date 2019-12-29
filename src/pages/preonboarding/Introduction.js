@@ -5,14 +5,9 @@ import { Formik } from 'formik'
 
 import { SmallNav } from 'components/navigation'
 import { H4, Container, Img, Button } from 'components/styled'
-import {
-  SplitGrid,
-  SplitGridLeftColumn,
-  SplitGridRightColumn
-} from 'views/layout'
+import { Hero } from 'views/layout'
 
 import bgImg from 'images/bg_l_bottomright.svg'
-import bg from 'images/bg_yellow_m.svg'
 
 import heroImg from 'images/introduce_yourself.svg'
 // import property from 'images/compliance_property.svg'
@@ -31,15 +26,6 @@ const BgImgContainer = styled.div`
   position: relative;
   min-height: 26.1rem;
   width: 100%;
-`
-
-const Hero = styled.div`
-  background-image: url("${bg}");
-  width: 100%;
-  // height: 100%;
-  min-height: 70rem;
-  background-size: contain;
-  background-repeat: no-repeat;
 `
 
 const initialValues = {
@@ -65,18 +51,13 @@ export default class Introduction extends Component {
         <Container>
           <H4>Get introduced</H4>
           <Hero>
-            <SplitGrid>
-              <SplitGridLeftColumn background="transparent">
-                <p>
-                  You’re almost (75%) done but first we’d like to know a bit
-                  more about you, so we can introduce you to the rest of the
-                  team.
-                </p>
-              </SplitGridLeftColumn>
-              <SplitGridRightColumn background="transparent">
-                <img src={heroImg} alt="" />
-              </SplitGridRightColumn>
-            </SplitGrid>
+            <div className="row">
+              <p className="column">
+                You’re almost (75%) done but first we’d like to know a bit more
+                about you, so we can introduce you to the rest of the team.
+              </p>
+              <img className="column" src={heroImg} alt="" />
+            </div>
           </Hero>
 
           <p>
@@ -135,7 +116,7 @@ export default class Introduction extends Component {
                     value={props.values.current_charity.education}
                     onChange={props.handleChange}
                     name="current_charity.education"
-                    id=""
+                    // id=""
                   />
                   Education
                 </label>
@@ -146,7 +127,7 @@ export default class Introduction extends Component {
                     value={props.values.current_charity.health}
                     onChange={props.handleChange}
                     name="current_charity.health"
-                    id=""
+                    // id=""
                   />
                   Health
                 </label>
@@ -157,7 +138,7 @@ export default class Introduction extends Component {
                     value={props.values.current_charity.economic_empowerment}
                     onChange={props.handleChange}
                     name="current_charity.economic_empowerment"
-                    id=""
+                    // id=""
                   />
                   Economic Empowerment
                 </label>

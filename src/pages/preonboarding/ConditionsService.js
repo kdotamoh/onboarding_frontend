@@ -13,7 +13,7 @@ import property from 'images/compliance_property.svg'
 import ip from 'images/compliance_ip.svg'
 import whistleblowing from 'images/compliance_whistleblowing.svg'
 
-import heroImg from 'images/compliance_hero.svg'
+import heroImg from 'images/conditions_service_hero.svg'
 
 // import { COLORS } from '../../constants'
 
@@ -68,21 +68,21 @@ const sections = [
   }
 ]
 
-export default class Compliance extends Component {
+export default class ConditionsService extends Component {
   render() {
     return (
       <div>
         <SmallNav />
         <Container>
-          <H4>Compliance &amp; Governance</H4>
+          <H4>Overview</H4>
           <Hero>
             <div className="row">
               <img className="column" src={heroImg} alt="" />
               <p className="column">
-                As responsible corporate citizens, we are committed to uphold
-                our compliance obligations when we do business and instil good
-                governance practices to achieve our strategic goals. We are
-                guided by both local and global corporate governance practices.
+                As an employee, you have the right to workplace terms and
+                conditions that are fair and non-discriminatory. We’d like you
+                to take some time to read the Conditions of Service.
+                <small>Last modified: November 13, 2017</small>
               </p>
             </div>
           </Hero>

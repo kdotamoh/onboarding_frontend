@@ -5,15 +5,15 @@ import styled from 'styled-components'
 import { SmallNav } from 'components/navigation'
 import { H4, Container, Img } from 'components/styled'
 import {
-  SplitGrid,
-  SplitGridLeftColumn,
-  SplitGridRightColumn
+  // SplitGrid,
+  // SplitGridLeftColumn,
+  // SplitGridRightColumn,
+  Hero
 } from 'views/layout'
 
 import DetailsForm from './DetailsForm'
 
 import bgImg from 'images/bg_l_bottomright.svg'
-import bg from 'images/bg_yellow_m.svg'
 
 import heroImg from 'images/introduce_yourself.svg'
 // import property from 'images/compliance_property.svg'
@@ -34,14 +34,14 @@ const BgImgContainer = styled.div`
   width: 100%;
 `
 
-const Hero = styled.div`
-  background-image: url("${bg}");
-  width: 100%;
-  // height: 100%;
-  min-height: 70rem;
-  background-size: contain;
-  background-repeat: no-repeat;
-`
+// const Hero = styled.div`
+//   background-image: url("${bg}");
+//   width: 100%;
+//   // height: 100%;
+//   min-height: 70rem;
+//   background-size: contain;
+//   background-repeat: no-repeat;
+// `
 
 export default class EmployeeDetails extends Component {
   render() {
@@ -51,19 +51,15 @@ export default class EmployeeDetails extends Component {
         <Container>
           <H4>Your First Three Days</H4>
           <Hero>
-            <SplitGrid>
-              <SplitGridLeftColumn background="transparent">
-                <p>
-                  We’re super excited and preparing towards your first day. You
-                  will be taken through a three-day formal onboarding programme,
-                  after which your onboarding will continue within your
-                  department.
-                </p>
-              </SplitGridLeftColumn>
-              <SplitGridRightColumn background="transparent">
-                <img src={heroImg} alt="" />
-              </SplitGridRightColumn>
-            </SplitGrid>
+            <div className="row">
+              <p className="column">
+                We’re super excited and preparing towards your first day. You
+                will be taken through a three-day formal onboarding programme,
+                after which your onboarding will continue within your
+                department.
+              </p>
+              <img className="column" src={heroImg} alt="" />
+            </div>
           </Hero>
 
           <DetailsForm />

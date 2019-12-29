@@ -4,21 +4,16 @@ import { navigate } from '@reach/router'
 
 import { SmallNav } from 'components/navigation'
 import { H4, Container, Img, Button } from 'components/styled'
-import {
-  SplitGrid,
-  SplitGridLeftColumn,
-  SplitGridRightColumn
-} from 'views/layout'
+import { Hero } from 'views/layout'
 
 import bgImg from 'images/bg_l_bottomright.svg'
-import bg from 'images/bg_yellow_m.svg'
 
 import conduct from 'images/compliance_conduct.svg'
 import property from 'images/compliance_property.svg'
 import ip from 'images/compliance_ip.svg'
 import whistleblowing from 'images/compliance_whistleblowing.svg'
 
-import heroImg from 'images/compliance_hero.svg'
+import heroImg from 'images/code_of_ethics_hero.svg'
 
 // import { COLORS } from '../../constants'
 
@@ -32,15 +27,6 @@ const BgImgContainer = styled.div`
   position: relative;
   min-height: 26.1rem;
   width: 100%;
-`
-
-const Hero = styled.div`
-  background-image: url("${bg}");
-  width: 100%;
-  // height: 100%;
-  min-height: 70rem;
-  background-size: contain;
-  background-repeat: no-repeat;
 `
 
 const Section = styled.section`
@@ -90,24 +76,14 @@ export default class CodeEthics extends Component {
         <Container>
           <H4>Overview</H4>
           <Hero>
-            <SplitGrid>
-              <SplitGridLeftColumn background="transparent">
-                <img src={heroImg} alt="" />
-              </SplitGridLeftColumn>
-              <SplitGridRightColumn background="transparent">
-                <p>
-                  As responsible corporate citizens, we are committed to uphold
-                  our compliance obligations when we do business and instil good
-                  governance practices to achieve our strategic goals. We are
-                  guided by both local and global corporate governance
-                  practices.
-                </p>
-              </SplitGridRightColumn>
-            </SplitGrid>
             <div className="row">
-              <div className="column">
-                <div></div>
-              </div>
+              <img className="column" src={heroImg} alt="" />
+              <p className="column">
+                Workplace ethics leads to happy and satisfied employees. We
+                trust that after reviewing our Code of Ethics, you will develop
+                a feeling of loyalty and attachment towards MTN.
+                <small>January 2014</small>
+              </p>
             </div>
           </Hero>
           {sections.length &&
