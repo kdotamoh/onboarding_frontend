@@ -31,11 +31,12 @@ export default class Info extends Component {
         <SmallNav />
         <ContainerWithBackground>
           <Header>Where &amp; When</Header>
-          <Card></Card>
+          <Card mb="3rem"></Card>
           <Button
             onClick={() => navigate('/preonboarding/company-overview')}
             color="blue"
             fontSize={1.6}
+            p="4rem"
           >
             Next Step >
           </Button>

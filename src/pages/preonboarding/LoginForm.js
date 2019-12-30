@@ -82,7 +82,12 @@ export default class LoginForm extends Component {
               {props.errors.password && props.touched.password ? (
                 <Error id="feedback">{props.errors.password}</Error>
               ) : null}
-              <Button color="blue" type="submit">
+              <Button
+                style={{ padding: '0.5rem' }}
+                mt="1rem"
+                color="blue"
+                type="submit"
+              >
                 LOG IN
               </Button>
             </Form>

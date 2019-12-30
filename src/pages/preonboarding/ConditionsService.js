@@ -3,8 +3,13 @@ import styled from 'styled-components'
 import { navigate } from '@reach/router'
 
 import { SmallNav } from 'components/navigation'
-import { H4, Container, Img, Button } from 'components/styled'
-import { Hero } from 'views/layout'
+import { H4, Container, Img, Button, Small } from 'components/styled'
+import {
+  Hero,
+  SplitGridRightColumn,
+  SplitGridLeftColumn,
+  SplitGrid
+} from 'views/layout'
 
 import bgImg from 'images/bg_l_bottomright.svg'
 
@@ -16,25 +21,26 @@ const BgImg = styled(Img)`
   position: absolute;
   bottom: 0;
   left: 0;
+  z-index: -1;
 `
 
 const BgImgContainer = styled.div`
   position: relative;
-  min-height: 26.1rem;
+  min-height: 13rem;
   width: 100%;
 `
 
-// const Section = styled.section`
-//   h4 {
-//   }
+const Section = styled.section`
+  h4 {
+  }
 
-//   img {
-//     text-align: center;
-//   }
+  img {
+    text-align: center;
+  }
 
-//   p {
-//   }
-// `
+  p {
+  }
+`
 
 export default class ConditionsService extends Component {
   render() {
@@ -42,7 +48,7 @@ export default class ConditionsService extends Component {
       <div>
         <SmallNav />
         <Container>
-          <H4>Overview</H4>
+          <H4 py="3rem">Overview</H4>
           <Hero>
             <div className="row">
               <img className="column" src={heroImg} alt="" />
@@ -50,18 +56,26 @@ export default class ConditionsService extends Component {
                 As an employee, you have the right to workplace terms and
                 conditions that are fair and non-discriminatory. We’d like you
                 to take some time to read the Conditions of Service.
-                <small>Last modified: November 13, 2017</small>
+                <Small mt="5rem">Last modified: November 13, 2017</Small>
               </p>
             </div>
           </Hero>
-          {/* {sections.length &&
-            sections.map((section, id) => (
-              <Section key={id}>
-                <H4>{section.heading}</H4>
-                <img alt="" src={section.img} />
-                <p>{section.p}</p>
+
+          <SplitGrid leftWidth={30} rightWidth={70}>
+            <SplitGridLeftColumn></SplitGridLeftColumn>
+            <SplitGridRightColumn>
+              <Section>
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum
+                impedit rem alias consequatur, expedita voluptates tenetur magni
+                consequuntur veniam ex, fugiat similique debitis sint deserunt
+                assumenda soluta minus fugit quod!
+                {/* <H4>{section.heading}</H4>
+            <img alt="" src={section.img} />
+            <p>{section.p}</p> */}
               </Section>
-            ))} */}
+            </SplitGridRightColumn>
+          </SplitGrid>
+
           <Button
             color="blue"
             onClick={() => navigate('/preonboarding/introduce-yourself')}

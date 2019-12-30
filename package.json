@@ -19,6 +19,7 @@
     "react-scrollspy": "^3.4.2",
     "react-sticky-box": "^0.9.2",
     "styled-components": "^4.4.1",
+    "styled-system": "^5.1.4",
     "yup": "^0.28.0"
   },
   "scripts": {

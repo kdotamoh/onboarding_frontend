@@ -17,6 +17,7 @@ import bgImg from 'images/bg_l_bottomleft.svg'
 
 const HeroH1 = styled(H1)`
   color: ${COLORS.DARKER_GREYISH_BROWN};
+  z-index: 1000;
 `
 
 const BgImg = styled(Img)`
@@ -24,6 +25,7 @@ const BgImg = styled(Img)`
   bottom: 0;
   left: 0;
   align-self: flex-end;
+  z-index: 500;
 `
 
 const Paragraph = styled(P)`

@@ -36,7 +36,7 @@ const BgImg = styled(Img)`
 
 const BgImgContainer = styled.div`
   position: relative;
-  min-height: 26.1rem;
+  min-height: 13rem;
   width: 100%;
 `
 
@@ -147,7 +147,7 @@ export default class Compliance extends Component {
       <div>
         <SmallNav />
         <Container>
-          <H4>Compliance &amp; Governance</H4>
+          <H4 py="3rem">Compliance &amp; Governance</H4>
           <Hero>
             <div className="row">
               <img className="column" src={heroImg} alt="" />

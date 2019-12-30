@@ -141,7 +141,7 @@ export default class Introduction extends Component {
       <div>
         <SmallNav />
         <Container>
-          <H4>Get introduced</H4>
+          <H4 py="3rem">Get introduced</H4>
           <Hero>
             <div className="row">
               <p className="column">

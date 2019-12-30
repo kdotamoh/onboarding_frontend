@@ -63,15 +63,15 @@ const ChangeRating = styled.span`
 `
 
 const Submit = styled.span`
-    font-size: 90%;
-    margin-top: 2rem;
-    cursor: pointer;
-    color: ${COLORS.TWILIGHT_BLUE};
+  font-size: 90%;
+  margin-top: 2rem;
+  cursor: pointer;
+  color: ${COLORS.TWILIGHT_BLUE};
 `
 
 export default class FirstDays extends Component {
   state = {
-    visible: true,
+    visible: false,
     rating: 5,
     getFeedback: false,
     feedBack: ''
@@ -79,12 +79,13 @@ export default class FirstDays extends Component {
 
   handleRating = rating => {
     this.setState({ rating, getFeedback: rating < 4 ? true : false })
-    
+
+    if (rating > 3) navigate('/preonboarding/end')
   }
 
-  handleChange = (event) => {
-    let { name, value} = event.target
-    this.setState({ [name]: value} )
+  handleChange = event => {
+    let { name, value } = event.target
+    this.setState({ [name]: value })
   }
 
   render() {
@@ -94,7 +95,7 @@ export default class FirstDays extends Component {
       <div>
         <SmallNav />
         <Container>
-          <H4>Your First Three Days</H4>
+          <H4 py="3rem">Your First Three Days</H4>
           <Hero>
             <div className="row">
               <p className="column">
@@ -126,7 +127,9 @@ export default class FirstDays extends Component {
                   >
                     Change rating
                   </ChangeRating>
-                  <Submit onClick={() => navigate('/preonboarding/end')}>Submit feedback</Submit>
+                  <Submit onClick={() => navigate('/preonboarding/end')}>
+                    Submit feedback
+                  </Submit>
                 </Actions>
               </div>
             ) : (

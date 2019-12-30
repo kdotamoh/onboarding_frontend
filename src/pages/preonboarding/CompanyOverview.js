@@ -22,20 +22,6 @@ const BgImg = styled(Img)`
   right: 0;
 `
 
-// const BgImgContainer = styled.div`
-//   position: relative;
-//   min-height: 26.1rem;
-//   width: 100%;
-// `
-
-// const Hero = styled.div`
-//   background-image: url("${bg}");
-//   width: 100%;
-//   // height: 100%;
-//   min-height: 70rem;
-//   background-size: cover;
-// `
-
 const BigHero = styled(Hero)`
   div {
     transform: unset;
@@ -59,7 +45,7 @@ export default class CompanyOverview extends Component {
       <div>
         <SmallNav />
         <Container>
-          <H4>Overview</H4>
+          <H4 py="3rem">Overview</H4>
           <BigHero>
             <div className="row">
               <div className="column">
@@ -100,7 +86,7 @@ export default class CompanyOverview extends Component {
               </div>
             </div>
           </BigHero>
-          <H4>Our Employee Value Proposition</H4>
+          <H4 py="2rem">Our Employee Value Proposition</H4>
           <p>We can make your life better.</p>
           <InfoBox>
             <H4>Data Protection Principles</H4>
@@ -126,6 +112,8 @@ export default class CompanyOverview extends Component {
             </UL>
           </InfoBox>
           <Button
+            mt="5rem"
+            mb="10rem"
             color="blue"
             onClick={() => navigate('/preonboarding/compliance')}
           >

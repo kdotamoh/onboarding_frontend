@@ -1,6 +1,9 @@
 import styled from 'styled-components'
+import { space } from 'styled-system'
 
 export const Card = styled.div`
+  ${space}
+
   min-height: 350px;
   min-width: 350px;
   background: white;

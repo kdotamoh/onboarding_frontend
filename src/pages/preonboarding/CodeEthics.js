@@ -5,7 +5,7 @@ import Scrollspy from 'react-scrollspy'
 import StickyBox from 'react-sticky-box'
 
 import { SmallNav } from 'components/navigation'
-import { H4, Container, Img, Button } from 'components/styled'
+import { H4, Container, Img, Button, Small } from 'components/styled'
 import {
   SplitGrid,
   Hero,
@@ -18,8 +18,7 @@ import { Sidebar } from 'components/navigation/SideNav'
 import bgImg from 'images/bg_l_bottomright.svg'
 
 import heroImg from 'images/code_of_ethics_hero.svg'
-
-// import { COLORS } from '../../constants'
+import { marginRight } from 'styled-system'
 
 const BgImg = styled(Img)`
   position: absolute;
@@ -29,7 +28,7 @@ const BgImg = styled(Img)`
 
 const BgImgContainer = styled.div`
   position: relative;
-  min-height: 26.1rem;
+  min-height: 13rem;
   width: 100%;
 `
 
@@ -62,7 +61,7 @@ export default class CodeEthics extends Component {
       <div>
         <SmallNav />
         <Container>
-          <H4>Overview</H4>
+          <H4 py="3rem">Code of Ethics</H4>
           <Hero>
             <div className="row">
               <img className="column" src={heroImg} alt="" />
@@ -70,7 +69,7 @@ export default class CodeEthics extends Component {
                 Workplace ethics leads to happy and satisfied employees. We
                 trust that after reviewing our Code of Ethics, you will develop
                 a feeling of loyalty and attachment towards MTN.
-                <small>January 2014</small>
+                <Small mt="5rem">January 2014</Small>
               </p>
             </div>
           </Hero>
@@ -852,6 +851,7 @@ export default class CodeEthics extends Component {
                 <div>
                   <label>
                     <input
+                      style={{ marginRight: '1rem' }}
                       type="checkbox"
                       name="checked"
                       id="checked"
@@ -868,6 +868,7 @@ export default class CodeEthics extends Component {
             disabled={!this.state.checked}
             color="blue"
             onClick={() => navigate('/preonboarding/conditions-of-service')}
+            my="5rem"
           >
             Next Step >
           </Button>
