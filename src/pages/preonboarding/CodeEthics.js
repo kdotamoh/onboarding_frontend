@@ -12,7 +12,6 @@ import {
   SplitGridLeftColumn,
   SplitGridRightColumn
 } from 'views/layout'
-
 import { Sidebar } from 'components/navigation/SideNav'
 
 import bgImg from 'images/bg_l_bottomright.svg'
