@@ -65,10 +65,7 @@ export default class ConditionsService extends Component {
             <SplitGridLeftColumn></SplitGridLeftColumn>
             <SplitGridRightColumn>
               <Section>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum
-                impedit rem alias consequatur, expedita voluptates tenetur magni
-                consequuntur veniam ex, fugiat similique debitis sint deserunt
-                assumenda soluta minus fugit quod!
+                Placeholder
                 {/* <H4>{section.heading}</H4>
             <img alt="" src={section.img} />
             <p>{section.p}</p> */}

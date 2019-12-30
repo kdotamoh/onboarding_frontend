@@ -12,12 +12,17 @@ export const Card = styled.div`
   background: white;
   z-index: 500;
   box-shadow: 0 4px 2.5px 0 rgba(0, 0, 0, 0.25);
+
+  hr {
+    border-top: 1px solid #e6e6e6;
+  }
 `
 
 export const CardInfo = styled.div`
   display: flex;
   flex-direction: row;
   height: 50%;
+  min-height: 175px;
 
   .card-info__image {
     height: 8.5rem;

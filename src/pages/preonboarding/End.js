@@ -63,8 +63,6 @@ export default class End extends Component {
                   <div className="card-info__image card-info__circle"></div>
                 </div>
 
-                <hr />
-
                 <div className="card-info__right">
                   <div className="card-info__details">
                     <h5>Your First Day</h5>
@@ -75,6 +73,8 @@ export default class End extends Component {
                   </div>
                 </div>
               </CardInfo>
+
+              <hr />
 
               <CardInfo>
                 <div className="card-info__left">

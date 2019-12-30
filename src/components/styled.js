@@ -30,7 +30,8 @@ export const H4 = styled.h4`
 
   font-size: 2rem;
   font-family: MTNBrighterSans-Bold;
-  color: ${COLORS.TWILIGHT_BLUE};
+  /* // Todo: Use styled system instead */
+  color: ${props => (props.color ? props.color : COLORS.TWILIGHT_BLUE)};
 `
 export const UL = styled.ul`
   li {

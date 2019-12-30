@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { navigate } from '@reach/router'
 
 import { SmallNav } from 'components/navigation'
-import { H4, Container, Img, UL, Button, H3 } from 'components/styled'
+import { H4, Container, Img, UL, Button } from 'components/styled'
 import { Hero } from 'views/layout'
 
 import bgImg from 'images/bg_l_bottomright.svg'
@@ -23,11 +23,27 @@ const BgImg = styled(Img)`
 `
 
 const BigHero = styled(Hero)`
+  /* // Todo: Clean up this mess */
+  span,
+  p,
+  a {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
   div {
+    width: 90%;
     transform: unset;
     p {
-      font-size: 100%;
+      font-size: 1.2rem;
       text-align: center;
+    }
+  }
+
+  .column {
+    align-items: center;
+    p {
+      width: 70%;
     }
   }
 `
@@ -50,7 +66,9 @@ export default class CompanyOverview extends Component {
             <div className="row">
               <div className="column">
                 <img src={vision} alt="" />
-                <H3>Vision</H3>
+                <H4 color="black" mt="4rem">
+                  Vision
+                </H4>
                 <p>
                   To lead the delivery of a bold, new, Digital world to our
                   customers.
@@ -58,38 +76,40 @@ export default class CompanyOverview extends Component {
               </div>
               <div className="column">
                 <img src={mission} alt="" />
-                <H3>Mission</H3>
+                <H4 color="black" mt="4rem">
+                  Mission
+                </H4>
                 <p>To make our customers’ lives a whole lot brighter.</p>
               </div>
               <div className="column">
                 <img src={values} alt="" />
-                <H3>Values</H3>
-                <div className="column">
-                  <span>Leadership</span>
-                  <span>Integrity</span>
-                  <span>Relationship</span>
-                  <span>Innovation</span>
-                  <span>Can-do</span>
-                  <a href="#/">See full values dictionary</a>
-                </div>
+                <H4 color="black" mt="4rem">
+                  Values
+                </H4>
+                <span>Leadership</span>
+                <span>Integrity</span>
+                <span>Relationship</span>
+                <span>Innovation</span>
+                <span>Can-do</span>
+                <a href="#/">See full values dictionary</a>
               </div>
               <div className="column">
                 <img src={vital} alt="" />
-                <H4>Vital</H4>
-                <div className="column">
-                  <span>Active Collaboration</span>
-                  <span>Complete Accountability</span>
-                  <span>Complete Candor</span>
-                  <span>Get-It-Done</span>
-                  <a href="#/">See full vital behaviours dictionary</a>
-                </div>
+                <H4 color="black" mt="4rem">
+                  Vital
+                </H4>
+                <span>Active Collaboration</span>
+                <span>Complete Accountability</span>
+                <span>Complete Candor</span>
+                <span>Get-It-Done</span>
+                <a href="#/">See full vital behaviours dictionary</a>
               </div>
             </div>
           </BigHero>
           <H4 py="2rem">Our Employee Value Proposition</H4>
           <p>We can make your life better.</p>
           <InfoBox>
-            <H4>Data Protection Principles</H4>
+            <H4 color="black">Data Protection Principles</H4>
             <p>
               Protecting individual data is paramount to us in MTN. Our Data
               protection principles are meant to protect you, your colleagues
