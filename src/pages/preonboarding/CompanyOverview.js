@@ -4,9 +4,10 @@ import { navigate } from '@reach/router'
 
 import { SmallNav } from 'components/navigation'
 import { H4, Container, Img, UL, Button, H3 } from 'components/styled'
+import { Hero } from 'views/layout'
 
 import bgImg from 'images/bg_l_bottomright.svg'
-import bg from 'images/bg_yellow_l.svg'
+// import heroBg from 'images/bg_yellow_l.svg'
 
 import vision from 'images/vision_icon.svg'
 import mission from 'images/mission_icon.svg'
@@ -27,12 +28,22 @@ const BgImg = styled(Img)`
 //   width: 100%;
 // `
 
-const Hero = styled.div`
-  background-image: url("${bg}");
-  width: 100%;
-  // height: 100%;
-  min-height: 70rem;
-  background-size: cover;
+// const Hero = styled.div`
+//   background-image: url("${bg}");
+//   width: 100%;
+//   // height: 100%;
+//   min-height: 70rem;
+//   background-size: cover;
+// `
+
+const BigHero = styled(Hero)`
+  div {
+    transform: unset;
+    p {
+      font-size: 100%;
+      text-align: center;
+    }
+  }
 `
 
 const InfoBox = styled.div`
@@ -49,20 +60,20 @@ export default class CompanyOverview extends Component {
         <SmallNav />
         <Container>
           <H4>Overview</H4>
-          <Hero>
+          <BigHero>
             <div className="row">
               <div className="column">
                 <img src={vision} alt="" />
                 <H3>Vision</H3>
-                <div>
+                <p>
                   To lead the delivery of a bold, new, Digital world to our
                   customers.
-                </div>
+                </p>
               </div>
               <div className="column">
                 <img src={mission} alt="" />
                 <H3>Mission</H3>
-                <div>To make our customers’ lives a whole lot brighter.</div>
+                <p>To make our customers’ lives a whole lot brighter.</p>
               </div>
               <div className="column">
                 <img src={values} alt="" />
@@ -88,7 +99,7 @@ export default class CompanyOverview extends Component {
                 </div>
               </div>
             </div>
-          </Hero>
+          </BigHero>
           <H4>Our Employee Value Proposition</H4>
           <p>We can make your life better.</p>
           <InfoBox>

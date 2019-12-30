@@ -29,14 +29,13 @@ export default createGlobalStyle`
     min-height: 100vh;
   }
 
+
+  a {
+    color: rgba(0, 0, 0, 0.65)
+  }
+
   ${fonts}
 
-  // .row {
-  //   display: flex;
-  //   flex-direction: row;
-  //   flex-wrap: wrap;
-  // }
-  
   .row {
     display: flex;
     flex-direction: row;
@@ -44,10 +43,6 @@ export default createGlobalStyle`
     width: 100%;
   }
 
-  // .column {
-  //   flex-basis: 100%;
-  // }
-  
   .column {
     display: flex;
     flex-direction: column;
@@ -55,6 +50,11 @@ export default createGlobalStyle`
     flex: 1;
     text-align: center;
   }
+
+  .is-current {
+    color: red;
+  }
+
 
   // #root {
     //   height: 100vh;

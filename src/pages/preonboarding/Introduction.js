@@ -28,6 +28,13 @@ const BgImgContainer = styled.div`
   width: 100%;
 `
 
+const Form = styled.form`
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+`
+
 const initialValues = {
   bio: '',
   hobbies: '',
@@ -60,11 +67,6 @@ export default class Introduction extends Component {
             </div>
           </Hero>
 
-          <p>
-            Please answer the following questions and we’ll send out a quick
-            introduction email to the people you’ll be working with.
-          </p>
-
           <Formik
             initialValues={initialValues}
             onSubmit={() => {
@@ -72,7 +74,11 @@ export default class Introduction extends Component {
             }}
           >
             {props => (
-              <form className="column">
+              <Form>
+                <p>
+                  Please answer the following questions and we’ll send out a
+                  quick introduction email to the people you’ll be working with.
+                </p>
                 <label htmlFor="bio">
                   Tell us a bit more about yourself (750 characters limit)
                 </label>
@@ -151,7 +157,7 @@ export default class Introduction extends Component {
                 <label htmlFor="recreation">
                   Which of these recreational activities do you participate in?
                 </label> */}
-              </form>
+              </Form>
             )}
           </Formik>
 

@@ -49,7 +49,7 @@ const LinkWrapper = styled.li`
     padding: 2rem;
     padding-bottom: 3.5rem;
     vertical-align: middle;
-    color: ;
+    /* color: ; */
   }
 `
 

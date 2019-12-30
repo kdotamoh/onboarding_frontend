@@ -447,8 +447,8 @@ export default class DetailsForm extends Component {
                 />
               </label>
               <p>
-                {props.values.passportPhoto.name
-                  ? props.values.passportPhoto.name
+                {props.values.marriageCertificate.name
+                  ? props.values.marriageCertificate.name
                   : 'Please upload JPEG format, no larger than 3mb in size'}
               </p>
             </FileInput>

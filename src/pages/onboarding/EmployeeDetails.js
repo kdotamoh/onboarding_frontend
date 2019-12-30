@@ -4,12 +4,7 @@ import styled from 'styled-components'
 
 import { SmallNav } from 'components/navigation'
 import { H4, Container, Img } from 'components/styled'
-import {
-  // SplitGrid,
-  // SplitGridLeftColumn,
-  // SplitGridRightColumn,
-  Hero
-} from 'views/layout'
+import { Hero } from 'views/layout'
 
 import DetailsForm from './DetailsForm'
 

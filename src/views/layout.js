@@ -17,13 +17,13 @@ export const GridMain = styled.main`
 `
 
 export const SplitGrid = styled.div`
-  height: 100vh;
-  height: calc(
+  min-height: 100vh;
+  /* height: calc(
     100vh - ${props => (props.fullPage ? '0px' : `${NAV_HEIGHT}px`)}
-  );
+  ); */
   display: grid;
   grid-template-columns: ${props => props.leftWidth}vw ${props =>
-      props.rightWidth}vw;
+  props.rightWidth}vw;
   grid-template-rows: 100%;
   grid-template-areas: 'left right';
 `
@@ -31,15 +31,15 @@ export const SplitGrid = styled.div`
 export const SplitGridLeftColumn = styled.section`
   grid-area: left;
   position: relative;
-  background: ${props => (props.background ? props.background : 'white')};
+  background: ${props => (props.background ? props.background : 'transparent')};
 `
 
 export const SplitGridRightColumn = styled.section`
   grid-area: right;
-  background: ${props => (props.background ? props.background : 'white')};
   position: relative;
-  display: flex;
-  justify-content: center;
+  background: ${props => (props.background ? props.background : 'transparent')};
+  /* display: flex; */
+  /* justify-content: center; */
 `
 
 export const CenterContent = styled.div`
@@ -55,7 +55,7 @@ export const Hero = styled.div`
   justify-content: center;
   align-items: center;
 
-  background-image: url(${props => (props.bgImg ? props.bgImg : heroBg)});
+  background-image: url(${heroBg});
   width: 100%;
   min-height: 55rem;
   background-size: contain;
