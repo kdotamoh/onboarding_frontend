@@ -83,7 +83,7 @@ export default class FirstDays extends Component {
   }
 
   handleChange = (event) => {
-    let { name, value} = event.target;
+    let { name, value} = event.target
     this.setState({ [name]: value} )
   }
 
