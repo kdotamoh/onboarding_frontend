@@ -11,9 +11,10 @@ import {
   CenterContent
 } from 'views/layout'
 import { H1, P } from 'components/styled'
-import { Card } from 'components/card'
+import { Card, CardInfo } from 'components/card'
 
 import bgImg from 'images/bg_l_bottomleft.svg'
+import placeholder from 'images/png/placeholder.png'
 
 const HeroH1 = styled(H1)`
   color: ${COLORS.DARKER_GREYISH_BROWN};
@@ -25,7 +26,6 @@ const BgImg = styled(Img)`
   bottom: 0;
   left: 0;
   align-self: flex-end;
-  z-index: 500;
 `
 
 const Paragraph = styled(P)`
@@ -57,7 +57,39 @@ export default class End extends Component {
         </SplitGridLeftColumn>
         <SplitGridRightColumn background={COLORS.MARIGOLD}>
           <CenterContent>
-            <Card></Card>
+            <Card p="2rem">
+              <CardInfo>
+                <div className="card-info__left">
+                  <div className="card-info__image card-info__circle"></div>
+                </div>
+
+                <hr />
+
+                <div className="card-info__right">
+                  <div className="card-info__details">
+                    <h5>Your First Day</h5>
+                    <span>Sep 10 2019 | 11:00 am</span>
+                    <span>MTN House, #6 Independence Avenue,</span>
+                    <span>West Ridge, Accra</span>
+                    <span>GA-052-4025</span>
+                  </div>
+                </div>
+              </CardInfo>
+
+              <CardInfo>
+                <div className="card-info__left">
+                  <img className="card-info__image" src={placeholder} alt="" />
+                </div>
+                <div className="card-info__right">
+                  <div className="card-info__details">
+                    <h5>Your HR Business Partner</h5>
+                    <span>Esi Amegache</span>
+                    <span>024 412 3456</span>
+                    <span>esi.amegache@company.com</span>
+                  </div>
+                </div>
+              </CardInfo>
+            </Card>
           </CenterContent>
         </SplitGridRightColumn>
       </SplitGrid>
