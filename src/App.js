@@ -1,5 +1,5 @@
 import React from 'react'
-import { Router } from '@reach/router'
+import { Router, navigate } from '@reach/router'
 
 import PreOnboarding from 'pages/preonboarding'
 
@@ -7,6 +7,10 @@ import GlobalStyles from './GlobalStyles'
 import Onboarding from 'pages/onboarding'
 
 function App() {
+  // This is tempporary
+  React.useEffect(() => {
+    navigate('/preonboarding')
+  }, [])
   return (
     <div className="App">
       <GlobalStyles />

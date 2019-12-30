@@ -18,7 +18,6 @@ import { Sidebar } from 'components/navigation/SideNav'
 import bgImg from 'images/bg_l_bottomright.svg'
 
 import heroImg from 'images/code_of_ethics_hero.svg'
-import { marginRight } from 'styled-system'
 
 const BgImg = styled(Img)`
   position: absolute;
