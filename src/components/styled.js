@@ -65,10 +65,67 @@ export const Button = styled.button`
   z-index: 500;
 `
 
+export const Table = styled.table`
+  ${space}
+
+  margin: 4rem 0;
+  border-collapse: collapse;
+  width: 70%;
+  font-size: 80%;
+
+  thead tr {
+    background: #ffcb09;
+
+    th {
+      font-weight: normal;
+    }
+  }
+
+  td,
+  th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+`
+
+export const StripedTable = styled(Table)`
+  width: 100%;
+  /* border: transparent; */
+
+  tr td,
+  th {
+    border: none;
+  }
+
+  tr:nth-child(even) {
+    background-color: #fff5ce;
+  }
+`
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   min-height: calc(100vh - ${SMALL_NAV_HEIGHT}rem);
   position: relative;
+`
+
+export const Wrapper = styled.div`
+  width: 60%;
+`
+
+export const Section = styled.section`
+  padding-top: 2rem;
+  margin-bottom: 4rem;
+
+  p {
+  }
+
+  ul {
+  }
+
+  li {
+    margin-left: 2rem;
+  }
 `

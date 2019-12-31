@@ -5,7 +5,7 @@ import Scrollspy from 'react-scrollspy'
 import StickyBox from 'react-sticky-box'
 
 import { SmallNav } from 'components/navigation'
-import { H4, Container, Img, Button, Small } from 'components/styled'
+import { H4, Container, Img, Button, Small, Section } from 'components/styled'
 import {
   SplitGrid,
   Hero,
@@ -28,17 +28,6 @@ const BgImgContainer = styled.div`
   position: relative;
   min-height: 13rem;
   width: 100%;
-`
-
-const Section = styled.section`
-  padding-top: 2rem;
-  margin-bottom: 4rem;
-
-  p {
-  }
-
-  ul {
-  }
 `
 
 export default class CodeEthics extends Component {

@@ -5,7 +5,7 @@ import Scrollspy from 'react-scrollspy'
 import StickyBox from 'react-sticky-box'
 
 import { SmallNav } from 'components/navigation'
-import { H4, Container, Img, Button, Small } from 'components/styled'
+import { H4, Container, Img, Button, Small, Section, Table, StripedTable } from 'components/styled'
 import {
   Hero,
   SplitGridRightColumn,
@@ -31,19 +31,6 @@ const BgImgContainer = styled.div`
   position: relative;
   min-height: 13rem;
   width: 100%;
-`
-
-const Section = styled.section`
-line-height: 1.7;
-  h4 {
-  }
-
-  img {
-    text-align: center;
-  }
-
-  p {
-  }
 `
 
 export default class ConditionsService extends Component {
@@ -236,6 +223,29 @@ export default class ConditionsService extends Component {
                   2.3.1 All newly recruited Employees (Internal or External
                   Candidates) will undergo a probationary period of as follows:
                 </p>
+
+               <Table mb="2rem">
+                 <thead>
+                  <tr>
+                    <th>MTN Level</th>
+                    <th>Probation Period</th>
+                  </tr>
+                 </thead>
+                 <tbody>
+                  <tr>
+                    <td>Levels 1 &amp; 2</td>
+                    <td>3 months</td>
+                  </tr>
+                  <tr>
+                    <td>Levels 3 &amp; 3H</td>
+                    <td>3 months</td>
+                  </tr>
+                  <tr>
+                    <td>Levels 4 &amp; 5</td>
+                    <td>6 months</td>
+                  </tr>
+                 </tbody>
+               </Table>
 
                 <p>
                   2.3.2 For employees in Levels 1 to 3H, if the employee’s
@@ -508,7 +518,49 @@ export default class ConditionsService extends Component {
                   professional medical opinion to assist the Company in making a
                   determination regarding applicability of sick leave or fitness
                   to return to work. 5.5.2 Subject to (5.5.1) above, Employees
-                  shall be entitled to paid sick leave as follows: 5.5.3
+                  shall be entitled to paid sick leave as follows: 
+
+                </p>
+                  
+                <StripedTable>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>On Full Pay</th>
+                      <th>On Half Pay</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Employees under two years' service</td>
+                      <td>1 week</td>
+                      <td>1 week</td>
+                    </tr>
+                    <tr>
+                      <td>Employees with two years' but under three's service</td>
+                      <td>2 weeks</td>
+                      <td>2 weeks</td>
+                    </tr>
+                    <tr>
+                      <td>Employees with three years' but under fours's service</td>
+                      <td>3 weeks</td>
+                      <td>3 weeks</td>
+                    </tr>
+                    <tr>
+                      <td>Employees with four years' but under five's service</td>
+                      <td>4 weeks</td>
+                      <td>4 weeks</td>
+                    </tr>
+                    <tr>
+                      <td>Employees with 5 years' service and above</td>
+                      <td>5 weeks</td>
+                      <td>5 weeks</td>
+                    </tr>
+                  </tbody>
+                </StripedTable>
+
+                <p>
+                  5.5.3
                   Provided that in all cases the grant of further period of sick
                   leave with pay after the maximum period described in (5.5.2)
                   above shall be at the discretion of the Company.
@@ -544,10 +596,72 @@ export default class ConditionsService extends Component {
                   7.1.1 An employee wishing to terminate his/her appointment
                   shall give the Company notice in writing as stated in the
                   table below or pay or forfeit the commensurate salary in lieu
-                  of notice: 7.1.2 Should the Company wish to terminate the
+                  of notice: 
+                </p>
+
+                <StripedTable>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Resignation Notice During Probation</th>
+                      <th>Resignation Notice After Confirmation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Levels 1 &amp; 2</td>
+                      <td>Two weeks</td>
+                      <td>One Month</td>
+                    </tr>
+                    <tr>
+                      <td>Levels 3 &amp; 3H</td>
+                      <td>Two weeks</td>
+                      <td>Three Months</td>
+                    </tr>
+                    <tr>
+                      <td>Levels 4 &amp; 5</td>
+                      <td>One Month</td>
+                      <td>Three Months</td>
+                    </tr>
+                  </tbody>
+                </StripedTable>
+
+                <p>
+                  7.1.2 Should the Company wish to terminate the
                   appointment of an Employee the Company shall give the Employee
                   notice in writing as stated in the table below or pay the
-                  commensurate salary in lieu of notice: For the avoidance of
+                  commensurate salary in lieu of notice: 
+                </p>
+
+                <StripedTable>
+                  <thead>
+                    <tr>
+                      <th></th>
+                      <th>Resignation Notice During Probation</th>
+                      <th>Resignation Notice After Confirmation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Levels 1 &amp; 2</td>
+                      <td>Two weeks</td>
+                      <td>One Month</td>
+                    </tr>
+                    <tr>
+                      <td>Levels 3 &amp; 3H</td>
+                      <td>Two weeks</td>
+                      <td>Three Months</td>
+                    </tr>
+                    <tr>
+                      <td>Levels 4 &amp; 5</td>
+                      <td>One Month</td>
+                      <td>Three Months</td>
+                    </tr>
+                  </tbody>
+                </StripedTable>
+
+                <p>
+                  For the avoidance of
                   doubt, in the case of employees subject to the Collective
                   Agreement (the “CA”) between the Company and Scancom Local
                   Staff Association, where the provision of this clause 7.1.1 is
