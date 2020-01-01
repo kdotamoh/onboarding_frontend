@@ -12,6 +12,7 @@ import ConditionsService from './ConditionsService'
 import Introduction from './Introduction'
 import FirstDays from './FirstDays'
 import End from './End'
+import EmployeeDetails from './EmployeeDetails'
 
 export default class PreOnboarding extends Component {
   render() {
@@ -24,6 +25,7 @@ export default class PreOnboarding extends Component {
           <CompanyOverview path="company-overview" />
           <Compliance path="compliance" />
           <CodeEthics path="code-of-ethics" />
+          <EmployeeDetails path="employee-details" />
           <ConditionsService path="conditions-of-service" />
           <Introduction path="introduce-yourself" />
           <FirstDays path="your-first-three-days" />

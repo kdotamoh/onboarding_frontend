@@ -224,7 +224,7 @@ export default class ConditionsService extends Component {
                   Candidates) will undergo a probationary period of as follows:
                 </p>
 
-               <Table mb="2rem">
+               <Table mb="2rem" width="70%">
                  <thead>
                   <tr>
                     <th>MTN Level</th>

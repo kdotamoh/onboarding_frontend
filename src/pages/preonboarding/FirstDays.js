@@ -108,7 +108,7 @@ export default class FirstDays extends Component {
             </div>
           </Hero>
 
-          <Wrapper>
+          <Wrapper width="60%">
             <Section>
               <h2>Your First Day</h2>
               Venue: MTN House, #6 Independence Avenue, West Ridge, Accra

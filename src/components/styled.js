@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { space, layout, position } from 'styled-system'
+import { space, layout, position, flexbox } from 'styled-system'
 
 import { COLORS, SMALL_NAV_HEIGHT } from '../constants'
 
@@ -74,10 +74,11 @@ export const Logo = styled.img`
 
 export const Table = styled.table`
   ${space}
+  ${layout}
 
   margin: 4rem 0;
   border-collapse: collapse;
-  width: 70%;
+  width: ${props => (props.width ? props.width : '100%')};
   font-size: 80%;
 
   thead tr {
@@ -90,6 +91,8 @@ export const Table = styled.table`
 
   td,
   th {
+    ${props => (props.rowWidth ? `width: ${props.rowWidth};` : null)}
+
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
@@ -119,7 +122,14 @@ export const Container = styled.div`
 `
 
 export const Wrapper = styled.div`
-  width: 60%;
+  ${layout}
+  ${flexbox}
+
+  display: flex;
+  flex-direction: column;
+  ${props => (props.alignItems ? `align-items: ${props.alignItems};` : null)}
+
+  width: ${props => props.width};
 `
 
 export const Section = styled.section`
