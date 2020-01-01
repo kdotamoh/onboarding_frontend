@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Formik, FieldArray } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
-import { navigate } from '@reach/router'
+// import { navigate } from '@reach/router'
 import PropTypes from 'prop-types'
 
 // import { COLORS, INPUT_WIDTH } from '../../constants'
@@ -21,6 +21,7 @@ const Form = styled.form`
   background: #f2f2ef;
   border: 0.5px solid #e6e6e6;
   padding: 3rem;
+  width: 100%;
 
   * {
     font-family: PTSans-Regular;
@@ -81,15 +82,17 @@ const FileInput = styled.div`
   }
 `
 
-// const AddButton = styled.button`
-//   color: white;
-//   background-color: #666666;
-//   padding: 0.3rem;
-//   border-radius: 4px;
-//   width: 2rem;
-//   height: 2rem;
-//   display: inline-block;
-// `
+const AddButton = styled.button`
+  color: white;
+  background-color: #666666;
+  padding: 0.3rem;
+  border-radius: 4px;
+  width: 2rem;
+  height: 2rem;
+  display: inline-block;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+`
 
 const Label = styled.label`
   text-align: left;
@@ -204,6 +207,10 @@ const initialValues = {
 }
 
 export default class DetailsForm extends Component {
+  state = {
+    currentSection: 'this one'
+  }
+
   handleBirthCertificate = (props, event, id) => {
     const newChildren = props.values.children.map((child, childId) => {
       if (id !== childId) return child
@@ -218,14 +225,13 @@ export default class DetailsForm extends Component {
       children: newChildren
     })
   }
+
   render() {
     return (
       <Formik
         enableReinitialize={true}
         initialValues={initialValues}
-        onSubmit={() => {
-          navigate('/preonboarding/welcome')
-        }}
+        onSubmit={() => this.props.handleSubmit()}
         validationSchema={ValidationSchema}
       >
         {props => (
@@ -499,21 +505,23 @@ export default class DetailsForm extends Component {
                     </React.Fragment>
                   ))}
 
-                  {/* <AddButton */}
-                  <Button
-                    type="button"
-                    onClick={e => {
-                      e.preventDefault()
-                      console.log('i been clicked')
-                      arrayHelpers.push({
-                        name: '',
-                        birthCertificate: '',
-                        dateOfBirth: ''
-                      })
-                    }}
-                  >
-                    +
-                  </Button>
+                  <Label htmlFor="">
+                    <AddButton
+                      type="button"
+                      onClick={e => {
+                        e.preventDefault()
+                        console.log('i been clicked')
+                        arrayHelpers.push({
+                          name: '',
+                          birthCertificate: '',
+                          dateOfBirth: ''
+                        })
+                      }}
+                    >
+                      +
+                    </AddButton>
+                    Add child
+                  </Label>
 
                   {/* <label htmlFor="parents.father">Date of Birth</label>
 
@@ -947,4 +955,8 @@ export default class DetailsForm extends Component {
       </Formik>
     )
   }
+}
+
+DetailsForm.propTypes = {
+  handleSubmit: PropTypes.func
 }

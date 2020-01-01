@@ -854,7 +854,7 @@ export default class CodeEthics extends Component {
           <Button
             disabled={!this.state.checked}
             color="blue"
-            onClick={() => navigate('/preonboarding/conditions-of-service')}
+            onClick={() => navigate('/preonboarding/employee-details')}
             my="5rem"
           >
             Next Step >
