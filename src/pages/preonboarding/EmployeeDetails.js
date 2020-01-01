@@ -36,8 +36,6 @@ export default class EmployeeDetails extends Component {
     this.setState({ [name]: value })
   }
 
-  submitDetailsForm = null
-
   render() {
     return (
       <div>

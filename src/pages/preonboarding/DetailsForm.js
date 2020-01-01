@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import { Formik, FieldArray } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
-// import { navigate } from '@reach/router'
+import { navigate } from '@reach/router'
 import PropTypes from 'prop-types'
 
-// import { COLORS, INPUT_WIDTH } from '../../constants'
-
 import { Button } from 'components/styled'
+// import HorizontalSelect from 'components/horizontal-select'
 
 import downArrow from 'images/select/down-arrow.svg'
 
@@ -99,18 +98,6 @@ const Label = styled.label`
   margin-top: 1rem;
   margin-bottom: 0.2rem;
 `
-// const Input = styled.input`
-//   background: white;
-//   height: 1.5rem;
-//   width: ${INPUT_WIDTH}rem;
-//   border: solid 1px ${COLORS.INPUT_BORDER_COLOR};
-//   padding: 1.5rem;
-//   margin: 0.5rem 0;
-// `
-
-// const Label = styled.label`
-//   color: ${COLORS.LABEL_COLOR};
-// `
 
 const Error = styled.div`
   text-align: left;
@@ -227,17 +214,25 @@ export default class DetailsForm extends Component {
   }
 
   render() {
+    // const options = [
+    //   { text: 'Green', selected: false },
+    //   { text: 'Orange', selected: true }
+    // ]
     return (
       <Formik
         enableReinitialize={true}
         initialValues={initialValues}
-        onSubmit={() => this.props.handleSubmit()}
+        onSubmit={() => {
+          navigate('/preonboarding/conditions-of-service')
+        }}
         validationSchema={ValidationSchema}
       >
         {props => (
           <>
             <Form onSubmit={props.handleSubmit}>
               <Heading>1. Personal Information</Heading>
+
+              {/* <HorizontalSelect options={options} /> */}
 
               <Label>Upload your passport photograph here</Label>
               <FileInput>
@@ -342,7 +337,8 @@ export default class DetailsForm extends Component {
               <Label htmlFor="nationality">Nationality</Label>
               <Select
                 as="select"
-                onChange={props.handleChange}
+                // onChange={props.handleChange}
+                onChange={e => console.log(e)}
                 onBlur={props.handleBlur}
                 value={props.values.nationality}
                 name="nationality"
@@ -916,15 +912,17 @@ export default class DetailsForm extends Component {
               <Label htmlFor="medicalInsurance.provider">
                 Select your preferred medical insurance provider:
               </Label>
-              <select
+              <Select
+                as="select"
                 name="medicalInsurance.provider"
                 onChange={props.handleChange}
                 onBlur={props.handleBlur}
                 value={props.values.medicalInsurance.provider}
               >
+                <option value=""></option>
                 <option value="NMI">Nationwide Medical Insurance</option>
                 <option value="AHI">Acacia Health Insurance</option>
-              </select>
+              </Select>
 
               <Label htmlFor="medicalInsurance.form">
                 Upload the completed forms here
@@ -943,15 +941,17 @@ export default class DetailsForm extends Component {
               <Label htmlFor="medicalInsurance.provider">
                 Select your preferred fuel provider:
               </Label>
-              <select
+              <Select
+                as="select"
                 name="fuelCard"
                 onChange={props.handleChange}
                 onBlur={props.handleBlur}
                 value={props.values.fuelCard}
               >
+                <option value=""></option>
                 <option value="TT">Total TomCard</option>
                 <option value="GG">Goil GOCard</option>
-              </select>
+              </Select>
             </Form>
 
             <Button
