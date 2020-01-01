@@ -87,61 +87,107 @@ const sections = [
   {
     heading: 'Anti-Bribery & Corruption',
     img: corruption,
-    p: 'Lorem ipsum'
+    p: `
+      It is our policy to conduct our business activities with honesty, integrity and to the highest ethical standards.
+      
+      Read the MTN-GROUP ANTI-BRIBERY & CORRUPTION POLICY here
+      https://bit.ly/30Tr73B`
   },
   {
     heading: 'Conflict of Interest',
     img: interest,
-    p: 'Lorem ipsum'
+    p: `
+      It is not permissible for employees to: 
+      
+      •     conclude contracts or arrangements or receive or place business on behalf of MTN for financial or personal gain;
+      •     use his/her position or authority to influence or make decisions that lead to any form of financial or personal gain for him/herself, his/her close associates or family members; 
+      •     source or promote any commercial activities for a third party for the purpose of financial or personal gain for him/herself, his/her close associates or family members; and/or engage in any other conduct that may be construed or identified as constituting a conflict of interest.
+      
+      Read the Conflict of Interest Policy here https://bit.ly/30Tr73B`
   },
   {
     heading: 'Gifts, Entertainment and Hospitality',
     img: gifts,
-    p: 'Lorem ipsum'
+    p: `
+      Whilst we appreciate our business partners’ goodwill, MTN has a strict “No-Gifts” stance.
+
+      Read the MTN-Goup Gifts & Entertainment Policy here https://bit.ly/30Tr73B`
   },
   {
     heading: 'Our Employees',
     img: employees,
-    p: 'Lorem ipsum'
+    p: `
+      “We believe in developing our talent, because it’s our people who make us what we are.”
+      
+      At MTN, we do not tolerate harassment, intimidation or discrimination and we respect the political and religious views of all employees. We are also strongly against any form of slavery and child labor.
+      
+      It is important that you use the link below to read MTN Disciplinary Code and Policy. You may also refer to your local Risk and Compliance Department for more information. https://bit.ly/2SCe2ca`
   },
   {
     heading: 'Our Customers',
     img: customers,
-    p: 'Lorem ipsum'
+    p: `
+    Our relationship with our customers is based trust and integrity and we are committed to upholding these values throughout the organization and in how we serve our customers. Through our collective commitment, we are able to work together to ensure that we make our customers’ lives a whole lot BRIGHTER.`
   },
   {
     heading: 'Data Privacy',
     img: privacy,
-    p: 'Lorem ipsum'
+    p: `
+      An information leak takes place when confidential information is revealed to unauthorized persons or parties. Employees who are tempted on a regular basis to disclose customer information to family members or friends, contrary to the data protection laws which MTN is required to operate within should desist from the act.
+
+      Read the MTN-Goup Gifts & Entertainment Policy here https://bit.ly/30Tr73B
+  `
   },
   {
     heading: 'Public Relations',
     img: pr,
-    p: 'Lorem ipsum'
+    p: `
+      What is required of us?
+      We ensure that any statements disclosed to the public and/or key stakeholders are accurate, factual and are disclosed by authorized officials.`
   },
   {
     heading: 'Our Suppliers',
     img: suppliers,
-    p: 'Lorem ipsum'
+    p: `
+      We ensure that our vendors and suppliers adhere to our ethical standards and compliance obligations at all times and wherever we operate in the world. The MTN Group Supplier Code of Conduct defines the standards to be met by all suppliers in carrying out business with MTN, including their employees and subcontractors.`
   },
   {
     heading: 'Compliance and Governance',
     img: governance,
-    p: 'Lorem ipsum'
+    p: `
+      We encourage our stakeholders to take personal responsibility for upholding the Group’s ethics, but we also have formal structures in place to assist with compliance.`
   },
   {
     heading: 'Communities, Society and the Environment',
     img: society,
-    p: 'Lorem ipsum'
+    p: `
+      In order to ensure a sustainable future for all, we must ensure that we keep up to date with environmental laws, regulations and international best practice. We must also use our resources sparingly and in a prudent manner at all times. 
+      
+      Use water, electricity and other resources wisely. Think before printing, dispose of waste responsibly and recycle waste in designated areas.`
   },
   {
     heading: 'Guidance',
     img: guidance,
-    p: 'Lorem ipsum'
+    p: `
+      We see the choice to communicate and speak up as a proactive step in managing any issues or raising concerns.
+      
+      If you require guidance on our ethical standards or you suspect or have witnessed any breach of the standards set out in the MTN Conduct Passport, please consider consult with your direct line management. `
   }
 ]
 
 export default class Compliance extends Component {
+  state = {
+    checked: false
+  }
+
+  handleInput = event => {
+    event.persist()
+    const { target } = event
+    const value = target.type === 'checkbox' ? target.checked : target.value
+    const name = target.name
+    this.setState({ [name]: value })
+  }
+
   render() {
     return (
       <div>
@@ -159,6 +205,7 @@ export default class Compliance extends Component {
               </p>
             </div>
           </Hero>
+
           {sections.length &&
             sections.map((section, id) => (
               <Section key={id}>
@@ -167,9 +214,24 @@ export default class Compliance extends Component {
                 <p>{section.p}</p>
               </Section>
             ))}
+
+          <div>
+            <label>
+              <input
+                style={{ marginRight: '1rem' }}
+                type="checkbox"
+                name="checked"
+                id="checked"
+                onChange={this.handleInput}
+              />
+              I have read and fully understood the MTN Code of Ethics.
+            </label>
+          </div>
           <Button
+            disabled={!this.state.checked}
             color="blue"
             onClick={() => navigate('/preonboarding/code-of-ethics')}
+            my="5rem"
           >
             Next Step >
           </Button>

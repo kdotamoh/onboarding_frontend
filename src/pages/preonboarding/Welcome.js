@@ -10,10 +10,11 @@ import {
   SplitGridRightColumn,
   CenterContent
 } from 'views/layout'
-import { H1, P, Button } from 'components/styled'
+import { H1, P, Button, Logo } from 'components/styled'
 
 import bgImg from 'images/bg_topright.svg'
 import heroImg from 'images/silhouettes.svg'
+import logo from 'images/mtn_logo.svg'
 
 const HeroH1 = styled(H1)`
   color: ${COLORS.DARKER_GREYISH_BROWN};
@@ -53,6 +54,8 @@ export default class Welcome extends Component {
     return (
       <SplitGrid fullPage leftWidth={40} rightWidth={60}>
         <SplitGridLeftColumn background={COLORS.MARIGOLD}>
+          <Logo maxWidth="6rem" left="8rem" top="1rem" src={logo} alt="" />
+
           <PaddedContent>
             <HeroH1>
               Hello, Edward!

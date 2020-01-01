@@ -346,7 +346,7 @@ export default class ConditionsService extends Component {
                   time.
                 </p>
               </Section>
-              <Section id="benfits">
+              <Section id="benefits">
                 <h2>4. Benefits</h2>
                 <h3>4.1 Salary Advance</h3>
                 <p>

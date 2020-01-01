@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { space } from 'styled-system'
+import { space, layout, position } from 'styled-system'
 
 import { COLORS, SMALL_NAV_HEIGHT } from '../constants'
 
@@ -63,6 +63,13 @@ export const Button = styled.button`
   border-color: ${props => props.disabled && '#bfbfbf'};
 
   z-index: 500;
+`
+
+export const Logo = styled.img`
+  ${layout}
+  ${position}
+
+  position: absolute;
 `
 
 export const Table = styled.table`
