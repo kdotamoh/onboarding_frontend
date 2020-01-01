@@ -1,17 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { navigate } from '@reach/router'
 
 import { SmallNav } from 'components/navigation'
-import {
-  H4,
-  Container,
-  Img,
-  Button,
-  Table,
-  Wrapper,
-  Section
-} from 'components/styled'
+import { H4, Container, Img, Table, Wrapper, Section } from 'components/styled'
 import { Hero } from 'views/layout'
 
 import DetailsForm from './DetailsForm'
@@ -45,9 +36,7 @@ export default class EmployeeDetails extends Component {
     this.setState({ [name]: value })
   }
 
-  handleSubmit = () => {
-    navigate('/preonboarding/conditions-of-service')
-  }
+  submitDetailsForm = null
 
   render() {
     return (
@@ -209,15 +198,7 @@ export default class EmployeeDetails extends Component {
               <h2>B. EMPLOYEE DETAILS</h2>
             </Section>
 
-            <DetailsForm handleSubmit={this.handleSubmit} />
-
-            <Button
-              color="blue"
-              onClick={() => navigate('/preonboarding/conditions-of-service')}
-              my="5rem"
-            >
-              Submit and Continue >
-            </Button>
+            <DetailsForm />
           </Wrapper>
 
           <BgImgContainer>
