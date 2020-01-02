@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Router } from '@reach/router'
+import { Helmet } from 'react-helmet'
 
 import Scrolltop from 'utils/scrolltop'
 import PreOnboardingLogin from './PreOnboardingLogin'
@@ -17,21 +18,26 @@ import EmployeeDetails from './EmployeeDetails'
 export default class PreOnboarding extends Component {
   render() {
     return (
-      <Router>
-        <Scrolltop path="/">
-          <PreOnboardingLogin path="/" />
-          <Welcome path="welcome" />
-          <Info path="info" />
-          <CompanyOverview path="company-overview" />
-          <Compliance path="compliance" />
-          <CodeEthics path="code-of-ethics" />
-          <EmployeeDetails path="employee-details" />
-          <ConditionsService path="conditions-of-service" />
-          <Introduction path="introduce-yourself" />
-          <FirstDays path="your-first-three-days" />
-          <End path="end" />
-        </Scrolltop>
-      </Router>
+      <>
+        <Helmet>
+          <title>MTN - Pre-onboarding</title>
+        </Helmet>
+        <Router>
+          <Scrolltop path="/">
+            <PreOnboardingLogin path="/" />
+            <Welcome path="welcome" />
+            <Info path="info" />
+            <CompanyOverview path="company-overview" />
+            <Compliance path="compliance" />
+            <CodeEthics path="code-of-ethics" />
+            <EmployeeDetails path="employee-details" />
+            <ConditionsService path="conditions-of-service" />
+            <Introduction path="introduce-yourself" />
+            <FirstDays path="your-first-three-days" />
+            <End path="end" />
+          </Scrolltop>
+        </Router>
+      </>
     )
   }
 }
