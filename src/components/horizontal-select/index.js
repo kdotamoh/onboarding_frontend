@@ -33,7 +33,9 @@ const Option = styled.div`
 
 export default class HorizontalSelect extends Component {
   state = {
-    options: []
+    ...this.props,
+    options: this.props.options || [],
+    selectedItem: { value: '' }
   }
 
   componentDidMount() {
@@ -41,7 +43,7 @@ export default class HorizontalSelect extends Component {
   }
 
   componentDidUpdate() {
-    this.onChange()
+    // this.onChange()
   }
 
   toggleSelected = id => {
@@ -49,43 +51,50 @@ export default class HorizontalSelect extends Component {
       if (id !== optionId) return { ...option, selected: false }
       return { ...option, selected: !option.selected }
     })
-    this.setState({ options: newOptions })
+    let selectedItem = newOptions.find(option => option.selected)
+    this.setState({ options: newOptions, selectedItem })
   }
 
-  onChange = () => {
-    console.log(
-      this.state.options
-        ? this.state.options.find(option => option.selected)
-        : null
-    )
-  }
+  // onChange = () => {
+  //   console.log(
+  //     this.state.options
+  //       ? this.state.options.find(option => option.selected)
+  //       : null
+  //   )
+  // }
 
   render() {
     // const { options } = this.props
-    const { options } = this.state
-
+    // const { options } = this.state
     return (
-      <Select role="listbox" id="listbox1" onChange={console.log()}>
-        {options &&
-          options.map((option, id) => (
-            // Todo: Get id from spread props
-            <Option
-              role="option"
-              id={`listbox1-${id + 1}`}
-              key={id}
-              aria-selected={option.selected}
-              onClick={() => this.toggleSelected(id)}
-            >
-              {option.text}
-            </Option>
-          ))}
-        {/* <Option role="option" id="listbox1-1" aria-selected="true">
+      <>
+        <Select role="listbox" id="listbox1">
+          {this.state.options &&
+            this.state.options.map((option, id) => (
+              // Todo: Get id from spread props
+              <Option
+                role="option"
+                id={`listbox1-${id + 1}`}
+                key={id}
+                aria-selected={option.selected}
+                onClick={() => this.toggleSelected(id)}
+              >
+                {option.text}
+              </Option>
+            ))}
+          {/* <Option role="option" id="listbox1-1" aria-selected="true">
           Green
         </Option>
         <Option role="option" id="listbox1-2">
           Orange
         </Option> */}
-      </Select>
+          <input
+            type="hidden"
+            value={this.state.selectedItem.value}
+            name={this.state.name}
+          />
+        </Select>
+      </>
     )
   }
 }
