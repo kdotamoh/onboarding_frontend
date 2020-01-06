@@ -2,10 +2,15 @@ import React, { Component } from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
-import { navigate } from '@reach/router'
+import PropTypes from 'prop-types'
+// import { navigate } from '@reach/router'
+import axios from 'axios'
+import { connect } from 'react-redux'
+
+import { setToken } from 'store/auth'
+import { setUser } from 'store/user'
 
 import { COLORS, INPUT_WIDTH } from '../../constants'
-
 import { Button } from 'components/styled'
 
 const Form = styled.form`
@@ -23,11 +28,6 @@ const Input = styled.input`
   margin: 0.5rem 0;
 `
 
-const FormHeading = styled.h2`
-  color: ${COLORS.TWILIGHT_BLUE};
-  font-family: MTNBrighterSans-Regular;
-`
-
 const Label = styled.label`
   color: ${COLORS.LABEL_COLOR};
 `
@@ -41,20 +41,47 @@ const LoginSchema = Yup.object().shape({
   username: Yup.string().required('Username is required'),
   password: Yup.string().required('Password is required')
 })
+class LoginForm extends Component {
+  handleSubmit = async values => {
+    // event.preventDefault()
+    // console.log(`I'm submitting`)
+    try {
+      let res = await axios({
+        method: 'post',
+        url: `${process.env.REACT_APP_API_BASE}/auth/local`,
+        data: {
+          identifier: values.username,
+          password: values.password
+        }
+      })
+      console.log(res)
+      let {
+        data: { jwt, user }
+      } = res
+      this.props.setToken(jwt)
+      this.props.setUser(user)
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
-export default class LoginForm extends Component {
   render() {
     return (
       <div>
-        <FormHeading>
-          Pre-onboarding
-          <br />
-          Log In
-        </FormHeading>
         <Formik
           initialValues={{ username: '', password: '' }}
-          onSubmit={() => {
-            navigate('/preonboarding/welcome')
+          // onSubmit={() => {
+          //   // navigate('/preonboarding/welcome')
+          onSubmit={(
+            values
+            // { setSubmitting }
+          ) => {
+            this.handleSubmit(values)
+
+            // setTimeout(() => {
+            //   alert(JSON.stringify(values, null, 2))
+            //   setSubmitting(false)
+            // }, 400)
           }}
           validationSchema={LoginSchema}
         >
@@ -96,4 +123,13 @@ export default class LoginForm extends Component {
       </div>
     )
   }
+}
+
+const mapDispatch = { setToken, setUser }
+
+export default connect(null, mapDispatch)(LoginForm)
+
+LoginForm.propTypes = {
+  setToken: PropTypes.func,
+  setUser: PropTypes.func
 }

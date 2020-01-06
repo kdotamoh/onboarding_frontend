@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import LoginForm from './LoginForm'
+import LoginForm from 'pages/preonboarding/LoginForm' // Todo: Change this
 import { COLORS } from '../../constants'
 import logo from 'images/mtn_logo.svg'
 
@@ -15,6 +15,7 @@ import {
 const TranslateCenter = styled(CenterContent)`
   transform: translateX(-10rem);
 `
+
 const FormHeading = styled.h2`
   color: ${COLORS.TWILIGHT_BLUE};
   text-align: left;
@@ -36,12 +37,12 @@ export default class PreOnboardingLogin extends Component {
           <TranslateCenter>
             <div>
               <FormHeading>
-                Pre-onboarding
+                Onboarding
                 <br />
                 Log In
               </FormHeading>
+              <LoginForm />
             </div>
-            <LoginForm />
           </TranslateCenter>
         </SplitGridRightColumn>
       </SplitGrid>
