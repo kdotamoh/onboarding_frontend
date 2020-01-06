@@ -6,20 +6,22 @@ import {
   SplitGridRightColumn
 } from 'views/layout'
 import { COLORS } from '../../constants'
-import Navigation, { SideNav } from 'components/navigation'
+import Navigation from 'components/navigation'
 
-export default class Onboarding extends Component {
+export default class UserProfile extends Component {
   render() {
     return (
-      <div>
+      <>
         <Navigation />
         <SplitGrid leftWidth={30} rightWidth={70}>
           <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
-            <SideNav />
+            Avatar goes here
           </SplitGridLeftColumn>
-          <SplitGridRightColumn background={COLORS.WHITE} />
+          <SplitGridRightColumn background={COLORS.LIGHT_GREY}>
+            Profile info
+          </SplitGridRightColumn>
         </SplitGrid>
-      </div>
+      </>
     )
   }
 }

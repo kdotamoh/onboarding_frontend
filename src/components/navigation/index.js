@@ -74,13 +74,13 @@ export default class Navigation extends Component {
         <Img src={logo} />
         <NavigationLinks>
           <LinkWrapper>
-            <StyledNavLink to="/">Home</StyledNavLink>
+            <StyledNavLink to="/dashboard">Home</StyledNavLink>
           </LinkWrapper>
           <LinkWrapper>
-            <Link to="/">Home</Link>
+            <Link to="/dashboard/events">Events</Link>
           </LinkWrapper>
           <LinkWrapper>
-            <Link to="/">Home</Link>
+            <Link to="/dashboard/tasks">Tasks</Link>
           </LinkWrapper>
         </NavigationLinks>
         <UserProfile className="tour-step-4">user profile</UserProfile>

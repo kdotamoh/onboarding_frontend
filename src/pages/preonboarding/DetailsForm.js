@@ -130,20 +130,20 @@ const Divider = styled.hr`
 `
 
 const ValidationSchema = Yup.object().shape({
-  surname: Yup.string().required('Surname is required'),
-  middleName: Yup.string().required('Middle name is required'),
-  firstName: Yup.string().required('First name is required'),
-  contactNumber: Yup.number().required('Contact number is required'),
-  // dateOfBirth
-  gender: Yup.mixed()
-    .oneOf(['M', 'F'])
-    .required('Gender is required'),
-  nextOfKin: Yup.object().shape({
-    name: Yup.string().required(),
-    dateOfBirth: '',
-    address: '',
-    contactNumber: Yup.number().required()
-  })
+  surname: Yup.string().required('Surname is required')
+  // middleName: Yup.string().required('Middle name is required'),
+  // firstName: Yup.string().required('First name is required'),
+  // contactNumber: Yup.number().required('Contact number is required'),
+  // // dateOfBirth
+  // gender: Yup.mixed()
+  //   .oneOf(['M', 'F'])
+  //   .required('Gender is required'),
+  // nextOfKin: Yup.object().shape({
+  //   name: Yup.string().required(),
+  //   dateOfBirth: '',
+  //   address: '',
+  //   contactNumber: Yup.number().required()
+  // })
   // For when I wanna validate children: https://codesandbox.io/s/myqmyq3plx
 })
 
@@ -312,8 +312,7 @@ export default class DetailsForm extends Component {
                 <Label htmlFor="surname">Surname</Label>
                 <Input
                   type="text"
-                  // onChange={props.handleChange}
-                  onChange={e => console.log(e.target.value)}
+                  onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   value={props.values.surname}
                   name="surname"

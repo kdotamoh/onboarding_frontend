@@ -50,7 +50,7 @@ const BigHero = styled(Hero)`
 
 const InfoBox = styled.div`
   background: ${COLORS.PALE_MARIGOLD};
-  width: 90%;
+  /* width: 90%; */
   padding: 5rem 15rem;
   z-index: 500;
 `

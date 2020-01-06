@@ -160,7 +160,7 @@ export default class Introduction extends Component {
             validationSchema={ValidationSchema}
           >
             {props => (
-              <Form>
+              <Form onSubmit={props.handleSubmit}>
                 <p>
                   Please answer the following questions and we’ll send out a
                   quick introduction email to the people you’ll be working with.
@@ -172,6 +172,7 @@ export default class Introduction extends Component {
                 <Textarea
                   name="bio"
                   value={props.values.bio}
+                  onBlur={props.handleBlur}
                   onChange={props.handleChange}
                 ></Textarea>
                 {props.errors.bio && props.touched.bio ? (
