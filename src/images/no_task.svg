@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="204.755" height="137" viewBox="0 0 204.755 137">
+    <defs>
+        <style>
+            .cls-1,.cls-5{fill:#0f6987}.cls-1,.cls-3,.cls-4{opacity:.1}.cls-2{fill:#fff}.cls-4{fill:#444053}
+        </style>
+    </defs>
+    <g id="Group_997" data-name="Group 997" transform="translate(-2418 -1580)">
+        <path id="Path_749" d="M155.1 79.213c-13.122-.455-25.62-4.693-37.555-9.327S93.786 60.115 80.976 57.66c-8.237-1.581-17.659-1.8-24.3 2.613-6.388 4.25-8.451 11.587-9.562 18.4-.835 5.123-1.325 10.512.962 15.309 1.588 3.328 4.408 6.126 6.351 9.315 6.785 11.1 2 24.778-5.364 35.613-3.448 5.081-7.451 9.93-10.111 15.34s-3.887 11.609-1.548 17.136c2.308 5.469 7.8 9.578 13.768 12.469 12.093 5.86 26.355 7.54 40.261 8.491 30.784 2.105 61.734 1.194 92.6.281 11.422-.339 22.9-.681 34.132-2.448 6.241-.98 12.683-2.541 17.214-6.3a14.417 14.417 0 0 0 3.323-18.833c-6.464-10.035-24.337-12.521-28.853-23.3-2.488-5.927.067-12.53 3.682-18.027 7.752-11.8 20.747-22.139 21.431-35.62.472-9.255-5.776-18.532-15.436-22.912-10.126-4.591-24.164-4.014-31.635 3.588C180.2 76.6 166.683 79.614 155.1 79.213z" class="cls-1" data-name="Path 749" transform="translate(2381.892 1523.375)"/>
+        <path id="Path_788" d="M267.81 317.87v80.156a2.8 2.8 0 0 0 2.8 2.8h115.026a2.8 2.8 0 0 0 2.8-2.8V317.87z" class="cls-2" data-name="Path 788" transform="translate(2192.285 1309.538)"/>
+        <rect id="Rectangle_548" width="28.835" height="16.926" class="cls-3" data-name="Rectangle 548" rx="8.463" transform="translate(2469.64 1634.583)"/>
+        <rect id="Rectangle_549" width="28.835" height="16.926" class="cls-3" data-name="Rectangle 549" rx="8.463" transform="translate(2505.99 1634.583)"/>
+        <rect id="Rectangle_551" width="28.024" height="16.448" class="cls-4" data-name="Rectangle 551" rx="8.224" transform="rotate(180 1285.384 825.635)"/>
+        <rect id="Rectangle_553" width="28.024" height="16.448" class="cls-4" data-name="Rectangle 553" rx="8.224" transform="translate(2470.045 1658.581)"/>
+        <rect id="Rectangle_554" width="28.024" height="16.448" class="cls-4" data-name="Rectangle 554" rx="8.224" transform="rotate(180 1285.384 837.515)"/>
+        <rect id="Rectangle_555" width="28.024" height="16.448" class="cls-4" data-name="Rectangle 555" rx="8.224" transform="rotate(180 1267.21 837.515)"/>
+        <rect id="Rectangle_556" width="28.024" height="16.448" class="cls-4" data-name="Rectangle 556" rx="8.224" transform="translate(2470.045 1682.34)"/>
+        <rect id="Rectangle_557" width="28.024" height="16.448" class="cls-4" data-name="Rectangle 557" rx="8.224" transform="rotate(180 1285.384 849.395)"/>
+        <rect id="Rectangle_558" width="28.024" height="16.448" class="cls-4" data-name="Rectangle 558" rx="8.224" transform="rotate(180 1267.21 849.395)"/>
+        <path id="Path_789" d="M267.81 227.23v14.563h120.624V227.23a2.8 2.8 0 0 0-2.8-2.8H270.608a2.8 2.8 0 0 0-2.798 2.8zm29.852 4.308a2.234 2.234 0 1 1 2.238-2.238 2.234 2.234 0 0 1-2.238 2.238zm60.921 0a2.234 2.234 0 1 1 1.578-.653 2.234 2.234 0 0 1-1.578.653z" class="cls-5" data-name="Path 789" transform="translate(2192.285 1386.021)"/>
+        <path id="Path_790" d="M420.392 236.74a2.64 2.64 0 1 0 2.639 2.64 2.64 2.64 0 0 0-2.639-2.64zm0 4.874a2.234 2.234 0 1 1 2.234-2.234 2.234 2.234 0 0 1-2.234 2.234z" class="cls-3" data-name="Path 790" transform="translate(2069.554 1375.945)"/>
+        <path id="Path_791" d="M756.09 236.74a2.64 2.64 0 1 0 2.64 2.64 2.64 2.64 0 0 0-2.64-2.64zm0 4.874a2.234 2.234 0 1 1 2.234-2.234 2.234 2.234 0 0 1-2.234 2.234z" class="cls-3" data-name="Path 791" transform="translate(1794.773 1375.945)"/>
+        <circle id="Ellipse_119" cx="2.771" cy="2.771" r="2.771" class="cls-1" data-name="Ellipse 119" transform="translate(2602.704 1653.436)"/>
+        <circle id="Ellipse_120" cx="4.646" cy="4.646" r="4.646" class="cls-1" data-name="Ellipse 120" transform="translate(2610.743 1639.203)"/>
+        <circle id="Ellipse_121" cx="4.646" cy="4.646" r="4.646" class="cls-1" data-name="Ellipse 121" transform="translate(2604.593 1661.745)"/>
+        <circle id="Ellipse_122" cx="6.578" cy="6.578" r="6.578" class="cls-1" data-name="Ellipse 122" transform="translate(2418 1636.131)"/>
+    </g>
+</svg>

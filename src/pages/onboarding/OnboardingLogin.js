@@ -41,7 +41,7 @@ export default class PreOnboardingLogin extends Component {
                 <br />
                 Log In
               </FormHeading>
-              <LoginForm />
+              <LoginForm next="dashboard/tasks" />
             </div>
           </TranslateCenter>
         </SplitGridRightColumn>

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { space } from 'styled-system'
 
 import { NAV_HEIGHT } from '../constants'
 
@@ -29,12 +30,16 @@ export const SplitGrid = styled.div`
 `
 
 export const SplitGridLeftColumn = styled.section`
+  ${space}
+
   grid-area: left;
   position: relative;
   background: ${props => (props.background ? props.background : 'transparent')};
 `
 
 export const SplitGridRightColumn = styled.section`
+  ${space}
+
   grid-area: right;
   position: relative;
   background: ${props => (props.background ? props.background : 'transparent')};

@@ -64,3 +64,13 @@ export const CardInfo = styled.div`
     }
   }
 `
+
+export const DashboardCard = styled(Card)`
+  img {
+    margin-bottom: 3rem;
+  }
+  box-shadow: unset;
+  min-height: unset;
+  height: 300px;
+  text-align: center;
+`

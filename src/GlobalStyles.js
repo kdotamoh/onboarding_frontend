@@ -7,7 +7,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: MTNBrighterSans-Regular;
+    /* font-family: MTNBrighterSans-Regular; */
   }
 
   html {
@@ -15,11 +15,16 @@ export default createGlobalStyle`
     height: 100vh;
   }
 
+  h1, h2, h3, h4 {
+    font-family: MTNBrighterSans-Bold;
+  }
+
   body {
     // font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     //   "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     //   sans-serif;
-    font-family: MTNBrighterSans-Regular;
+    color: #3d3d3d;
+    font-family: MTNBrighterSans-Light;
     font-weight: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;

@@ -35,6 +35,7 @@ const NavigationLinks = styled.ul`
   width: 350px;
   list-style: none;
   height: 100%;
+  margin-bottom: 0;
 `
 
 const LinkWrapper = styled.li`
@@ -47,14 +48,14 @@ const LinkWrapper = styled.li`
     height: 100%;
     border-bottom: 5px solid ${COLORS.GREYISH_BROWN};
     padding: 2rem;
-    padding-bottom: 3.5rem;
+    padding-bottom: 2.25rem; /* // Todo: this is super jank */
     vertical-align: middle;
     /* color: ; */
   }
 `
 
 const Img = styled.img`
-  height: 75%;
+  height: 65%;
 `
 
 export const UserProfile = styled.div``

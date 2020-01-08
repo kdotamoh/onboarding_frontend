@@ -3,7 +3,7 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-// import { navigate } from '@reach/router'
+import { navigate } from '@reach/router'
 import axios from 'axios'
 import { connect } from 'react-redux'
 
@@ -43,8 +43,6 @@ const LoginSchema = Yup.object().shape({
 })
 class LoginForm extends Component {
   handleSubmit = async values => {
-    // event.preventDefault()
-    // console.log(`I'm submitting`)
     try {
       let res = await axios({
         method: 'post',
@@ -58,8 +56,9 @@ class LoginForm extends Component {
       let {
         data: { jwt, user }
       } = res
-      this.props.setToken(jwt)
-      this.props.setUser(user)
+      await this.props.setToken(jwt)
+      await this.props.setUser(user)
+      navigate(`${this.props.next}`)
     } catch (err) {
       console.log(err)
     }
@@ -70,18 +69,12 @@ class LoginForm extends Component {
       <div>
         <Formik
           initialValues={{ username: '', password: '' }}
-          // onSubmit={() => {
-          //   // navigate('/preonboarding/welcome')
           onSubmit={(
             values
             // { setSubmitting }
           ) => {
             this.handleSubmit(values)
-
-            // setTimeout(() => {
-            //   alert(JSON.stringify(values, null, 2))
-            //   setSubmitting(false)
-            // }, 400)
+            // setSubmitting(false)
           }}
           validationSchema={LoginSchema}
         >
@@ -131,5 +124,6 @@ export default connect(null, mapDispatch)(LoginForm)
 
 LoginForm.propTypes = {
   setToken: PropTypes.func,
-  setUser: PropTypes.func
+  setUser: PropTypes.func,
+  next: PropTypes.string
 }
