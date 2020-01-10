@@ -21,10 +21,10 @@ const Form = styled.form`
   padding: 3rem;
   width: 100%;
 
-  * {
+  /* * {
     font-family: PTSans-Regular;
     /* font-size: 85%; */
-  }
+  } */
 
   section {
     font-size: 85%;

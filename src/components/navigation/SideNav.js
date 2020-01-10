@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import styled from 'styled-components'
+import OnboardingLink from 'pages/onboarding/OnboardingLink'
 
 const Wrapper = styled.div`
-  background: black;
+  /* background: black; */
   height: 300px;
   width: 250px;
   position: absolute;
@@ -14,7 +15,36 @@ const Wrapper = styled.div`
 
 export default class SideNav extends Component {
   render() {
-    return <Wrapper>sidenav</Wrapper>
+    return (
+      <Wrapper>
+        <nav className="onboarding-navigation">
+          <ul className="onboarding-navigation__items">
+            {/* <li className="onboarding-navigation__item onboarding-navigation__item--active">
+              Company Overview
+            </li> */}
+            <OnboardingLink to="/onboarding/company-overview">
+              Company Overview
+            </OnboardingLink>
+            <OnboardingLink to="/onboarding/ceo-welcome">
+              CEO Welcome
+            </OnboardingLink>
+            <OnboardingLink to="/onboarding/mission-and-vision">
+              Mission &amp; Vision
+            </OnboardingLink>
+            <OnboardingLink to="/onboarding/how-we-are-organised">
+              How we are organised
+            </OnboardingLink>
+            <OnboardingLink to="/onboarding/employee-value-proposition">
+              Employee Value Proposition
+            </OnboardingLink>
+            <OnboardingLink to="/onboarding/strategic-pillars-and-priorities">
+              Strategic Pillars &amp; Priorities
+            </OnboardingLink>
+            <OnboardingLink to="/onboarding/tasks">Tasks</OnboardingLink>
+          </ul>
+        </nav>
+      </Wrapper>
+    )
   }
 }
 
@@ -35,6 +65,11 @@ const Navigation = styled.nav`
     li {
       margin-bottom: 1rem;
     }
+  }
+
+  a {
+    text-decoration: unset;
+    color: unset;
   }
 `
 

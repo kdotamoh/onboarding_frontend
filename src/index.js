@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 
 import 'antd/dist/antd.css'
 import 'react-datepicker/dist/react-datepicker.css'
+import 'css/navigation.css'
 import './index.css'
 
 import App from './App'

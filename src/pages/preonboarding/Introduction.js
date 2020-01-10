@@ -5,7 +5,7 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 
 import { SmallNav } from 'components/navigation'
-import { H4, Container, Img, Button } from 'components/styled'
+import { H3, Container, Img, Button } from 'components/styled'
 import { Hero } from 'views/layout'
 
 import bgImg from 'images/bg_l_bottomright.svg'
@@ -32,9 +32,9 @@ const Form = styled.form`
   text-align: left;
   margin-bottom: 7rem;
 
-  * {
+  /* * {
     font-family: PTSans-Regular;
-  }
+  } */
 
   input[type='checkbox'] {
     margin-right: 0.5rem;
@@ -141,7 +141,7 @@ export default class Introduction extends Component {
       <div>
         <SmallNav />
         <Container>
-          <H4 py="3rem">Get Introduced</H4>
+          <H3 py="3rem">Get Introduced</H3>
           <Hero>
             <div className="row">
               <p className="column">

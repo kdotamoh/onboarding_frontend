@@ -13,9 +13,11 @@ import logo from 'images/mtn_logo.svg'
 import NavLink from './NavLink'
 import SideNav from './SideNav'
 import SmallNav from './SmallNav'
+import StepNav from './StepNav'
 
 export { SideNav }
 export { SmallNav }
+export { StepNav }
 
 export const Nav = styled.nav`
   grid-area: nav;

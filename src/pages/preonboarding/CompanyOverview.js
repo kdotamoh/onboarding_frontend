@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { navigate } from '@reach/router'
 
 import { SmallNav } from 'components/navigation'
-import { H4, Container, Img, UL, Button } from 'components/styled'
+import { H4, H3, Container, Img, UL, Button } from 'components/styled'
 import { Hero } from 'views/layout'
 
 import bgImg from 'images/bg_l_bottomright.svg'
@@ -45,6 +45,16 @@ const BigHero = styled(Hero)`
     p {
       width: 70%;
     }
+
+    a {
+      color: rgba(0, 0, 0, 0.65);
+      text-decoration: underline;
+      font-size: 1rem;
+
+      &:hover {
+        color: ${COLORS.TWILIGHT_BLUE};
+      }
+    }
   }
 `
 
@@ -61,7 +71,7 @@ export default class CompanyOverview extends Component {
       <div>
         <SmallNav />
         <Container>
-          <H4 py="3rem">Overview</H4>
+          <H3 py="3rem">Overview</H3>
           <BigHero>
             <div className="row">
               <div className="column">

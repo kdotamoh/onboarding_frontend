@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { navigate } from '@reach/router'
 
 import { Card, CardInfo } from 'components/card'
-import { SmallNav } from 'components/navigation'
+import { SmallNav, StepNav } from 'components/navigation'
 import { Button, H3, Container } from 'components/styled'
 
 import { COLORS } from '../../constants'
@@ -31,6 +31,7 @@ export default class Info extends Component {
       <div>
         <SmallNav />
         <ContainerWithBackground>
+          <StepNav />
           <Header>Where &amp; When</Header>
           <Card mb="3rem" p="2rem">
             <CardInfo>

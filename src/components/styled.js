@@ -1,10 +1,11 @@
 import styled from 'styled-components'
-import { space, layout, position, flexbox } from 'styled-system'
+import { space, color, layout, position, flexbox } from 'styled-system'
 
 import { COLORS, SMALL_NAV_HEIGHT } from '../constants'
 
 export const H1 = styled.h1`
   ${space}
+  ${color}
 
   font-size: 3.6rem;
   font-family: MTNBrighterSans-Bold;
@@ -13,6 +14,7 @@ export const H1 = styled.h1`
 `
 export const H2 = styled.h2`
   ${space}
+  ${color}
 
   font-size: 3rem;
   font-family: MTNBrighterSans-Bold;
@@ -20,6 +22,7 @@ export const H2 = styled.h2`
 `
 export const H3 = styled.h3`
   ${space}
+  ${color}
 
   font-size: 2.5rem;
   font-family: MTNBrighterSans-Bold;
@@ -27,6 +30,7 @@ export const H3 = styled.h3`
 `
 export const H4 = styled.h4`
   ${space}
+  ${color}
 
   font-size: 2rem;
   font-family: MTNBrighterSans-Bold;

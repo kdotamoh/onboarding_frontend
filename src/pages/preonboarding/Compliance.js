@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import { navigate } from '@reach/router'
 
 import { SmallNav } from 'components/navigation'
-import { H4, Container, Img, Button } from 'components/styled'
+import { H4, H3, Container, Img, Button, Wrapper } from 'components/styled'
 import { Hero } from 'views/layout'
+import { COLORS } from '../../constants'
 
 import bgImg from 'images/bg_l_bottomright.svg'
 
@@ -193,7 +194,7 @@ export default class Compliance extends Component {
       <div>
         <SmallNav />
         <Container>
-          <H4 py="3rem">Compliance &amp; Governance</H4>
+          <H3 py="3rem">Compliance &amp; Governance</H3>
           <Hero>
             <div className="row">
               <img className="column" src={heroImg} alt="" />
@@ -206,27 +207,29 @@ export default class Compliance extends Component {
             </div>
           </Hero>
 
-          {sections.length &&
-            sections.map((section, id) => (
-              <Section key={id}>
-                <H4>{section.heading}</H4>
-                <img alt="" src={section.img} />
-                <p>{section.p}</p>
-              </Section>
-            ))}
+          <Wrapper width="50%">
+            {sections.length &&
+              sections.map((section, id) => (
+                <Section key={id}>
+                  <H4 color={COLORS.DARKER_GREYISH_BROWN}>{section.heading}</H4>
+                  <img alt="" src={section.img} />
+                  <p>{section.p}</p>
+                </Section>
+              ))}
 
-          <div>
-            <label>
-              <input
-                style={{ marginRight: '1rem' }}
-                type="checkbox"
-                name="checked"
-                id="checked"
-                onChange={this.handleInput}
-              />
-              I have read and fully understood the MTN Code of Ethics.
-            </label>
-          </div>
+            <div style={{ width: '100%', textAlign: 'left' }}>
+              <label>
+                <input
+                  style={{ marginRight: '1rem' }}
+                  type="checkbox"
+                  name="checked"
+                  id="checked"
+                  onChange={this.handleInput}
+                />
+                I have read and fully understood the MTN Code of Ethics.
+              </label>
+            </div>
+          </Wrapper>
           <Button
             disabled={!this.state.checked}
             color="blue"

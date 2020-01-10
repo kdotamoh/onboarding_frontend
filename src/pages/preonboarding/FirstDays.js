@@ -4,9 +4,8 @@ import { navigate } from '@reach/router'
 
 import { SmallNav } from 'components/navigation'
 import Modal from 'components/modal'
-import { H4, Container, Wrapper, Img, Button, Section } from 'components/styled'
+import { H3, Container, Wrapper, Img, Button, Section } from 'components/styled'
 import { Hero } from 'views/layout'
-import { COLORS } from '../../constants'
 
 import bgImg from 'images/bg_l_bottomright.svg'
 import heroImg from 'images/first_days_hero.svg'
@@ -29,12 +28,6 @@ const BgImgContainer = styled.div`
   width: 100%;
 `
 
-const Feedback = styled.textarea`
-  border: 0;
-  border-bottom: 1px solid #e6e6e6;
-  resize: none;
-`
-
 const Emoji = styled.img`
   max-height: 5rem;
   cursor: pointer;
@@ -50,25 +43,6 @@ const ModalHeading = styled.h3`
   margin-bottom: 2rem;
 `
 
-const Actions = styled.div`
-  width: 60%;
-  display: flex;
-  justify-content: space-between;
-`
-
-const ChangeRating = styled.span`
-  font-size: 90%;
-  margin-top: 2rem;
-  cursor: pointer;
-`
-
-const Submit = styled.span`
-  font-size: 90%;
-  margin-top: 2rem;
-  cursor: pointer;
-  color: ${COLORS.TWILIGHT_BLUE};
-`
-
 export default class FirstDays extends Component {
   state = {
     visible: false,
@@ -78,9 +52,8 @@ export default class FirstDays extends Component {
   }
 
   handleRating = rating => {
-    this.setState({ rating, getFeedback: rating < 4 ? true : false })
-
-    if (rating > 3) navigate('/preonboarding/end')
+    this.setState({ rating })
+    navigate('/preonboarding/end')
   }
 
   handleChange = event => {
@@ -95,7 +68,7 @@ export default class FirstDays extends Component {
       <div>
         <SmallNav />
         <Container>
-          <H4 py="3rem">Your First Three Days</H4>
+          <H3 py="3rem">Your First Three Days</H3>
           <Hero>
             <div className="row">
               <p className="column">
@@ -185,61 +158,36 @@ export default class FirstDays extends Component {
             <BgImg src={bgImg} />
           </BgImgContainer>
           <Modal visible={visible}>
-            {this.state.getFeedback ? (
-              <div className="column">
-                <ModalHeading>
-                  Please tell us what we could improve on
-                </ModalHeading>
-                <Feedback onChange={this.handleChange}></Feedback>
-                <Actions>
-                  <ChangeRating
-                    onClick={() => this.setState({ getFeedback: false })}
-                  >
-                    Change rating
-                  </ChangeRating>
-                  <Submit onClick={() => navigate('/preonboarding/end')}>
-                    Submit feedback
-                  </Submit>
-                </Actions>
-              </div>
-            ) : (
-              <React.Fragment>
-                <ModalHeading>
-                  Please rate your onboarding experience?
-                </ModalHeading>
-                <div className="row">
-                  <div className="column">
-                    <Emoji
-                      onClick={() => this.handleRating(1)}
-                      src={verypoor}
-                    />
-                    <Caption>Very Poor</Caption>
-                  </div>
-                  <div className="column">
-                    <Emoji onClick={() => this.handleRating(2)} src={poor} />
-                    <Caption>Poor</Caption>
-                  </div>
-                  <div className="column">
-                    <Emoji
-                      onClick={() => this.handleRating(3)}
-                      src={satisfactory}
-                    />
-                    <Caption>Satisfactory</Caption>
-                  </div>
-                  <div className="column">
-                    <Emoji onClick={() => this.handleRating(4)} src={good} />
-                    <Caption>Good</Caption>
-                  </div>
-                  <div className="column">
-                    <Emoji
-                      onClick={() => this.handleRating(5)}
-                      src={verygood}
-                    />
-                    <Caption>Very Good</Caption>
-                  </div>
+            <React.Fragment>
+              <ModalHeading>
+                Please rate your onboarding experience?
+              </ModalHeading>
+              <div className="row">
+                <div className="column">
+                  <Emoji onClick={() => this.handleRating(1)} src={verypoor} />
+                  <Caption>Very Poor</Caption>
                 </div>
-              </React.Fragment>
-            )}
+                <div className="column">
+                  <Emoji onClick={() => this.handleRating(2)} src={poor} />
+                  <Caption>Poor</Caption>
+                </div>
+                <div className="column">
+                  <Emoji
+                    onClick={() => this.handleRating(3)}
+                    src={satisfactory}
+                  />
+                  <Caption>Satisfactory</Caption>
+                </div>
+                <div className="column">
+                  <Emoji onClick={() => this.handleRating(4)} src={good} />
+                  <Caption>Good</Caption>
+                </div>
+                <div className="column">
+                  <Emoji onClick={() => this.handleRating(5)} src={verygood} />
+                  <Caption>Very Good</Caption>
+                </div>
+              </div>
+            </React.Fragment>
           </Modal>
         </Container>
       </div>

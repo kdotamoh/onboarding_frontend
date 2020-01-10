@@ -5,7 +5,7 @@ import Scrollspy from 'react-scrollspy'
 import StickyBox from 'react-sticky-box'
 
 import { SmallNav } from 'components/navigation'
-import { H4, Container, Img, Button, Small, Section } from 'components/styled'
+import { H3, Container, Img, Button, Small, Section } from 'components/styled'
 import {
   SplitGrid,
   Hero,
@@ -48,7 +48,7 @@ export default class CodeEthics extends Component {
       <div>
         <SmallNav />
         <Container>
-          <H4 py="3rem">Code of Ethics</H4>
+          <H3 py="3rem">Code of Ethics</H3>
           <Hero>
             <div className="row">
               <img className="column" src={heroImg} alt="" />

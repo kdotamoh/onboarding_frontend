@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 import { SmallNav } from 'components/navigation'
-import { H4, Container, Img, Table, Wrapper, Section } from 'components/styled'
+import { H3, Container, Img, Table, Wrapper, Section } from 'components/styled'
 import { Hero } from 'views/layout'
 
 import DetailsForm from './DetailsForm'
@@ -41,7 +41,7 @@ export default class EmployeeDetails extends Component {
       <div>
         <SmallNav />
         <Container>
-          <H4 py="3rem">Help Us Get You Ready for Your First at MTN</H4>
+          <H3 py="3rem">Help Us Get You Ready for Your First at MTN</H3>
           <Hero>
             <div className="row">
               <img className="column" src={heroImg} alt="" />

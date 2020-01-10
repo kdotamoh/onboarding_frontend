@@ -5,7 +5,7 @@ import Scrollspy from 'react-scrollspy'
 import StickyBox from 'react-sticky-box'
 
 import { SmallNav } from 'components/navigation'
-import { H4, Container, Img, Button, Small, Section, Table, StripedTable } from 'components/styled'
+import { H3, Container, Img, Button, Small, Section, Table, StripedTable } from 'components/styled'
 import {
   Hero,
   SplitGridRightColumn,
@@ -51,7 +51,7 @@ export default class ConditionsService extends Component {
       <div>
         <SmallNav />
         <Container>
-          <H4 py="3rem">Overview</H4>
+          <H3 py="3rem">Overview</H3>
           <Hero>
             <div className="row">
               <img className="column" src={heroImg} alt="" />
