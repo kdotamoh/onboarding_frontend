@@ -7,8 +7,10 @@ import {
   SplitGridRightColumn
 } from 'views/layout'
 import { COLORS } from '../../constants'
-import Navigation, { SideNav } from 'components/navigation'
+import { SideNav } from 'components/navigation'
+import DashboardNav from 'components/navigation/DashboardNav'
 import { DashboardCard } from 'components/card'
+import OnboardingLink from 'pages/onboarding/OnboardingLink'
 
 import noTask from 'images/no_task.svg'
 
@@ -16,10 +18,14 @@ class Tasks extends Component {
   render() {
     return (
       <>
-        <Navigation />
-        <SplitGrid leftWidth={30} rightWidth={70}>
+        {/* <Navigation /> */}
+        <DashboardNav />
+        <SplitGrid leftWidth={20} rightWidth={80}>
           <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
-            <SideNav />
+            <SideNav>
+              <OnboardingLink to="/dashboard/tasks">New</OnboardingLink>
+              <OnboardingLink to="/dashboard/tasks/past">Past</OnboardingLink>
+            </SideNav>
           </SplitGridLeftColumn>
           <SplitGridRightColumn p="5rem" background={COLORS.LIGHT_GREY}>
             tasks

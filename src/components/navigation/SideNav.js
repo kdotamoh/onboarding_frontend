@@ -15,37 +15,25 @@ const Wrapper = styled.div`
 
 export default class SideNav extends Component {
   render() {
+    const { children } = this.props
     return (
       <Wrapper>
         <nav className="onboarding-navigation">
           <ul className="onboarding-navigation__items">
-            {/* <li className="onboarding-navigation__item onboarding-navigation__item--active">
-              Company Overview
-            </li> */}
-            <OnboardingLink to="/onboarding/company-overview">
-              Company Overview
-            </OnboardingLink>
-            <OnboardingLink to="/onboarding/ceo-welcome">
-              CEO Welcome
-            </OnboardingLink>
-            <OnboardingLink to="/onboarding/mission-and-vision">
-              Mission &amp; Vision
-            </OnboardingLink>
-            <OnboardingLink to="/onboarding/how-we-are-organised">
-              How we are organised
-            </OnboardingLink>
-            <OnboardingLink to="/onboarding/employee-value-proposition">
-              Employee Value Proposition
-            </OnboardingLink>
-            <OnboardingLink to="/onboarding/strategic-pillars-and-priorities">
-              Strategic Pillars &amp; Priorities
-            </OnboardingLink>
-            <OnboardingLink to="/onboarding/tasks">Tasks</OnboardingLink>
+            {React.Children.map(children, child => (
+              <OnboardingLink to={child.props.to}>
+                {child.props.children}
+              </OnboardingLink>
+            ))}
           </ul>
         </nav>
       </Wrapper>
     )
   }
+}
+
+SideNav.propTypes = {
+  children: PropTypes.node
 }
 
 // Sidebar on preonboarding pagges

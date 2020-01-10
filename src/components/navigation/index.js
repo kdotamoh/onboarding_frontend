@@ -56,7 +56,7 @@ const LinkWrapper = styled.li`
   }
 `
 
-const Img = styled.img`
+export const Img = styled.img`
   height: 65%;
 `
 

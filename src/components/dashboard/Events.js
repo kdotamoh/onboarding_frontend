@@ -6,16 +6,21 @@ import {
   SplitGridRightColumn
 } from 'views/layout'
 import { COLORS } from '../../constants'
-import Navigation, { SideNav } from 'components/navigation'
+import { SideNav } from 'components/navigation'
+import DashboardNav from 'components/navigation/DashboardNav'
+import OnboardingLink from 'pages/onboarding/OnboardingLink'
 
 export default class Events extends Component {
   render() {
     return (
       <>
-        <Navigation />
-        <SplitGrid leftWidth={30} rightWidth={70}>
+        <DashboardNav />
+        <SplitGrid leftWidth={20} rightWidth={80}>
           <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
-            <SideNav />
+            <SideNav>
+              <OnboardingLink to="/dashboard/events">Upcoming</OnboardingLink>
+              <OnboardingLink to="/dashboard/events/past">Past</OnboardingLink>
+            </SideNav>
           </SplitGridLeftColumn>
           <SplitGridRightColumn background={COLORS.LIGHT_GREY}>
             events

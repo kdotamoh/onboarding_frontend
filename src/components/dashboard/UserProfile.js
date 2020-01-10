@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import styled from 'styled-components'
 
 import {
   SplitGrid,
@@ -7,6 +8,15 @@ import {
 } from 'views/layout'
 import { COLORS } from '../../constants'
 import Navigation from 'components/navigation'
+
+export const ProfileDropdown = styled.div`
+  display: flex;
+
+  img {
+    border-radius: 50%;
+    height: 60%;
+  }
+`
 
 export default class UserProfile extends Component {
   render() {

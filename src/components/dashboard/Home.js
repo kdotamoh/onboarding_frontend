@@ -3,7 +3,9 @@ import Joyride from 'react-joyride' //,
 import styled from 'styled-components'
 
 import { Card } from 'components/card'
-import Navigation from 'components/navigation'
+// import Navigation from 'components/navigation'
+import DashboardNav from 'components/navigation/DashboardNav'
+
 import {
   SplitGrid,
   SplitGridLeftColumn,
@@ -24,7 +26,7 @@ const StepTwo = styled(Card).attrs({
   className: 'tour-step-2'
 })``
 
-const StepThree = styled(Navigation).attrs({
+const StepThree = styled(DashboardNav).attrs({
   className: 'tour-step-3'
 })``
 

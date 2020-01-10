@@ -12,7 +12,7 @@ export default class Dashboard extends Component {
     return (
       <Router>
         <Scrolltop path="/">
-          <Home path="/" />
+          <Home path="/home" />
           <Events path="/events" />
           <Tasks path="/tasks" />
           <UserProfile path="/profile" />

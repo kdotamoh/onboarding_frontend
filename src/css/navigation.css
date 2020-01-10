@@ -41,3 +41,43 @@
   padding-left: 0.6rem;
   width: 100%;
 }
+
+.dashboard-navigation {
+  /* grid-area: nav; */
+  padding-left: 5rem;
+  padding-right: 5rem;
+  display: flex;
+  height: 7.5rem;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffcb09;
+}
+
+.dashboard-navigation__items {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 350px;
+  list-style: none;
+  height: 100%;
+  margin-bottom: 0;
+}
+
+.dashboard-navigation__item {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.dashboard-navigation__item {
+  justify-content: flex-end;
+  text-decoration: none;
+  height: 100%;
+  padding: 2rem;
+  padding-bottom: 2.25rem; /* // Todo: this is super jank */
+  vertical-align: middle;
+  /* color: ; */
+}
+
+.dashboard-navigation__item--active {
+  border-bottom: 5px solid #4f4f4f;
+}
