@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
 
 import fonts from './fonts/fonts'
+import { COLORS } from './constants'
 
 export default createGlobalStyle`
   * {
@@ -36,7 +37,8 @@ export default createGlobalStyle`
 
 
   a {
-    color: rgba(0, 0, 0, 0.65)
+    color: ${COLORS.TWILIGHT_BLUE};
+    text-decoration: underline;
   }
 
   ${fonts}
