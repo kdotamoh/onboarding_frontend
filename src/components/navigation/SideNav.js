@@ -1,23 +1,25 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
 import styled from 'styled-components'
+import { space } from 'styled-system'
+
 import OnboardingLink from 'pages/onboarding/OnboardingLink'
 
 const Wrapper = styled.div`
-  /* background: black; */
+  ${space}
+
   height: 300px;
   width: 250px;
   position: absolute;
   right: 0;
-  transform: translateY(10rem);
+  /* transform: translateY(10rem); */
 `
 
 export default class SideNav extends Component {
   render() {
     const { children } = this.props
     return (
-      <Wrapper>
+      <Wrapper pt="5rem">
         <nav className="onboarding-navigation">
           <ul className="onboarding-navigation__items">
             {React.Children.map(children, child => (

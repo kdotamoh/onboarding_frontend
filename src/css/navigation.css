@@ -66,18 +66,17 @@
 .dashboard-navigation__item {
   text-transform: uppercase;
   font-weight: bold;
-}
-
-.dashboard-navigation__item {
+  font-family: MTNBrighterSans-Bold;
   justify-content: flex-end;
   text-decoration: none;
   height: 100%;
   padding: 2rem;
   padding-bottom: 2.25rem; /* // Todo: this is super jank */
   vertical-align: middle;
-  /* color: ; */
+  opacity: 30%;
 }
 
 .dashboard-navigation__item--active {
   border-bottom: 5px solid #4f4f4f;
+  opacity: 100%;
 }

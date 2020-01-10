@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Joyride from 'react-joyride' //,
 import styled from 'styled-components'
+import { navigate } from '@reach/router'
 
 import { Card } from 'components/card'
 // import Navigation from 'components/navigation'
@@ -38,8 +39,8 @@ const BgImg = styled(Img)`
 `
 
 const PaddedContent = styled(CenterContent)`
-  padding: 10rem;
-  transform: translateX(10rem);
+  padding: 15rem;
+  transform: translateY(-9rem);
   text-align: left;
   align-items: start;
 `
@@ -89,7 +90,12 @@ export default class Welcome extends Component {
                       quis tenetur sapiente, amet ab quod quisquam et, libero
                       assumenda velit? Quis, tempora saepe. Sunt, doloremque!
                     </p>
-                    <Button color="blue">Start now ></Button>
+                    <Button
+                      color="blue"
+                      onClick={() => navigate('/onboarding/company-overview')}
+                    >
+                      Start now >
+                    </Button>
                   </StepTwo>
                 </CenterContent>
                 <BgImg src={bgImg} />

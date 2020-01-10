@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
 
+import goBack from 'utils/go-back'
+
 import { COLORS } from '../../constants'
 
 const Container = styled.div`
@@ -71,10 +73,6 @@ export default class StepNav extends Component {
     console.log(this.props)
   }
 
-  goBack = () => {
-    window.history.back()
-  }
-
   goTo = path => {
     navigate(`${path}`)
   }
@@ -83,7 +81,7 @@ export default class StepNav extends Component {
     let { steps } = this.state
     return (
       <Container>
-        <u onClick={this.goBack}>{`< Back`}</u> {/* eslint-disable-line */}
+        <u onClick={() => goBack()}>{'< Back'}</u>
         <Steps>
           {steps &&
             steps.map((step, id) => (

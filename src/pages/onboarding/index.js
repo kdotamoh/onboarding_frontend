@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Router } from '@reach/router'
 
+import goBack from 'utils/go-back'
+
 import {
   SplitGrid,
   SplitGridLeftColumn,
@@ -50,7 +52,9 @@ export default class Onboarding extends Component {
             </SideNav>
           </SplitGridLeftColumn>
           <SplitGridRightColumn px="10rem" py="5rem" background={COLORS.WHITE}>
-            <u>{'<'} Back</u>
+            <u style={{ cursor: 'pointer' }} onClick={() => goBack()}>
+              {'< Back'}
+            </u>
             <Router>
               <CompanyOverview path="/company-overview" />
               <CEOWelcome path="/ceo-welcome" />

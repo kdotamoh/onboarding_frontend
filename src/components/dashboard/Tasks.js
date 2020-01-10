@@ -28,7 +28,6 @@ class Tasks extends Component {
             </SideNav>
           </SplitGridLeftColumn>
           <SplitGridRightColumn p="5rem" background={COLORS.LIGHT_GREY}>
-            tasks
             <DashboardCard px="3rem" py="4rem">
               <img src={noTask} alt="" />
               <p>

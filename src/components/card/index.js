@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { space } from 'styled-system'
+import { space, layout } from 'styled-system'
 
 export const Card = styled.div`
   ${space}
@@ -66,11 +66,16 @@ export const CardInfo = styled.div`
 `
 
 export const DashboardCard = styled(Card)`
+  ${layout}
+  ${space}
+
   img {
     margin-bottom: 3rem;
   }
   box-shadow: unset;
   min-height: unset;
-  height: 300px;
-  text-align: center;
 `
+DashboardCard.defaultProps = {
+  height: '30rem',
+  textAlign: 'center'
+}
