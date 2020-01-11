@@ -32,6 +32,7 @@ const Steps = styled.div`
 
 const Step = styled.div`
   cursor: pointer;
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,26 +46,45 @@ const Step = styled.div`
   text-align: center;
   vertical-align: center;
   background-color: ${COLORS.TWILIGHT_BLUE};
-
-  ${props =>
-    props.isCurrent ? `box-shadow: 0 0 1px ${COLORS.TWILIGHT_BLUE};` : null}
-  opacity: ${props => (props.isCurrent ? '100%' : '50%')};
+  margin-right: 44px;
 
   /* Line */
   &::after {
     content: "";
-    border-bottom: solid 1px #fff;
+    margin-left: 22px;
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: ${COLORS.TWILIGHT_BLUE};
     position: absolute;
     left: 0;
     top: 50%;
-    z-index: 1;
+    z-index: -1;
+  }
+
+&:last-child {
+  margin-right: 0;
 }
+
+  &:last-child::after {
+      display: none;
+  }
+
+  ${props =>
+    props.isCurrent ? `box-shadow: 0 0 1px ${COLORS.TWILIGHT_BLUE};` : null}
+  opacity: ${props => (props.isCurrent ? '90%' : '50%')};
+
+
+
+
 `
 
 export default class StepNav extends Component {
   state = {
     steps: [
       { path: '/preonboarding/info', isCurrent: true },
+      { path: '/preonboarding/company-overview', isCurrent: false },
+      { path: '/preonboarding/company-overview', isCurrent: false },
       { path: '/preonboarding/company-overview', isCurrent: false }
     ]
   }
