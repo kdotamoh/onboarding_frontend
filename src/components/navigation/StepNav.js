@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { navigate } from '@reach/router'
+import { navigate, Location } from '@reach/router'
 
 import goBack from 'utils/go-back'
 
@@ -82,10 +82,14 @@ const Step = styled.div`
 export default class StepNav extends Component {
   state = {
     steps: [
-      { path: '/preonboarding/info', isCurrent: true },
+      { path: '/preonboarding/info', isCurrent: false },
       { path: '/preonboarding/company-overview', isCurrent: false },
-      { path: '/preonboarding/company-overview', isCurrent: false },
-      { path: '/preonboarding/company-overview', isCurrent: false }
+      { path: '/preonboarding/compliance', isCurrent: false },
+      { path: '/preonboarding/code-of-ethics', isCurrent: false },
+      { path: '/preonboarding/employee-details', isCurrent: false },
+      { path: '/preonboarding/conditions-of-service', isCurrent: false },
+      { path: '/preonboarding/introduce-yourself', isCurrent: false },
+      { path: '/preonboarding/your-first-three-days', isCurrent: false }
     ]
   }
 
@@ -94,28 +98,36 @@ export default class StepNav extends Component {
   }
 
   goTo = path => {
-    navigate(`${path}`)
+    navigate(path)
+  }
+
+  checkIsCurrent = (location, step) => {
+    return location.pathname === step.path
   }
 
   render() {
     let { steps } = this.state
     return (
-      <Container>
-        <u onClick={() => goBack()}>{'< Back'}</u>
-        <Steps>
-          {steps &&
-            steps.map((step, id) => (
-              <Step
-                onClick={() => this.goTo(step.path)}
-                key={id}
-                isCurrent={step.isCurrent}
-              >
-                {id + 1}
-              </Step>
-            ))}
-        </Steps>
-        <p>hidden</p>
-      </Container>
+      <Location>
+        {({ location }) => (
+          <Container>
+            <u onClick={() => goBack()}>{'< Back'}</u>
+            <Steps>
+              {steps &&
+                steps.map((step, id) => (
+                  <Step
+                    onClick={() => this.goTo(step.path)}
+                    key={id}
+                    isCurrent={this.checkIsCurrent(location, step)}
+                  >
+                    {id + 1}
+                  </Step>
+                ))}
+            </Steps>
+            <p>hidden</p>
+          </Container>
+        )}
+      </Location>
     )
   }
 }
