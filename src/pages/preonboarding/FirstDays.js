@@ -85,11 +85,14 @@ export default class FirstDays extends Component {
           <Wrapper width="60%">
             <Section>
               <h2>Your First Day</h2>
-              Venue: MTN House, #6 Independence Avenue, West Ridge, Accra
-              Digital Address: GA-052-4025 Time: Do plan to arrive at MTN House
-              by 8:00am on your first day. Parking: In order to assist you with
-              parking on your first day, please present your ID to the security
-              personnel at the main entrance.
+              <strong>Venue:</strong> MTN House, #6 Independence Avenue, West
+              Ridge, Accra <br />
+              <strong>Digital Address:</strong> GA-052-4025 <br />
+              <strong>Time: </strong> Do plan to arrive at MTN House by 8:00am
+              on your first day. <br />
+              <strong>Parking:</strong> In order to assist you with parking on
+              your first day, please present your ID to the security personnel
+              at the main entrance.
             </Section>
 
             <Section>
