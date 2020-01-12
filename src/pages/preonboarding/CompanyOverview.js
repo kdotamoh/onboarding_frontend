@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
 
-import { SmallNav } from 'components/navigation'
+import { SmallNav, StepNav } from 'components/navigation'
 import { H4, H3, Container, Img, UL, Button } from 'components/styled'
 import { Hero } from 'views/layout'
 
@@ -70,6 +70,7 @@ export default class CompanyOverview extends Component {
     return (
       <div>
         <SmallNav />
+        <StepNav />
         <Container>
           <H3 py="3rem">Overview</H3>
           <BigHero>

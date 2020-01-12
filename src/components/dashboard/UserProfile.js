@@ -45,7 +45,7 @@ export const ProfileDropdown = () => {
       >
         Edward v
       </span>
-      <img src={test} />
+      <img src={test} alt="" />
       <div
         css={`
           background: white;

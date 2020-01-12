@@ -4,7 +4,7 @@ import { navigate } from '@reach/router'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 
-import { SmallNav } from 'components/navigation'
+import { SmallNav, StepNav } from 'components/navigation'
 import { H3, Container, Img, Button } from 'components/styled'
 import { Hero } from 'views/layout'
 
@@ -140,6 +140,7 @@ export default class Introduction extends Component {
     return (
       <div>
         <SmallNav />
+        <StepNav />
         <Container>
           <H3 py="3rem">Get Introduced</H3>
           <Hero>

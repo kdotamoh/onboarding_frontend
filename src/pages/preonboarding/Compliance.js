@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
 
-import { SmallNav } from 'components/navigation'
+import { SmallNav, StepNav } from 'components/navigation'
 import { H4, H3, Container, Img, Button, Wrapper } from 'components/styled'
 import { Hero } from 'views/layout'
 import { COLORS } from '../../constants'
@@ -193,6 +193,7 @@ export default class Compliance extends Component {
     return (
       <div>
         <SmallNav />
+        <StepNav />
         <Container>
           <H3 py="3rem">Compliance &amp; Governance</H3>
           <Hero>

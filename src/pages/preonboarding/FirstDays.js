@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
 
-import { SmallNav } from 'components/navigation'
+import { SmallNav, StepNav } from 'components/navigation'
 import Modal from 'components/modal'
 import { H3, Container, Wrapper, Img, Button, Section } from 'components/styled'
 import { Hero } from 'views/layout'
@@ -10,11 +10,11 @@ import { Hero } from 'views/layout'
 import bgImg from 'images/bg_l_bottomright.svg'
 import heroImg from 'images/first_days_hero.svg'
 
-import verypoor from 'images/emoji/002-angry.svg'
-import poor from 'images/emoji/017-sad.svg'
-import satisfactory from 'images/emoji/013-meh.svg'
-import good from 'images/emoji/022-smile.svg'
-import verygood from 'images/emoji/010-happy.svg'
+import verypoor from 'images/emoji/verypoor.svg'
+import poor from 'images/emoji/poor.svg'
+import satisfactory from 'images/emoji/satisfactory.svg'
+import good from 'images/emoji/good.svg'
+import verygood from 'images/emoji/verygood.svg'
 
 const BgImg = styled(Img)`
   position: absolute;
@@ -67,6 +67,7 @@ export default class FirstDays extends Component {
     return (
       <div>
         <SmallNav />
+        <StepNav />
         <Container>
           <H3 py="3rem">Your First Three Days</H3>
           <Hero>
