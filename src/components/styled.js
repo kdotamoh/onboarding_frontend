@@ -53,11 +53,15 @@ export const Small = styled.small`
 
 export const Button = styled.button`
   ${space}
+  ${color}
 
   font-size: 1.2rem;
   font-size: 1.8rem;
   font-family: MTNBrighterSans-Bold;
-  color: ${COLORS.WHITE};
+  color: ${props =>
+    props.textColor === 'black'
+      ? '#000'
+      : '#fff'}; /* // Todo: Use styled system instead */
   background: ${props =>
     props.color === 'blue' ? COLORS.DEEP_AQUA : COLORS.MARIGOLD};
   background: ${props => props.disabled && '#bfbfbf'};
@@ -148,5 +152,9 @@ export const Section = styled.section`
 
   li {
     margin-left: 2rem;
+  }
+
+  h2 {
+    font-family: MTNBrighterSans-Regular;
   }
 `

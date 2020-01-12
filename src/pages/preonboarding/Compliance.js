@@ -84,13 +84,13 @@ const sections = [
   {
     heading: 'Intellectual Property',
     img: ip,
-    text: `<p>You are the custodian of our brand so it’s up to you to ensure that we remain consistent – from Afghanistan to Zambia, and everywhere between.</p>`
+    text: `<p>You are the custodian of our brand so it’s up to you to ensure 
+    that we remain consistent – from Afghanistan to Zambia, and everywhere between.</p>`
   },
   {
     heading: 'Whistleblowing',
     img: whistleblowing,
-    text:
-      `<p>“MTN sees whistleblowing differently, regarding it as a positive practice that assists the organization to detect incidents of fraud,
+    text: `<p>“MTN sees whistleblowing differently, regarding it as a positive practice that assists the organization to detect incidents of fraud,
        misconduct, and illegal activity early.”</p>  <p><strong>Q&A</strong></br><strong>Q</strong>: How do I report suspicious or illegal activity? 
        </br> <strong>A</strong>: You may make use of our reporting channels such as: </br>  The MTN Fraud Hotline: 1385 </br> Email: anonymous@tip-offs.com 
        </br> You may also refer to your local Risk and Compliance department for further information.</p>  Read the Whistleblowing Policy here <a>https://bit.ly/2Y4KPwh</a>`

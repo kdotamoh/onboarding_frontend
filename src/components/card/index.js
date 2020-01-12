@@ -33,6 +33,22 @@ export const CardInfo = styled.div`
 
   .card-info__circle {
     background: #0d5d77;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+
+    span {
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+    }
+
+    .day {
+      font-family: MTNBrighterSans-Medium;
+      font-size: 130%;
+    }
   }
 
   .card-info__left {

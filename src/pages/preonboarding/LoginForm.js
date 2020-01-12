@@ -54,13 +54,14 @@ class LoginForm extends Component {
       })
       console.log(res)
       let {
-        data: { jwt, user }
+        data: { token, user }
       } = res
-      await this.props.setToken(jwt)
+      await this.props.setToken(token)
       await this.props.setUser(user)
       navigate(`${this.props.next}`)
     } catch (err) {
       console.log(err)
+      // navigate(`${this.props.next}`) // Todo: REMOVE THIS
     }
   }
 

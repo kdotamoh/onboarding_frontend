@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { COLORS } from '../../constants'
 import { Img } from 'components/styled'
@@ -10,11 +12,12 @@ import {
   SplitGridRightColumn,
   CenterContent
 } from 'views/layout'
-import { H1, P } from 'components/styled'
+import { H1, P, Logo } from 'components/styled'
 import { Card, CardInfo } from 'components/card'
 
 import bgImg from 'images/bg_l_bottomleft.svg'
 import placeholder from 'images/png/placeholder.png'
+import logo from 'images/mtn_logo.svg'
 
 const HeroH1 = styled(H1)`
   color: ${COLORS.DARKER_GREYISH_BROWN};
@@ -40,17 +43,22 @@ const PaddedContent = styled(CenterContent)`
   align-items: start;
 `
 
-export default class End extends Component {
+class End extends Component {
   nextPage = () => {
     navigate('/preonboarding/info')
   }
 
   render() {
+    const { first_name } = this.props.user
     return (
       <SplitGrid fullPage leftWidth={40} rightWidth={60}>
         <SplitGridLeftColumn background={COLORS.MARIGOLD}>
+          <Logo maxWidth="6rem" left="8rem" top="1rem" src={logo} alt="" />
+
           <PaddedContent>
-            <HeroH1>Congrats on completing your pre-onboarding, Edward.</HeroH1>
+            <HeroH1>
+              Congrats on completing your pre-onboarding, {first_name}.
+            </HeroH1>
             <Paragraph>We look forward to seeing you soon.</Paragraph>
           </PaddedContent>
           <BgImg src={bgImg} />
@@ -60,7 +68,10 @@ export default class End extends Component {
             <Card p="2rem">
               <CardInfo>
                 <div className="card-info__left">
-                  <div className="card-info__image card-info__circle"></div>
+                  <div className="card-info__image card-info__circle">
+                    <span className="month">SEP</span>
+                    <span className="day">10</span>
+                  </div>
                 </div>
 
                 <div className="card-info__right">
@@ -96,3 +107,11 @@ export default class End extends Component {
     )
   }
 }
+End.propTypes = {
+  user: PropTypes.shape({
+    first_name: PropTypes.string
+  })
+}
+export default connect(state => ({
+  user: state.user
+}))(End)

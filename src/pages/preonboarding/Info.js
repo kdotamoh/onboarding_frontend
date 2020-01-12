@@ -36,7 +36,10 @@ export default class Info extends Component {
           <Card mb="3rem" p="2rem">
             <CardInfo>
               <div className="card-info__left">
-                <div className="card-info__image card-info__circle"></div>
+                <div className="card-info__image card-info__circle">
+                  <span className="month">SEP</span>
+                  <span className="day">10</span>
+                </div>
               </div>
 
               <div className="card-info__right">

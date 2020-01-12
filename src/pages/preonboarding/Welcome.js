@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { COLORS } from '../../constants'
 import { Img } from 'components/styled'
@@ -45,12 +47,13 @@ const PaddedContent = styled(CenterContent)`
   align-items: start;
 `
 
-export default class Welcome extends Component {
+class Welcome extends Component {
   nextPage = () => {
     navigate('/preonboarding/info')
   }
 
   render() {
+    const { first_name } = this.props.user
     return (
       <SplitGrid fullPage leftWidth={40} rightWidth={60}>
         <SplitGridLeftColumn background={COLORS.MARIGOLD}>
@@ -58,7 +61,7 @@ export default class Welcome extends Component {
 
           <PaddedContent>
             <HeroH1>
-              Hello, Edward!
+              Hello, {first_name}!
               <br />
               Welcome aboard
             </HeroH1>
@@ -84,3 +87,11 @@ export default class Welcome extends Component {
     )
   }
 }
+Welcome.propTypes = {
+  user: PropTypes.shape({
+    first_name: PropTypes.string
+  })
+}
+export default connect(state => ({
+  user: state.user
+}))(Welcome)

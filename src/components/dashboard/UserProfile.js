@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { space } from 'styled-system'
 import { Link } from '@reach/router'
+import { connect } from 'react-redux'
 
 import {
   SplitGrid,
@@ -14,7 +16,7 @@ import { DashboardCard } from 'components/card'
 
 import test from 'images/png/placeholder.png'
 
-export const ProfileDropdown = () => {
+const _ProfileDropdown = ({ user }) => {
   const [isOpen, setIsOpen] = React.useState(false)
 
   return (
@@ -43,7 +45,7 @@ export const ProfileDropdown = () => {
           font-family: MTNBrighterSans-Bold;
         `}
       >
-        Edward v
+        {user.first_name} v
       </span>
       <img src={test} alt="" />
       <div
@@ -69,6 +71,15 @@ export const ProfileDropdown = () => {
     </div>
   )
 }
+_ProfileDropdown.propTypes = {
+  user: PropTypes.shape({
+    first_name: PropTypes.string
+  })
+}
+export const ProfileDropdown = connect(state => ({
+  token: state.token,
+  user: state.user
+}))(_ProfileDropdown)
 
 const Wrapper = styled.div`
   ${space}
@@ -88,8 +99,9 @@ const Avatar = styled.img`
   right: 0;
 `
 
-export default class UserProfile extends Component {
+class UserProfile extends Component {
   render() {
+    const { user } = this.props
     return (
       <>
         <DashboardNav />
@@ -107,17 +119,17 @@ export default class UserProfile extends Component {
               textAlign="left"
               mb="2rem"
             >
-              <span>Surname: Darko</span>
-              <span>Middle Name: Kwame</span>
-              <span>First Name: Edward</span>
-              <span>Official Mobile No.: 0244 123 456</span>
+              <span>Surname: {user.last_name}</span>
+              <span>Middle Name: {user.other_names}</span>
+              <span>First Name: {user.first_name}</span>
+              <span>Official Mobile No.: {user.phone_number}</span>
             </DashboardCard>
 
             <DashboardCard height="unset" py="3rem" px="2rem" textAlign="left">
-              <span>Job Title: xxxxxxxxxx</span>
-              <span>Division: xxxxxxxxxx</span>
-              <span>Department: xxxxxxxxxx</span>
-              <span>Location: xxxxxxxxxx</span>
+              <span>Job Title: {user.job_title}</span>
+              <span>Division: {user.division}</span>
+              <span>Department: {user.department}</span>
+              <span>Location: {user.location}</span>
               <span>Line Manager: xxxxxxxxxx</span>
             </DashboardCard>
           </SplitGridRightColumn>
@@ -126,3 +138,10 @@ export default class UserProfile extends Component {
     )
   }
 }
+UserProfile.propTypes = {
+  user: PropTypes.object
+}
+export default connect(state => ({
+  token: state.token,
+  user: state.user
+}))(UserProfile)
