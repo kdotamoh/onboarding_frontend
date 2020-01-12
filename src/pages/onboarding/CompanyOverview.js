@@ -31,7 +31,7 @@ export default class Onboarding extends Component {
             incidunt earum amet aliquam doloribus? Odio quae, fugit asperiores
             quas molestiae voluptatibus laboriosam doloribus!
           </p>
-          <Button color="black">Next ></Button>
+          <Button textColor="black">Next ></Button>
         </div>
         <div>
           <BgImg src={bgImg} />

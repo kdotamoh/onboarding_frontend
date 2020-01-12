@@ -20,7 +20,7 @@ import MissionVision from './MissionVision'
 import Organisation from './Organisation'
 import EmployeeValue from './EmployeeValue'
 import StrategicPillars from './StrategicPillars'
-import Tasks from 'components/dashboard/Tasks'
+import Tasks from './Tasks'
 
 export default class Onboarding extends Component {
   render() {
@@ -48,22 +48,28 @@ export default class Onboarding extends Component {
               <OnboardingLink to="/onboarding/strategic-pillars-and-priorities">
                 Strategic Pillars &amp; Priorities
               </OnboardingLink>
-              <OnboardingLink to="/dashboard/tasks">Tasks</OnboardingLink>
+              <OnboardingLink to="/onboarding/tasks">Tasks</OnboardingLink>
             </SideNav>
           </SplitGridLeftColumn>
           <SplitGridRightColumn px="10rem" py="5rem" background={COLORS.WHITE}>
             <u style={{ cursor: 'pointer' }} onClick={() => goBack()}>
               {'< Back'}
             </u>
-            <Router>
-              <CompanyOverview path="/company-overview" />
-              <CEOWelcome path="/ceo-welcome" />
-              <MissionVision path="/mission-and-vision" />
-              <Organisation path="/how-we-are-organised" />
-              <EmployeeValue path="/employee-value-proposition" />
-              <StrategicPillars path="/strategic-pillars-and-priorities" />
-              <Tasks path="/tasks" />
-            </Router>
+            <div
+              css={`
+                width: 600px;
+              `}
+            >
+              <Router>
+                <CompanyOverview path="/company-overview" />
+                <CEOWelcome path="/ceo-welcome" />
+                <MissionVision path="/mission-and-vision" />
+                <Organisation path="/how-we-are-organised" />
+                <EmployeeValue path="/employee-value-proposition" />
+                <StrategicPillars path="/strategic-pillars-and-priorities" />
+                <Tasks path="/tasks" />
+              </Router>
+            </div>
           </SplitGridRightColumn>
         </SplitGrid>
       </div>

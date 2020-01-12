@@ -20,7 +20,7 @@ export default class Organisation extends Component {
         <div style={{ zIndex: 10000, position: 'relative' }}>
           <H3>How We Are Organised</H3>
           Video
-          <Button color="black">Next ></Button>
+          <Button textColor="black">Next ></Button>
         </div>
         <div>
           <BgImg src={bgImg} />

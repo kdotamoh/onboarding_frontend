@@ -20,7 +20,7 @@ export default class EmployeeValue extends Component {
         <div style={{ zIndex: 10000, position: 'relative' }}>
           <H3>Employee Value Proposition</H3>
           Video
-          <Button color="black">Next ></Button>
+          <Button textColor="black">Next ></Button>
         </div>
         <div>
           <BgImg src={bgImg} />

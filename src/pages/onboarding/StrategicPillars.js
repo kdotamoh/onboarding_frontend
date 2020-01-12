@@ -20,7 +20,7 @@ export default class StrategicPillars extends Component {
         <div style={{ zIndex: 10000, position: 'relative' }}>
           <H3>Strategic Pillars &amp; Priorities</H3>
           Video
-          <Button color="black">Next ></Button>
+          <Button textColor="black">Next ></Button>
         </div>
         <div>
           <BgImg src={bgImg} />
