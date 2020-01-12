@@ -44,20 +44,20 @@ const LoginSchema = Yup.object().shape({
 class LoginForm extends Component {
   handleSubmit = async values => {
     try {
-      // let res = await axios({
-      //   method: 'post',
-      //   url: `${process.env.REACT_APP_API_BASE}/auth/local`,
-      //   data: {
-      //     identifier: values.username,
-      //     password: values.password
-      //   }
-      // })
-      // console.log(res)
-      // let {
-      //   data: { jwt, user }
-      // } = res
-      // await this.props.setToken(jwt)
-      // await this.props.setUser(user)
+      let res = await axios({
+        method: 'post',
+        url: `${process.env.REACT_APP_API_BASE}/api-token-auth/`,
+        data: {
+          email: values.username, // Todo: actually use a username
+          password: values.password
+        }
+      })
+      console.log(res)
+      let {
+        data: { jwt, user }
+      } = res
+      await this.props.setToken(jwt)
+      await this.props.setUser(user)
       navigate(`${this.props.next}`)
     } catch (err) {
       console.log(err)
