@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import { H3, Button, Img } from 'components/styled'
+import { Button, Img } from 'components/styled'
 
 import bgImg from 'images/onboarding/group-1.svg'
+import PageStyle from './PageStyle'
 
 const BgImg = styled(Img)`
   position: absolute;
@@ -16,16 +17,21 @@ const BgImg = styled(Img)`
 export default class EmployeeValue extends Component {
   render() {
     return (
-      <div>
-        <div style={{ zIndex: 10000, position: 'relative' }}>
-          <H3>Employee Value Proposition</H3>
-          Video
-          <Button textColor="black">Next ></Button>
-        </div>
+      <>
+        <PageStyle>
+          <h3>Employee Value Proposition</h3>
+          <h4>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
+            sint porro nulla officiis
+          </h4>
+          <Button mt="15rem" textColor="black">
+            Next >
+          </Button>
+        </PageStyle>
         <div>
           <BgImg src={bgImg} />
         </div>
-      </div>
+      </>
     )
   }
 }

@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import { H3, Button, Img } from 'components/styled'
+import { Button, Img } from 'components/styled'
 
 import bgImg from 'images/onboarding/group-1.svg'
+import PageStyle from './PageStyle'
 
 const BgImg = styled(Img)`
   position: absolute;
@@ -16,16 +17,29 @@ const BgImg = styled(Img)`
 export default class StrategicPillars extends Component {
   render() {
     return (
-      <div>
-        <div style={{ zIndex: 10000, position: 'relative' }}>
-          <H3>Strategic Pillars &amp; Priorities</H3>
-          Video
-          <Button textColor="black">Next ></Button>
-        </div>
+      <>
+        <PageStyle>
+          <h3>Strategic Pillars &amp; Priorities</h3>
+          <h4>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
+            sint porro nulla officiis, hic aut quam eius, earum eos illum quas,
+            natus ab repellendus assumenda quidem consequatur autem provident
+            iste.
+          </h4>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
+            qui debitis pariatur fuga blanditiis, tenetur doloribus fugiat iure
+            cupiditate enim esse ea sit? Impedit quaerat totam blanditiis illum,
+            quae cum.
+          </p>
+          <Button mt="15rem" textColor="black">
+            Next >
+          </Button>
+        </PageStyle>
         <div>
           <BgImg src={bgImg} />
         </div>
-      </div>
+      </>
     )
   }
 }

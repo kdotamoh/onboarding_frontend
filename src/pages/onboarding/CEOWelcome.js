@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import { H3, Button, Img } from 'components/styled'
+import { Button, Img } from 'components/styled'
+import PageStyle from './PageStyle'
 
 import bgImg from 'images/onboarding/group-1.svg'
 
@@ -16,16 +17,18 @@ const BgImg = styled(Img)`
 export default class CEOWelcome extends Component {
   render() {
     return (
-      <div>
-        <div style={{ zIndex: 10000, position: 'relative' }}>
-          <H3>CEO Welcome</H3>
-          Video
-          <Button textColor="black">Next ></Button>
-        </div>
+      <>
+        <PageStyle>
+          <h3>CEO Welcome</h3>
+          <div>Video</div> {/* // Todo: Embed video */}
+          <Button mt="15rem" textColor="black">
+            Next >
+          </Button>
+        </PageStyle>
         <div>
           <BgImg src={bgImg} />
         </div>
-      </div>
+      </>
     )
   }
 }
