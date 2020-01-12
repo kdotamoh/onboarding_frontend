@@ -34,9 +34,9 @@ const Form = styled.form`
   }
 
   label {
-    text-align: center;
   }
 `
+
 const Input = styled.input`
   width: 100%;
   border: 0.5px solid #e6e6e6;
@@ -55,10 +55,10 @@ const Select = styled(Input)`
   background-size: 0.5rem;
 `
 
-const Heading = styled.h4`
+const Heading = styled.p`
   text-align: left;
   border-bottom: 0.5px solid #e6e6e6;
-  font-size: 100%;
+  font-size: 120%;
   padding-bottom: 0.5rem;
   margin-top: 2rem;
 `
@@ -75,6 +75,7 @@ const FileInput = styled.div`
     border-radius: 2px;
     width: 8rem;
     display: inline-block;
+    text-align: center;
 
     input[type='file'] {
       width: 0.1px;
@@ -115,6 +116,9 @@ const ShowSectionButton = styled(AddButton)`
 const Label = styled.label`
   text-align: left;
   margin-top: 1rem;
+  margin-top: 1.5rem;
+  display: block;
+
   margin-bottom: 0.2rem;
 `
 

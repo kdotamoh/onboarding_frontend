@@ -57,7 +57,7 @@ export default class EmployeeDetails extends Component {
 
           <Wrapper alignItems="center" width="40%">
             <Section>
-              <h2>A. EMPLOYEE CONSENT</h2>
+              <h3>A. EMPLOYEE CONSENT</h3>
               <p>
                 Kindly note that the following documents would be required from
                 you for the below listed:
@@ -194,7 +194,8 @@ export default class EmployeeDetails extends Component {
               </label>
             </div>
             <Section>
-              <h2>B. EMPLOYEE DETAILS</h2>
+              <h3>B. EMPLOYEE DETAILS</h3>
+              <p></p>
             </Section>
 
             <DetailsForm />
