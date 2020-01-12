@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { layout } from 'styled-system'
 import PropTypes from 'prop-types'
 
 const Overlay = styled.div`
@@ -13,11 +14,13 @@ const Overlay = styled.div`
 `
 
 const Pane = styled.div`
+  ${layout}
+
   position: fixed;
   z-index: 5000;
   background-color: white;
-  min-width: 40%;
-  max-height: 90%;
+  /* min-width: 40%; */
+  /* max-height: 90%; */
   border-radius: 3px;
   text-align: center;
   padding: 5rem;
@@ -27,6 +30,10 @@ const Pane = styled.div`
   box-sizing: border-box;
   transition: all 0.3s ease-out;
 `
+Pane.defaultProps = {
+  width: '45rem',
+  height: '35rem'
+}
 
 export default class Modal extends Component {
   componentDidMount() {
