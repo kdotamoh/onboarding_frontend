@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="satisfactory" width="48.13" height="48.13" viewBox="0 0 48.13 48.13">
+    <defs>
+        <style>
+            .cls-1{fill:#ffd21f}.cls-2{fill:#403408}
+        </style>
+    </defs>
+    <g id="Group_805" data-name="Group 805">
+        <path id="Path_1051" d="M660.743 218.551a24.065 24.065 0 1 1-24.066-24.065 24.066 24.066 0 0 1 24.066 24.065z" class="cls-1" data-name="Path 1051" transform="translate(-612.613 -194.486)"/>
+    </g>
+    <g id="Group_806" data-name="Group 806" transform="translate(11.362 17.856)">
+        <path id="Path_1052" d="M629.429 225.859a1.753 1.753 0 0 1-1.748-1.748v-4.2a1.753 1.753 0 0 1 1.748-1.748 1.753 1.753 0 0 1 1.749 1.748v4.2a1.753 1.753 0 0 1-1.749 1.748z" class="cls-2" data-name="Path 1052" transform="translate(-627.681 -218.167)"/>
+        <path id="Path_1053" d="M658.486 225.859a1.753 1.753 0 0 1-1.748-1.748v-4.2a1.753 1.753 0 0 1 1.748-1.748 1.753 1.753 0 0 1 1.748 1.748v4.2a1.753 1.753 0 0 1-1.748 1.748z" class="cls-2" data-name="Path 1053" transform="translate(-634.828 -218.167)"/>
+    </g>
+    <path id="Path_1054" d="M653.471 236.226H625.91a1.049 1.049 0 1 1 0-2.1h27.561a1.049 1.049 0 0 1 0 2.1z" class="cls-2" data-name="Path 1054" transform="translate(-615.626 -204.237)"/>
+</svg>
