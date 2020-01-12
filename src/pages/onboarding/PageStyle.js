@@ -19,4 +19,8 @@ export default styled.div`
     font-family: MTNBrighterSans-Regular;
     margin-bottom: 2rem;
   }
+
+  h5 {
+    font-size: 1.5rem;
+  }
 `
