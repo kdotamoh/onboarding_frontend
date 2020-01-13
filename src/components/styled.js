@@ -54,6 +54,7 @@ export const Small = styled.small`
 export const Button = styled.button`
   ${space}
   ${color}
+  ${layout}
 
   font-size: 1.2rem;
   font-size: 1.8rem;
