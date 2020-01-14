@@ -2,9 +2,12 @@ import React, { Component } from 'react'
 import Joyride from 'react-joyride' //,
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { Card } from 'components/card'
 // import Navigation from 'components/navigation'
+import Modal from 'components/modal'
 import DashboardNav from 'components/navigation/DashboardNav'
 
 import {
@@ -45,21 +48,77 @@ const PaddedContent = styled(CenterContent)`
   align-items: start;
 `
 
+const HeroH1 = styled(H1)`
+  color: ${COLORS.DARKER_GREYISH_BROWN};
+  z-index: 1000;
+`
+
+const ButtonGrape = styled(Button)`
+  background: #db7371;
+  border: #db7371;
+  font-size: 1.2rem;
+`
+
 // StepFour is the UserProfile component in 'components/navigation',
 // to which I've attached the class '.tour-step-4'
 
-export default class Welcome extends Component {
+// const FakeBeacon = () => <div>s</div>
+
+// Custom tour component
+
+// const Tooltip = ({
+//   continuous,
+//   index,
+//   step,
+//   backProps,
+//   closeProps,
+//   primaryProps,
+//   tooltipProps
+// }) => (
+//   <TooltipBody {...tooltipProps}>
+//     {step.title && <TooltipTitle>{step.title}</TooltipTitle>}
+//     <TooltipContent>{step.content}</TooltipContent>
+//     <TooltipFooter>
+//       {index > 0 && (
+//         <Button {...backProps}>
+//           <FormattedMessage id="back" />
+//         </Button>
+//       )}
+//       {continuous && (
+//         <Button {...primaryProps}>
+//           <FormattedMessage id="next" />
+//         </Button>
+//       )}
+//       {!continuous && (
+//         <Button {...closeProps}>
+//           <FormattedMessage id="close" />
+//         </Button>
+//       )}
+//     </TooltipFooter>
+//   </TooltipBody>
+// )
+
+class Welcome extends Component {
   state = {
     steps: [
-      { target: '.tour-step-1', content: 'First step' },
+      { target: '.tour-step-1', content: 'First step', disableBeacon: true },
       { target: '.tour-step-2', content: 'Second step' },
       { target: '.tour-step-3', content: 'Third step' },
       { target: '.tour-step-4', content: 'Fourth step' }
-    ]
+    ],
+    visible: true,
+    runTour: false
+  }
+
+  handleStartTour = async () => {
+    this.setState({ visible: false }, () => this.setState({ runTour: true }))
   }
 
   render() {
-    const { steps } = this.state
+    const { steps, visible, runTour } = this.state
+    const {
+      user: { first_name }
+    } = this.props
 
     return (
       <React.Fragment>
@@ -70,7 +129,7 @@ export default class Welcome extends Component {
               <SplitGridLeftColumn background={COLORS.LIGHTER_MARIGOLD}>
                 <PaddedContent>
                   <StepOne>
-                    <H1>Welcome back, Edward</H1>
+                    <HeroH1>Welcome back, {first_name}</HeroH1>
                     <p>
                       Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                       Consectetur, officiis. Placeat assumenda cum quas officia,
@@ -82,7 +141,7 @@ export default class Welcome extends Component {
               </SplitGridLeftColumn>
               <SplitGridRightColumn background={COLORS.PALE_MARIGOLD}>
                 <CenterContent>
-                  <StepTwo p="2rem">
+                  <StepTwo p="4rem">
                     <H2>Onboarding</H2>
                     <p>
                       Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -103,8 +162,29 @@ export default class Welcome extends Component {
             </SplitGrid>
           </GridMain>
         </FullPageGrid>
-        <Joyride continuous steps={steps} />
+        <Joyride
+          continuous
+          steps={steps}
+          skipBeason={true}
+          run={runTour}
+          // beaconComponent={FakeBeacon}
+        />
+        <Modal visible={visible}>
+          Welcome! Get familiar with your MTN dashboard.
+          <ButtonGrape onClick={() => this.handleStartTour()}>
+            See how your dashboard works >
+          </ButtonGrape>
+        </Modal>
       </React.Fragment>
     )
   }
 }
+Welcome.propTypes = {
+  user: PropTypes.shape({
+    first_name: PropTypes.string
+  })
+}
+
+export default connect(state => ({
+  user: state.user
+}))(Welcome)

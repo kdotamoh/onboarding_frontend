@@ -56,11 +56,6 @@ export default class FirstDays extends Component {
     navigate('/preonboarding/end')
   }
 
-  handleChange = event => {
-    let { name, value } = event.target
-    this.setState({ [name]: value })
-  }
-
   render() {
     const { visible } = this.state
 

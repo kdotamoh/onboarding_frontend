@@ -1,6 +1,15 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
+// import Carousel from 'nuka-carousel'
+// import {
+//   CarouselProvider,
+//   Slider,
+//   Slide,
+//   ButtonBack,
+//   ButtonNext
+// } from 'pure-react-carousel'
+// import 'pure-react-carousel/dist/react-carousel.es.css'
 
 import { SmallNav, StepNav } from 'components/navigation'
 import { H4, H3, Container, Img, UL, Button } from 'components/styled'
@@ -8,6 +17,9 @@ import { Hero } from 'views/layout'
 
 import bgImg from 'images/bg_l_bottomright.svg'
 // import heroBg from 'images/bg_yellow_l.svg'
+import brand from 'images/carousel/brand.png'
+import leadership from 'images/carousel/leadership.png'
+import trust from 'images/carousel/trust.png'
 
 import vision from 'images/vision_icon.svg'
 import mission from 'images/mission_icon.svg'
@@ -65,6 +77,50 @@ const InfoBox = styled.div`
   z-index: 500;
 `
 
+const CarouselSlides = styled.div`
+  display: flex;
+  direction: row;
+  width: 75%;
+  justify-content: space-between;
+  margin-top: 4rem;
+  margin-bottom: 10rem;
+`
+
+const CarouselSlide = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30rem;
+
+  img {
+    width: 7rem;
+    min-height: auto;
+    margin-bottom: 5rem;
+  }
+
+  h5 {
+    font-family: MTNBrighterSans-Bold;
+  }
+
+  span {
+    text-align: center;
+  }
+`
+
+// const CarouselButton = () => (
+//   <button onClick={this.props.previousSlide}>Previous Slide</button>
+// )
+
+// const Decorators = [
+//   {
+//     component: <CarouselButton />,
+//     position: 'CenterLeft',
+//     style: {
+//       padding: 20
+//     }
+//   }
+// ]
+
 export default class CompanyOverview extends Component {
   render() {
     return (
@@ -119,6 +175,64 @@ export default class CompanyOverview extends Component {
           </BigHero>
           <H4 py="2rem">Our Employee Value Proposition</H4>
           <p>We can make your life better.</p>
+
+          {/* <Carousel decorators={Decorators} style={{ marginBottom: '10rem' }}> */}
+          {/* <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide1" />
+            <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide2" />
+            <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide3" />
+            <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide4" />
+            <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide5" />
+            <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide6" /> */}
+          {/* </Carousel> */}
+
+          {/* <CarouselProvider
+            naturalSlideWidth={800}
+            naturalSlideHeight={600}
+            totalSlides={4}
+            visibleSlides={3}
+          >
+            <Slider>
+              <Slide index={0}>I am the first Slide.</Slide>
+              <Slide index={1}>I am the second Slide.</Slide>
+              <Slide index={2}>I am the third Slide.</Slide>
+              <Slide index={3}>I am the fourth Slide.</Slide>
+            </Slider>
+            <ButtonBack>Back</ButtonBack>
+            <ButtonNext>Next</ButtonNext>
+          </CarouselProvider> */}
+
+          <CarouselSlides>
+            <CarouselSlide>
+              <img src={brand} alt="" />
+              <h5>Brand Strength</h5>
+              <span>
+                The strength of the MTN Brand; High Performing Culture;
+                Contribute to making a difference; 21 days of Y’ello Care;
+                Challenging &amp; meaningful work.
+              </span>
+            </CarouselSlide>
+            <CarouselSlide>
+              <img src={leadership} alt="" />
+              <h5>Leadership Brand</h5>
+              <span>
+                Bold and inspiring Leadership; Innovation; People, Products
+                &amp; Process Leadership, Aligned leadership; Work with people
+                with exceptional skills.
+              </span>
+            </CarouselSlide>
+            <CarouselSlide>
+              <img src={trust} alt="" />
+              <h5>Investing in our Trust</h5>
+              <span>
+                Unlocking potential; Blended Learning Opportunities; Challenging
+                Work, Job Environment, Rotations, Mentor Access &amp; Global
+                Assignments; Access to tools &amp; technologies that allow for
+                agile, flexible &amp; creative outcomes; Talent &amp; Career
+                Management.
+              </span>
+            </CarouselSlide>
+          </CarouselSlides>
+
           <InfoBox>
             <H4 color="black">Data Protection Principles</H4>
             <p>
