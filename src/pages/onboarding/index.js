@@ -50,7 +50,13 @@ const FunctionalGroups = ({ children }) => {
       <SplitGrid leftWidth={20} rightWidth={80}>
         <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
           <Wrapper pt="5rem">
-            <p>Functional Groups</p>
+            <p
+              css={`
+                padding-left: 1.2rem;
+              `}
+            >
+              Functional Groups
+            </p>
             <SideNav>
               <OnboardingLink to="/onboarding/functional-groups/overview">
                 Overview
@@ -101,7 +107,13 @@ const AboutMTN = ({ children }) => {
       <SplitGrid leftWidth={20} rightWidth={80}>
         <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
           <Wrapper pt="5rem">
-            <p>About MTN</p>
+            <p
+              css={`
+                padding-left: 1.2rem;
+              `}
+            >
+              About MTN
+            </p>
             <SideNav>
               <OnboardingLink to="/onboarding/about-mtn/company-overview">
                 Company Overview
