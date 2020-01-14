@@ -70,12 +70,10 @@ class LoginForm extends Component {
       <div>
         <Formik
           initialValues={{ username: '', password: '' }}
-          onSubmit={(
-            values
-            // { setSubmitting }
-          ) => {
+          onSubmit={(values, { setSubmitting }) => {
+            setSubmitting(true)
             this.handleSubmit(values)
-            // setSubmitting(false)
+            setSubmitting(false)
           }}
           validationSchema={LoginSchema}
         >
@@ -109,7 +107,7 @@ class LoginForm extends Component {
                 color="blue"
                 type="submit"
               >
-                LOG IN
+                {props.isSubmitting ? 'SUBMITING...' : 'LOG IN'}
               </Button>
             </Form>
           )}
