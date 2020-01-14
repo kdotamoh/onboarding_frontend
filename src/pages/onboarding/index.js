@@ -13,15 +13,33 @@ import { SideNav, SmallNav } from 'components/navigation'
 
 import OnboardingLink from 'pages/onboarding/OnboardingLink'
 
-import CompanyOverview from './CompanyOverview'
+import CompanyOverview from './about-mtn/CompanyOverview'
 // import OnboardingLogin from './OnboardingLogin'
-import CEOWelcome from './CEOWelcome'
-import MissionVision from './MissionVision'
-import Organisation from './Organisation'
-import EmployeeValue from './EmployeeValue'
-import StrategicPillars from './StrategicPillars'
-import Tasks from './Tasks'
+import CEOWelcome from './about-mtn/CEOWelcome'
+import MissionVision from './about-mtn/MissionVision'
+import Organisation from './about-mtn/Organisation'
+import EmployeeValue from './about-mtn/EmployeeValue'
+import StrategicPillars from './about-mtn/StrategicPillars'
+import Tasks from './about-mtn/Tasks'
 import OnboardingLogin from 'pages/onboarding/OnboardingLogin'
+import EmployeeIndustrial from './functional-groups/EmployeeIndustrial'
+import FinanceAndService from './functional-groups/FinanceAndService'
+import LearningDevelopment from './functional-groups/LearningDevelopment'
+import Marketing from './functional-groups/Marketing'
+import Overview from './functional-groups/Overview'
+import Sales from './functional-groups/Sales'
+import HRServices from './functional-groups/HRServices'
+
+// eslint-disable-next-line
+const FunctionalGroups = ({ children }) => {
+  return <div>{children}</div>
+}
+
+// eslint-disable-next-line
+const AboutMTN = ({ children }) => {
+  // eslint-disable-line
+  return <div>{children}</div>
+}
 
 export default class Onboarding extends Component {
   render() {
@@ -34,25 +52,27 @@ export default class Onboarding extends Component {
         <SplitGrid leftWidth={20} rightWidth={80}>
           <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
             <SideNav>
-              <OnboardingLink to="/onboarding/company-overview">
+              <OnboardingLink to="/onboarding/about-mtn/company-overview">
                 Company Overview
               </OnboardingLink>
-              <OnboardingLink to="/onboarding/ceo-welcome">
+              <OnboardingLink to="/onboarding/about-mtn/ceo-welcome">
                 CEO Welcome
               </OnboardingLink>
-              <OnboardingLink to="/onboarding/mission-and-vision">
+              <OnboardingLink to="/onboarding/about-mtn/mission-and-vision">
                 Mission &amp; Vision
               </OnboardingLink>
-              <OnboardingLink to="/onboarding/how-we-are-organised">
+              <OnboardingLink to="/onboarding/about-mtn/how-we-are-organised">
                 How we are organised
               </OnboardingLink>
-              <OnboardingLink to="/onboarding/employee-value-proposition">
+              <OnboardingLink to="/onboarding/about-mtn/employee-value-proposition">
                 Employee Value Proposition
               </OnboardingLink>
-              <OnboardingLink to="/onboarding/strategic-pillars-and-priorities">
+              <OnboardingLink to="/onboarding/about-mtn/strategic-pillars-and-priorities">
                 Strategic Pillars &amp; Priorities
               </OnboardingLink>
-              <OnboardingLink to="/onboarding/tasks">Tasks</OnboardingLink>
+              <OnboardingLink to="/onboarding/about-mtn/tasks">
+                Tasks
+              </OnboardingLink>
             </SideNav>
           </SplitGridLeftColumn>
           <SplitGridRightColumn px="10rem" py="5rem" background={COLORS.WHITE}>
@@ -65,13 +85,26 @@ export default class Onboarding extends Component {
               `}
             >
               <Router>
-                <CompanyOverview path="/company-overview" />
-                <CEOWelcome path="/ceo-welcome" />
-                <MissionVision path="/mission-and-vision" />
-                <Organisation path="/how-we-are-organised" />
-                <EmployeeValue path="/employee-value-proposition" />
-                <StrategicPillars path="/strategic-pillars-and-priorities" />
-                <Tasks path="/tasks" />
+                <FunctionalGroups path="functional-groups">
+                  {/* <FunctionalOverview path="/overview" /> */}
+                  <EmployeeIndustrial path="/employee-industrial" />
+                  <FinanceAndService path="/finance-services" />
+                  <HRServices path="/hr-service" />
+                  <LearningDevelopment path="/learning-development" />
+                  <Marketing path="/marketing" />
+                  <Overview path="/overview" />
+                  <Sales path="/sales" />
+                </FunctionalGroups>
+
+                <AboutMTN path="about-mtn">
+                  <CompanyOverview path="/company-overview" />
+                  <CEOWelcome path="/ceo-welcome" />
+                  <MissionVision path="/mission-and-vision" />
+                  <Organisation path="/how-we-are-organised" />
+                  <EmployeeValue path="/employee-value-proposition" />
+                  <StrategicPillars path="/strategic-pillars-and-priorities" />
+                  <Tasks path="/tasks" />
+                </AboutMTN>
               </Router>
             </div>
           </SplitGridRightColumn>

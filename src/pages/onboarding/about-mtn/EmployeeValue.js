@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 import { Button, Img } from 'components/styled'
-import PageStyle from './PageStyle'
+import PageStyle from '../PageStyle'
 
 import bgImg from 'images/onboarding/group-1.svg'
 

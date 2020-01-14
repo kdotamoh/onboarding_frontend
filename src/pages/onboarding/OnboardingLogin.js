@@ -15,10 +15,10 @@ import {
 const TranslateCenter = styled(CenterContent)`
   transform: translateX(-10rem);
 `
-
 const FormHeading = styled.h2`
   color: ${COLORS.TWILIGHT_BLUE};
   text-align: left;
+  width: 30rem;
   font-family: MTNBrighterSans-Regular;
 `
 
@@ -41,7 +41,7 @@ export default class PreOnboardingLogin extends Component {
                 <br />
                 Log In
               </FormHeading>
-              <LoginForm next="dashboard/tasks" />
+              <LoginForm next="/onboarding/company-overview" />
             </div>
           </TranslateCenter>
         </SplitGridRightColumn>

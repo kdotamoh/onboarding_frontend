@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Button, Img } from 'components/styled'
 
 import bgImg from 'images/onboarding/group-1.svg'
-import PageStyle from './PageStyle'
+import PageStyle from '../PageStyle'
 
 const BgImg = styled(Img)`
   position: absolute;
@@ -14,12 +14,12 @@ const BgImg = styled(Img)`
   z-index: 0;
 `
 
-export default class StrategicPillars extends Component {
+export default class LearningDevelopment extends Component {
   render() {
     return (
       <>
         <PageStyle>
-          <h3>Strategic Pillars &amp; Priorities</h3>
+          <h3>Learning &amp; Development</h3>
           <h4>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
             sint porro nulla officiis, hic aut quam eius, earum eos illum quas,
@@ -27,10 +27,9 @@ export default class StrategicPillars extends Component {
             iste.
           </h4>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda
-            qui debitis pariatur fuga blanditiis, tenetur doloribus fugiat iure
-            cupiditate enim esse ea sit? Impedit quaerat totam blanditiis illum,
-            quae cum.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quis
+            ullam culpa. Aperiam eius repellat alias, placeat illum nemo culpa
+            dicta dolor ex saepe cumque corrupti dolorem corporis fugit iste.
           </p>
           <Button mt="15rem" textColor="black">
             Next >

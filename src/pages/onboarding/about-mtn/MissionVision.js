@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 import { Button, Img } from 'components/styled'
-import PageStyle from './PageStyle'
+import PageStyle from '../PageStyle'
 
 import bgImg from 'images/onboarding/group-1.svg'
 
@@ -14,13 +14,18 @@ const BgImg = styled(Img)`
   z-index: 0;
 `
 
-export default class CEOWelcome extends Component {
+export default class MissionVision extends Component {
   render() {
     return (
       <>
         <PageStyle>
-          <h3>CEO Welcome</h3>
-          <div>Video</div> {/* // Todo: Embed video */}
+          <h3>Mission &amp; Vision</h3>
+          <span>Mission</span>
+          <h4>To Lead The Delivery Of A Bold, New World To Our Customers</h4>
+
+          <span>Vision</span>
+          <h4>To Make Our Customers' Lives A Whole Lot Brighter</h4>
+
           <Button mt="15rem" textColor="black">
             Next >
           </Button>
