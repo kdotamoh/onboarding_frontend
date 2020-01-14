@@ -31,8 +31,8 @@ export default class Overview extends Component {
             ullam culpa. Aperiam eius repellat alias, placeat illum nemo culpa
             dicta dolor ex saepe cumque corrupti dolorem corporis fugit iste.
           </p>
-          <Button mt="15rem" textColor="black">
-            Next >
+          <Button mt="15rem" color="blue">
+            Finish >
           </Button>
         </PageStyle>
         <div>

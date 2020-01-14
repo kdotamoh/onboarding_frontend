@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { Link } from '@reach/router'
 
 import { Button, Img } from 'components/styled'
 import PageStyle from '../PageStyle'
@@ -114,9 +115,11 @@ export default class EmployeeValue extends Component {
             </Value>
           </Values>
 
-          <Button mt="15rem" textColor="black">
-            Next >
-          </Button>
+          <Link to="../strategic-pillars-and-priorities">
+            <Button mt="15rem" textColor="black">
+              Next >
+            </Button>
+          </Link>
         </PageStyle>
         <div>
           <BgImg src={bgImg} />

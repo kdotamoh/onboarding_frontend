@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { Link } from '@reach/router'
 
 import { Button, Img } from 'components/styled'
 import PageStyle from '../PageStyle'
@@ -26,9 +27,11 @@ export default class MissionVision extends Component {
           <span>Vision</span>
           <h4>To Make Our Customers' Lives A Whole Lot Brighter</h4>
 
-          <Button mt="15rem" textColor="black">
-            Next >
-          </Button>
+          <Link to="../how-we-are-organised">
+            <Button mt="15rem" textColor="black">
+              Next >
+            </Button>
+          </Link>
         </PageStyle>
         <div>
           <BgImg src={bgImg} />

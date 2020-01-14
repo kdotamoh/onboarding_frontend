@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { Link } from '@reach/router'
 
 import { Button, Img } from 'components/styled'
 
@@ -32,9 +33,11 @@ export default class StrategicPillars extends Component {
             cupiditate enim esse ea sit? Impedit quaerat totam blanditiis illum,
             quae cum.
           </p>
-          <Button mt="15rem" textColor="black">
-            Next >
-          </Button>
+          <Link to="../tasks">
+            <Button mt="15rem" textColor="black">
+              Next >
+            </Button>
+          </Link>
         </PageStyle>
         <div>
           <BgImg src={bgImg} />

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { Link } from '@reach/router'
 
 import { Button, Img } from 'components/styled'
 import PageStyle from '../PageStyle'
@@ -21,9 +22,11 @@ export default class CEOWelcome extends Component {
         <PageStyle>
           <h3>CEO Welcome</h3>
           <div>Video</div> {/* // Todo: Embed video */}
-          <Button mt="15rem" textColor="black">
-            Next >
-          </Button>
+          <Link to="../mission-and-vision">
+            <Button mt="15rem" textColor="black">
+              Next >
+            </Button>
+          </Link>
         </PageStyle>
         <div>
           <BgImg src={bgImg} />

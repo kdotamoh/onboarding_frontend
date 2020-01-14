@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { Link } from '@reach/router'
 
 import { Button, Img } from 'components/styled'
 
@@ -31,9 +32,11 @@ export default class Overview extends Component {
             ullam culpa. Aperiam eius repellat alias, placeat illum nemo culpa
             dicta dolor ex saepe cumque corrupti dolorem corporis fugit iste.
           </p>
-          <Button mt="15rem" textColor="black">
-            Next >
-          </Button>
+          <Link to="../marketing">
+            <Button mt="15rem" textColor="black">
+              Next >
+            </Button>
+          </Link>
         </PageStyle>
         <div>
           <BgImg src={bgImg} />

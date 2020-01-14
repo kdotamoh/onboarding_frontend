@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { Link } from '@reach/router'
 
 import { Button, Img } from 'components/styled'
 import PageStyle from '../PageStyle'
@@ -32,9 +33,11 @@ export default class Onboarding extends Component {
             incidunt earum amet aliquam doloribus? Odio quae, fugit asperiores
             quas molestiae voluptatibus laboriosam doloribus!
           </p>
-          <Button mt="15rem" textColor="black">
-            Next >
-          </Button>
+          <Link to="../ceo-welcome">
+            <Button mt="15rem" textColor="black">
+              Next >
+            </Button>
+          </Link>
         </PageStyle>
         <div>
           <BgImg src={bgImg} />
