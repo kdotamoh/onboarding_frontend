@@ -18,6 +18,7 @@ const TranslateCenter = styled(CenterContent)`
 const FormHeading = styled.h2`
   color: ${COLORS.TWILIGHT_BLUE};
   text-align: left;
+  width: 30rem;
   font-family: MTNBrighterSans-Regular;
 `
 
