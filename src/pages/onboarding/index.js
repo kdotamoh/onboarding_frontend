@@ -21,11 +21,15 @@ import Organisation from './Organisation'
 import EmployeeValue from './EmployeeValue'
 import StrategicPillars from './StrategicPillars'
 import Tasks from './Tasks'
+import OnboardingLogin from 'pages/onboarding/OnboardingLogin'
 
 export default class Onboarding extends Component {
   render() {
     return (
       <div>
+        <Router>
+          <OnboardingLogin path="/" />
+        </Router>
         <SmallNav />
         <SplitGrid leftWidth={20} rightWidth={80}>
           <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
