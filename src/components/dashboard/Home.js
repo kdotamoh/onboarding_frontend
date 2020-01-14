@@ -41,12 +41,12 @@ const BgImg = styled(Img)`
   align-self: flex-end;
 `
 
-const PaddedContent = styled(CenterContent)`
-  padding: 15rem;
-  transform: translateY(-9rem);
-  text-align: left;
-  align-items: start;
-`
+// const PaddedContent = styled(CenterContent)`
+//   padding: 15rem;
+//   transform: translateY(-9rem);
+//   text-align: left;
+//   /* align-items: start; */
+// `
 
 const HeroH1 = styled(H1)`
   color: ${COLORS.DARKER_GREYISH_BROWN};
@@ -101,10 +101,21 @@ const ButtonGrape = styled(Button)`
 class Welcome extends Component {
   state = {
     steps: [
-      { target: '.tour-step-1', content: 'First step', disableBeacon: true },
-      { target: '.tour-step-2', content: 'Second step' },
-      { target: '.tour-step-3', content: 'Third step' },
-      { target: '.tour-step-4', content: 'Fourth step' }
+      {
+        target: '.tour-step-1',
+        content: '1. Your welcome message appears here.',
+        disableBeacon: true
+      },
+      {
+        target: '.tour-step-2',
+        content: '2. Your task and event notifications appear here.'
+      },
+      {
+        target: '.tour-step-3',
+        content:
+          '3. Your menu bar with links to view all your events and tasks.'
+      },
+      { target: '.tour-step-4', content: '4. Your log out and profile.' }
     ],
     visible: true,
     runTour: false
@@ -112,6 +123,11 @@ class Welcome extends Component {
 
   handleStartTour = async () => {
     this.setState({ visible: false }, () => this.setState({ runTour: true }))
+  }
+
+  handleReactJoyrideCallback = data => {
+    const { action, index, status, type } = data
+    console.log(status)
   }
 
   render() {
@@ -127,17 +143,20 @@ class Welcome extends Component {
           <GridMain>
             <SplitGrid leftWidth={50} rightWidth={50}>
               <SplitGridLeftColumn background={COLORS.LIGHTER_MARIGOLD}>
-                <PaddedContent>
-                  <StepOne>
-                    <HeroH1>Welcome back, {first_name}</HeroH1>
-                    <p>
-                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                      Consectetur, officiis. Placeat assumenda cum quas officia,
-                      iste veritatis voluptates sit nostrum natus consectetur
-                      voluptas quaerat vel id, voluptate dolor quidem ut?
-                    </p>
-                  </StepOne>
-                </PaddedContent>
+                <CenterContent>
+                  <div style={{ width: '50rem' }}>
+                    <StepOne>
+                      <HeroH1>Welcome back, {first_name}</HeroH1>
+                      <p>
+                        Lorem, ipsum dolor sit amet consectetur adipisicing
+                        elit. Consectetur, officiis. Placeat assumenda cum quas
+                        officia, iste veritatis voluptates sit nostrum natus
+                        consectetur voluptas quaerat vel id, voluptate dolor
+                        quidem ut?
+                      </p>
+                    </StepOne>
+                  </div>
+                </CenterContent>
               </SplitGridLeftColumn>
               <SplitGridRightColumn background={COLORS.PALE_MARIGOLD}>
                 <CenterContent>
@@ -146,10 +165,9 @@ class Welcome extends Component {
                     <p>
                       Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                       Porro accusantium iure magnam praesentium exercitationem,
-                      quis tenetur sapiente, amet ab quod quisquam et, libero
-                      assumenda velit? Quis, tempora saepe. Sunt, doloremque!
                     </p>
                     <Button
+                      mt="3rem"
                       color="blue"
                       onClick={() => navigate('/onboarding/company-overview')}
                     >
@@ -167,7 +185,9 @@ class Welcome extends Component {
           steps={steps}
           skipBeason={true}
           run={runTour}
-          // beaconComponent={FakeBeacon}
+          beaconComponent={null}
+          showSkipButton={true}
+          callback={this.handleJoyrideCallback}
         />
         <Modal visible={visible}>
           Welcome! Get familiar with your MTN dashboard.
