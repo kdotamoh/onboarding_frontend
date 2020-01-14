@@ -36,12 +36,12 @@ const Paragraph = styled(P)`
   line-height: 1.8;
 `
 
-const PaddedContent = styled(CenterContent)`
-  padding: 10rem;
-  transform: translateX(10rem);
-  text-align: left;
-  align-items: start;
-`
+// const PaddedContent = styled(CenterContent)`
+//   padding: 10rem;
+//   transform: translateX(10rem);
+//   text-align: left;
+//   align-items: start;
+// `
 
 class End extends Component {
   nextPage = () => {
@@ -51,16 +51,18 @@ class End extends Component {
   render() {
     const { first_name } = this.props.user
     return (
-      <SplitGrid fullPage leftWidth={40} rightWidth={60}>
+      <SplitGrid fullPage leftWidth={50} rightWidth={50}>
         <SplitGridLeftColumn background={COLORS.MARIGOLD}>
           <Logo maxWidth="6rem" left="8rem" top="1rem" src={logo} alt="" />
 
-          <PaddedContent>
-            <HeroH1>
-              Congrats on completing your pre-onboarding, {first_name}.
-            </HeroH1>
-            <Paragraph>We look forward to seeing you soon.</Paragraph>
-          </PaddedContent>
+          <CenterContent>
+            <div style={{ width: '40rem' }}>
+              <HeroH1>
+                Congrats on completing your pre-onboarding, {first_name}.
+              </HeroH1>
+              <Paragraph>We look forward to seeing you soon.</Paragraph>
+            </div>
+          </CenterContent>
           <BgImg src={bgImg} />
         </SplitGridLeftColumn>
         <SplitGridRightColumn background={COLORS.MARIGOLD}>

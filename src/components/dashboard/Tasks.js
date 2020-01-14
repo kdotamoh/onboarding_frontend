@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
+import { space } from 'styled-system'
 
 import {
   SplitGrid,
@@ -14,6 +16,16 @@ import OnboardingLink from 'pages/onboarding/OnboardingLink'
 
 import noTask from 'images/no_task.svg'
 
+export const Wrapper = styled.div`
+  ${space}
+
+  height: 300px;
+  width: 250px;
+  position: absolute;
+  right: 0;
+  /* transform: translateY(10rem); */
+`
+
 class Tasks extends Component {
   render() {
     return (
@@ -22,10 +34,12 @@ class Tasks extends Component {
         <DashboardNav />
         <SplitGrid leftWidth={20} rightWidth={80}>
           <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
-            <SideNav>
-              <OnboardingLink to="/dashboard/tasks">New</OnboardingLink>
-              <OnboardingLink to="/dashboard/tasks/past">Past</OnboardingLink>
-            </SideNav>
+            <Wrapper pt="5rem">
+              <SideNav>
+                <OnboardingLink to="/dashboard/tasks">New</OnboardingLink>
+                <OnboardingLink to="/dashboard/tasks/past">Past</OnboardingLink>
+              </SideNav>
+            </Wrapper>
           </SplitGridLeftColumn>
           <SplitGridRightColumn p="5rem" background={COLORS.LIGHT_GREY}>
             <DashboardCard px="3rem" py="4rem">

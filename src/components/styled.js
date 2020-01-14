@@ -10,33 +10,41 @@ export const H1 = styled.h1`
   font-size: 3.6rem;
   font-family: MTNBrighterSans-Bold;
   line-height: 1;
-  color: ${COLORS.TWILIGHT_BLUE};
 `
+H1.defaultProps = {
+  color: COLORS.TWILIGHT_BLUE
+}
 export const H2 = styled.h2`
   ${space}
   ${color}
 
   font-size: 3rem;
   font-family: MTNBrighterSans-Bold;
-  color: ${COLORS.TWILIGHT_BLUE};
 `
+H2.defaultProps = {
+  color: COLORS.TWILIGHT_BLUE
+}
 export const H3 = styled.h3`
   ${space}
   ${color}
 
   font-size: 2.5rem;
   font-family: MTNBrighterSans-Bold;
-  color: ${COLORS.TWILIGHT_BLUE};
 `
+H3.defaultProps = {
+  color: COLORS.TWILIGHT_BLUE
+}
 export const H4 = styled.h4`
   ${space}
   ${color}
 
   font-size: 2rem;
   font-family: MTNBrighterSans-Bold;
-  /* // Todo: Use styled system instead */
-  color: ${props => (props.color ? props.color : COLORS.TWILIGHT_BLUE)};
 `
+H4.defaultProps = {
+  color: COLORS.TWILIGHT_BLUE
+}
+
 export const UL = styled.ul`
   li {
     margin-left: 2rem;
@@ -56,6 +64,7 @@ export const Button = styled.button`
   ${color}
   ${layout}
 
+  cursor: pointer;
   font-size: 1.2rem;
   font-size: 1.8rem;
   font-family: MTNBrighterSans-Bold;
@@ -72,6 +81,11 @@ export const Button = styled.button`
   border-color: ${props => props.disabled && '#bfbfbf'};
 
   z-index: 500;
+
+  a {
+    color: unset;
+    text-decoration: unset;
+  }
 `
 
 export const Logo = styled.img`

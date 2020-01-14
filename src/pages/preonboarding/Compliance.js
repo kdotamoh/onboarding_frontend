@@ -93,7 +93,7 @@ const sections = [
     text: `<p>“MTN sees whistleblowing differently, regarding it as a positive practice that assists the organization to detect incidents of fraud,
        misconduct, and illegal activity early.”</p>  <p><strong>Q&A</strong></br><strong>Q</strong>: How do I report suspicious or illegal activity? 
        </br> <strong>A</strong>: You may make use of our reporting channels such as: </br>  The MTN Fraud Hotline: 1385 </br> Email: anonymous@tip-offs.com 
-       </br> You may also refer to your local Risk and Compliance department for further information.</p>  Read the Whistleblowing Policy here <a>https://bit.ly/2Y4KPwh</a>`
+       </br> You may also refer to your local Risk and Compliance department for further information.</p>  Read the Whistleblowing Policy here <a href="https://bit.ly/2Y4KPwh">https://bit.ly/2Y4KPwh</a>`
   },
   {
     heading: 'Anti-Bribery & Corruption',
@@ -102,7 +102,7 @@ const sections = [
       <p>It is our policy to conduct our business activities with honesty, integrity and to the highest ethical standards.</p>
       
       Read the MTN-GROUP ANTI-BRIBERY & CORRUPTION POLICY here </br>
-      <a>https://bit.ly/30Tr73B</a>`
+      <a href="https://bit.ly/30Tr73B">https://bit.ly/30Tr73B</a>`
   },
   {
     heading: 'Conflict of Interest',
@@ -135,7 +135,7 @@ const sections = [
       
       <p>At MTN, we do not tolerate harassment, intimidation or discrimination and we respect the political and religious views of all employees. We are also strongly against any form of slavery and child labor.</p>
       
-      <p>It is important that you use the link below to read MTN Disciplinary Code and Policy. You may also refer to your local Risk and Compliance Department for more information. https://bit.ly/2SCe2ca</p>`
+      <p>It is important that you use the link below to read MTN Disciplinary Code and Policy. You may also refer to your local Risk and Compliance Department for more information. <a href="https://bit.ly/2SCe2ca">https://bit.ly/2SCe2ca</a></a></p>`
   },
   {
     heading: 'Our Customers',
@@ -151,7 +151,7 @@ const sections = [
       <p>An information leak takes place when confidential information is revealed to unauthorized persons or parties. 
       Employees who are tempted on a regular basis to disclose customer information to family members or friends, contrary to the data protection laws which MTN is required to operate within should desist from the act.</p>
 
-      Read the MTN-Goup Gifts & Entertainment Policy here https://bit.ly/30Tr73B
+      Read the MTN-Goup Gifts & Entertainment Policy here <a href="https://bit.ly/30Tr73B">https://bit.ly/30Tr73B</a>
   `
   },
   {

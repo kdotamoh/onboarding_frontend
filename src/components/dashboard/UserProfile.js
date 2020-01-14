@@ -15,6 +15,21 @@ import DashboardNav from 'components/navigation/DashboardNav'
 import { DashboardCard } from 'components/card'
 
 import test from 'images/png/placeholder.png'
+import arrow from 'images/user-profile/down-arrow.svg'
+
+const UserName = styled.span`
+  font-size: 1.2rem;
+  font-family: MTNBrighterSans-Bold;
+
+  &:after {
+    content: url(${arrow});
+    margin-left: 5px;
+    display: inline-block;
+    width: 0.7rem;
+    height: 0.7rem;
+    margin-right: 0.7rem;
+  }
+`
 
 const _ProfileDropdown = ({ user }) => {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -38,15 +53,9 @@ const _ProfileDropdown = ({ user }) => {
       // onBlur={() => setIsOpen(false)}
       // tabIndex="-1"
     >
-      <span
-        css={`
-          margin-right: 0.7rem;
-          font-size: 1.2rem;
-          font-family: MTNBrighterSans-Bold;
-        `}
-      >
-        {user.first_name} v
-      </span>
+      {/* <span css={``}> */}
+      <UserName>{user.first_name}sdfsd</UserName>
+      {/* </span> */}
       <img src={test} alt="" />
       <div
         css={`

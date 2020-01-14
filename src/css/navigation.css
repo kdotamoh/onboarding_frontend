@@ -74,6 +74,7 @@
   padding-bottom: 2.25rem; /* // Todo: this is super jank */
   vertical-align: middle;
   opacity: 30%;
+  color: #3d3d3d;
 }
 
 .dashboard-navigation__item--active {

@@ -133,7 +133,7 @@ export default class CompanyOverview extends Component {
             <div className="row">
               <div className="column">
                 <img src={vision} alt="" />
-                <H4 color="black" mt="4rem">
+                <H4 color={COLORS.DARKER_GREYISH_BROWN} mt="4rem">
                   Vision
                 </H4>
                 <p>
@@ -143,14 +143,14 @@ export default class CompanyOverview extends Component {
               </div>
               <div className="column">
                 <img src={mission} alt="" />
-                <H4 color="black" mt="4rem">
+                <H4 color={COLORS.DARKER_GREYISH_BROWN} mt="4rem">
                   Mission
                 </H4>
                 <p>To make our customers’ lives a whole lot brighter.</p>
               </div>
               <div className="column">
                 <img src={values} alt="" />
-                <H4 color="black" mt="4rem">
+                <H4 color={COLORS.DARKER_GREYISH_BROWN} mt="4rem">
                   Values
                 </H4>
                 <span>Leadership</span>
@@ -162,7 +162,7 @@ export default class CompanyOverview extends Component {
               </div>
               <div className="column">
                 <img src={vital} alt="" />
-                <H4 color="black" mt="4rem">
+                <H4 color={COLORS.DARKER_GREYISH_BROWN} mt="4rem">
                   Vital
                 </H4>
                 <span>Active Collaboration</span>
@@ -173,7 +173,9 @@ export default class CompanyOverview extends Component {
               </div>
             </div>
           </BigHero>
-          <H4 py="2rem">Our Employee Value Proposition</H4>
+          <H4 color={COLORS.DARKER_GREYISH_BROWN} py="2rem">
+            Our Employee Value Proposition
+          </H4>
           <p>We can make your life better.</p>
 
           {/* <Carousel decorators={Decorators} style={{ marginBottom: '10rem' }}> */}

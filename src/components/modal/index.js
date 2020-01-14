@@ -29,10 +29,14 @@ const Pane = styled.div`
   transform: translate(-50%, -50%);
   box-sizing: border-box;
   transition: all 0.3s ease-out;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 `
 Pane.defaultProps = {
   width: '45rem',
-  height: '35rem'
+  minHeight: '25rem'
 }
 
 export default class Modal extends Component {

@@ -29,11 +29,13 @@ export default class Info extends Component {
   render() {
     return (
       <div>
-        <SmallNav />
-        <ContainerWithBackground>
+        <div style={{ background: `${COLORS.PALE_MARIGOLD}` }}>
+          <SmallNav />
           <StepNav />
+        </div>
+        <ContainerWithBackground>
           <Header>Where &amp; When</Header>
-          <Card mb="3rem" p="2rem">
+          <Card mt="2rem" mb="3rem" p="2rem">
             <CardInfo>
               <div className="card-info__left">
                 <div className="card-info__image card-info__circle">

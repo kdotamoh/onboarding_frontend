@@ -117,17 +117,12 @@ class Welcome extends Component {
       },
       { target: '.tour-step-4', content: '4. Your log out and profile.' }
     ],
-    visible: true,
+    // visible: true,
     runTour: false
   }
 
   handleStartTour = async () => {
     this.setState({ visible: false }, () => this.setState({ runTour: true }))
-  }
-
-  handleReactJoyrideCallback = data => {
-    const { action, index, status, type } = data
-    console.log(status)
   }
 
   render() {
