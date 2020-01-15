@@ -32,6 +32,11 @@ import Overview from './functional-groups/Overview'
 import Sales from './functional-groups/Sales'
 import HRServices from './functional-groups/HRServices'
 
+import Events from './dashboard/Events'
+import UserTasks from './dashboard/Tasks'
+import UserProfile from './dashboard/UserProfile'
+import Home from './dashboard/Home'
+
 export const Wrapper = styled.div`
   ${space}
 
@@ -171,6 +176,10 @@ export default class Onboarding extends Component {
       <div>
         <Router>
           <OnboardingLogin path="/" />
+          <Events path="/events" />
+          <UserTasks path="/user-tasks" />
+          <Home path="/dashboard" />
+          <UserProfile path="/user-profile" />
         </Router>
         <Router>
           <FunctionalGroups path="functional-groups">

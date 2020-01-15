@@ -12,9 +12,9 @@ export default class DashboardNav extends Component {
       <nav className="dashboard-navigation tour-step-3">
         <Img src={logo} />
         <ul className="dashboard-navigation__items">
-          <DashboardLink to="/dashboard/home">Home</DashboardLink>
-          <DashboardLink to="/dashboard/events">Events</DashboardLink>
-          <DashboardLink to="/dashboard/tasks">Tasks</DashboardLink>
+          <DashboardLink to="/onboarding/dashboard">Home</DashboardLink>
+          <DashboardLink to="/onboarding/events">Events</DashboardLink>
+          <DashboardLink to="/onboarding/user-tasks">Tasks</DashboardLink>
         </ul>
         {/* <UserProfile className="tour-step-4">user profile</UserProfile> */}
         <ProfileDropdown />
