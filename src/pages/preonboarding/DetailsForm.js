@@ -9,6 +9,7 @@ import { Button } from 'components/styled'
 // import HorizontalSelect from 'components/horizontal-select'
 
 import downArrow from 'images/select/down-arrow.svg'
+import downloadTray from 'images/employee_details/download_tray.svg'
 
 const Form = styled.form`
   display: flex;
@@ -26,6 +27,21 @@ const Form = styled.form`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+  }
+`
+
+const Link = styled.a`
+  color: #4f4f4f;
+  text-decoration: none;
+
+  &:before {
+    content: '';
+    display: inline-block;
+    background: url(${downloadTray}) no-repeat;
+    opacity: 70%;
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
   }
 `
 
@@ -212,7 +228,7 @@ const initialValues = {
   },
   medicalInsurance: {
     provider: '',
-    form: ''
+    form: []
   },
   fuelCard: ''
 }
@@ -752,7 +768,7 @@ export default class DetailsForm extends Component {
                 <Label htmlFor="educationalCertificates">
                   Upload Educational Certificates
                 </Label>
-                <input
+                {/* <input
                   accept="image/jpeg"
                   type="file"
                   name="educationalCertificates"
@@ -760,12 +776,41 @@ export default class DetailsForm extends Component {
                     // prettier-ignore
                     props.setFieldValue('educationalCertificates', e.currentTarget.files)
                   }}
-                />
+                /> */}
+                <FileInput>
+                  <label htmlFor="educationalCertificates">
+                    Upload
+                    <input
+                      multiple
+                      id="educationalCertificates"
+                      accept="image/jpeg"
+                      type="file"
+                      name="educationalCertificates"
+                      onChange={e => {
+                        if (e.target.files.length) {
+                          const arrFiles = Array.from(e.target.files)
+                          const files = arrFiles.map((file, index) => {
+                            const src = window.URL.createObjectURL(file)
+                            return { file, id: index, src }
+                          })
+                          props.setFieldValue('educationalCertificates', files)
+                        }
+                      }}
+                    />
+                  </label>
+
+                  <p>
+                    {props.values.educationalCertificates.length
+                      ? props.values.educationalCertificates.length +
+                        ' file(s) uploaded'
+                      : 'Please upload JPEG format, no larger than 3mb in size'}
+                  </p>
+                </FileInput>
 
                 <Label htmlFor="professionalBodies">
                   Upload Evidence of Professional Body Affliations
                 </Label>
-                <input
+                {/* <input
                   accept="image/jpeg"
                   type="file"
                   name="professionalBodies"
@@ -773,7 +818,36 @@ export default class DetailsForm extends Component {
                     // prettier-ignore
                     props.setFieldValue('professionalBodies', e.currentTarget.files)
                   }}
-                />
+                /> */}
+                <FileInput>
+                  <label htmlFor="professionalBodies">
+                    Upload
+                    <input
+                      multiple
+                      id="professionalBodies"
+                      accept="image/jpeg"
+                      type="file"
+                      name="professionalBodies"
+                      onChange={e => {
+                        if (e.target.files.length) {
+                          const arrFiles = Array.from(e.target.files)
+                          const files = arrFiles.map((file, index) => {
+                            const src = window.URL.createObjectURL(file)
+                            return { file, id: index, src }
+                          })
+                          props.setFieldValue('professionalBodies', files)
+                        }
+                      }}
+                    />
+                  </label>
+
+                  <p>
+                    {props.values.professionalBodies.length
+                      ? props.values.professionalBodies.length +
+                        ' file(s) uploaded'
+                      : 'Please upload JPEG format, no larger than 3mb in size'}
+                  </p>
+                </FileInput>
                 <ShowSectionButton
                   type="button"
                   onClick={() => this.handleOpenSection('nationalService')}
@@ -1046,11 +1120,28 @@ export default class DetailsForm extends Component {
                   <option value="NMI">Nationwide Medical Insurance</option>
                   <option value="AHI">Acacia Health Insurance</option>
                 </Select>
+                <p>
+                  Download the Principal &amp; Dependent Application Forms
+                  (where applicable):
+                </p>
+
+                <Link href="/#" download>
+                  Nationwide Medical Insurance Principal Application Form
+                </Link>
+                <Link href="/#" download>
+                  Nationwide Medical Insurance Dependent Application Form Acacia
+                </Link>
+                <Link href="/#" download>
+                  Medical Insurance Principal Application Form Acacia Medical
+                </Link>
+                <Link href="/#" download>
+                  Insurance Dependent Application Form
+                </Link>
 
                 <Label htmlFor="medicalInsurance.form">
                   Upload the completed forms here
                 </Label>
-                <input
+                {/* <input
                   accept="image/jpeg"
                   type="file"
                   name="medicalInsurance.form"
@@ -1058,7 +1149,38 @@ export default class DetailsForm extends Component {
                     // prettier-ignore
                     props.setFieldValue('medicalInsurance.form', e.currentTarget.files[0])
                   }}
-                />
+                /> */}
+
+                <FileInput>
+                  <label htmlFor="medicalInsurance.form">
+                    Upload
+                    <input
+                      multiple
+                      id="medicalInsurance.form"
+                      accept="image/jpeg"
+                      type="file"
+                      name="medicalInsurance.form"
+                      onChange={e => {
+                        if (e.target.files.length) {
+                          const arrFiles = Array.from(e.target.files)
+                          const files = arrFiles.map((file, index) => {
+                            const src = window.URL.createObjectURL(file)
+                            return { file, id: index, src }
+                          })
+                          props.setFieldValue('medicalInsurance.form', files)
+                        }
+                      }}
+                    />
+                  </label>
+
+                  <p>
+                    {props.values.medicalInsurance.form.length
+                      ? props.values.medicalInsurance.form.length +
+                        ' file(s) uploaded'
+                      : 'Please upload JPEG format, no larger than 3mb in size'}
+                  </p>
+                </FileInput>
+
                 <ShowSectionButton
                   type="button"
                   onClick={() => this.handleOpenSection('fuelCard')}
@@ -1073,6 +1195,7 @@ export default class DetailsForm extends Component {
                 <Label htmlFor="medicalInsurance.provider">
                   Select your preferred fuel provider:
                 </Label>
+
                 <Select
                   as="select"
                   name="fuelCard"
