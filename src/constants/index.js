@@ -31,3 +31,22 @@ export const PADDING_RIGHT = PADDING_LEFT
 
 // INPUT
 export const INPUT_WIDTH = 30
+
+export const regions = [
+  { label: 'Oti Region', value: 'OTR' },
+  { label: 'Bono East Region', value: 'BER' },
+  { label: 'Ahafo Region', value: 'AHR' },
+  { label: 'Bono Region', value: 'BOR' },
+  { label: 'North East Region', value: 'NER' },
+  { label: 'Savannah Region', value: 'SAR' },
+  { label: 'Western North Region', value: 'WNR' },
+  { label: 'Western Region', value: 'WER' },
+  { label: 'Volta Region', value: 'VOR' },
+  { label: 'Greater Accra Region', value: 'GAR' },
+  { label: 'Eastern Region', value: 'EAR' },
+  { label: 'Ashanti Region', value: 'ASR' },
+  { label: 'Central Region', value: 'CER' },
+  { label: 'Northern Region', value: 'NOR' },
+  { label: 'Upper East Region', value: 'UER' },
+  { label: 'Upper West Region', value: 'UWR' }
+]

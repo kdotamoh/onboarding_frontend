@@ -4,6 +4,8 @@ import * as Yup from 'yup'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
 import PropTypes from 'prop-types'
+import moment from 'moment'
+import { regions } from '../../constants'
 
 import { Button } from 'components/styled'
 // import HorizontalSelect from 'components/horizontal-select'
@@ -55,6 +57,7 @@ const Input = styled.input`
 const Select = styled(Input)`
   appearance: none;
   outline: none;
+  background-color: white;
 
   background-image: url(${downArrow});
   background-repeat: no-repeat;
@@ -176,7 +179,11 @@ const initialValues = {
   middleName: '',
   firstName: '',
   contactNumber: '',
-  dateOfBirth: '',
+  dateOfBirth: {
+    day: '',
+    month: '',
+    year: ''
+  },
   gender: '',
   nationality: '',
   region: '',
@@ -192,7 +199,11 @@ const initialValues = {
   // next of kin
   nextOfKin: {
     name: '',
-    dateOfBirth: '',
+    dateOfBirth: {
+      day: '',
+      month: '',
+      year: ''
+    },
     address: '',
     contactNumber: ''
   },
@@ -270,10 +281,23 @@ export default class DetailsForm extends Component {
   }
 
   render() {
-    // const options = [
-    //   { value: 'G', text: 'Green', selected: false },
-    //   { value: 'O', text: 'Orange', selected: false }
-    // ]
+    let mutedCss = `
+      color: #757575;
+    `
+
+    const years = []
+    const currYear = new Date().getFullYear()
+    for (let i = currYear; i > 1900; i--) {
+      years.push(i)
+    }
+
+    const months = moment.months()
+
+    const days = []
+    for (let i = 1; i < 32; i++) {
+      days.push(i)
+    }
+
     return (
       <Formik
         enableReinitialize={true}
@@ -371,6 +395,64 @@ export default class DetailsForm extends Component {
                 ) : null}
 
                 <Label htmlFor="dateOfBirth">Date of Birth</Label>
+
+                <div
+                  css={`
+                    display: flex;
+                    width: 25rem;
+
+                    select {
+                      margin-right: 1rem;
+                    }
+                  `}
+                >
+                  <Select
+                    as="select"
+                    name="dateOfBirth.month"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.dateOfBirth.month}
+                  >
+                    <option value="">Month</option>
+                    {months &&
+                      months.map((m, i) => (
+                        <option key={months[i]} value={months[i]}>
+                          {months[i]}
+                        </option>
+                      ))}
+                  </Select>
+                  <Select
+                    as="select"
+                    name="dateOfBirth.day"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.dateOfBirth.day}
+                  >
+                    <option value="">Day</option>
+                    {days &&
+                      days.map((d, i) => (
+                        <option key={days[i]} value={days[i]}>
+                          {days[i]}
+                        </option>
+                      ))}
+                  </Select>
+                  <Select
+                    as="select"
+                    name="dateOfBirth.year"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.dateOfBirth.year}
+                  >
+                    <option value="">Year</option>
+                    {years &&
+                      years.map((year, i) => (
+                        <option key={years[i]} value={years[i]}>
+                          {years[i]}
+                        </option>
+                      ))}
+                  </Select>
+                </div>
+
                 {/* <input
                 type="text"
                 onChange={props.handleChange}
@@ -402,7 +484,7 @@ export default class DetailsForm extends Component {
                 <Select
                   as="select"
                   // onChange={props.handleChange}
-                  onChange={e => console.log(e)}
+                  onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   value={props.values.nationality}
                   name="nationality"
@@ -425,8 +507,12 @@ export default class DetailsForm extends Component {
                   name="region"
                 >
                   <option value=""></option>
-                  <option value="M">Male</option>
-                  <option value="F">Female</option>
+                  {regions &&
+                    regions.map((r, i) => (
+                      <option key={i} value={r.value}>
+                        {r.label}
+                      </option>
+                    ))}
                 </Select>
                 {props.errors.region && props.touched.region ? (
                   <Error id="feedback">{props.errors.region}</Error>
@@ -506,12 +592,11 @@ export default class DetailsForm extends Component {
                   Upload Marriage Certificate (if applicable)
                 </Label>
 
-                <hr />
-
                 <FileInput>
                   <label htmlFor="marriageCertificate">
                     Upload
                     <input
+                      id="marriageCertificate"
                       accept="image/jpeg"
                       type="file"
                       name="marriageCertificate"
@@ -550,7 +635,65 @@ export default class DetailsForm extends Component {
                           <Label htmlFor={`children.${id}.dateOfBirth`}>
                             Date of Birth
                           </Label>
-                          <Input name={`children.${id}.dateOfBirth`} />
+
+                          <div
+                            css={`
+                              display: flex;
+                              width: 25rem;
+
+                              select {
+                                margin-right: 1rem;
+                              }
+                            `}
+                          >
+                            <Select
+                              as="select"
+                              name={`children.${id}.dateOfBirth.month`}
+                              onChange={props.handleChange}
+                              onBlur={props.handleBlur}
+                              value={
+                                props.values.children[id].dateOfBirth.month
+                              }
+                            >
+                              <option value="">Month</option>
+                              {months &&
+                                months.map((m, i) => (
+                                  <option key={months[i]} value={months[i]}>
+                                    {months[i]}
+                                  </option>
+                                ))}
+                            </Select>
+                            <Select
+                              as="select"
+                              name={`children.${id}.dateOfBirth.day`}
+                              onChange={props.handleChange}
+                              onBlur={props.handleBlur}
+                              value={props.values.children[id].dateOfBirth.day}
+                            >
+                              <option value="">Day</option>
+                              {days &&
+                                days.map((d, i) => (
+                                  <option key={days[i]} value={days[i]}>
+                                    {days[i]}
+                                  </option>
+                                ))}
+                            </Select>
+                            <Select
+                              as="select"
+                              name={`children.${id}.dateOfBirth.year`}
+                              onChange={props.handleChange}
+                              onBlur={props.handleBlur}
+                              value={props.values.children[id].dateOfBirth.year}
+                            >
+                              <option value="">Year</option>
+                              {years &&
+                                years.map((year, i) => (
+                                  <option key={years[i]} value={years[i]}>
+                                    {years[i]}
+                                  </option>
+                                ))}
+                            </Select>
+                          </div>
 
                           <Label>
                             Upload Birth Certificate (if applicable)
@@ -713,13 +856,62 @@ export default class DetailsForm extends Component {
                 ) : null}
 
                 <Label htmlFor="nextOfKin.dateOfBirth">Date of Birth</Label>
-                <Input
-                  type="text"
-                  onChange={props.handleChange}
-                  onBlur={props.handleBlur}
-                  value={props.values.nextOfKin.dateOfBirth}
-                  name="nextOfKin.dateOfBirth"
-                />
+                <div
+                  css={`
+                    display: flex;
+                    width: 25rem;
+
+                    select {
+                      margin-right: 1rem;
+                    }
+                  `}
+                >
+                  <Select
+                    as="select"
+                    name="nextOfKin.dateOfBirth.month"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.nextOfKin.dateOfBirth.month}
+                  >
+                    <option value="">Month</option>
+                    {months &&
+                      months.map((m, i) => (
+                        <option key={months[i]} value={months[i]}>
+                          {months[i]}
+                        </option>
+                      ))}
+                  </Select>
+                  <Select
+                    as="select"
+                    name="dateOfBirth.day"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.dateOfBirth.day}
+                  >
+                    <option value="">Day</option>
+                    {days &&
+                      days.map((d, i) => (
+                        <option key={days[i]} value={days[i]}>
+                          {days[i]}
+                        </option>
+                      ))}
+                  </Select>
+                  <Select
+                    as="select"
+                    name="nextOfKin.dateOfBirth.year"
+                    onChange={props.handleChange}
+                    onBlur={props.handleBlur}
+                    value={props.values.nextOfKin.dateOfBirth.year}
+                  >
+                    <option value="">Year</option>
+                    {years &&
+                      years.map((year, i) => (
+                        <option key={years[i]} value={years[i]}>
+                          {years[i]}
+                        </option>
+                      ))}
+                  </Select>
+                </div>
                 {props.errors.nexOfKin && props.touched.nexOfKin ? (
                   <Error id="feedback">
                     {props.errors.nextOfKin.dateOfBirth}
@@ -1207,6 +1399,32 @@ export default class DetailsForm extends Component {
                   <option value="TT">Total TomCard</option>
                   <option value="GG">Goil GOCard</option>
                 </Select>
+
+                <ShowSectionButton
+                  type="button"
+                  onClick={() => this.handleOpenSection('functional')}
+                  hidden={!this.state.functional}
+                >
+                  Continue to Functional Information
+                </ShowSectionButton>
+              </section>
+
+              <Heading>10. Functional Information</Heading>
+              <section hidden={this.state.functional}>
+                <Label htmlFor="nationalId">Job Title</Label>
+                <p css={mutedCss}>XXXXXXXX</p>
+
+                <Label htmlFor="nationalId">Division</Label>
+                <p css={mutedCss}>XXXXXXXX</p>
+
+                <Label htmlFor="nationalId">Department</Label>
+                <p css={mutedCss}>XXXXXXXX</p>
+
+                <Label htmlFor="nationalId">Location</Label>
+                <p css={mutedCss}>XXXXXXXX</p>
+
+                <Label htmlFor="nationalId">Line Manager</Label>
+                <p css={mutedCss}>XXXXXXXX</p>
               </section>
             </Form>
 
