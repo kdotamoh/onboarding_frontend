@@ -103,7 +103,7 @@ const ShowSectionButton = styled(AddButton)`
   height: unset;
   padding: 0.3rem 1.5rem;
   margin-top: 2rem;
-  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
+  /* visibility: ${props => (props.visible ? 'visible' : 'hidden')}; */
 `
 
 const Label = styled.label`
@@ -673,6 +673,7 @@ export default class DetailsForm extends Component {
                 <ShowSectionButton
                   type="button"
                   onClick={() => this.handleOpenSection('nextOfKin')}
+                  hidden={!this.state.nextOfKin}
                 >
                   Continue to Next of Kin
                 </ShowSectionButton>
@@ -738,6 +739,7 @@ export default class DetailsForm extends Component {
                 <ShowSectionButton
                   type="button"
                   onClick={() => this.handleOpenSection('education')}
+                  hidden={!this.state.education}
                 >
                   Continue to Education
                 </ShowSectionButton>
@@ -775,6 +777,7 @@ export default class DetailsForm extends Component {
                 <ShowSectionButton
                   type="button"
                   onClick={() => this.handleOpenSection('nationalService')}
+                  hidden={!this.state.nationalService}
                 >
                   Continue to National Service
                 </ShowSectionButton>
@@ -807,6 +810,7 @@ export default class DetailsForm extends Component {
                 <ShowSectionButton
                   type="button"
                   onClick={() => this.handleOpenSection('residential')}
+                  hidden={!this.state.residential}
                 >
                   Continue to Residential
                 </ShowSectionButton>
@@ -880,6 +884,7 @@ export default class DetailsForm extends Component {
                 <ShowSectionButton
                   type="button"
                   onClick={() => this.handleOpenSection('salary')}
+                  hidden={!this.state.salary}
                 >
                   Continue to Salary
                 </ShowSectionButton>
@@ -961,6 +966,7 @@ export default class DetailsForm extends Component {
                 <ShowSectionButton
                   type="button"
                   onClick={() => this.handleOpenSection('familyLine')}
+                  hidden={!this.state.familyLine}
                 >
                   Continue to Family Line
                 </ShowSectionButton>
@@ -1018,6 +1024,7 @@ export default class DetailsForm extends Component {
                 <ShowSectionButton
                   type="button"
                   onClick={() => this.handleOpenSection('medicalInsurance')}
+                  hidden={!this.state.medicalInsurance}
                 >
                   Continue to Medical Insurance
                 </ShowSectionButton>
@@ -1055,6 +1062,7 @@ export default class DetailsForm extends Component {
                 <ShowSectionButton
                   type="button"
                   onClick={() => this.handleOpenSection('fuelCard')}
+                  hidden={!this.state.fuelCard}
                 >
                   Continue to Fuel Card
                 </ShowSectionButton>
