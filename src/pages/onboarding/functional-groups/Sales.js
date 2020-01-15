@@ -6,7 +6,7 @@ import { Button, Img } from 'components/styled'
 import Modal from 'components/modal'
 import PageStyle from '../PageStyle'
 
-import bgImg from 'images/onboarding/group-1.svg'
+import bgImg from 'images/onboarding/bg_bottomright.svg'
 
 import verypoor from 'images/emoji/verypoor.svg'
 import poor from 'images/emoji/poor.svg'
@@ -16,8 +16,8 @@ import verygood from 'images/emoji/verygood.svg'
 
 const BgImg = styled(Img)`
   position: absolute;
-  bottom: 5vw;
-  right: 7.5vw;
+  bottom: 0;
+  right: 0;
   align-self: flex-end;
   z-index: 0;
 `
