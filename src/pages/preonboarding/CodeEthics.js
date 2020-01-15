@@ -30,7 +30,7 @@ const BgImgContainer = styled.div`
   width: 100%;
 `
 
-const LegalSection = styled(Section)`
+export const LegalSection = styled(Section)`
   h2 {
     font-family: MTNBrighterSans-Regular;
     counter-reset: h3-counter;
@@ -48,6 +48,45 @@ const LegalSection = styled(Section)`
     &:before {
       counter-increment: h3-counter;
       content: counter(h2-counter) '.' counter(h3-counter) ' ';
+    }
+  }
+
+  p {
+    h3 {
+      font-family: MTNBrighterSans-Light;
+      font-size: 16px;
+      counter-reset: h4-counter;
+      padding-left: 6rem;
+      position: relative;
+
+      &:before {
+        display: block;
+        position: absolute;
+        left: 0;
+
+        counter-increment: h3-counter;
+        content: counter(h2-counter) '.' counter(h3-counter) ' ';
+      }
+    }
+  }
+
+  p {
+    h4 {
+      font-family: MTNBrighterSans-Regular;
+      counter-reset: h5-counter;
+      padding-left: unset;
+      position: unset;
+      color: #666666;
+
+      &:before {
+        display: unset;
+        position: unset;
+        left: unset;
+
+        counter-increment: h4-counter;
+        content: counter(h2-counter) '.' counter(h3-counter) '.'
+          counter(h4-counter) ' ';
+      }
     }
   }
 
@@ -377,7 +416,10 @@ export default class CodeEthics extends Component {
                     </li>
                   </ul>
                   <h3>Gifts, Hospitality and Favours </h3>
-                  <h4>Receiving </h4>
+
+                  <p>
+                    <h4>Receiving </h4>
+                  </p>
                   <p>
                     Conflicts of interest can arise where employees are offered
                     gifts, hospitality or other favours, which might or could be
@@ -454,7 +496,11 @@ export default class CodeEthics extends Component {
                     or on behalf of the Company, nor have any indirect financial
                     interest in such a transaction.
                   </p>
-                  <h4>Giving </h4>
+
+                  <p>
+                    <h4>Giving </h4>
+                  </p>
+
                   <p>
                     An employee should not offer gifts, hospitality or other
                     favours to customers of goods and services exceeding $200 or
