@@ -130,9 +130,7 @@ const initialValues = {
 }
 
 const ValidationSchema = Yup.object().shape({
-  bio: Yup.string()
-    .max(750, 'Please enter no more that 750 characters')
-    .required('This field is required')
+  bio: Yup.string().required('This field is required')
 })
 
 export default class Introduction extends Component {
@@ -154,6 +152,7 @@ export default class Introduction extends Component {
           </Hero>
 
           <Formik
+            enableReinitialize={true}
             initialValues={initialValues}
             onSubmit={() => {
               navigate('/preonboarding/first-three-days')
@@ -171,10 +170,12 @@ export default class Introduction extends Component {
                   <small>(750 characters limit)</small>
                 </label>
                 <Textarea
+                  type="text"
                   name="bio"
                   value={props.values.bio}
                   onBlur={props.handleBlur}
                   onChange={props.handleChange}
+                  maxLength="750"
                 ></Textarea>
                 {props.errors.bio && props.touched.bio ? (
                   <Error id="feedback">{props.errors.bio}</Error>
