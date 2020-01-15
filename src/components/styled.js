@@ -171,7 +171,13 @@ export const Section = styled.section`
     margin-left: 2rem;
   }
 
-  h2 {
+  h2,
+  h3 {
     font-family: MTNBrighterSans-Regular;
+  }
+
+  h4,
+  h5 {
+    font-family: MTNBrighterSans-Light;
   }
 `

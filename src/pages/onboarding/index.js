@@ -36,6 +36,7 @@ import Events from './dashboard/Events'
 import UserTasks from './dashboard/Tasks'
 import UserProfile from './dashboard/UserProfile'
 import Home from './dashboard/Home'
+import End from './dashboard/End'
 
 export const Wrapper = styled.div`
   ${space}
@@ -178,8 +179,9 @@ export default class Onboarding extends Component {
           <OnboardingLogin path="/" />
           <Events path="/events" />
           <UserTasks path="/user-tasks" />
-          <Home path="/dashboard" />
+          <Home path="/home" />
           <UserProfile path="/user-profile" />
+          <End path="/end" />
         </Router>
         <Router>
           <FunctionalGroups path="functional-groups">

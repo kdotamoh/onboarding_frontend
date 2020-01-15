@@ -12,6 +12,7 @@ import { SideNav } from 'components/navigation'
 import DashboardNav from 'components/navigation/DashboardNav'
 import OnboardingLink from 'pages/onboarding/OnboardingLink'
 import { DashboardCard } from 'components/card'
+import DashboardLink from 'pages/onboarding/dashboard/DashboardLink'
 
 import noTask from 'images/no_task.svg'
 
@@ -47,7 +48,11 @@ export default class Events extends Component {
   render() {
     return (
       <>
-        <DashboardNav />
+        <DashboardNav>
+          <DashboardLink to="/onboarding/home">Home</DashboardLink>
+          <DashboardLink to="/onboarding/events">Events</DashboardLink>
+          <DashboardLink to="/onboarding/user-tasks">Tasks</DashboardLink>
+        </DashboardNav>
         <SplitGrid leftWidth={20} rightWidth={80}>
           <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
             <Wrapper pt="5rem">

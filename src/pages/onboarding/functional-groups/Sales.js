@@ -47,7 +47,7 @@ export default class Overview extends Component {
 
   handleRating = rating => {
     this.setState({ rating })
-    navigate('/dashboard/home')
+    navigate('/onboarding/end')
   }
 
   render() {

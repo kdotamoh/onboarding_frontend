@@ -12,6 +12,7 @@ import {
 } from 'views/layout'
 import { COLORS } from '../../../constants'
 import DashboardNav from 'components/navigation/DashboardNav'
+import DashboardLink from 'pages/onboarding/dashboard/DashboardLink'
 import { DashboardCard } from 'components/card'
 
 import test from 'images/png/placeholder.png'
@@ -54,7 +55,7 @@ const _ProfileDropdown = ({ user }) => {
       // tabIndex="-1"
     >
       {/* <span css={``}> */}
-      <UserName>{user.first_name}sdfsd</UserName>
+      <UserName>{user.first_name}</UserName>
       {/* </span> */}
       <img src={test} alt="" />
       <div
@@ -113,7 +114,11 @@ class UserProfile extends Component {
     const { user } = this.props
     return (
       <>
-        <DashboardNav />
+        <DashboardNav>
+          <DashboardLink to="/onboarding/home">Home</DashboardLink>
+          <DashboardLink to="/onboarding/events">Events</DashboardLink>
+          <DashboardLink to="/onboarding/user-tasks">Tasks</DashboardLink>
+        </DashboardNav>
         <SplitGrid leftWidth={20} rightWidth={80}>
           <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
             <Wrapper pt="5rem">
