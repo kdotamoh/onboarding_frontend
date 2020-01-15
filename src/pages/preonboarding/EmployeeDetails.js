@@ -23,6 +23,14 @@ const BgImgContainer = styled.div`
   width: 100%;
 `
 
+const DocumentsTable = styled(Table)`
+  td:first-child,
+  th:first-child {
+    /* font-weight: bold; */
+    font-family: MTNBrighterSans-Medium;
+  }
+`
+
 export default class EmployeeDetails extends Component {
   state = {
     checked: false
@@ -72,7 +80,7 @@ export default class EmployeeDetails extends Component {
                 </li>
               </ul>
             </Section>
-            <Table mb="2rem" rowWidth="50%">
+            <DocumentsTable mb="2rem" rowWidth="50%">
               <thead>
                 <tr>
                   <th>Document Name</th>
@@ -166,7 +174,7 @@ export default class EmployeeDetails extends Component {
                   <td>For part of salary payment</td>
                 </tr>
               </tbody>
-            </Table>
+            </DocumentsTable>
             <Section>
               <p>
                 MTN confirms that these information so provided would be used
@@ -193,7 +201,7 @@ export default class EmployeeDetails extends Component {
                 information for the sole purpose for which it is intended.
               </label>
             </div>
-            <Section>
+            <Section mt="4rem" width="100%">
               <h3>B. EMPLOYEE DETAILS</h3>
               <p></p>
             </Section>
