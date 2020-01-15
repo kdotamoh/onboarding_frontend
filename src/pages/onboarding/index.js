@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Router, navigate } from '@reach/router'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { space } from 'styled-system'
 
@@ -37,6 +38,7 @@ import UserTasks from './dashboard/Tasks'
 import UserProfile from './dashboard/UserProfile'
 import Home from './dashboard/Home'
 import End from './dashboard/End'
+import { connect } from 'react-redux'
 
 export const Wrapper = styled.div`
   ${space}
@@ -171,41 +173,55 @@ const AboutMTN = ({ children }) => {
   )
 }
 
-export default class Onboarding extends Component {
+class Onboarding extends Component {
   render() {
     return (
-      <div>
-        <Router>
-          <OnboardingLogin path="/" />
-          <Events path="/events" />
-          <UserTasks path="/user-tasks" />
-          <Home path="/home" />
-          <UserProfile path="/user-profile" />
-          <End path="/end" />
-        </Router>
-        <Router>
-          <FunctionalGroups path="functional-groups">
-            <Overview path="/overview" />
-            <FinanceAndService path="/finance-service" />
-            <EmployeeIndustrial path="/employee-industrial" />
-            <LearningDevelopment path="/learning-development" />
-            <HRServices path="/hr-service" />
-            <Marketing path="/marketing" />
-            <Sales path="/sales" />
-          </FunctionalGroups>
-        </Router>
-        <Router>
-          <AboutMTN path="about-mtn">
-            <CompanyOverview path="/company-overview" />
-            <CEOWelcome path="/ceo-welcome" />
-            <MissionVision path="/mission-and-vision" />
-            <Organisation path="/how-we-are-organised" />
-            <EmployeeValue path="/employee-value-proposition" />
-            <StrategicPillars path="/strategic-pillars-and-priorities" />
-            <Tasks path="/tasks" />
-          </AboutMTN>
-        </Router>
-      </div>
+      <>
+        {this.props.token ? (
+          <>
+            <Router>
+              <Events path="/events" />
+              <UserTasks path="/user-tasks" />
+              <Home path="/home" />
+              <UserProfile path="/user-profile" />
+              <End path="/end" />
+            </Router>
+            <Router>
+              <FunctionalGroups path="functional-groups">
+                <Overview path="/overview" />
+                <FinanceAndService path="/finance-service" />
+                <EmployeeIndustrial path="/employee-industrial" />
+                <LearningDevelopment path="/learning-development" />
+                <HRServices path="/hr-service" />
+                <Marketing path="/marketing" />
+                <Sales path="/sales" />
+              </FunctionalGroups>
+            </Router>
+            <Router>
+              <AboutMTN path="about-mtn">
+                <CompanyOverview path="/company-overview" />
+                <CEOWelcome path="/ceo-welcome" />
+                <MissionVision path="/mission-and-vision" />
+                <Organisation path="/how-we-are-organised" />
+                <EmployeeValue path="/employee-value-proposition" />
+                <StrategicPillars path="/strategic-pillars-and-priorities" />
+                <Tasks path="/tasks" />
+              </AboutMTN>
+            </Router>
+          </>
+        ) : (
+          <Router>
+            <OnboardingLogin path="/*" />
+          </Router>
+        )}
+      </>
     )
   }
 }
+Onboarding.propTypes = {
+  token: PropTypes.string
+}
+
+export default connect(state => ({
+  token: state.token
+}))(Onboarding)

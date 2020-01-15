@@ -151,7 +151,7 @@ class Welcome extends Component {
                         transform: translateY(-10rem);
                       `}
                     >
-                      <HeroH1>Welcome back, {first_name}</HeroH1>
+                      <HeroH1>Welcome back, {first_name}!</HeroH1>
                       <p>
                         Lorem, ipsum dolor sit amet consectetur adipisicing
                         elit. Consectetur, officiis. Placeat assumenda cum quas

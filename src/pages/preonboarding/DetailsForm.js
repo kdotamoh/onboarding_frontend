@@ -949,7 +949,7 @@ export default class DetailsForm extends Component {
                   onClick={() => this.handleOpenSection('education')}
                   hidden={!this.state.education}
                 >
-                  Continue to Education
+                  Continue to Educational Information
                 </ShowSectionButton>
               </section>
 
@@ -1045,7 +1045,7 @@ export default class DetailsForm extends Component {
                   onClick={() => this.handleOpenSection('nationalService')}
                   hidden={!this.state.nationalService}
                 >
-                  Continue to National Service
+                  Continue to National Service Information
                 </ShowSectionButton>
               </section>
 
@@ -1078,7 +1078,7 @@ export default class DetailsForm extends Component {
                   onClick={() => this.handleOpenSection('residential')}
                   hidden={!this.state.residential}
                 >
-                  Continue to Residential
+                  Continue to Residential/Postal Information
                 </ShowSectionButton>
               </section>
 
@@ -1152,7 +1152,7 @@ export default class DetailsForm extends Component {
                   onClick={() => this.handleOpenSection('salary')}
                   hidden={!this.state.salary}
                 >
-                  Continue to Salary
+                  Continue to Salary Transfer Information
                 </ShowSectionButton>
               </section>
 
@@ -1234,7 +1234,7 @@ export default class DetailsForm extends Component {
                   onClick={() => this.handleOpenSection('familyLine')}
                   hidden={!this.state.familyLine}
                 >
-                  Continue to Family Line
+                  Continue to Family Line Information
                 </ShowSectionButton>
               </section>
 
@@ -1378,7 +1378,7 @@ export default class DetailsForm extends Component {
                   onClick={() => this.handleOpenSection('fuelCard')}
                   hidden={!this.state.fuelCard}
                 >
-                  Continue to Fuel Card
+                  Continue to Fuel Card Option
                 </ShowSectionButton>
               </section>
 
