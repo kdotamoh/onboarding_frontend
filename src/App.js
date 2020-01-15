@@ -6,7 +6,6 @@ import GlobalStyles from './GlobalStyles'
 
 import PreOnboarding from 'pages/preonboarding'
 import Onboarding from 'pages/onboarding'
-import Dashboard from 'components/dashboard'
 
 function App() {
   return (
@@ -18,7 +17,6 @@ function App() {
       <Router>
         <PreOnboarding path="preonboarding/*" />
         <Onboarding path="onboarding/*" />
-        <Dashboard path="dashboard/*" />
       </Router>
     </div>
   )

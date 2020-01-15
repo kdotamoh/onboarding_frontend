@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import DashboardLink from 'components/dashboard/DashboardLink'
+import DashboardLink from 'pages/onboarding/dashboard/DashboardLink'
 import { Img } from 'components/navigation'
-import { ProfileDropdown } from 'components/dashboard/UserProfile'
+import { ProfileDropdown } from 'pages/onboarding/dashboard/UserProfile'
 
 import logo from 'images/mtn_logo.svg'
 
