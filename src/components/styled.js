@@ -158,6 +158,8 @@ export const Wrapper = styled.div`
 export const Section = styled.section`
   padding-top: 2rem;
   margin-bottom: 4rem;
+  ${layout}
+  ${space}
 
   p {
   }

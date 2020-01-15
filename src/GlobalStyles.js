@@ -37,6 +37,7 @@ export default createGlobalStyle`
     font-size: 1.6rem;
     line-height: 1.5;
     min-height: 100vh;
+    counter-reset: h2-counter;
   }
 
 

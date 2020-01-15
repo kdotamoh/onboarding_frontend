@@ -30,6 +30,62 @@ const BgImgContainer = styled.div`
   width: 100%;
 `
 
+const LegalSection = styled(Section)`
+  h2 {
+    font-family: MTNBrighterSans-Regular;
+    counter-reset: h3-counter;
+
+    &:before {
+      counter-increment: h2-counter;
+      content: counter(h2-counter) '. ';
+    }
+  }
+
+  h3 {
+    font-family: MTNBrighterSans-Regular;
+    counter-reset: h4-counter;
+
+    &:before {
+      counter-increment: h3-counter;
+      content: counter(h2-counter) '.' counter(h3-counter) ' ';
+    }
+  }
+
+  h4 {
+    font-family: MTNBrighterSans-Light;
+    counter-reset: h5-counter;
+    padding-left: 6rem;
+    position: relative;
+
+    &:before {
+      display: block;
+      position: absolute;
+      left: 0;
+
+      counter-increment: h4-counter;
+      content: counter(h2-counter) '.' counter(h3-counter) '.'
+        counter(h4-counter) ' ';
+    }
+  }
+
+  h5 {
+    font-family: MTNBrighterSans-Light;
+    font-size: 16px;
+    padding-left: 7rem;
+    position: relative;
+
+    &:before {
+      display: block;
+      position: absolute;
+      left: 0;
+
+      counter-increment: h5-counter;
+      content: counter(h2-counter) '.' counter(h3-counter) '.'
+        counter(h4-counter) '.' counter(h5-counter) ' ';
+    }
+  }
+`
+
 export default class CodeEthics extends Component {
   state = {
     checked: false
@@ -65,7 +121,7 @@ export default class CodeEthics extends Component {
             <SplitGridLeftColumn>
               <StickyBox offsetTop={20} offsetBottom={20}>
                 <Scrollspy
-                  items={['section-1', 'section-2', 'section-3']}
+                  items={['introduction', 'compliance', 'conflict-of-interest']}
                   currentClassName="is-current"
                 >
                   <Sidebar>
@@ -130,9 +186,9 @@ export default class CodeEthics extends Component {
             </SplitGridLeftColumn>
             <SplitGridRightColumn>
               <div style={{ width: '60%' }}>
-                <Section id="introduction">
-                  <h2>1. Introduction</h2>
-                  <h3>1.1 Purpose </h3>
+                <LegalSection id="introduction">
+                  <h2>Introduction</h2>
+                  <h3>Purpose </h3>
                   <p>
                     The philosophy of Scancom Ltd. (the “Company”) is to conduct
                     its affairs with uncompromising honesty, integrity,
@@ -162,7 +218,7 @@ export default class CodeEthics extends Component {
                     spirit of the law) and should be aware that their actions
                     serve as examples to others.
                   </p>
-                  <h3>1.2 Policy</h3>
+                  <h3>Policy</h3>
                   <p>
                     Scancom Ltd. is committed to a policy of openness and
                     integrity in its conduct of business. This commitment, which
@@ -182,7 +238,7 @@ export default class CodeEthics extends Component {
                     standard of ethics, and to understand that anything less is
                     unacceptable.
                   </p>
-                  <h3>1.3 Understanding the Code </h3>
+                  <h3>Understanding the Code </h3>
                   <p>
                     Scancom Ltd’s Code of Ethics, applies equally to all
                     directors, employees and stakeholders. The Code is designed
@@ -206,9 +262,9 @@ export default class CodeEthics extends Component {
                     they should discuss the matter with the person to whom they
                     report, or the Company Secretary.
                   </p>
-                </Section>
-                <Section id="compliance">
-                  <h2>2. Compliance with Laws and Regulations</h2>
+                </LegalSection>
+                <LegalSection id="compliance">
+                  <h2>Compliance with Laws and Regulations</h2>
                   <p>
                     Employees must comply with all applicable laws and
                     regulations, which relate to activities for and on behalf of
@@ -218,9 +274,9 @@ export default class CodeEthics extends Component {
                     illegal act such as fraud, bribery or money laundering
                     activities.
                   </p>
-                </Section>
-                <Section id="conflict-of-interest">
-                  <h2>3. Conflict of Interest</h2>
+                </LegalSection>
+                <LegalSection id="conflict-of-interest">
+                  <h2>Conflict of Interest</h2>
                   <p>
                     The Company expects the employees to perform their duties
                     conscientiously, honestly and in accordance with the best
@@ -245,7 +301,7 @@ export default class CodeEthics extends Component {
                     interest situation, they should immediately make all the
                     facts known to the person to whom they report.
                   </p>
-                  <h3>3.1 Outside Activities, Employment and Directorships</h3>
+                  <h3>Outside Activities, Employment and Directorships</h3>
                   <p>
                     We all share a very real responsibility to contribute to our
                     local communities, and the Company encourages employees to
@@ -254,18 +310,22 @@ export default class CodeEthics extends Component {
                     business interest or participating in any activity outside
                     the Company, which would create, or appear to create:
                   </p>
-                  3.1.1 an excessive demand upon their time, attention and
-                  energy which would deprive the Company of their best efforts
-                  in their work; or 3.1.2 A conflict of interest – that is an
-                  obligation, interest or distraction which would interfere or
-                  appear to interfere with the independent exercise of judgment
-                  in the Company’s best interests. Employees may not take up
-                  outside employment whether permanent or part time without the
-                  prior approval of their Manager and Executive responsible for
-                  Human Resources.
-                  <h3>
-                    3.2 Relationships with Clients, Customers and Suppliers
-                  </h3>
+                  <div style={{ display: 'flex' }}>
+                    <h4>
+                      an excessive demand upon their time, attention and energy
+                      which would deprive the Company of their best efforts in
+                      their work; or
+                    </h4>
+                  </div>
+                  <h4>
+                    A conflict of interest – that is an obligation, interest or
+                    distraction which would interfere or appear to interfere
+                    with the independent exercise of judgment in the Company’s
+                    best interests. Employees may not take up outside employment
+                    whether permanent or part time without the prior approval of
+                    their Manager and Executive responsible for Human Resources.
+                  </h4>
+                  <h3>Relationships with Clients, Customers and Suppliers</h3>
                   <p>
                     The Company recognizes that relationships with clients,
                     customers and suppliers give rise to many potential
@@ -316,8 +376,8 @@ export default class CodeEthics extends Component {
                       supplier protected.
                     </li>
                   </ul>
-                  <h3>3.3 Gifts, Hospitality and Favours </h3>
-                  <h4> 3.3.1 Receiving </h4>
+                  <h3>Gifts, Hospitality and Favours </h3>
+                  <h4>Receiving </h4>
                   <p>
                     Conflicts of interest can arise where employees are offered
                     gifts, hospitality or other favours, which might or could be
@@ -332,31 +392,44 @@ export default class CodeEthics extends Component {
                     acceptance of the following would not be considered contrary
                     to such policy:
                   </p>
-                  3.3.1.1 Advertising matter of limited commercial value;
-                  3.3.1.2 Occasional business entertaining such as lunches,
-                  cocktail parties or dinners; and 3.3.1.3 Occasional personal
-                  hospitality such as tickets to local sporting and recreational
-                  events or theatres in accordance with the Group Gift Policy
-                  clause 12 or as maybe amended from time to time. 3.3.1.4 Local
-                  hospitality getaways including one or more nights paid
-                  accommodation are acceptable only with the prior written
-                  consent of the individual's superior All overseas getaways
-                  need to be authorized in writing by the CEO prior to departure
-                  while overseas sporting events need to be approved Group Chief
-                  Business Risk Officer prior to departure in accordance with
-                  clause 12.1.5 of the Group Gift Policy. 3.3.1.5 Low value
-                  corporate branded items less than $40.00 in value or as maybe
-                  amended from time to time in the Group Gift Policy maybe
-                  accepted. 3.3.1.6 Cellular devices and related accessories may
-                  only be accepted by the relevant departments for testing and
-                  becomes the property of MTN and shall be disposed of in
-                  accordance with the provisions of the Group gift policy clause
-                  11.5.3 and 11.5.4 or as may be amended from time to time. In
-                  addition, no personal favours or other preferential treatment
-                  should be accepted by any employee when they are offered
-                  because of the employee’s position with the Company, and,
-                  therefore might tend to place the recipient under obligation.
-                  <h4>DECLARATION of GIFTS</h4>
+                  <h5>Advertising matter of limited commercial value;</h5>
+                  <h5>
+                    Occasional business entertaining such as lunches, cocktail
+                    parties or dinners; and{' '}
+                  </h5>
+                  <h5>
+                    Occasional personal hospitality such as tickets to local
+                    sporting and recreational events or theatres in accordance
+                    with the Group Gift Policy clause 12 or as maybe amended
+                    from time to time.{' '}
+                  </h5>
+                  <h5>
+                    Local hospitality getaways including one or more nights paid
+                    accommodation are acceptable only with the prior written
+                    consent of the individual's superior All overseas getaways
+                    need to be authorized in writing by the CEO prior to
+                    departure while overseas sporting events need to be approved
+                    Group Chief Business Risk Officer prior to departure in
+                    accordance with clause 12.1.5 of the Group Gift Policy.{' '}
+                  </h5>
+                  <h5>
+                    Low value corporate branded items less than $40.00 in value
+                    or as maybe amended from time to time in the Group Gift
+                    Policy maybe accepted.{' '}
+                  </h5>
+                  <h5>
+                    Cellular devices and related accessories may only be
+                    accepted by the relevant departments for testing and becomes
+                    the property of MTN and shall be disposed of in accordance
+                    with the provisions of the Group gift policy clause 11.5.3
+                    and 11.5.4 or as may be amended from time to time. In
+                    addition, no personal favours or other preferential
+                    treatment should be accepted by any employee when they are
+                    offered because of the employee’s position with the Company,
+                    and, therefore might tend to place the recipient under
+                    obligation.
+                  </h5>
+                  <p style={{ fontSize: '18px' }}>Declaration of Gifts</p>
                   <p>
                     The employee should declare the receipt of gifts exceeding
                     the value of $40 or as may be amended from time to time in
@@ -381,7 +454,7 @@ export default class CodeEthics extends Component {
                     or on behalf of the Company, nor have any indirect financial
                     interest in such a transaction.
                   </p>
-                  <h4>3.3.2 Giving </h4>
+                  <h4>Giving </h4>
                   <p>
                     An employee should not offer gifts, hospitality or other
                     favours to customers of goods and services exceeding $200 or
@@ -392,13 +465,19 @@ export default class CodeEthics extends Component {
                     with approved business plans and sanctioned in accordance
                     with the delegation of authority:
                   </p>
-                  3.3.2.1 Occasional entertainment of a customer representative
-                  and their spouse or partner; 3.3.2.2 Accommodation in one of
-                  the MTN Group’s and subsidiary’s own guest cottages or on any
-                  properties owned by it for a customer representative and their
-                  spouse or partner; 3.3.2.3 The supply of any of the Company or
-                  any of its associates branded products on a limited commercial
-                  basis.
+                  <h5>
+                    Occasional entertainment of a customer representative and
+                    their spouse or partner;
+                  </h5>
+                  <h5>
+                    Accommodation in one of the MTN Group’s and subsidiary’s own
+                    guest cottages or on any properties owned by it for a
+                    customer representative and their spouse or partner;
+                  </h5>
+                  <h5>
+                    The supply of any of the Company or any of its associates
+                    branded products on a limited commercial basis.
+                  </h5>
                   <p>
                     Conflicts of interest or embarrassment may be caused to
                     customers where employees offer gifts, hospitality of other
@@ -415,7 +494,7 @@ export default class CodeEthics extends Component {
                     hospitality or other favours and to observe at all times the
                     customer’s practice in this regard.
                   </p>
-                  <h3>3.4 Personal Investments </h3>
+                  <h3>Personal Investments </h3>
                   <p>
                     The Group respects the right of all employees to make
                     investment decisions as they see fit, as long as these
@@ -456,21 +535,25 @@ export default class CodeEthics extends Component {
                     bodies, industry associations and management.
                   </p>
                   <p>The rules include requirements for employees to: </p>
-                  3.4.1 Obtain prior approval for, and to report on, their
-                  personal investment activity and the investment activity of
-                  those persons with whom they have dealings with. 3.4.2 Refrain
-                  from dealing in shares of the Company or the MTN Group during
-                  restricted periods (close periods) as communicated by the
-                  Company Secretary.
+                  <h4>
+                    Obtain prior approval for, and to report on, their personal
+                    investment activity and the investment activity of those
+                    persons with whom they have dealings with.
+                  </h4>
+                  <h4>
+                    Refrain from dealing in shares of the Company or the MTN
+                    Group during restricted periods (close periods) as
+                    communicated by the Company Secretary.
+                  </h4>
                   <p>
                     Shareholders should not have unrealistic expectations of
                     management to the extent that the latter are pressurized
                     into acting injudiciously or unethically in any way to the
                     detriment of the Company.
                   </p>
-                </Section>
-                <Section id="communication-to-third-party">
-                  <h2>4. Communication of Philosophy to Third Parties</h2>
+                </LegalSection>
+                <LegalSection id="communication-to-third-party">
+                  <h2>Communication of Philosophy to Third Parties</h2>
                   <p>
                     All suppliers, financiers and customers should be made aware
                     of all aspects of the Code of Ethics and be advised that
@@ -487,9 +570,9 @@ export default class CodeEthics extends Component {
                     of both personal and corporate governance so as to benefit
                     all associated entities.
                   </p>
-                </Section>
-                <Section id="employment-equity">
-                  <h2>5. Employment Equity</h2>
+                </LegalSection>
+                <LegalSection id="employment-equity">
+                  <h2>Employment Equity</h2>
                   <p>
                     The Company’s employment equity policy is a system of
                     opportunity for all. Employment equity seeks to identify,
@@ -529,10 +612,10 @@ export default class CodeEthics extends Component {
                     and do not present a safety or health hazard to themselves
                     or others.
                   </p>
-                </Section>
-                <Section id="environmental-responsibility">
-                  <h2>6. Environmental Responsibility </h2>
-                  <h3>6.1 Health and Safety</h3>
+                </LegalSection>
+                <LegalSection id="environmental-responsibility">
+                  <h2>Environmental Responsibility </h2>
+                  <h3>Health and Safety</h3>
                   <p>
                     The Company is committed to taking every reasonable
                     precaution to ensure a safe working environment for all
@@ -545,7 +628,7 @@ export default class CodeEthics extends Component {
                     set out in the Contravention of the Code section of this
                     booklet.
                   </p>
-                  <h3>6.2 Environmental Management </h3>
+                  <h3>Environmental Management </h3>
                   <p>
                     The Company is committed to developing operating policies to
                     address the environmental impact of its business activities
@@ -554,31 +637,56 @@ export default class CodeEthics extends Component {
                     Employees should give appropriate and timely attention to
                     environmental issues.
                   </p>
-                </Section>
-                <Section id="political-support">
-                  <h2>7. Political Support</h2>
-                  7.1 The Company is politically neutral and employees shall not
-                  engage in any activity or omission that compromises the
-                  political neutrality of the company or public perception
-                  thereof. Notwithstanding that the Company is politically
-                  neutral the Company respects the rights of its employees to
-                  personal participation in the political process and respects
-                  their rights to absolute privacy with regard to personal
-                  political activity. 7.2 Employees shall keep any business and
-                  personal political affiliations separate and shall ensure that
-                  any activity related to business or personal political
-                  activity shall NOT: 7.2.1 disrupt workplace activities; 7.2.2
-                  promote or contribute to industrial unrest; 7.2.3 create or
-                  appear to create the perception of affiliation of the Company
-                  to a particular political party. 7.3 Leadership of the Company
-                  and all employees, especially employees whose roles promote
-                  close facial or voice association with the Company shall
-                  desist from engaging in personal political activity that
-                  detracts from the perception of MTN as a politically neutral
-                  Company.
-                </Section>
-                <Section id="company-funds-and-property">
-                  <h2>8. Company’s Funds and Property</h2>
+                </LegalSection>
+                <LegalSection id="political-support">
+                  <h2>Political Support</h2>
+                  <h3
+                    style={{
+                      fontSize: '16px',
+                      fontFamily: 'MTNBrighterSans-Light'
+                    }}
+                  >
+                    The Company is politically neutral and employees shall not
+                    engage in any activity or omission that compromises the
+                    political neutrality of the company or public perception
+                    thereof. Notwithstanding that the Company is politically
+                    neutral the Company respects the rights of its employees to
+                    personal participation in the political process and respects
+                    their rights to absolute privacy with regard to personal
+                    political activity.
+                  </h3>
+                  <h3
+                    style={{
+                      fontSize: '16px',
+                      fontFamily: 'MTNBrighterSans-Light'
+                    }}
+                  >
+                    Employees shall keep any business and personal political
+                    affiliations separate and shall ensure that any activity
+                    related to business or personal political activity shall
+                    NOT:
+                  </h3>
+                  <h4>disrupt workplace activities;</h4>
+                  <h4>promote or contribute to industrial unrest; </h4>
+                  <h4>
+                    create or appear to create the perception of affiliation of
+                    the Company to a particular political party.
+                  </h4>
+                  <h3
+                    style={{
+                      fontSize: '16px',
+                      fontFamily: 'MTNBrighterSans-Light'
+                    }}
+                  >
+                    Leadership of the Company and all employees, especially
+                    employees whose roles promote close facial or voice
+                    association with the Company shall desist from engaging in
+                    personal political activity that detracts from the
+                    perception of MTN as a politically neutral Company.
+                  </h3>
+                </LegalSection>
+                <LegalSection id="company-funds-and-property">
+                  <h2>Company’s Funds and Property</h2>
                   <p>
                     The Company has developed a number of internal controls to
                     safeguard its assets and imposes strict standards to prevent
@@ -631,9 +739,9 @@ export default class CodeEthics extends Component {
                     advise the Company as set out in the Contravention of the
                     Code section of this booklet.
                   </p>
-                </Section>
-                <Section id="company-records">
-                  <h2>9. Company’s Records </h2>
+                </LegalSection>
+                <LegalSection id="company-records">
+                  <h2>Company’s Records </h2>
                   <p>
                     Accurate and reliable records of many kinds are necessary to
                     meet the Company’s legal and financial obligations and to
@@ -647,10 +755,10 @@ export default class CodeEthics extends Component {
                     and recording functions are expected to be diligent in
                     enforcing proper practices.
                   </p>
-                </Section>
-                <Section id="dealing-with-outside-parties">
-                  <h2>10. Dealing with Outside Persons and Organisations</h2>
-                  <h3> 10.1 Prompt Communications</h3>
+                </LegalSection>
+                <LegalSection id="dealing-with-outside-parties">
+                  <h2>Dealing with Outside Persons and Organisations</h2>
+                  <h3>Prompt Communications</h3>
                   <p>
                     The Company strives to achieve complete, accurate and timely
                     communications with all parties with whom it conducts
@@ -668,7 +776,7 @@ export default class CodeEthics extends Component {
                     accordance with internal procedures established by various
                     operating areas of the Company and applicable laws.
                   </p>
-                  <h3>10.2 Media Relations</h3>
+                  <h3>Media Relations</h3>
                   <p>
                     In addition to everyday communications with outside persons
                     and organizations, the Company will, on occasion, be asked
@@ -708,7 +816,7 @@ export default class CodeEthics extends Component {
                     unless this identification has been especially authorized in
                     writing in advance by the Company’s Chief Executive Officer.
                   </p>
-                  <h3>10.3 Obligations to Society at large</h3>
+                  <h3>Obligations to Society at large</h3>
                   <p>The Company shall:</p>
 
                   <ul>
@@ -720,15 +828,15 @@ export default class CodeEthics extends Component {
                     <li>Respect the rights and dignity of other persons;</li>
                     <li>Pay all taxes and other duties as required by law.</li>
                   </ul>
-                </Section>
-                <Section id="privacy-and-confidentiality">
-                  <h2>11. Privacy and Confidentiality </h2>
+                </LegalSection>
+                <LegalSection id="privacy-and-confidentiality">
+                  <h2>Privacy and Confidentiality </h2>
                   <p>
                     In the regular course of business, the Company accumulates a
                     considerable amount of information. The following principles
                     are to be observed:
                   </p>
-                  <h3>11.1 Confidentiality of Information </h3>
+                  <h3>Confidentiality of Information </h3>
                   <p>
                     Each employee has a responsibility to safeguard confidential
                     and private information belonging to the Company or the MTN
@@ -764,7 +872,7 @@ export default class CodeEthics extends Component {
                     the laws of the country after following a proper process
                     authorized by management.
                   </p>
-                  <h3>11.2 Obtaining and Safeguarding Information</h3>
+                  <h3>Obtaining and Safeguarding Information</h3>
                   <p>
                     Only such information as is necessary to the Company’s
                     business should be collected, used and retained. When
@@ -778,9 +886,9 @@ export default class CodeEthics extends Component {
                     or as required by law and such information should be
                     physically secured and protected.
                   </p>
-                </Section>
-                <Section id="contravention-of-code">
-                  <h2>12. Contravention of the Code</h2>
+                </LegalSection>
+                <LegalSection id="contravention-of-code">
+                  <h2>Contravention of the Code</h2>
                   <p>
                     The Company regards any contravention of the Code as a
                     serious matter, at the same time, any suspected or alleged
@@ -813,8 +921,8 @@ export default class CodeEthics extends Component {
                     employment. Certain breaches of the Code could also result
                     in civil or criminal proceedings.
                   </p>
-                </Section>
-                <Section id="compliance-hotline">
+                </LegalSection>
+                <section id="compliance-hotline">
                   <h2>
                     <strong>Compliance Hotline</strong>
                   </h2>
@@ -834,7 +942,7 @@ export default class CodeEthics extends Component {
                     questions concerning compensation and job performance should
                     be addressed through current HR processes.
                   </p>
-                </Section>
+                </section>
 
                 <div>
                   <label>
