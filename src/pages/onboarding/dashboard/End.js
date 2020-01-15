@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { navigate } from '@reach/router'
+// import { navigate } from '@reach/router'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { Card } from 'components/card'
+import { DashboardCard } from 'components/card'
 // import Navigation from 'components/navigation'
 import DashboardNav from 'components/navigation/DashboardNav'
 import DashboardLink from 'pages/onboarding/dashboard/DashboardLink'
+
+import noTask from 'images/no_task.svg'
 
 import {
   SplitGrid,
@@ -18,15 +20,11 @@ import {
   GridMain
 } from 'views/layout'
 import { COLORS } from '../../../constants'
-import { Img, H1, H2, Button } from 'components/styled'
+import { Img, H1 } from 'components/styled'
 import bgImg from 'images/bg_l_h_bottomright.svg'
 
 const StepOne = styled.div.attrs({
   className: 'tour-step-1'
-})``
-
-const StepTwo = styled(Card).attrs({
-  className: 'tour-step-2'
 })``
 
 const StepThree = styled(DashboardNav).attrs({
@@ -112,22 +110,18 @@ class End extends Component {
               </SplitGridLeftColumn>
               <SplitGridRightColumn background={COLORS.PALE_MARIGOLD}>
                 <CenterContent>
-                  <StepTwo p="4rem">
-                    <H2>Onboarding</H2>
+                  <DashboardCard
+                    px="3rem"
+                    py="4rem"
+                    css={`
+                      transform: translateY(-10rem);
+                    `}
+                  >
+                    <img src={noTask} alt="" />
                     <p>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Porro accusantium iure magnam praesentium exercitationem,
+                      <strong>You don't have any tasks yet</strong>
                     </p>
-                    <Button
-                      mt="3rem"
-                      color="blue"
-                      onClick={() =>
-                        navigate('/onboarding/about-mtn/company-overview')
-                      }
-                    >
-                      Start now >
-                    </Button>
-                  </StepTwo>
+                  </DashboardCard>
                 </CenterContent>
                 <BgImg src={bgImg} />
               </SplitGridRightColumn>

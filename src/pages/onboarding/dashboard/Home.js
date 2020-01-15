@@ -22,6 +22,7 @@ import {
 import { COLORS } from '../../../constants'
 import { Img, H1, H2, Button } from 'components/styled'
 import bgImg from 'images/bg_l_h_bottomright.svg'
+import lightBulb from 'images/light_bulb.svg'
 
 const StepOne = styled.div.attrs({
   className: 'tour-step-1'
@@ -196,7 +197,21 @@ class Welcome extends Component {
           callback={this.handleJoyrideCallback}
         />
         <Modal visible={visible}>
-          Welcome! Get familiar with your MTN dashboard.
+          <img
+            src={lightBulb}
+            alt=""
+            css={`
+              margin-bottom: 2rem;
+            `}
+          />
+          <p
+            css={`
+              font-size: 2rem;
+              font-family: MTNBrighterSans-Regular;
+            `}
+          >
+            Welcome! Get familiar with your MTN dashboard.
+          </p>
           <ButtonGrape onClick={() => this.handleStartTour()}>
             See how your dashboard works >
           </ButtonGrape>
