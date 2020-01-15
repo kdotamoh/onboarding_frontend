@@ -72,7 +72,7 @@ const Step = styled.div`
 
   ${props =>
     props.isCurrent ? `box-shadow: 0 0 1px ${COLORS.TWILIGHT_BLUE};` : null}
-  opacity: ${props => (props.isCurrent ? '90%' : '50%')};
+  opacity: ${props => (props.isCurrent ? '0.9' : '0.5')};
 
 
 

@@ -67,7 +67,7 @@ const StyledNavLink = styled(NavLink).attrs({
   activeClassName: activeClassName
 })`
   &.${activeClassName} {
-    opacity: 30%;
+    opacity: 0.3;
   }
 `
 export default class Navigation extends Component {

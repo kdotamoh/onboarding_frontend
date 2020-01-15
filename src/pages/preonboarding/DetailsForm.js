@@ -38,7 +38,7 @@ const Link = styled.a`
     content: '';
     display: inline-block;
     background: url(${downloadTray}) no-repeat;
-    opacity: 70%;
+    opacity: 0.7;
     width: 1rem;
     height: 1rem;
     margin-right: 0.5rem;
