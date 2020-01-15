@@ -118,7 +118,7 @@ class Welcome extends Component {
       },
       { target: '.tour-step-4', content: '4. Your log out and profile.' }
     ],
-    // visible: true,
+    visible: true,
     runTour: false
   }
 

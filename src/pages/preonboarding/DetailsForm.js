@@ -103,6 +103,7 @@ const ShowSectionButton = styled(AddButton)`
   height: unset;
   padding: 0.3rem 1.5rem;
   margin-top: 2rem;
+  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
 `
 
 const Label = styled.label`
@@ -436,8 +437,8 @@ export default class DetailsForm extends Component {
                     />
                   </label>
                   <p>
-                    {props.values.passportPhoto.name
-                      ? props.values.passportPhoto.name
+                    {props.values.nationalId.name
+                      ? props.values.nationalId.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
                   </p>
                 </FileInput>
@@ -489,6 +490,8 @@ export default class DetailsForm extends Component {
                   Upload Marriage Certificate (if applicable)
                 </Label>
 
+                <hr />
+
                 <FileInput>
                   <label htmlFor="marriageCertificate">
                     Upload
@@ -516,7 +519,6 @@ export default class DetailsForm extends Component {
                 ) : null}
 
                 {/* CHILDREN */}
-                <Divider />
 
                 <FieldArray
                   name="children"
@@ -551,8 +553,9 @@ export default class DetailsForm extends Component {
                               />
                             </label>
                             <p>
-                              {props.values.passportPhoto.name
-                                ? props.values.passportPhoto.name
+                              {props.values.children[id].birthCertificate.name
+                                ? props.values.children[id].birthCertificate
+                                    .name
                                 : 'Please upload JPEG format, no larger than 3mb in size'}
                             </p>
                           </FileInput>
@@ -576,6 +579,8 @@ export default class DetailsForm extends Component {
                         </AddButton>
                         Add child
                       </Label>
+
+                      <Divider />
 
                       {/* <label htmlFor="parents.father">Date of Birth</label>
 
@@ -794,8 +799,8 @@ export default class DetailsForm extends Component {
                     />
                   </label>
                   <p>
-                    {props.values.passportPhoto.name
-                      ? props.values.passportPhoto.name
+                    {props.values.nationalService.certificate.name
+                      ? props.values.nationalService.certificate.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
                   </p>
                 </FileInput>

@@ -1,15 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
-// import Carousel from 'nuka-carousel'
-// import {
-//   CarouselProvider,
-//   Slider,
-//   Slide,
-//   ButtonBack,
-//   ButtonNext
-// } from 'pure-react-carousel'
-// import 'pure-react-carousel/dist/react-carousel.es.css'
+import 'react-multi-carousel/lib/styles.css'
+import Carousel from 'react-multi-carousel'
 
 import { SmallNav, StepNav } from 'components/navigation'
 import { H4, H3, Container, Img, UL, Button } from 'components/styled'
@@ -20,6 +13,8 @@ import bgImg from 'images/bg_l_bottomright.svg'
 import brand from 'images/carousel/brand.png'
 import leadership from 'images/carousel/leadership.png'
 import trust from 'images/carousel/trust.png'
+import global from 'images/carousel/global.png'
+import reward from 'images/carousel/reward.png'
 
 import vision from 'images/vision_icon.svg'
 import mission from 'images/mission_icon.svg'
@@ -77,15 +72,6 @@ const InfoBox = styled.div`
   z-index: 500;
 `
 
-const CarouselSlides = styled.div`
-  display: flex;
-  direction: row;
-  width: 75%;
-  justify-content: space-between;
-  margin-top: 4rem;
-  margin-bottom: 10rem;
-`
-
 const CarouselSlide = styled.div`
   display: flex;
   flex-direction: column;
@@ -107,22 +93,56 @@ const CarouselSlide = styled.div`
   }
 `
 
-// const CarouselButton = () => (
-//   <button onClick={this.props.previousSlide}>Previous Slide</button>
-// )
+// const CustomLeftArrow = ({ previous }) => {
+//   return (
+//     <div
+//       style={{
+//         textAlign: 'center',
+//         position: 'relative'
+//       }}
+//     >
+//       <button className="fal fa-chevron-left" onClick={previous}>
+//         Left
+//       </button>
+//     </div>
+//   )
+// }
 
-// const Decorators = [
-//   {
-//     component: <CarouselButton />,
-//     position: 'CenterLeft',
-//     style: {
-//       padding: 20
-//     }
-//   }
-// ]
+// const CustomRightArrow = ({ next }) => {
+//   return (
+//     <div
+//       style={{
+//         textAlign: 'center',
+//         position: 'relative'
+//       }}
+//     >
+//       <button className="fal fa-chevron-right" onClick={next}>
+//         Right
+//       </button>
+//     </div>
+//   )
+// }
 
 export default class CompanyOverview extends Component {
   render() {
+    const responsive = {
+      desktop: {
+        breakpoint: { max: 3000, min: 1024 },
+        items: 3,
+        slidesToSlide: 3 // optional, default to 1.
+      },
+      tablet: {
+        breakpoint: { max: 1024, min: 464 },
+        items: 2,
+        slidesToSlide: 2 // optional, default to 1.
+      },
+      mobile: {
+        breakpoint: { max: 464, min: 0 },
+        items: 1,
+        slidesToSlide: 1 // optional, default to 1.
+      }
+    }
+
     return (
       <div>
         <SmallNav />
@@ -177,33 +197,23 @@ export default class CompanyOverview extends Component {
             Our Employee Value Proposition
           </H4>
           <p>We can make your life better.</p>
+        </Container>
 
-          {/* <Carousel decorators={Decorators} style={{ marginBottom: '10rem' }}> */}
-          {/* <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide1" />
-            <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide2" />
-            <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide3" />
-            <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide4" />
-            <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide5" />
-            <img src="https://via.placeholder.com/400/ffffff/c0392b/&text=slide6" /> */}
-          {/* </Carousel> */}
-
-          {/* <CarouselProvider
-            naturalSlideWidth={800}
-            naturalSlideHeight={600}
-            totalSlides={4}
-            visibleSlides={3}
+        <div style={{ width: '75%', margin: '0 auto', marginBottom: '10rem' }}>
+          <Carousel
+            swipeable={false}
+            draggable={false}
+            responsive={responsive}
+            ssr={true} // means to render carousel on server-side.
+            autoPlay={false}
+            autoPlaySpeed={1000}
+            keyBoardControl={true}
+            customTransition="all .5"
+            transitionDuration={500}
+            containerClass="carousel-container"
+            removeArrowOnDeviceType={['tablet', 'mobile']}
+            renderDotsOutside={true}
           >
-            <Slider>
-              <Slide index={0}>I am the first Slide.</Slide>
-              <Slide index={1}>I am the second Slide.</Slide>
-              <Slide index={2}>I am the third Slide.</Slide>
-              <Slide index={3}>I am the fourth Slide.</Slide>
-            </Slider>
-            <ButtonBack>Back</ButtonBack>
-            <ButtonNext>Next</ButtonNext>
-          </CarouselProvider> */}
-
-          <CarouselSlides>
             <CarouselSlide>
               <img src={brand} alt="" />
               <h5>Brand Strength</h5>
@@ -233,8 +243,28 @@ export default class CompanyOverview extends Component {
                 Management.
               </span>
             </CarouselSlide>
-          </CarouselSlides>
+            <CarouselSlide>
+              <img src={reward} alt="" />
+              <h5>Total Reward &amp; Recognition</h5>
+              <span>
+                Designed to meet every MTners motivation and aspirations; Labour
+                market relevant Cash &amp; Non-cash benefits, Long and short
+                term reward schemes, Life style and wellness schemes to manage
+                life commitments, Recognition on the go &amp; MTN Shine.
+              </span>
+            </CarouselSlide>
+            <CarouselSlide>
+              <img src={global} alt="" />
+              <h5>Globally Diverse Culture</h5>
+              <span>
+                Celebrating our diverse communities &amp; workforce; Each
+                employee has a place and a voice.
+              </span>
+            </CarouselSlide>
+          </Carousel>
+        </div>
 
+        <Container>
           <InfoBox>
             <H4 color="black">Data Protection Principles</H4>
             <p>
@@ -266,9 +296,7 @@ export default class CompanyOverview extends Component {
           >
             Next Step >
           </Button>
-          {/* <BgImgContainer> */}
           <BgImg src={bgImg} />
-          {/* </BgImgContainer> */}
         </Container>
       </div>
     )
