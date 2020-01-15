@@ -30,15 +30,15 @@
   text-decoration: none;
   padding: 0.7rem 1rem;
   background: white;
+  opacity: 0.7;
   margin: 0.2rem 0 0.2rem 0.2rem;
-  opacity: 70%;
   width: 100%;
 }
 
 .onboarding-navigation__item--active {
   border-left: 4px solid #ffcb09;
-  opacity: 100%;
   padding-left: 0.6rem;
+  opacity: 1;
   width: 100%;
 }
 
@@ -72,12 +72,12 @@
   height: 100%;
   padding: 2rem;
   padding-bottom: 2.25rem; /* // Todo: this is super jank */
+  opacity: 0.3;
   vertical-align: middle;
-  opacity: 30%;
   color: #3d3d3d;
 }
 
 .dashboard-navigation__item--active {
+  opacity: 1;
   border-bottom: 5px solid #4f4f4f;
-  opacity: 100%;
 }
