@@ -2,8 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { space } from 'styled-system'
-import { Link } from '@reach/router'
+import { Link, navigate } from '@reach/router'
 import { connect } from 'react-redux'
+
+import { unsetToken } from 'store/auth'
+import { unsetUser } from 'store/user'
 
 import {
   SplitGrid,
@@ -32,9 +35,14 @@ const UserName = styled.span`
   }
 `
 
-const _ProfileDropdown = ({ user }) => {
+const _ProfileDropdown = ({ user, unsetToken }) => {
   const [isOpen, setIsOpen] = React.useState(false)
 
+  const logout = () => {
+    unsetUser()
+    unsetToken()
+    navigate('/onboarding')
+  }
   return (
     <div
       css={`
@@ -62,7 +70,7 @@ const _ProfileDropdown = ({ user }) => {
         css={`
           background: white;
           width: 20rem;
-          height: 20rem;
+          height: 10rem;
           transform: translateY(7rem);
           position: absolute;
           z-index: 500;
@@ -70,13 +78,22 @@ const _ProfileDropdown = ({ user }) => {
           top: 0;
           display: flex;
           flex-direction: column;
+          padding: 2rem;
 
           ${isOpen ? 'visibility: visible' : 'visibility: hidden'}
         `}
         tabIndex="-1"
       >
-        <Link to="/dashboard/profile">Profile</Link>
-        <span>Logout</span>
+        <Link
+          css={`
+            color: ${COLORS.DARKER_GREYISH_BROWN};
+            text-decoration: none;
+          `}
+          to="../user-profile"
+        >
+          Profile
+        </Link>
+        <span onClick={() => logout()}>Logout</span>
       </div>
     </div>
   )
@@ -84,12 +101,17 @@ const _ProfileDropdown = ({ user }) => {
 _ProfileDropdown.propTypes = {
   user: PropTypes.shape({
     first_name: PropTypes.string
-  })
+  }),
+  unsetToken: PropTypes.func
 }
-export const ProfileDropdown = connect(state => ({
-  token: state.token,
-  user: state.user
-}))(_ProfileDropdown)
+const mapDispatch = { unsetToken, unsetUser }
+export const ProfileDropdown = connect(
+  state => ({
+    token: state.token,
+    user: state.user
+  }),
+  mapDispatch
+)(_ProfileDropdown)
 
 const Wrapper = styled.div`
   ${space}
@@ -155,6 +177,7 @@ class UserProfile extends Component {
 UserProfile.propTypes = {
   user: PropTypes.object
 }
+
 export default connect(state => ({
   token: state.token,
   user: state.user

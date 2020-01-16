@@ -13,10 +13,16 @@ const authSlice = createSlice({
         localStorage.setItem('onboardingUserToken', action.payload)
         return action.payload
       }
+    },
+    unsetToken: {
+      reducer() {
+        localStorage.removeItem('onboardingUserToken')
+        return ''
+      }
     }
   }
 })
 
-export const { setToken } = authSlice.actions
+export const { setToken, unsetToken } = authSlice.actions
 
 export default authSlice.reducer
