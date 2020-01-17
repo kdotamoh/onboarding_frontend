@@ -48,7 +48,7 @@ class LoginForm extends Component {
         method: 'post',
         url: `${process.env.REACT_APP_API_BASE}/api-token-auth/`,
         data: {
-          email: values.username, // Todo: actually use a username
+          username: values.username,
           password: values.password
         }
       })

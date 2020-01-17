@@ -28,6 +28,7 @@ class PreOnboarding extends Component {
         {this.props.token ? (
           <Router>
             <Scrolltop path="/">
+              <PreOnboardingLogin path="/" />
               <Welcome path="welcome" />
               <Info path="info" />
               <CompanyOverview path="company-overview" />

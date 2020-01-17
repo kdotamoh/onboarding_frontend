@@ -6,6 +6,7 @@ import GlobalStyles from './GlobalStyles'
 
 import PreOnboarding from 'pages/preonboarding'
 import Onboarding from 'pages/onboarding'
+// import NotFound from 'pages/onboarding'
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
       </Helmet>
       <GlobalStyles />
       <Router>
-        <PreOnboarding path="preonboarding/*" />
         <Onboarding path="onboarding/*" />
+        <PreOnboarding path="preonboarding/*" />
+        {/* <NotFound default /> */}
       </Router>
     </div>
   )

@@ -143,6 +143,7 @@ const Error = styled.div`
 const Divider = styled.hr`
   border-top: 0.5px solid #e6e6e6;
   margin-top: 2rem;
+  width: 100%;
 `
 
 const ValidationSchema = Yup.object().shape({
@@ -173,7 +174,6 @@ FormSection.propTypes = {
 }
 
 const initialValues = {
-  test: 'G',
   passportPhoto: '',
   surname: '',
   middleName: '',
@@ -803,7 +803,7 @@ export default class DetailsForm extends Component {
               Add child
             </button> */}
 
-                <Divider />
+                {/* <Divider /> */}
 
                 <Label htmlFor="parents.father">Name of Father</Label>
                 <Input

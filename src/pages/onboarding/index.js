@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Router, navigate } from '@reach/router'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
@@ -38,7 +39,8 @@ import UserTasks from './dashboard/Tasks'
 import UserProfile from './dashboard/UserProfile'
 import Home from './dashboard/Home'
 import End from './dashboard/End'
-import { connect } from 'react-redux'
+
+import NotFound from 'pages/NotFound'
 
 export const Wrapper = styled.div`
   ${space}
@@ -180,6 +182,7 @@ class Onboarding extends Component {
         {this.props.token ? (
           <>
             <Router>
+              <OnboardingLogin path="/" />
               <Events path="/events" />
               <UserTasks path="/user-tasks" />
               <Home path="/home" />
@@ -206,6 +209,7 @@ class Onboarding extends Component {
                 <EmployeeValue path="/employee-value-proposition" />
                 <StrategicPillars path="/strategic-pillars-and-priorities" />
                 <Tasks path="/tasks" />
+                <NotFound default />
               </AboutMTN>
             </Router>
           </>
