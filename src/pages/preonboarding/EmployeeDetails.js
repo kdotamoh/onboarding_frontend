@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
+
+import { getInsuranceProviders, getFuelProviders } from 'utils/get-thingy'
 
 import { SmallNav, StepNav } from 'components/navigation'
 import { H3, Container, Img, Table, Wrapper, Section } from 'components/styled'
@@ -31,9 +35,14 @@ const DocumentsTable = styled(Table)`
   }
 `
 
-export default class EmployeeDetails extends Component {
+class EmployeeDetails extends Component {
   state = {
     checked: false
+  }
+
+  componentDidMount() {
+    getInsuranceProviders(this.props.token)
+    getFuelProviders(this.props.token)
   }
 
   handleInput = event => {
@@ -217,3 +226,10 @@ export default class EmployeeDetails extends Component {
     )
   }
 }
+EmployeeDetails.propTypes = {
+  token: PropTypes.string
+}
+
+export default connect(state => ({
+  token: state.token
+}))(EmployeeDetails)

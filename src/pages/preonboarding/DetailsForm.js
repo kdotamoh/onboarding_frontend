@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Formik, FieldArray, getIn } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 import { layout } from 'styled-system'
-import { navigate } from '@reach/router'
+// import { navigate } from '@reach/router'
 import PropTypes from 'prop-types'
 import moment from 'moment'
+import axios from 'axios'
 import { regions } from '../../constants'
 
 import { Button } from 'components/styled'
@@ -179,17 +181,17 @@ const FlexRow = styled.div`
 `
 
 const ValidationSchema = Yup.object().shape({
-  surname: Yup.string().required('Surname is required')
+  // surname: Yup.string().required('Surname is required')
   // middleName: Yup.string().required('Middle name is required'),
   // firstName: Yup.string().required('First name is required'),
   // contactNumber: Yup.number().required('Contact number is required'),
-  // // dateOfBirth
+  // // dob
   // gender: Yup.mixed()
   //   .oneOf(['M', 'F'])
   //   .required('Gender is required'),
   // nextOfKin: Yup.object().shape({
   //   name: Yup.string().required(),
-  //   dateOfBirth: '',
+  //   dob: '',
   //   address: '',
   //   contactNumber: Yup.number().required()
   // })
@@ -211,7 +213,7 @@ const initialValues = {
   middleName: '',
   firstName: '',
   contactNumber: '',
-  dateOfBirth: {
+  dob: {
     day: '',
     month: '',
     year: ''
@@ -226,12 +228,14 @@ const initialValues = {
     contactNumber: ''
   },
   marriageCertificate: '',
-  children: [{ name: '', dateOfBirth: '', birthCertificate: '' }],
+  children: [
+    { name: '', dob: { month: '', day: '', year: '' }, birthCertificate: '' }
+  ],
   parents: { father: '', mother: '' },
   // next of kin
   nextOfKin: {
     name: '',
-    dateOfBirth: {
+    dob: {
       day: '',
       month: '',
       year: ''
@@ -282,10 +286,9 @@ const initialValues = {
   fuelCard: ''
 }
 
-export default class DetailsForm extends Component {
+class DetailsForm extends Component {
   state = {
     currentSection: 'this one',
-
     // Toggle whether a section is hidden
     personal: false,
     nextOfKin: true,
@@ -296,7 +299,10 @@ export default class DetailsForm extends Component {
     familyLine: true,
     medicalInsurance: true,
     fuelCard: true,
-    functional: true
+    functional: true,
+
+    // Is submitting
+    isSubmitting: false
   }
 
   handleBirthCertificate = (props, event, id) => {
@@ -345,8 +351,82 @@ export default class DetailsForm extends Component {
       <Formik
         enableReinitialize={true}
         initialValues={initialValues}
-        onSubmit={() => {
-          navigate('/preonboarding/conditions-of-service')
+        onSubmit={async (values, props) => {
+          props.setSubmitting(true)
+          this.setState({ isSubmitting: true })
+
+          console.log(values)
+
+          let newChildren = values.children.map(child => ({
+            ...child,
+            dob: `${child.dob.year}-${child.dob.month}-${child.dob.day}`
+          }))
+
+          if (
+            values.children.length === 1 &&
+            values.children[0].name === '' &&
+            values.children[0].birthCertificate === ''
+          ) {
+            newChildren = []
+          }
+
+          let data = {
+            dob: `${values.dob.year}-${values.dob.month}-${values.dob.day}`,
+            gender: values.gender,
+            nationality: values.nationality,
+            region: values.region,
+            national_id: values.nationalId,
+            marital_status: values.maritalStatus,
+            name_of_spouse: values.spouse.name,
+            contact_of_spouse: values.spouse.contactNumber,
+            marriage_cert: values.marriageCertificate,
+            children: newChildren,
+            name_of_father: values.parents.father,
+            name_of_mother: values.parents.mother,
+            nok_name: values.nextOfKin.name,
+            nok_dob: `${values.nextOfKin.dob.year}-${values.nextOfKin.dob.month}-${values.nextOfKin.dob.day}`,
+            nok_address: values.nextOfKin.address,
+            nok_contact: values.nextOfKin.contactNumber,
+            educational_cert: values.educationalCertificates,
+            professional_body_affiliates: values.professionalBodies,
+            nss_start_date: `${values.nationalService.startDate.year}-${values.nationalService.startDate.month}-01`,
+            nss_end_date: `${values.nationalService.endDate.year}-${values.nationalService.endDate.month}-30`, // TODO: fix hardcoded days
+            nss_cert: values.nationalService.certificate,
+            res_physical_address: values.residentialAddress.physical,
+            res_digital_address: values.residentialAddress.digital,
+            res_phone_number: values.residentialAddress.phoneNumber,
+            postal_address: values.postalAddress,
+            ssnit_number: values.socialSecurity,
+            tin_number: values.TIN,
+            bank_account_number: values.bank.accountNumber,
+            bank_branch: values.bank.branch,
+            bank_name: values.bank.name,
+            sort_code: values.bank.sortCode,
+            family_beneficiary: values.familyLine.name,
+            relationship_to_beneficiary: values.familyLine.relationship,
+            beneficiary_phone_number: values.familyLine.mobileNumber,
+            medical_insurance_provider: values.medicalInsurance.provider,
+            // TODO: forms
+            fuel_card_option: values.fuelCard
+          }
+          console.log(data)
+
+          try {
+            let res = await axios({
+              method: 'post',
+              url: `${process.env.REACT_APP_API_BASE}/profiles/`,
+              data,
+              headers: {
+                Authorization: `JWT ${this.props.token}`
+              }
+            })
+            console.log(res)
+          } catch (err) {
+            console.log(err)
+          }
+
+          props.setSubmitting(false)
+          this.setState({ isSubmitting: false })
         }}
         validationSchema={ValidationSchema}
       >
@@ -437,15 +517,15 @@ export default class DetailsForm extends Component {
                   <Error id="feedback">{props.errors.contactNumber}</Error>
                 ) : null}
 
-                <Label htmlFor="dateOfBirth">Date of Birth</Label>
+                <Label htmlFor="dob">Date of Birth</Label>
 
                 <SelectRow>
                   <Select
                     as="select"
-                    name="dateOfBirth.month"
+                    name="dob.month"
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
-                    value={props.values.dateOfBirth.month}
+                    value={props.values.dob.month}
                   >
                     <option value="">Month</option>
                     {months &&
@@ -457,10 +537,10 @@ export default class DetailsForm extends Component {
                   </Select>
                   <Select
                     as="select"
-                    name="dateOfBirth.day"
+                    name="dob.day"
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
-                    value={props.values.dateOfBirth.day}
+                    value={props.values.dob.day}
                   >
                     <option value="">Day</option>
                     {days &&
@@ -472,10 +552,10 @@ export default class DetailsForm extends Component {
                   </Select>
                   <Select
                     as="select"
-                    name="dateOfBirth.year"
+                    name="dob.year"
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
-                    value={props.values.dateOfBirth.year}
+                    value={props.values.dob.year}
                   >
                     <option value="">Year</option>
                     {years &&
@@ -524,8 +604,8 @@ export default class DetailsForm extends Component {
                   name="nationality"
                 >
                   <option value=""></option>
-                  <option value="M">Ghanaian</option>
-                  <option value="F">Other</option>
+                  <option value="G">Ghanaian</option>
+                  <option value="O">Other</option>
                 </Select>
                 {props.errors.nationality && props.touched.nationality ? (
                   <Error id="feedback">{props.errors.nationality}</Error>
@@ -591,8 +671,8 @@ export default class DetailsForm extends Component {
                   value={props.values.maritalStatus}
                 >
                   <option value=""></option>
-                  <option value="S">Single</option>
-                  <option value="M">Married</option>
+                  <option value="SINGLE">Single</option>
+                  <option value="MARRIED">Married</option>
                 </Select>
                 {props.errors.maritalStatus && props.touched.maritalStatus ? (
                   <Error id="feedback">{props.errors.maritalStatus}</Error>
@@ -658,6 +738,7 @@ export default class DetailsForm extends Component {
                 ) : null}
 
                 {/* CHILDREN */}
+                <Divider />
 
                 <FieldArray
                   name="children"
@@ -670,19 +751,17 @@ export default class DetailsForm extends Component {
                           </Label>
                           <Input name={`children.${id}.name`} />
 
-                          <Label htmlFor={`children.${id}.dateOfBirth`}>
+                          <Label htmlFor={`children.${id}.dob`}>
                             Date of Birth
                           </Label>
 
                           <SelectRow>
                             <Select
                               as="select"
-                              name={`children.${id}.dateOfBirth.month`}
+                              name={`children.${id}.dob.month`}
                               onChange={props.handleChange}
                               onBlur={props.handleBlur}
-                              value={
-                                props.values.children[id].dateOfBirth.month
-                              }
+                              value={props.values.children[id].dob.month}
                             >
                               <option value="">Month</option>
                               {months &&
@@ -694,10 +773,10 @@ export default class DetailsForm extends Component {
                             </Select>
                             <Select
                               as="select"
-                              name={`children.${id}.dateOfBirth.day`}
+                              name={`children.${id}.dob.day`}
                               onChange={props.handleChange}
                               onBlur={props.handleBlur}
-                              value={props.values.children[id].dateOfBirth.day}
+                              value={props.values.children[id].dob.day}
                             >
                               <option value="">Day</option>
                               {days &&
@@ -709,10 +788,10 @@ export default class DetailsForm extends Component {
                             </Select>
                             <Select
                               as="select"
-                              name={`children.${id}.dateOfBirth.year`}
+                              name={`children.${id}.dob.year`}
                               onChange={props.handleChange}
                               onBlur={props.handleBlur}
-                              value={props.values.children[id].dateOfBirth.year}
+                              value={props.values.children[id].dob.year}
                             >
                               <option value="">Year</option>
                               {years &&
@@ -759,7 +838,7 @@ export default class DetailsForm extends Component {
                             arrayHelpers.push({
                               name: '',
                               birthCertificate: '',
-                              dateOfBirth: ''
+                              dob: ''
                             })
                           }}
                         >
@@ -825,7 +904,7 @@ export default class DetailsForm extends Component {
                 e.preventDefault()
                 console.log('i been clicked')
                 initialValues.children.concat([
-                  { name: '', dateOfBirth: '', birthCertificate: '' }
+                  { name: '', dob: '', birthCertificate: '' }
                 ])
               }}
             >
@@ -884,14 +963,14 @@ export default class DetailsForm extends Component {
                   <Error id="feedback">{props.errors.nextOfKin.name}</Error>
                 ) : null}
 
-                <Label htmlFor="nextOfKin.dateOfBirth">Date of Birth</Label>
+                <Label htmlFor="nextOfKin.dob">Date of Birth</Label>
                 <SelectRow>
                   <Select
                     as="select"
-                    name="nextOfKin.dateOfBirth.month"
+                    name="nextOfKin.dob.month"
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
-                    value={props.values.nextOfKin.dateOfBirth.month}
+                    value={props.values.nextOfKin.dob.month}
                   >
                     <option value="">Month</option>
                     {months &&
@@ -903,10 +982,10 @@ export default class DetailsForm extends Component {
                   </Select>
                   <Select
                     as="select"
-                    name="dateOfBirth.day"
+                    name="nextOfKin.dob.day"
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
-                    value={props.values.dateOfBirth.day}
+                    value={props.values.nextOfKin.dob.day}
                   >
                     <option value="">Day</option>
                     {days &&
@@ -918,10 +997,10 @@ export default class DetailsForm extends Component {
                   </Select>
                   <Select
                     as="select"
-                    name="nextOfKin.dateOfBirth.year"
+                    name="nextOfKin.dob.year"
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
-                    value={props.values.nextOfKin.dateOfBirth.year}
+                    value={props.values.nextOfKin.dob.year}
                   >
                     <option value="">Year</option>
                     {years &&
@@ -934,9 +1013,7 @@ export default class DetailsForm extends Component {
                 </SelectRow>
 
                 {props.errors.nexOfKin && props.touched.nexOfKin ? (
-                  <Error id="feedback">
-                    {props.errors.nextOfKin.dateOfBirth}
-                  </Error>
+                  <Error id="feedback">{props.errors.nextOfKin.dob}</Error>
                 ) : null}
 
                 <Label htmlFor="nextOfKin.address">Address</Label>
@@ -1406,8 +1483,15 @@ export default class DetailsForm extends Component {
                   value={props.values.medicalInsurance.provider}
                 >
                   <option value=""></option>
-                  <option value="NMI">Nationwide Medical Insurance</option>
-                  <option value="AHI">Acacia Health Insurance</option>
+                  {this.props.insuranceProviders &&
+                    this.props.insuranceProviders.map(insuranceProvider => (
+                      <option
+                        key={insuranceProvider.id}
+                        value={insuranceProvider.id}
+                      >
+                        {insuranceProvider.name}
+                      </option>
+                    ))}
                 </Select>
                 <p>
                   Download the Principal &amp; Dependent Application Forms
@@ -1493,8 +1577,12 @@ export default class DetailsForm extends Component {
                   value={props.values.fuelCard}
                 >
                   <option value=""></option>
-                  <option value="TT">Total TomCard</option>
-                  <option value="GG">Goil GOCard</option>
+                  {this.props.fuelCardProviders &&
+                    this.props.fuelCardProviders.map(fuelProvider => (
+                      <option key={fuelProvider.id} value={fuelProvider.id}>
+                        {fuelProvider.name}
+                      </option>
+                    ))}
                 </Select>
 
                 <ShowSectionButton
@@ -1531,7 +1619,7 @@ export default class DetailsForm extends Component {
               type="submit"
               onClick={props.handleSubmit}
             >
-              Submit and Continue >
+              {props.isSubmitting ? 'Submitting...' : 'Submit and Continue >'}
             </Button>
           </>
         )}
@@ -1539,7 +1627,16 @@ export default class DetailsForm extends Component {
     )
   }
 }
-
 DetailsForm.propTypes = {
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
+  token: PropTypes.string,
+  insuranceProviders: PropTypes.array,
+  fuelCardProviders: PropTypes.array
 }
+
+export default connect(state => ({
+  token: state.token,
+  user: state.user,
+  insuranceProviders: state.providers.insuranceProviders,
+  fuelCardProviders: state.providers.fuelCardProviders
+}))(DetailsForm)

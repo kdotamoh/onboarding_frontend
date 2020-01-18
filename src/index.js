@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { configureStore } from '@reduxjs/toolkit'
+// import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 
 import 'antd/dist/antd.css'
@@ -8,14 +8,15 @@ import 'react-datepicker/dist/react-datepicker.css'
 import 'css/navigation.css'
 import './index.css'
 
+import store from 'store'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
-import rootReducer from 'store'
+// import rootReducer from 'store'
 
-const store = configureStore({
-  reducer: rootReducer
-})
+// const store = configureStore({
+//   reducer: rootReducer
+// })
 
 ReactDOM.render(
   <Provider store={store}>
