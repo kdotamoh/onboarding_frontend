@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Formik, FieldArray, getIn } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
+import { layout } from 'styled-system'
 import { navigate } from '@reach/router'
 import PropTypes from 'prop-types'
 import moment from 'moment'
@@ -66,6 +67,19 @@ const Select = styled(Input)`
   background-size: 0.5rem;
 `
 
+const SelectRow = styled.div`
+  ${layout}
+
+  display: flex;
+
+  select {
+    margin-right: 1rem;
+  }
+`
+SelectRow.defaultProps = {
+  width: '50%'
+}
+
 const Heading = styled.p`
   text-align: left;
   border-bottom: 0.5px solid #e6e6e6;
@@ -87,6 +101,11 @@ const FileInput = styled.div`
     width: 8rem;
     display: inline-block;
     text-align: center;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #7d7d7d;
+    }
 
     input[type='file'] {
       width: 0.1px;
@@ -106,7 +125,7 @@ const FileInput = styled.div`
 const AddButton = styled.button`
   color: white;
   background-color: #666666;
-  padding: 0.3rem;
+  padding-bottom: 0.1rem;
   border-radius: 4px;
   width: 2rem;
   height: 2rem;
@@ -144,6 +163,19 @@ const Divider = styled.hr`
   border-top: 0.5px solid #e6e6e6;
   margin-top: 2rem;
   width: 100%;
+`
+
+const FlexColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`
+
+const FlexRow = styled.div`
+  ${layout}
+
+  display: flex;
+  flex-direction: row;
 `
 
 const ValidationSchema = Yup.object().shape({
@@ -211,8 +243,14 @@ const initialValues = {
   educationalCertificates: [],
   professionalBodies: [],
   nationalService: {
-    startDate: '',
-    endDate: '',
+    startDate: {
+      month: '',
+      year: ''
+    },
+    endDate: {
+      month: '',
+      year: ''
+    },
     certificate: ''
   },
   // residential
@@ -285,10 +323,15 @@ export default class DetailsForm extends Component {
       color: #757575;
     `
 
-    const years = []
     const currYear = new Date().getFullYear()
-    for (let i = currYear; i > 1900; i--) {
+    const years = []
+    for (let i = currYear; i > 1950; i--) {
       years.push(i)
+    }
+
+    const nssYears = []
+    for (let i = currYear; i > 1972; i--) {
+      nssYears.push(i)
     }
 
     const months = moment.months()
@@ -396,16 +439,7 @@ export default class DetailsForm extends Component {
 
                 <Label htmlFor="dateOfBirth">Date of Birth</Label>
 
-                <div
-                  css={`
-                    display: flex;
-                    width: 25rem;
-
-                    select {
-                      margin-right: 1rem;
-                    }
-                  `}
-                >
+                <SelectRow>
                   <Select
                     as="select"
                     name="dateOfBirth.month"
@@ -451,7 +485,7 @@ export default class DetailsForm extends Component {
                         </option>
                       ))}
                   </Select>
-                </div>
+                </SelectRow>
 
                 {/* <input
                 type="text"
@@ -549,13 +583,17 @@ export default class DetailsForm extends Component {
                 ) : null}
 
                 <Label htmlFor="maritalStatus">Marital Status</Label>
-                <Input
-                  type="text"
+                <Select
+                  as="select"
+                  name="maritalStatus"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   value={props.values.maritalStatus}
-                  name="maritalStatus"
-                />
+                >
+                  <option value=""></option>
+                  <option value="S">Single</option>
+                  <option value="M">Married</option>
+                </Select>
                 {props.errors.maritalStatus && props.touched.maritalStatus ? (
                   <Error id="feedback">{props.errors.maritalStatus}</Error>
                 ) : null}
@@ -636,16 +674,7 @@ export default class DetailsForm extends Component {
                             Date of Birth
                           </Label>
 
-                          <div
-                            css={`
-                              display: flex;
-                              width: 25rem;
-
-                              select {
-                                margin-right: 1rem;
-                              }
-                            `}
-                          >
+                          <SelectRow>
                             <Select
                               as="select"
                               name={`children.${id}.dateOfBirth.month`}
@@ -693,7 +722,7 @@ export default class DetailsForm extends Component {
                                   </option>
                                 ))}
                             </Select>
-                          </div>
+                          </SelectRow>
 
                           <Label>
                             Upload Birth Certificate (if applicable)
@@ -856,16 +885,7 @@ export default class DetailsForm extends Component {
                 ) : null}
 
                 <Label htmlFor="nextOfKin.dateOfBirth">Date of Birth</Label>
-                <div
-                  css={`
-                    display: flex;
-                    width: 25rem;
-
-                    select {
-                      margin-right: 1rem;
-                    }
-                  `}
-                >
+                <SelectRow>
                   <Select
                     as="select"
                     name="nextOfKin.dateOfBirth.month"
@@ -911,7 +931,8 @@ export default class DetailsForm extends Component {
                         </option>
                       ))}
                   </Select>
-                </div>
+                </SelectRow>
+
                 {props.errors.nexOfKin && props.touched.nexOfKin ? (
                   <Error id="feedback">
                     {props.errors.nextOfKin.dateOfBirth}
@@ -1052,6 +1073,82 @@ export default class DetailsForm extends Component {
               <Heading>4. National Service Information</Heading>
 
               <section hidden={this.state.nationalService}>
+                <FlexRow width="70%">
+                  <FlexColumn>
+                    <Label htmlFor="nationalService.startDate">
+                      Start Date
+                    </Label>
+                    <SelectRow width="100%">
+                      <Select
+                        as="select"
+                        name="nationalService.startDate.month"
+                        onChange={props.handleChange}
+                        onBlur={props.handleBlur}
+                        value={props.values.nationalService.startDate.month}
+                      >
+                        <option value="">Month</option>
+                        {months &&
+                          months.map((m, i) => (
+                            <option key={months[i]} value={months[i]}>
+                              {months[i]}
+                            </option>
+                          ))}
+                      </Select>
+                      <Select
+                        as="select"
+                        name="nationalService.startDate.year"
+                        onChange={props.handleChange}
+                        onBlur={props.handleBlur}
+                        value={props.values.nationalService.startDate.year}
+                      >
+                        <option value="">Year</option>
+                        {nssYears &&
+                          nssYears.map((d, i) => (
+                            <option key={nssYears[i]} value={nssYears[i]}>
+                              {nssYears[i]}
+                            </option>
+                          ))}
+                      </Select>
+                    </SelectRow>
+                  </FlexColumn>
+
+                  <FlexColumn>
+                    <Label htmlFor="nationalService.endDate">End Date</Label>
+                    <SelectRow width="100%">
+                      <Select
+                        as="select"
+                        name="nationalService.endDate.month"
+                        onChange={props.handleChange}
+                        onBlur={props.handleBlur}
+                        value={props.values.nationalService.endDate.month}
+                      >
+                        <option value="">Month</option>
+                        {months &&
+                          months.map((m, i) => (
+                            <option key={months[i]} value={months[i]}>
+                              {months[i]}
+                            </option>
+                          ))}
+                      </Select>
+                      <Select
+                        as="select"
+                        name="nationalService.endDate.year"
+                        onChange={props.handleChange}
+                        onBlur={props.handleBlur}
+                        value={props.values.nationalService.endDate.year}
+                      >
+                        <option value="">Year</option>
+                        {years &&
+                          nssYears.map((year, i) => (
+                            <option key={nssYears[i]} value={nssYears[i]}>
+                              {years[i]}
+                            </option>
+                          ))}
+                      </Select>
+                    </SelectRow>
+                  </FlexColumn>
+                </FlexRow>
+
                 <Label>Upload National Service Certificate</Label>
                 <FileInput>
                   <label htmlFor="nationalService.certificate">
