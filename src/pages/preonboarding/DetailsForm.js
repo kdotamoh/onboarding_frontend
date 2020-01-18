@@ -340,7 +340,11 @@ class DetailsForm extends Component {
       nssYears.push(i)
     }
 
-    const months = moment.months()
+    let months = moment.months()
+    months = months.map((month, i) => ({
+      label: month,
+      value: i + 1 < 10 ? '0' + (i + 1) : '' + (i + 1)
+    }))
 
     const days = []
     for (let i = 1; i < 32; i++) {
@@ -371,15 +375,16 @@ class DetailsForm extends Component {
           }
 
           let data = {
+            employee: this.props.user.id,
             dob: `${values.dob.year}-${values.dob.month}-${values.dob.day}`,
             gender: values.gender,
             nationality: values.nationality,
             region: values.region,
-            national_id: values.nationalId,
+            // national_id: values.nationalId,
             marital_status: values.maritalStatus,
             name_of_spouse: values.spouse.name,
             contact_of_spouse: values.spouse.contactNumber,
-            marriage_cert: values.marriageCertificate,
+            // marriage_cert: values.marriageCertificate,
             children: newChildren,
             name_of_father: values.parents.father,
             name_of_mother: values.parents.mother,
@@ -387,11 +392,11 @@ class DetailsForm extends Component {
             nok_dob: `${values.nextOfKin.dob.year}-${values.nextOfKin.dob.month}-${values.nextOfKin.dob.day}`,
             nok_address: values.nextOfKin.address,
             nok_contact: values.nextOfKin.contactNumber,
-            educational_cert: values.educationalCertificates,
-            professional_body_affiliates: values.professionalBodies,
+            // educational_cert: values.educationalCertificates,
+            // professional_body_affiliates: values.professionalBodies,
             nss_start_date: `${values.nationalService.startDate.year}-${values.nationalService.startDate.month}-01`,
             nss_end_date: `${values.nationalService.endDate.year}-${values.nationalService.endDate.month}-30`, // TODO: fix hardcoded days
-            nss_cert: values.nationalService.certificate,
+            // nss_cert: values.nationalService.certificate,
             res_physical_address: values.residentialAddress.physical,
             res_digital_address: values.residentialAddress.digital,
             res_phone_number: values.residentialAddress.phoneNumber,
@@ -405,9 +410,21 @@ class DetailsForm extends Component {
             family_beneficiary: values.familyLine.name,
             relationship_to_beneficiary: values.familyLine.relationship,
             beneficiary_phone_number: values.familyLine.mobileNumber,
-            medical_insurance_provider: values.medicalInsurance.provider,
-            // TODO: forms
-            fuel_card_option: values.fuelCard
+            medical_insurance_provider: {
+              id: Number(values.medicalInsurance.provider),
+              name: this.props.insuranceProviders.find(
+                provider =>
+                  provider.id === Number(values.medicalInsurance.provider)
+              ).name
+            },
+            // TODO: medical insurance forms
+            fuel_card_option: {
+              id: Number(values.fuelCard),
+              name: this.props.fuelCardProviders.find(
+                fuelCardProvider =>
+                  fuelCardProvider.id === Number(values.fuelCard)
+              ).name
+            }
           }
           console.log(data)
 
@@ -529,9 +546,9 @@ class DetailsForm extends Component {
                   >
                     <option value="">Month</option>
                     {months &&
-                      months.map((m, i) => (
-                        <option key={months[i]} value={months[i]}>
-                          {months[i]}
+                      months.map(month => (
+                        <option key={month.value} value={month.value}>
+                          {month.label}
                         </option>
                       ))}
                   </Select>
@@ -765,9 +782,9 @@ class DetailsForm extends Component {
                             >
                               <option value="">Month</option>
                               {months &&
-                                months.map((m, i) => (
-                                  <option key={months[i]} value={months[i]}>
-                                    {months[i]}
+                                months.map(month => (
+                                  <option key={month.value} value={month.value}>
+                                    {month.label}
                                   </option>
                                 ))}
                             </Select>
@@ -974,9 +991,9 @@ class DetailsForm extends Component {
                   >
                     <option value="">Month</option>
                     {months &&
-                      months.map((m, i) => (
-                        <option key={months[i]} value={months[i]}>
-                          {months[i]}
+                      months.map(month => (
+                        <option key={month.value} value={month.value}>
+                          {month.label}
                         </option>
                       ))}
                   </Select>
@@ -1165,9 +1182,9 @@ class DetailsForm extends Component {
                       >
                         <option value="">Month</option>
                         {months &&
-                          months.map((m, i) => (
-                            <option key={months[i]} value={months[i]}>
-                              {months[i]}
+                          months.map(month => (
+                            <option key={month.value} value={month.value}>
+                              {month.label}
                             </option>
                           ))}
                       </Select>
@@ -1201,9 +1218,9 @@ class DetailsForm extends Component {
                       >
                         <option value="">Month</option>
                         {months &&
-                          months.map((m, i) => (
-                            <option key={months[i]} value={months[i]}>
-                              {months[i]}
+                          months.map(month => (
+                            <option key={month.value} value={month.value}>
+                              {month.label}
                             </option>
                           ))}
                       </Select>
@@ -1629,6 +1646,9 @@ class DetailsForm extends Component {
 }
 DetailsForm.propTypes = {
   handleSubmit: PropTypes.func,
+  user: PropTypes.shape({
+    id: PropTypes.number
+  }),
   token: PropTypes.string,
   insuranceProviders: PropTypes.array,
   fuelCardProviders: PropTypes.array
