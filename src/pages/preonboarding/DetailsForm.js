@@ -376,6 +376,9 @@ class DetailsForm extends Component {
 
           let data = {
             employee: this.props.user.id,
+            first_name: values.firstName,
+            other_names: values.middleName,
+            last_name: values.surname,
             dob: `${values.dob.year}-${values.dob.month}-${values.dob.day}`,
             gender: values.gender,
             nationality: values.nationality,
@@ -410,21 +413,11 @@ class DetailsForm extends Component {
             family_beneficiary: values.familyLine.name,
             relationship_to_beneficiary: values.familyLine.relationship,
             beneficiary_phone_number: values.familyLine.mobileNumber,
-            medical_insurance_provider: {
-              id: Number(values.medicalInsurance.provider),
-              name: this.props.insuranceProviders.find(
-                provider =>
-                  provider.id === Number(values.medicalInsurance.provider)
-              ).name
-            },
+            medical_insurance_provider: Number(
+              values.medicalInsurance.provider
+            ),
             // TODO: medical insurance forms
-            fuel_card_option: {
-              id: Number(values.fuelCard),
-              name: this.props.fuelCardProviders.find(
-                fuelCardProvider =>
-                  fuelCardProvider.id === Number(values.fuelCard)
-              ).name
-            }
+            fuel_card_option: Number(values.fuelCard)
           }
           console.log(data)
 

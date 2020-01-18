@@ -12,12 +12,6 @@ import store from 'store'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
-// import rootReducer from 'store'
-
-// const store = configureStore({
-//   reducer: rootReducer
-// })
-
 ReactDOM.render(
   <Provider store={store}>
     <App />
