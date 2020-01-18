@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 let mtnOnboardingUser = localStorage.getItem('mtnOnboardingUser')
-if (!mtnOnboardingUser) mtnOnboardingUser = {}
-const initialState = mtnOnboardingUser
+if (!mtnOnboardingUser) mtnOnboardingUser = '{}'
+const initialState = JSON.parse(mtnOnboardingUser)
 
 const userSlice = createSlice({
   name: 'user',
@@ -10,7 +10,10 @@ const userSlice = createSlice({
   reducers: {
     setUser: {
       reducer(state, action) {
-        localStorage.setItem('mtnOnboardingUser', action.payload)
+        localStorage.setItem(
+          'mtnOnboardingUser',
+          JSON.stringify(action.payload)
+        )
         return {
           ...action.payload
         }
