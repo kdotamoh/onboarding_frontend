@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { space } from 'styled-system'
 
 import goBack from 'utils/go-back'
+import Scrolltop from 'utils/scrolltop'
 
 import {
   SplitGrid,
@@ -15,7 +16,7 @@ import {
 import { COLORS } from '../../constants'
 import { SideNav, SmallNav } from 'components/navigation'
 
-import OnboardingLink from 'pages/onboarding/OnboardingLink'
+import ControlledLink from './ControlledLink'
 
 import CompanyOverview from './about-mtn/CompanyOverview'
 // import OnboardingLogin from './OnboardingLogin'
@@ -49,7 +50,6 @@ export const Wrapper = styled.div`
   width: 250px;
   position: absolute;
   right: 0;
-  /* transform: translateY(10rem); */
 `
 
 // eslint-disable-next-line
@@ -68,27 +68,27 @@ const FunctionalGroups = ({ children }) => {
               Functional Groups
             </p>
             <SideNav>
-              <OnboardingLink to="/onboarding/functional-groups/overview">
+              <ControlledLink to="/onboarding/functional-groups/overview">
                 Overview
-              </OnboardingLink>
-              <OnboardingLink to="/onboarding/functional-groups/finance-service">
+              </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/finance-service">
                 Finance &amp; Service
-              </OnboardingLink>
-              <OnboardingLink to="/onboarding/functional-groups/employee-industrial">
+              </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/employee-industrial">
                 Employee &amp; Industrial
-              </OnboardingLink>
-              <OnboardingLink to="/onboarding/functional-groups/learning-development">
+              </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/learning-development">
                 Learning &amp; Development
-              </OnboardingLink>
-              <OnboardingLink to="/onboarding/functional-groups/hr-service">
+              </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/hr-service">
                 HR Services
-              </OnboardingLink>
-              <OnboardingLink to="/onboarding/functional-groups/marketing">
+              </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/marketing">
                 Marketing
-              </OnboardingLink>
-              <OnboardingLink to="/onboarding/functional-groups/sales">
+              </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/sales">
                 Sales
-              </OnboardingLink>
+              </ControlledLink>
             </SideNav>
           </Wrapper>
         </SplitGridLeftColumn>
@@ -125,27 +125,27 @@ const AboutMTN = ({ children }) => {
               About MTN
             </p>
             <SideNav>
-              <OnboardingLink to="/onboarding/about-mtn/company-overview">
+              <ControlledLink to="/onboarding/about-mtn/company-overview">
                 Company Overview
-              </OnboardingLink>
-              <OnboardingLink to="/onboarding/about-mtn/ceo-welcome">
+              </ControlledLink>
+              <ControlledLink to="/onboarding/about-mtn/ceo-welcome">
                 CEO Welcome
-              </OnboardingLink>
-              <OnboardingLink to="/onboarding/about-mtn/mission-and-vision">
+              </ControlledLink>
+              <ControlledLink to="/onboarding/about-mtn/mission-and-vision">
                 Mission &amp; Vision
-              </OnboardingLink>
-              <OnboardingLink to="/onboarding/about-mtn/how-we-are-organised">
+              </ControlledLink>
+              <ControlledLink to="/onboarding/about-mtn/how-we-are-organised">
                 How we are organised
-              </OnboardingLink>
-              <OnboardingLink to="/onboarding/about-mtn/employee-value-proposition">
+              </ControlledLink>
+              <ControlledLink to="/onboarding/about-mtn/employee-value-proposition">
                 Employee Value Proposition
-              </OnboardingLink>
-              <OnboardingLink to="/onboarding/about-mtn/strategic-pillars-and-priorities">
+              </ControlledLink>
+              <ControlledLink to="/onboarding/about-mtn/strategic-pillars-and-priorities">
                 Strategic Pillars &amp; Priorities
-              </OnboardingLink>
-              <OnboardingLink to="/onboarding/about-mtn/tasks">
+              </ControlledLink>
+              <ControlledLink to="/onboarding/about-mtn/tasks">
                 Tasks
-              </OnboardingLink>
+              </ControlledLink>
             </SideNav>
             <p
               css={`
@@ -182,35 +182,41 @@ class Onboarding extends Component {
         {this.props.token ? (
           <>
             <Router>
-              <OnboardingLogin path="/" />
-              <Events path="/events" />
-              <UserTasks path="/user-tasks" />
-              <Home path="/home" />
-              <UserProfile path="/user-profile" />
-              <End path="/end" />
+              <Scrolltop path="/">
+                <OnboardingLogin path="/" />
+                <Events path="/events" />
+                <UserTasks path="/user-tasks" />
+                <Home path="/home" />
+                <UserProfile path="/user-profile" />
+                <End path="/end" />
+              </Scrolltop>
             </Router>
             <Router>
-              <FunctionalGroups path="functional-groups">
-                <Overview path="/overview" />
-                <FinanceAndService path="/finance-service" />
-                <EmployeeIndustrial path="/employee-industrial" />
-                <LearningDevelopment path="/learning-development" />
-                <HRServices path="/hr-service" />
-                <Marketing path="/marketing" />
-                <Sales path="/sales" />
-              </FunctionalGroups>
+              <Scrolltop path="/">
+                <FunctionalGroups path="functional-groups">
+                  <Overview path="/overview" />
+                  <FinanceAndService path="/finance-service" />
+                  <EmployeeIndustrial path="/employee-industrial" />
+                  <LearningDevelopment path="/learning-development" />
+                  <HRServices path="/hr-service" />
+                  <Marketing path="/marketing" />
+                  <Sales path="/sales" />
+                </FunctionalGroups>
+              </Scrolltop>
             </Router>
             <Router>
-              <AboutMTN path="about-mtn">
-                <CompanyOverview path="/company-overview" />
-                <CEOWelcome path="/ceo-welcome" />
-                <MissionVision path="/mission-and-vision" />
-                <Organisation path="/how-we-are-organised" />
-                <EmployeeValue path="/employee-value-proposition" />
-                <StrategicPillars path="/strategic-pillars-and-priorities" />
-                <Tasks path="/tasks" />
-                <NotFound default />
-              </AboutMTN>
+              <Scrolltop path="/">
+                <AboutMTN path="about-mtn">
+                  <CompanyOverview path="/company-overview" />
+                  <CEOWelcome path="/ceo-welcome" />
+                  <MissionVision path="/mission-and-vision" />
+                  <Organisation path="/how-we-are-organised" />
+                  <EmployeeValue path="/employee-value-proposition" />
+                  <StrategicPillars path="/strategic-pillars-and-priorities" />
+                  <Tasks path="/tasks" />
+                  <NotFound default />
+                </AboutMTN>
+              </Scrolltop>
             </Router>
           </>
         ) : (

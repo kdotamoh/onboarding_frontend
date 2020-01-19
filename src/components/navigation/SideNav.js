@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import OnboardingLink from 'pages/onboarding/OnboardingLink'
-
 export default class SideNav extends Component {
   componentDidMount() {
     this.showSection()
@@ -18,13 +16,7 @@ export default class SideNav extends Component {
     return (
       // <Wrapper pt="5rem">
       <nav className="onboarding-navigation">
-        <ul className="onboarding-navigation__items">
-          {React.Children.map(children, child => (
-            <OnboardingLink to={child.props.to}>
-              {child.props.children}
-            </OnboardingLink>
-          ))}
-        </ul>
+        <ul className="onboarding-navigation__items">{children}</ul>
       </nav>
       // </Wrapper>
     )
