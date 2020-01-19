@@ -119,12 +119,24 @@ class Welcome extends Component {
       },
       { target: '.tour-step-4', content: '4. Your log out and profile.' }
     ],
-    visible: true,
+    visible: false,
     runTour: false
   }
 
   handleStartTour = async () => {
     this.setState({ visible: false }, () => this.setState({ runTour: true }))
+  }
+
+  handleCompleteTour = () => {
+    localStorage.setItem('onboardingTourComplete', 'true')
+    navigate('/onboarding/about-mtn/company-overview')
+  }
+
+  componentDidMount() {
+    let isComplete = localStorage.getItem('onboardingTourComplete')
+    if (isComplete !== 'true') {
+      this.setState({ visible: true })
+    }
   }
 
   render() {
@@ -174,9 +186,7 @@ class Welcome extends Component {
                     <Button
                       mt="3rem"
                       color="blue"
-                      onClick={() =>
-                        navigate('/onboarding/about-mtn/company-overview')
-                      }
+                      onClick={this.handleCompleteTour}
                     >
                       Start now >
                     </Button>
