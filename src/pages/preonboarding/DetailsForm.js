@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Formik, FieldArray, getIn } from 'formik'
+import { Formik, FieldArray, getIn, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 import { layout } from 'styled-system'
@@ -15,6 +15,7 @@ import { Button } from 'components/styled'
 
 import downArrow from 'images/select/down-arrow.svg'
 import downloadTray from 'images/employee_details/download_tray.svg'
+import { navigate } from '@reach/router'
 
 const Form = styled.form`
   display: flex;
@@ -181,20 +182,30 @@ const FlexRow = styled.div`
 `
 
 const ValidationSchema = Yup.object().shape({
-  // surname: Yup.string().required('Surname is required')
-  // middleName: Yup.string().required('Middle name is required'),
-  // firstName: Yup.string().required('First name is required'),
-  // contactNumber: Yup.number().required('Contact number is required'),
-  // // dob
-  // gender: Yup.mixed()
-  //   .oneOf(['M', 'F'])
-  //   .required('Gender is required'),
-  // nextOfKin: Yup.object().shape({
-  //   name: Yup.string().required(),
-  //   dob: '',
-  //   address: '',
-  //   contactNumber: Yup.number().required()
-  // })
+  surname: Yup.string().required('Surname is required'),
+  middleName: Yup.string().required('Middle name is required'),
+  firstName: Yup.string().required('First name is required'),
+  contactNumber: Yup.number().required('Contact number is required'),
+  // dob
+  gender: Yup.mixed()
+    .oneOf(['M', 'F'])
+    .required('Gender is required'),
+  nationality: Yup.mixed()
+    .oneOf(['G', 'O'])
+    .required('Nationality is required'),
+  maritalStatus: Yup.mixed()
+    .oneOf(['SINGLE', 'MARRIED'])
+    .required('Marital status is required'),
+  nextOfKin: Yup.object().shape({
+    name: Yup.string().required('Name is required'),
+    dob: '',
+    address: Yup.string().required(),
+    contactNumber: Yup.number().required()
+  }),
+  postalAddress: Yup.string().required('Postal address is required'),
+  socialSecurity: Yup.string().required('Social Security number is required'),
+  TIN: Yup.string().required('TIN is required')
+
   // For when I wanna validate children: https://codesandbox.io/s/myqmyq3plx
 })
 
@@ -302,7 +313,8 @@ class DetailsForm extends Component {
     functional: true,
 
     // Is submitting
-    isSubmitting: false
+    isSubmitting: false,
+    errorMessage: ''
   }
 
   handleBirthCertificate = (props, event, id) => {
@@ -376,6 +388,7 @@ class DetailsForm extends Component {
 
           let data = {
             employee: this.props.user.id,
+
             first_name: values.firstName,
             other_names: values.middleName,
             last_name: values.surname,
@@ -428,11 +441,16 @@ class DetailsForm extends Component {
               data,
               headers: {
                 Authorization: `JWT ${this.props.token}`
+                // 'Content-Type': 'multipart/form-data'
               }
             })
+            navigate('/preonboarding/conditions-of-service')
             console.log(res)
           } catch (err) {
             console.log(err)
+            this.setState({
+              errorMessage: 'Something went wrong. Please try again.'
+            })
           }
 
           props.setSubmitting(false)
@@ -517,7 +535,7 @@ class DetailsForm extends Component {
 
                 <Label htmlFor="contactNumber">Contact Number</Label>
                 <Input
-                  type="text"
+                  type="number"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   value={props.values.contactNumber}
@@ -704,7 +722,7 @@ class DetailsForm extends Component {
 
                 <Label htmlFor="spouse.contactNumber">Contact Number</Label>
                 <Input
-                  type="text"
+                  type="number"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   value={props.values.spouse.contactNumber}
@@ -969,9 +987,13 @@ class DetailsForm extends Component {
                   value={props.values.nextOfKin.name}
                   name="nextOfKin.name"
                 />
-                {props.errors.nexOfKin && props.touched.nexOfKin ? (
-                  <Error id="feedback">{props.errors.nextOfKin.name}</Error>
-                ) : null}
+                {getIn(props.errors, 'nexOfKin.name') &&
+                getIn(props.touched, 'nexOfKin.name') ? (
+                  <ErrorMessage component="div" name="nextOfKin.name" />
+                ) : // <Error id="feedback">
+                //   {getIn(props.errors, 'nextOfKin.name')}
+                // </Error>
+                null}
 
                 <Label htmlFor="nextOfKin.dob">Date of Birth</Label>
                 <SelectRow>
@@ -1040,7 +1062,7 @@ class DetailsForm extends Component {
 
                 <Label htmlFor="nextOfKin.contactNumber">Contact Number</Label>
                 <Input
-                  type="text"
+                  type="number"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   value={props.values.nextOfKin.contactNumber}
@@ -1307,7 +1329,7 @@ class DetailsForm extends Component {
                   Residential Phone Number (if any)
                 </Label>
                 <Input
-                  type="text"
+                  type="number"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   value={props.values.residentialAddress.phoneNumber}
@@ -1392,7 +1414,7 @@ class DetailsForm extends Component {
 
                 <Label htmlFor="bank.accountNumber">Account Number</Label>
                 <Input
-                  type="text"
+                  type="number"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   value={props.values.bank.accountNumber}
@@ -1459,7 +1481,7 @@ class DetailsForm extends Component {
                   Mobile Number (MTN Only)
                 </Label>
                 <Input
-                  type="text"
+                  type="number"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   value={props.values.familyLine.mobileNumber}
@@ -1631,6 +1653,12 @@ class DetailsForm extends Component {
             >
               {props.isSubmitting ? 'Submitting...' : 'Submit and Continue >'}
             </Button>
+
+            {this.state.errorMessage && (
+              <p style={{ marginTop: '3rem', color: 'red' }}>
+                {this.state.errorMessage}
+              </p>
+            )}
           </>
         )}
       </Formik>

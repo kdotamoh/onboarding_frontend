@@ -42,7 +42,7 @@ class Tasks extends Component {
             <Wrapper pt="5rem">
               <SideNav>
                 <OnboardingLink to="/onboarding/user-tasks">New</OnboardingLink>
-                <OnboardingLink to="/onboarding/user-tasks/past">
+                <OnboardingLink to="/onboarding/user-tasks">
                   Past
                 </OnboardingLink>
               </SideNav>
