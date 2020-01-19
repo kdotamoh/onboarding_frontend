@@ -49,7 +49,7 @@ class Tasks extends Component {
             </Wrapper>
           </SplitGridLeftColumn>
           <SplitGridRightColumn p="5rem" background={COLORS.LIGHT_GREY}>
-            <DashboardCard px="3rem" py="4rem">
+            <DashboardCard px="3rem" py="4rem" style={{ textAlign: 'center' }}>
               <img src={noTask} alt="" />
               <p>
                 <strong>You don't have any tasks yet</strong>

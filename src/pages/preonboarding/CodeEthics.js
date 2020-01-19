@@ -993,7 +993,7 @@ export default class CodeEthics extends Component {
                 <div>
                   <label>
                     <input
-                      style={{ marginRight: '1rem' }}
+                      style={{ marginTop: '5rem', marginRight: '1rem' }}
                       type="checkbox"
                       name="checked"
                       id="checked"

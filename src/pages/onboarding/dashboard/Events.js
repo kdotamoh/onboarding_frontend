@@ -27,7 +27,7 @@ export const Wrapper = styled.div`
 `
 
 const NoEvents = () => (
-  <DashboardCard px="3rem" py="4rem">
+  <DashboardCard px="3rem" py="4rem" style={{ textAlign: 'center' }}>
     <img src={noTask} alt="" />
     <p>
       <strong>You don't have any events yet</strong>
