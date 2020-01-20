@@ -35,7 +35,7 @@ const UserName = styled.span`
   }
 `
 
-const _ProfileDropdown = ({ user, unsetToken }) => {
+const _ProfileDropdown = ({ user, unsetToken, unsetUser }) => {
   const [isOpen, setIsOpen] = React.useState(false)
 
   const logout = () => {
@@ -102,7 +102,8 @@ _ProfileDropdown.propTypes = {
   user: PropTypes.shape({
     first_name: PropTypes.string
   }),
-  unsetToken: PropTypes.func
+  unsetToken: PropTypes.func,
+  unsetUser: PropTypes.func
 }
 const mapDispatch = { unsetToken, unsetUser }
 export const ProfileDropdown = connect(
