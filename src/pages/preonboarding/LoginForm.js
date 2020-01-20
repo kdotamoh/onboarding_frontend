@@ -115,7 +115,7 @@ class LoginForm extends Component {
                 color="blue"
                 type="submit"
               >
-                {this.state.isSubmitting ? 'SUBMITING...' : 'LOG IN'}
+                {this.state.isSubmitting ? 'SUBMITTING...' : 'LOG IN'}
               </Button>
             </Form>
           )}

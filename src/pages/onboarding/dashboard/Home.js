@@ -128,15 +128,15 @@ class Welcome extends Component {
   }
 
   handleCompleteTour = () => {
-    // localStorage.setItem('onboardingTourComplete', 'true')
+    localStorage.setItem('onboardingTourComplete', 'true')
     navigate('/onboarding/about-mtn/company-overview')
   }
 
   componentDidMount() {
-    // let isComplete = localStorage.getItem('onboardingTourComplete')
-    // if (isComplete !== 'true') {
-    //   this.setState({ visible: true })
-    // }
+    let isComplete = localStorage.getItem('onboardingTourComplete')
+    if (isComplete !== 'true') {
+      this.setState({ visible: true })
+    }
   }
 
   render() {
