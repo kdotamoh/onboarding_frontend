@@ -42,8 +42,14 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required('Password is required')
 })
 class LoginForm extends Component {
+  state = {
+    isSubmitting: false,
+    errorMessage: ''
+  }
+
   handleSubmit = async values => {
     try {
+      this.setState({ isSubmitting: true })
       let res = await axios({
         method: 'post',
         url: `${process.env.REACT_APP_API_BASE}/api-token-auth/`,
@@ -59,8 +65,10 @@ class LoginForm extends Component {
       await this.props.setToken(token)
       await this.props.setUser(user)
       navigate(`${this.props.next}`)
+      this.setState({ isSubmitting: false })
     } catch (err) {
       console.log(err)
+      this.setState({ errorMessage: 'Something went wrong. Please try again.' })
       // navigate(`${this.props.next}`) // Todo: REMOVE THIS
     }
   }
@@ -107,7 +115,7 @@ class LoginForm extends Component {
                 color="blue"
                 type="submit"
               >
-                {props.isSubmitting ? 'SUBMITING...' : 'LOG IN'}
+                {this.state.isSubmitting ? 'SUBMITING...' : 'LOG IN'}
               </Button>
             </Form>
           )}
