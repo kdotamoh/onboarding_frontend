@@ -183,7 +183,7 @@ const FlexRow = styled.div`
 
 const ValidationSchema = Yup.object().shape({
   surname: Yup.string().required('Surname is required'),
-  middleName: Yup.string().required('Middle name is required'),
+  middleName: Yup.string(),
   firstName: Yup.string().required('First name is required'),
   contactNumber: Yup.number().required('Contact number is required'),
   // dob
@@ -202,7 +202,7 @@ const ValidationSchema = Yup.object().shape({
     address: Yup.string().required(),
     contactNumber: Yup.number().required()
   }),
-  postalAddress: Yup.string().required('Postal address is required'),
+  postalAddress: Yup.string(),
   socialSecurity: Yup.string().required('Social Security number is required'),
   TIN: Yup.string().required('TIN is required')
 
