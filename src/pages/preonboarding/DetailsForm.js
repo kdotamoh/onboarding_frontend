@@ -191,7 +191,7 @@ const ValidationSchema = Yup.object().shape({
     .oneOf(['M', 'F'])
     .required('Gender is required'),
   nationality: Yup.mixed()
-    .oneOf(['G', 'O'])
+    .oneOf(['Ghanaian', 'Other'])
     .required('Nationality is required'),
   maritalStatus: Yup.mixed()
     .oneOf(['SINGLE', 'MARRIED'])
@@ -374,8 +374,10 @@ class DetailsForm extends Component {
           console.log(values)
 
           let newChildren = values.children.map(child => ({
-            ...child,
-            dob: `${child.dob.year}-${child.dob.month}-${child.dob.day}`
+            // ...child,
+            name: child.name,
+            dob: `${child.dob.year}-${child.dob.month}-${child.dob.day}`,
+            birth_certificate: null
           }))
 
           if (
@@ -632,8 +634,8 @@ class DetailsForm extends Component {
                   name="nationality"
                 >
                   <option value=""></option>
-                  <option value="G">Ghanaian</option>
-                  <option value="O">Other</option>
+                  <option value="Ghanaian">Ghanaian</option>
+                  <option value="Other">Other</option>
                 </Select>
                 {props.errors.nationality && props.touched.nationality ? (
                   <Error id="feedback">{props.errors.nationality}</Error>
@@ -651,7 +653,7 @@ class DetailsForm extends Component {
                   <option value=""></option>
                   {regions &&
                     regions.map((r, i) => (
-                      <option key={i} value={r.value}>
+                      <option key={i} value={r.label}>
                         {r.label}
                       </option>
                     ))}
@@ -777,7 +779,10 @@ class DetailsForm extends Component {
                           <Label htmlFor={`children.${id}.name`}>
                             Name of Child
                           </Label>
-                          <Input name={`children.${id}.name`} />
+                          <Input
+                            name={`children.${id}.name`}
+                            onChange={props.handleChange}
+                          />
 
                           <Label htmlFor={`children.${id}.dob`}>
                             Date of Birth
