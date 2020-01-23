@@ -196,12 +196,6 @@ const ValidationSchema = Yup.object().shape({
   maritalStatus: Yup.mixed()
     .oneOf(['SINGLE', 'MARRIED'])
     .required('Marital status is required'),
-  nextOfKin: Yup.object().shape({
-    name: Yup.string().required('Name is required'),
-    dob: '',
-    address: Yup.string().required(),
-    contactNumber: Yup.number().required()
-  }),
   postalAddress: Yup.string(),
   socialSecurity: Yup.string().required('Social Security number is required'),
   TIN: Yup.string().required('TIN is required')
@@ -224,76 +218,55 @@ const initialValues = {
   middleName: '',
   firstName: '',
   contactNumber: '',
-  dob: {
-    day: '',
-    month: '',
-    year: ''
-  },
+  dob_day: '',
+  dob_month: '',
+  dob_year: '',
   gender: '',
   nationality: '',
   region: '',
   nationalId: '',
   maritalStatus: '',
-  spouse: {
-    name: '',
-    contactNumber: ''
-  },
+  spouse_name: '',
+  spouse_contactNumber: '',
   marriageCertificate: '',
   children: [
-    { name: '', dob: { month: '', day: '', year: '' }, birthCertificate: '' }
+    { name: '', dob_month: '', dob_day: '', dob_year: '', birthCertificate: '' }
   ],
-  parents: { father: '', mother: '' },
-  // next of kin
-  nextOfKin: {
-    name: '',
-    dob: {
-      day: '',
-      month: '',
-      year: ''
-    },
-    address: '',
-    contactNumber: ''
-  },
-  // education
+  father: '',
+  mother: '',
+
+  nok_name: '',
+  nok_address: '',
+  nok_contactNumber: '',
+  nok_dob_day: '',
+  nok_dob_month: '',
+  nok_dob_year: '',
+
   educationalCertificates: [],
   professionalBodies: [],
-  nationalService: {
-    startDate: {
-      month: '',
-      year: ''
-    },
-    endDate: {
-      month: '',
-      year: ''
-    },
-    certificate: ''
-  },
-  // residential
-  residentialAddress: {
-    physical: '',
-    digital: '',
-    phoneNumber: ''
-  },
+  nationalService_start_month: '',
+  nationalService_start_year: '',
+  nationalService_end_month: '',
+  nationalService_end_year: '',
+  nationalService_certificate: '',
+
+  residential_address_physical: '',
+  residential_address_digital: '',
+  residential_phoneNumber: '',
   postalAddress: '',
-  // salary transfer
+
   socialSecurity: '',
   TIN: '',
-  bank: {
-    name: '',
-    branch: '',
-    accountNumber: '',
-    sortCode: ''
-  },
-  // family line
-  familyLine: {
-    name: '',
-    relationship: '',
-    mobileNumber: ''
-  },
-  medicalInsurance: {
-    provider: '',
-    form: []
-  },
+  bank_name: '',
+  bank_branch: '',
+  bank_accountNumber: '',
+  bank_sortCode: '',
+
+  family_line_beneficiary: '',
+  family_line_relationship: '',
+  family_line_number: '',
+  medicalInsurance_provider: '',
+  medicalInsurance_form: [],
   fuelCard: ''
 }
 
@@ -376,7 +349,7 @@ class DetailsForm extends Component {
           let newChildren = values.children.map(child => ({
             // ...child,
             name: child.name,
-            dob: `${child.dob.year}-${child.dob.month}-${child.dob.day}`,
+            dob: `${child.dob_year}-${child.dob_month}-${child.dob_day}`,
             birth_certificate: null
           }))
 
@@ -388,59 +361,127 @@ class DetailsForm extends Component {
             newChildren = []
           }
 
-          let data = {
-            employee: this.props.user.id,
+          let formData = new FormData()
 
-            first_name: values.firstName,
-            other_names: values.middleName,
-            last_name: values.surname,
-            dob: `${values.dob.year}-${values.dob.month}-${values.dob.day}`,
-            gender: values.gender,
-            nationality: values.nationality,
-            region: values.region,
-            // national_id: values.nationalId,
-            marital_status: values.maritalStatus,
-            name_of_spouse: values.spouse.name,
-            contact_of_spouse: values.spouse.contactNumber,
-            // marriage_cert: values.marriageCertificate,
-            children: newChildren,
-            name_of_father: values.parents.father,
-            name_of_mother: values.parents.mother,
-            nok_name: values.nextOfKin.name,
-            nok_dob: `${values.nextOfKin.dob.year}-${values.nextOfKin.dob.month}-${values.nextOfKin.dob.day}`,
-            nok_address: values.nextOfKin.address,
-            nok_contact: values.nextOfKin.contactNumber,
-            // educational_cert: values.educationalCertificates,
-            // professional_body_affiliates: values.professionalBodies,
-            nss_start_date: `${values.nationalService.startDate.year}-${values.nationalService.startDate.month}-01`,
-            nss_end_date: `${values.nationalService.endDate.year}-${values.nationalService.endDate.month}-30`, // TODO: fix hardcoded days
-            // nss_cert: values.nationalService.certificate,
-            res_physical_address: values.residentialAddress.physical,
-            res_digital_address: values.residentialAddress.digital,
-            res_phone_number: values.residentialAddress.phoneNumber,
-            postal_address: values.postalAddress,
-            ssnit_number: values.socialSecurity,
-            tin_number: values.TIN,
-            bank_account_number: values.bank.accountNumber,
-            bank_branch: values.bank.branch,
-            bank_name: values.bank.name,
-            sort_code: values.bank.sortCode,
-            family_beneficiary: values.familyLine.name,
-            relationship_to_beneficiary: values.familyLine.relationship,
-            beneficiary_phone_number: values.familyLine.mobileNumber,
-            medical_insurance_provider: Number(
-              values.medicalInsurance.provider
-            ),
-            // TODO: medical insurance forms
-            fuel_card_option: Number(values.fuelCard)
-          }
-          console.log(data)
+          formData.append('passport_picture', values.passportPhoto)
+          formData.append('employee', this.props.user.id)
+          formData.append('first_name', values.firstName)
+          formData.append('other_names', values.middleName)
+          formData.append('last_name', values.surname)
+          formData.append(
+            'dob',
+            `${values.dob_year}-${values.dob_month}-${values.dob_day}`
+          )
+          formData.append('gender', values.gender)
+          formData.append('nationality', values.nationality)
+          formData.append('region', values.region)
+
+          formData.append('marital_status', values.maritalStatus)
+          formData.append('name_of_spouse', values.spouse_name)
+          formData.append('contact_of_spouse', values.spouse_contactNumber)
+
+          formData.append('children', newChildren)
+          formData.append('name_of_father', values.father)
+          formData.append('name_of_mother', values.mother)
+          formData.append('nok_name', values.nok_name)
+          formData.append(
+            'nok_dob',
+            `${values.nok_dob_year}-${values.nok_dob_month}-${values.nok_dob_day}`
+          )
+          formData.append('nok_address', values.nok_address)
+          formData.append('nok_contact', values.nok_contactNumber)
+
+          formData.append(
+            'nss_start_date',
+            `${values.nationalService_start_year}-${values.nationalService_start_month}-01`
+          )
+          formData.append(
+            'nss_end_date',
+            `${values.nationalService_end_year}-${values.nationalService_end_month}-30`
+          )
+
+          formData.append(
+            'res_physical_address',
+            values.residential_address_physical
+          )
+          formData.append(
+            'res_digital_address',
+            values.residential_address_digital
+          )
+          formData.append('res_phone_number', values.residential_phoneNumber)
+          formData.append('postal_address', values.postalAddress)
+          formData.append('ssnit_number', values.socialSecurity)
+          formData.append('tin_number', values.TIN)
+          formData.append('bank_account_number', values.bank_accountNumber)
+          formData.append('bank_branch', values.bank_branch)
+          formData.append('bank_name', values.bank_name)
+          formData.append('sort_code', values.bank_sortCode)
+          formData.append('family_beneficiary', values.family_line_beneficiary)
+          formData.append(
+            'relationship_to_beneficiary',
+            values.family_line_relationship
+          )
+          formData.append('beneficiary_phone_number', values.family_line_number)
+          formData.append(
+            'medical_insurance_provider',
+            Number(values.medicalInsurance_provider)
+          )
+          // TODO: medical insurance forms
+          formData.append('fuel_card_option', Number(values.fuelCard))
+
+          // let data = {
+          //   employee: this.props.user.id,
+
+          //   first_name: values.firstName,
+          //   other_names: values.middleName,
+          //   last_name: values.surname,
+          //   dob: `${values.dob_year}-${values.dob_month}-${values.dob_day}`,
+          //   gender: values.gender,
+          //   nationality: values.nationality,
+          //   region: values.region,
+          //   // national_id: values.nationalId,
+          //   marital_status: values.maritalStatus,
+          //   name_of_spouse: values.spouse_name,
+          //   contact_of_spouse: values.spouse_contactNumber,
+          //   // marriage_cert: values.marriageCertificate,
+          //   children: newChildren,
+          //   name_of_father: values.father,
+          //   name_of_mother: values.mother,
+          //   nok_name: values.nok_name,
+          //   nok_dob: `${values.nok_dob_year}-${values.nok_dob_month}-${values.nok_dob_day}`,
+          //   nok_address: values.nok_address,
+          //   nok_contact: values.nok_contactNumber,
+          //   // educational_cert: values.educationalCertificates,
+          //   // professional_body_affiliates: values.professionalBodies,
+          //   nss_start_date: `${values.nationalService_start_year}-${values.nationalService_start_month}-01`,
+          //   nss_end_date: `${values.nationalService_end_year}-${values.nationalService_end_month}-30`, // TODO: fix hardcoded days
+          //   // nss_cert: values.nationalService.certificate,
+          //   res_physical_address: values.residential_address_physical,
+          //   res_digital_address: values.residential_address_digital,
+          //   res_phone_number: values.residential_phoneNumber,
+          //   postal_address: values.postalAddress,
+          //   ssnit_number: values.socialSecurity,
+          //   tin_number: values.TIN,
+          //   bank_account_number: values.bank_accountNumber,
+          //   bank_branch: values.bank_branch,
+          //   bank_name: values.bank_name,
+          //   sort_code: values.bank_sortCode,
+          //   family_beneficiary: values.family_line_beneficiary,
+          //   relationship_to_beneficiary: values.family_line_relationship,
+          //   beneficiary_phone_number: values.family_line_number,
+          //   medical_insurance_provider: Number(
+          //     values.medicalInsurance_provider
+          //   ),
+          //   // TODO: medical insurance forms
+          //   fuel_card_option: Number(values.fuelCard)
+          // }
+          // console.log(data)
 
           try {
             let res = await axios({
               method: 'post',
               url: `${process.env.REACT_APP_API_BASE}/profiles/`,
-              data,
+              data: formData,
               headers: {
                 Authorization: `JWT ${this.props.token}`
                 // 'Content-Type': 'multipart/form-data'
@@ -552,10 +593,10 @@ class DetailsForm extends Component {
                 <SelectRow>
                   <Select
                     as="select"
-                    name="dob.month"
+                    name="dob_month"
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
-                    value={props.values.dob.month}
+                    value={props.values.dob_month}
                   >
                     <option value="">Month</option>
                     {months &&
@@ -567,10 +608,10 @@ class DetailsForm extends Component {
                   </Select>
                   <Select
                     as="select"
-                    name="dob.day"
+                    name="dob_day"
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
-                    value={props.values.dob.day}
+                    value={props.values.dob_day}
                   >
                     <option value="">Day</option>
                     {days &&
@@ -582,10 +623,10 @@ class DetailsForm extends Component {
                   </Select>
                   <Select
                     as="select"
-                    name="dob.year"
+                    name="dob_year"
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
-                    value={props.values.dob.year}
+                    value={props.values.dob_year}
                   >
                     <option value="">Year</option>
                     {years &&
@@ -708,31 +749,31 @@ class DetailsForm extends Component {
                   <Error id="feedback">{props.errors.maritalStatus}</Error>
                 ) : null}
 
-                <Label htmlFor="spouse.name">
+                <Label htmlFor="spouse_name">
                   Name of Spouse (where applicable)
                 </Label>
                 <Input
                   type="text"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.spouse.name}
-                  name="spouse.name"
+                  value={props.values.spouse_name}
+                  name="spouse_name"
                 />
                 {props.errors.spouse && props.touched.spouse ? (
-                  <Error id="feedback">{props.errors.spouse.name}</Error>
+                  <Error id="feedback">{props.errors.spouse_name}</Error>
                 ) : null}
 
-                <Label htmlFor="spouse.contactNumber">Contact Number</Label>
+                <Label htmlFor="spouse_contactNumber">Contact Number</Label>
                 <Input
                   type="number"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.spouse.contactNumber}
-                  name="spouse.contactNumber"
+                  value={props.values.spouse_contactNumber}
+                  name="spouse_contactNumber"
                 />
                 {props.errors.spouse && props.touched.spouse ? (
                   <Error id="feedback">
-                    {props.errors.spouse.contactNumber}
+                    {props.errors.spouse_contactNumber}
                   </Error>
                 ) : null}
 
@@ -791,10 +832,10 @@ class DetailsForm extends Component {
                           <SelectRow>
                             <Select
                               as="select"
-                              name={`children.${id}.dob.month`}
+                              name={`children.${id}.dob_month`}
                               onChange={props.handleChange}
                               onBlur={props.handleBlur}
-                              value={props.values.children[id].dob.month}
+                              value={props.values.children[id].dob_month}
                             >
                               <option value="">Month</option>
                               {months &&
@@ -806,10 +847,10 @@ class DetailsForm extends Component {
                             </Select>
                             <Select
                               as="select"
-                              name={`children.${id}.dob.day`}
+                              name={`children.${id}.dob_day`}
                               onChange={props.handleChange}
                               onBlur={props.handleBlur}
-                              value={props.values.children[id].dob.day}
+                              value={props.values.children[id].dob_day}
                             >
                               <option value="">Day</option>
                               {days &&
@@ -821,10 +862,10 @@ class DetailsForm extends Component {
                             </Select>
                             <Select
                               as="select"
-                              name={`children.${id}.dob.year`}
+                              name={`children.${id}.dob_year`}
                               onChange={props.handleChange}
                               onBlur={props.handleBlur}
-                              value={props.values.children[id].dob.year}
+                              value={props.values.children[id].dob_year}
                             >
                               <option value="">Year</option>
                               {years &&
@@ -871,7 +912,9 @@ class DetailsForm extends Component {
                             arrayHelpers.push({
                               name: '',
                               birthCertificate: '',
-                              dob: ''
+                              dob_day: '',
+                              dob_month: '',
+                              dob_year: ''
                             })
                           }}
                         >
@@ -946,28 +989,28 @@ class DetailsForm extends Component {
 
                 {/* <Divider /> */}
 
-                <Label htmlFor="parents.father">Name of Father</Label>
+                <Label htmlFor="father">Name of Father</Label>
                 <Input
                   type="text"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.parents.father}
-                  name="parents.father"
+                  value={props.values.father}
+                  name="father"
                 />
-                {props.errors.parents && props.touched.parents ? (
-                  <Error id="feedback">{props.errors.parents.father}</Error>
+                {props.errors.father && props.touched.father ? (
+                  <Error id="feedback">{props.errors.father}</Error>
                 ) : null}
 
-                <Label htmlFor="parents.mother">Name of Mother</Label>
+                <Label htmlFor="mother">Name of Mother</Label>
                 <Input
                   type="text"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.parents.mother}
-                  name="parents.mother"
+                  value={props.values.mother}
+                  name="mother"
                 />
-                {props.errors.parents && props.touched.parents ? (
-                  <Error id="feedback">{props.errors.parents.mother}</Error>
+                {props.errors.mother && props.touched.mother ? (
+                  <Error id="feedback">{props.errors.mother}</Error>
                 ) : null}
 
                 <ShowSectionButton
@@ -984,30 +1027,30 @@ class DetailsForm extends Component {
               <Heading>2. Next of Kin Details</Heading>
 
               <section hidden={this.state.nextOfKin}>
-                <Label htmlFor="nextOfKin.name">Name</Label>
+                <Label htmlFor="nok_name">Name</Label>
                 <Input
                   type="text"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.nextOfKin.name}
-                  name="nextOfKin.name"
+                  value={props.values.nok_name}
+                  name="nok_name"
                 />
-                {getIn(props.errors, 'nexOfKin.name') &&
-                getIn(props.touched, 'nexOfKin.name') ? (
-                  <ErrorMessage component="div" name="nextOfKin.name" />
+                {getIn(props.errors, 'nok_name') &&
+                getIn(props.touched, 'nok_name') ? (
+                  <ErrorMessage component="div" name="nok_name" />
                 ) : // <Error id="feedback">
                 //   {getIn(props.errors, 'nextOfKin.name')}
                 // </Error>
                 null}
 
-                <Label htmlFor="nextOfKin.dob">Date of Birth</Label>
+                <Label htmlFor="nok_dob">Date of Birth</Label>
                 <SelectRow>
                   <Select
                     as="select"
-                    name="nextOfKin.dob.month"
+                    name="nok_dob_month"
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
-                    value={props.values.nextOfKin.dob.month}
+                    value={props.values.nok_dob_month}
                   >
                     <option value="">Month</option>
                     {months &&
@@ -1019,10 +1062,10 @@ class DetailsForm extends Component {
                   </Select>
                   <Select
                     as="select"
-                    name="nextOfKin.dob.day"
+                    name="nok_dob_day"
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
-                    value={props.values.nextOfKin.dob.day}
+                    value={props.values.nok_dob_day}
                   >
                     <option value="">Day</option>
                     {days &&
@@ -1034,10 +1077,10 @@ class DetailsForm extends Component {
                   </Select>
                   <Select
                     as="select"
-                    name="nextOfKin.dob.year"
+                    name="nok_dob_year"
                     onChange={props.handleChange}
                     onBlur={props.handleBlur}
-                    value={props.values.nextOfKin.dob.year}
+                    value={props.values.nok_dob_year}
                   >
                     <option value="">Year</option>
                     {years &&
@@ -1053,31 +1096,29 @@ class DetailsForm extends Component {
                   <Error id="feedback">{props.errors.nextOfKin.dob}</Error>
                 ) : null}
 
-                <Label htmlFor="nextOfKin.address">Address</Label>
+                <Label htmlFor="nok_address">Address</Label>
                 <Input
                   type="text"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.nextOfKin.address}
-                  name="nextOfKin.address"
+                  value={props.values.nok_address}
+                  name="nok_address"
                 />
-                {props.errors.nexOfKin && props.touched.nexOfKin ? (
-                  <Error id="feedback">{props.errors.nextOfKin.address}</Error>
+                {props.errors.nok_address && props.touched.nok_address ? (
+                  <Error id="feedback">{props.errors.nok_address}</Error>
                 ) : null}
 
-                <Label htmlFor="nextOfKin.contactNumber">Contact Number</Label>
+                <Label htmlFor="nok_contactNumber">Contact Number</Label>
                 <Input
                   type="number"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.nextOfKin.contactNumber}
-                  name="nextOfKin.contactNumber"
+                  value={props.values.nok_contactNumber}
+                  name="nok_contactNumber"
                 />
-                {getIn(props.errors, 'nexOfKin.contactNumber') &&
-                getIn(props.touched, 'nexOfKin.contactNumber') ? (
-                  <Error id="feedback">
-                    {props.errors.nextOfKin.contactNumber}
-                  </Error>
+                {getIn(props.errors, 'nok_contactNumber') &&
+                getIn(props.touched, 'nok_contactNumber') ? (
+                  <Error id="feedback">{props.errors.nok_contactNumber}</Error>
                 ) : null}
                 <ShowSectionButton
                   type="button"
@@ -1189,16 +1230,16 @@ class DetailsForm extends Component {
               <section hidden={this.state.nationalService}>
                 <FlexRow width="70%">
                   <FlexColumn>
-                    <Label htmlFor="nationalService.startDate">
+                    <Label htmlFor="nationalService_startDate">
                       Start Date
                     </Label>
                     <SelectRow width="100%">
                       <Select
                         as="select"
-                        name="nationalService.startDate.month"
+                        name="nationalService_start_month"
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
-                        value={props.values.nationalService.startDate.month}
+                        value={props.values.nationalService_start_month}
                       >
                         <option value="">Month</option>
                         {months &&
@@ -1210,10 +1251,10 @@ class DetailsForm extends Component {
                       </Select>
                       <Select
                         as="select"
-                        name="nationalService.startDate.year"
+                        name="nationalService_start_year"
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
-                        value={props.values.nationalService.startDate.year}
+                        value={props.values.nationalService_start_year}
                       >
                         <option value="">Year</option>
                         {nssYears &&
@@ -1227,14 +1268,14 @@ class DetailsForm extends Component {
                   </FlexColumn>
 
                   <FlexColumn>
-                    <Label htmlFor="nationalService.endDate">End Date</Label>
+                    <Label htmlFor="nationalService_end_month">End Date</Label>
                     <SelectRow width="100%">
                       <Select
                         as="select"
-                        name="nationalService.endDate.month"
+                        name="nationalService_end_month"
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
-                        value={props.values.nationalService.endDate.month}
+                        value={props.values.nationalService_end_month}
                       >
                         <option value="">Month</option>
                         {months &&
@@ -1246,10 +1287,10 @@ class DetailsForm extends Component {
                       </Select>
                       <Select
                         as="select"
-                        name="nationalService.endDate.year"
+                        name="nationalService_end_year"
                         onChange={props.handleChange}
                         onBlur={props.handleBlur}
-                        value={props.values.nationalService.endDate.year}
+                        value={props.values.nationalService_end_year}
                       >
                         <option value="">Year</option>
                         {years &&
@@ -1265,22 +1306,22 @@ class DetailsForm extends Component {
 
                 <Label>Upload National Service Certificate</Label>
                 <FileInput>
-                  <label htmlFor="nationalService.certificate">
+                  <label htmlFor="nationalService_certificate">
                     Upload
                     <input
-                      id="nationalService.certificate"
+                      id="nationalService_certificate"
                       accept="image/jpeg"
                       type="file"
-                      name="nationalService.certificate"
+                      name="nationalService_certificate"
                       onChange={e => {
                         // prettier-ignore
-                        props.setFieldValue('nationalService.certificate', e.currentTarget.files[0])
+                        props.setFieldValue('nationalService_certificate', e.currentTarget.files[0])
                       }}
                     />
                   </label>
                   <p>
-                    {props.values.nationalService.certificate.name
-                      ? props.values.nationalService.certificate.name
+                    {props.values.nationalService_certificate.name
+                      ? props.values.nationalService_certificate.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
                   </p>
                 </FileInput>
@@ -1296,54 +1337,54 @@ class DetailsForm extends Component {
               <Heading>5. Residential/Postal Information</Heading>
 
               <section hidden={this.state.residential}>
-                <Label htmlFor="residentialAddress.physical">
+                <Label htmlFor="residential_address_physical">
                   Residential Address (Physical)
                 </Label>
                 <Input
                   type="text"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.residentialAddress.physical}
-                  name="residentialAddress.physical"
+                  value={props.values.residential_address_physical}
+                  name="residential_address_physical"
                 />
-                {props.errors.residentialAddress &&
-                props.touched.residentAddress ? (
+                {props.errors.residential_address_physical &&
+                props.touched.residential_address_physical ? (
                   <Error id="feedback">
-                    {props.errors.residentialAddress.physical}
+                    {props.errors.residential_address_physical}
                   </Error>
                 ) : null}
 
-                <Label htmlFor="residentialAddress.digital">
+                <Label htmlFor="residential_address_digital">
                   Residential Address (Digital)
                 </Label>
                 <Input
                   type="text"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.residentialAddress.digital}
-                  name="residentialAddress.digital"
+                  value={props.values.residential_address_digital}
+                  name="residential_address_digital"
                 />
-                {props.errors.residentialAddress &&
-                props.touched.residentAddress ? (
+                {props.errors.residential_address_digital &&
+                props.touched.residential_address_digital ? (
                   <Error id="feedback">
-                    {props.errors.residentialAddress.digital}
+                    {props.errors.residential_address_digital}
                   </Error>
                 ) : null}
 
-                <Label htmlFor="residentialAddress.phoneNumber">
+                <Label htmlFor="residential_phoneNumber">
                   Residential Phone Number (if any)
                 </Label>
                 <Input
                   type="number"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.residentialAddress.phoneNumber}
-                  name="residentialAddress.phoneNumber"
+                  value={props.values.residential_phoneNumber}
+                  name="residential_phoneNumber"
                 />
-                {props.errors.residentialAddress &&
-                props.touched.residentAddress ? (
+                {props.errors.residential_phoneNumber &&
+                props.touched.residential_phoneNumber ? (
                   <Error id="feedback">
-                    {props.errors.residentialAddress.phoneNumber}
+                    {props.errors.residential_phoneNumber}
                   </Error>
                 ) : null}
 
@@ -1393,52 +1434,53 @@ class DetailsForm extends Component {
                   <Error id="feedback">{props.errors.TIN}</Error>
                 ) : null}
 
-                <Label htmlFor="bank.name">Bank</Label>
+                <Label htmlFor="bank_name">Bank</Label>
                 <Input
                   type="text"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.bank.name}
-                  name="bank.name"
+                  value={props.values.bank_name}
+                  name="bank_name"
                 />
-                {props.errors.bank && props.touched.bank ? (
-                  <Error id="feedback">{props.errors.bank.name}</Error>
+                {props.errors.bank_name && props.touched.bank_name ? (
+                  <Error id="feedback">{props.errors.bank_name}</Error>
                 ) : null}
 
-                <Label htmlFor="bank.branch">Branch</Label>
+                <Label htmlFor="bank_branch">Branch</Label>
                 <Input
                   type="text"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.bank.branch}
-                  name="bank.branch"
+                  value={props.values.bank_branch}
+                  name="bank_branch"
                 />
-                {props.errors.bank && props.touched.bank ? (
-                  <Error id="feedback">{props.errors.bank.branch}</Error>
+                {props.errors.bank_branch && props.touched.bank_branch ? (
+                  <Error id="feedback">{props.errors.bank_branch}</Error>
                 ) : null}
 
-                <Label htmlFor="bank.accountNumber">Account Number</Label>
+                <Label htmlFor="bank_accountNumber">Account Number</Label>
                 <Input
                   type="number"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.bank.accountNumber}
-                  name="bank.accountNumber"
+                  value={props.values.bank_accountNumber}
+                  name="bank_accountNumber"
                 />
-                {props.errors.bank && props.touched.bank ? (
-                  <Error id="feedback">{props.errors.bank.accountNumber}</Error>
+                {props.errors.bank_accountNumber &&
+                props.touched.bank_accountNumber ? (
+                  <Error id="feedback">{props.errors.bank_accountNumber}</Error>
                 ) : null}
 
-                <Label htmlFor="bank.sortCode">SORT Code</Label>
+                <Label htmlFor="bank_sortCode">SORT Code</Label>
                 <Input
                   type="text"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.bank.sortCode}
-                  name="bank.sortCode"
+                  value={props.values.bank_sortCode}
+                  name="bank_sortCode"
                 />
-                {props.errors.bank && props.touched.bank ? (
-                  <Error id="feedback">{props.errors.bank.sortCode}</Error>
+                {props.errors.bank_sortCode && props.touched.bank_sortCode ? (
+                  <Error id="feedback">{props.errors.bank_sortCode}</Error>
                 ) : null}
                 <ShowSectionButton
                   type="button"
@@ -1452,7 +1494,7 @@ class DetailsForm extends Component {
               <Heading>7. Employee Family Line Information</Heading>
 
               <section hidden={this.state.familyLine}>
-                <Label htmlFor="familyLine.name">
+                <Label htmlFor="family_line_beneficiary">
                   Name of Family Member to receive monthly airtime (per employee
                   benefit)
                 </Label>
@@ -1460,43 +1502,44 @@ class DetailsForm extends Component {
                   type="text"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.familyLine.name}
-                  name="familyLine.name"
+                  value={props.values.family_line_beneficiary}
+                  name="family_line_beneficiary"
                 />
-                {props.errors.familyLine && props.touched.familyLine.name ? (
-                  <Error id="feedback">{props.errors.familyLine.name}</Error>
+                {props.errors.family_line_beneficiary &&
+                props.touched.family_line_beneficiary ? (
+                  <Error id="feedback">
+                    {props.errors.family_line_beneficiary}
+                  </Error>
                 ) : null}
 
-                <Label htmlFor="familyLine.relationship">Relationship</Label>
+                <Label htmlFor="family_line_relationship">Relationship</Label>
                 <Input
                   type="text"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.familyLine.relationship}
-                  name="familyLine.relationship"
+                  value={props.values.family_line_relationship}
+                  name="family_line_relationship"
                 />
-                {props.errors.familyLine &&
-                props.touched.familyLine.relationship ? (
+                {props.errors.family_line_relationship &&
+                props.touched.family_line_relationship ? (
                   <Error id="feedback">
-                    {props.errors.familyLine.relationship}
+                    {props.errors.family_line_relationship}
                   </Error>
                 ) : null}
 
-                <Label htmlFor="familyLine.mobileNumber">
+                <Label htmlFor="family_line_number">
                   Mobile Number (MTN Only)
                 </Label>
                 <Input
                   type="number"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.familyLine.mobileNumber}
-                  name="familyLine.mobileNumber"
+                  value={props.values.family_line_number}
+                  name="family_line_number"
                 />
-                {props.errors.familyLine &&
-                props.touched.familyLine.mobileNumber ? (
-                  <Error id="feedback">
-                    {props.errors.familyLine.mobileNumber}
-                  </Error>
+                {props.errors.family_line_number &&
+                props.touched.family_line_number ? (
+                  <Error id="feedback">{props.errors.family_line_number}</Error>
                 ) : null}
                 <ShowSectionButton
                   type="button"
@@ -1509,15 +1552,15 @@ class DetailsForm extends Component {
 
               <Heading>8. Medical Insurance</Heading>
               <section hidden={this.state.medicalInsurance}>
-                <Label htmlFor="medicalInsurance.provider">
+                <Label htmlFor="medicalInsurance_provider">
                   Select your preferred medical insurance provider:
                 </Label>
                 <Select
                   as="select"
-                  name="medicalInsurance.provider"
+                  name="medicalInsurance_provider"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  value={props.values.medicalInsurance.provider}
+                  value={props.values.medicalInsurance_provider}
                 >
                   <option value=""></option>
                   {this.props.insuranceProviders &&
@@ -1548,9 +1591,7 @@ class DetailsForm extends Component {
                   Insurance Dependent Application Form
                 </Link>
 
-                <Label htmlFor="medicalInsurance.form">
-                  Upload the completed forms here
-                </Label>
+                <Label htmlFor="">Upload the completed forms here</Label>
                 {/* <input
                   accept="image/jpeg"
                   type="file"
@@ -1562,14 +1603,14 @@ class DetailsForm extends Component {
                 /> */}
 
                 <FileInput>
-                  <label htmlFor="medicalInsurance.form">
+                  <label htmlFor="medicalInsurance_form">
                     Upload
                     <input
                       multiple
-                      id="medicalInsurance.form"
+                      id="medicalInsurance_form"
                       accept="image/jpeg"
                       type="file"
-                      name="medicalInsurance.form"
+                      name="medicalInsurance_form"
                       onChange={e => {
                         if (e.target.files.length) {
                           const arrFiles = Array.from(e.target.files)
@@ -1577,15 +1618,15 @@ class DetailsForm extends Component {
                             const src = window.URL.createObjectURL(file)
                             return { file, id: index, src }
                           })
-                          props.setFieldValue('medicalInsurance.form', files)
+                          props.setFieldValue('medicalInsurance_form', files)
                         }
                       }}
                     />
                   </label>
 
                   <p>
-                    {props.values.medicalInsurance.form.length
-                      ? props.values.medicalInsurance.form.length +
+                    {props.values.medicalInsurance_form.length
+                      ? props.values.medicalInsurance_form.length +
                         ' file(s) uploaded'
                       : 'Please upload JPEG format, no larger than 3mb in size'}
                   </p>
@@ -1602,7 +1643,7 @@ class DetailsForm extends Component {
 
               <Heading>9. Fuel Card Option</Heading>
               <section hidden={this.state.fuelCard}>
-                <Label htmlFor="medicalInsurance.provider">
+                <Label htmlFor="fuelCard">
                   Select your preferred fuel provider:
                 </Label>
 
