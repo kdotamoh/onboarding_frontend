@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Formik, FieldArray, getIn, ErrorMessage } from 'formik'
+import { Formik, FieldArray, getIn } from 'formik'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 import { layout } from 'styled-system'
@@ -181,6 +181,8 @@ const FlexRow = styled.div`
   flex-direction: row;
 `
 
+const phoneRegex = /^(024|054|055|059)([0-9]{7})/g
+
 const ValidationSchema = Yup.object().shape({
   surname: Yup.string().required('Surname is required'),
   middleName: Yup.string(),
@@ -196,9 +198,38 @@ const ValidationSchema = Yup.object().shape({
   maritalStatus: Yup.mixed()
     .oneOf(['SINGLE', 'MARRIED'])
     .required('Marital status is required'),
+  father: Yup.string().required('Name of father is required'),
+  mother: Yup.string().required('Name of mother is required'),
+  nok_name: Yup.string().required('Name of next of kin is required'),
+  nok_address: Yup.string().required('Address of next of kin is required'),
+  nok_contactNumber: Yup.string().required(
+    'Contact number of next of kin is required'
+  ),
+  nok_dob_day: Yup.string().required('Day is required'),
+  nok_dob_month: Yup.string().required('Month is required'),
+  nok_dob_year: Yup.string().required('Year is required'),
+  nationalService_start_month: Yup.string().required('Month is required'),
+  nationalService_start_year: Yup.string().required('Year is required'),
+  nationalService_end_year: Yup.string().required('Year is required'),
+  nationalService_end_month: Yup.string().required('Month is required'),
+  residential_address_physical: Yup.string().required(
+    'Physical address is required'
+  ),
+  residential_address_digital: Yup.string().required(
+    'Digital address is required'
+  ),
   postalAddress: Yup.string(),
-  socialSecurity: Yup.string().required('Social Security number is required'),
-  TIN: Yup.string().required('TIN is required')
+  socialSecurity: Yup.string().required('Social Security Number is required'),
+  TIN: Yup.string().required('TIN is required'),
+  bank_name: Yup.string().required('Bank name is required'),
+  bank_branch: Yup.string().required('Bank branch is required'),
+  bank_accountNumber: Yup.string().required('Bank account number is required'),
+  bank_sortCode: Yup.string().required('Bank sort code is required'),
+  family_line_beneficiary: Yup.string().required('Name is required'),
+  family_line_relationship: Yup.string().required('Relationship is required'),
+  family_line_number: Yup.string()
+    .matches(phoneRegex, 'Must be an MTN number')
+    .required('Number is required')
 
   // For when I wanna validate children: https://codesandbox.io/s/myqmyq3plx
 })
@@ -1035,13 +1066,9 @@ class DetailsForm extends Component {
                   value={props.values.nok_name}
                   name="nok_name"
                 />
-                {getIn(props.errors, 'nok_name') &&
-                getIn(props.touched, 'nok_name') ? (
-                  <ErrorMessage component="div" name="nok_name" />
-                ) : // <Error id="feedback">
-                //   {getIn(props.errors, 'nextOfKin.name')}
-                // </Error>
-                null}
+                {props.errors.nok_name && props.touched.nok_name ? (
+                  <Error id="feedback">{props.errors.nok_name}</Error>
+                ) : null}
 
                 <Label htmlFor="nok_dob">Date of Birth</Label>
                 <SelectRow>
@@ -1092,8 +1119,14 @@ class DetailsForm extends Component {
                   </Select>
                 </SelectRow>
 
-                {props.errors.nexOfKin && props.touched.nexOfKin ? (
-                  <Error id="feedback">{props.errors.nextOfKin.dob}</Error>
+                {props.errors.nok_dob_day && props.touched.nok_dob_day ? (
+                  <Error id="feedback">{props.errors.nok_dob_day}</Error>
+                ) : null}
+                {props.errors.nok_dob_month && props.touched.nok_dob_month ? (
+                  <Error id="feedback">{props.errors.nok_dob_month}</Error>
+                ) : null}
+                {props.errors.nok_dob_year && props.touched.nok_dob_year ? (
+                  <Error id="feedback">{props.errors.nok_dob_year}</Error>
                 ) : null}
 
                 <Label htmlFor="nok_address">Address</Label>
@@ -1531,11 +1564,13 @@ class DetailsForm extends Component {
                   Mobile Number (MTN Only)
                 </Label>
                 <Input
-                  type="number"
+                  type="tel"
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
                   value={props.values.family_line_number}
                   name="family_line_number"
+                  pattern="[0-9]*"
+                  inputmode="numeric"
                 />
                 {props.errors.family_line_number &&
                 props.touched.family_line_number ? (
