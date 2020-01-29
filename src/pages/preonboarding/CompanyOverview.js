@@ -20,6 +20,8 @@ import vision from 'images/vision_icon.svg'
 import mission from 'images/mission_icon.svg'
 import values from 'images/values_icon.svg'
 import vital from 'images/vital_icon.svg'
+import valuesPdf from 'assets/values.pdf'
+import behavioursPdf from 'assets/behaviours.pdf'
 
 import { COLORS } from '../../constants'
 
@@ -178,7 +180,9 @@ export default class CompanyOverview extends Component {
                 <span>Relationship</span>
                 <span>Innovation</span>
                 <span>Can-do</span>
-                <a href="#/">See full values dictionary</a>
+                <a target="_blank" rel="noopener noreferrer" href={valuesPdf}>
+                  See full values dictionary
+                </a>
               </div>
               <div className="column">
                 <img src={vital} alt="" />
@@ -189,7 +193,13 @@ export default class CompanyOverview extends Component {
                 <span>Complete Accountability</span>
                 <span>Complete Candor</span>
                 <span>Get-It-Done</span>
-                <a href="#/">See full vital behaviours dictionary</a>
+                <a
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={behavioursPdf}
+                >
+                  See full vital behaviours dictionary
+                </a>
               </div>
             </div>
           </BigHero>
