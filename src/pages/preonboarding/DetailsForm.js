@@ -367,6 +367,10 @@ class DetailsForm extends Component {
       days.push(i)
     }
 
+    let { user } = this.props
+    let { departments } = this.props
+    let { divisions } = this.props
+
     return (
       <Formik
         enableReinitialize={true}
@@ -389,7 +393,7 @@ class DetailsForm extends Component {
             values.children[0].name === '' &&
             values.children[0].birthCertificate === ''
           ) {
-            newChildren = []
+            newChildren = null
           }
 
           let formData = new FormData()
@@ -1710,19 +1714,28 @@ class DetailsForm extends Component {
               <Heading>10. Functional Information</Heading>
               <section hidden={this.state.functional}>
                 <Label htmlFor="nationalId">Job Title</Label>
-                <p css={mutedCss}>XXXXXXXX</p>
+                <p css={mutedCss}>{user.job_title}</p>
 
                 <Label htmlFor="nationalId">Division</Label>
-                <p css={mutedCss}>XXXXXXXX</p>
+                <p css={mutedCss}>
+                  {divisions.length &&
+                    divisions.find(division => division.id === user.division)
+                      .title}
+                </p>
 
                 <Label htmlFor="nationalId">Department</Label>
-                <p css={mutedCss}>XXXXXXXX</p>
+                <p css={mutedCss}>
+                  {departments.length &&
+                    departments.find(
+                      department => department.id === user.department
+                    ).title}
+                </p>
 
                 <Label htmlFor="nationalId">Location</Label>
-                <p css={mutedCss}>XXXXXXXX</p>
+                <p css={mutedCss}>{user.location}</p>
 
                 <Label htmlFor="nationalId">Line Manager</Label>
-                <p css={mutedCss}>XXXXXXXX</p>
+                <p css={mutedCss}>{user.line_manager}</p>
               </section>
             </Form>
 
@@ -1749,8 +1762,15 @@ class DetailsForm extends Component {
 DetailsForm.propTypes = {
   handleSubmit: PropTypes.func,
   user: PropTypes.shape({
-    id: PropTypes.number
+    id: PropTypes.number,
+    division: PropTypes.number,
+    department: PropTypes.number,
+    location: PropTypes.string,
+    job_title: PropTypes.string,
+    line_manager: PropTypes.string
   }),
+  divisions: PropTypes.array,
+  departments: PropTypes.array,
   token: PropTypes.string,
   insuranceProviders: PropTypes.array,
   fuelCardProviders: PropTypes.array
@@ -1760,5 +1780,7 @@ export default connect(state => ({
   token: state.token,
   user: state.user,
   insuranceProviders: state.providers.insuranceProviders,
-  fuelCardProviders: state.providers.fuelCardProviders
+  fuelCardProviders: state.providers.fuelCardProviders,
+  departments: state.organisation.departments,
+  divisions: state.organisation.divisions
 }))(DetailsForm)
