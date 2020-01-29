@@ -23,6 +23,8 @@ import vital from 'images/vital_icon.svg'
 import valuesPdf from 'assets/values.pdf'
 import behavioursPdf from 'assets/behaviours.pdf'
 
+import preonboarding from 'assets/preonboarding.mp4'
+
 import { COLORS } from '../../constants'
 
 const BgImg = styled(Img)`
@@ -151,6 +153,11 @@ export default class CompanyOverview extends Component {
         <StepNav />
         <Container>
           <H3 py="3rem">Overview</H3>
+          <video controls>
+            <source src={preonboarding} type="video/mp4" />
+            Sorry, your browser doesn't support embedded videos.
+          </video>
+          <div style={{ marginTop: '10rem' }} />
           <BigHero>
             <div className="row">
               <div className="column">
