@@ -85,9 +85,6 @@ export const DashboardCard = styled(Card)`
   ${layout}
   ${space}
 
-  img {
-    margin-bottom: 3rem;
-  }
   box-shadow: unset;
   min-height: unset;
 `

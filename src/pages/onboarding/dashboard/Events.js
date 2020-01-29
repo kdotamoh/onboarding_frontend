@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { space } from 'styled-system'
+import axios from 'axios'
+import moment from 'moment'
 
 import {
   SplitGrid,
@@ -11,7 +15,7 @@ import { COLORS } from '../../../constants'
 import { SideNav } from 'components/navigation'
 import DashboardNav from 'components/navigation/DashboardNav'
 import OnboardingLink from 'pages/onboarding/OnboardingLink'
-import { DashboardCard } from 'components/card'
+import { DashboardCard, CardInfo } from 'components/card'
 import DashboardLink from 'pages/onboarding/dashboard/DashboardLink'
 
 import noTask from 'images/no_task.svg'
@@ -44,7 +48,24 @@ const NoEvents = () => (
 //   </DashboardCard>
 // )
 
-export default class Events extends Component {
+class Events extends Component {
+  state = {
+    events: []
+  }
+
+  async componentDidMount() {
+    let res = await axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API_BASE}/events/`,
+      headers: {
+        Authorization: `JWT ${this.props.token}`
+      }
+    })
+
+    let { data: events } = res
+    this.setState({ events })
+  }
+
   render() {
     return (
       <>
@@ -64,7 +85,88 @@ export default class Events extends Component {
           </SplitGridLeftColumn>
 
           <SplitGridRightColumn p="5rem" background={COLORS.LIGHT_GREY}>
-            <NoEvents path="/" />
+            <div
+              css={`
+                display: flex;
+                flex-wrap: wrap;
+              `}
+            >
+              {this.state.events.length ? (
+                this.state.events.map(event => (
+                  <DashboardCard
+                    mx="1rem"
+                    my="1rem"
+                    height="unset"
+                    key={event.id}
+                  >
+                    {/* {event.picture && <img src={event.picture} />} */}
+                    {event.picture && (
+                      <img
+                        css={`
+                          height: 20rem;
+                          width: 100%;
+                          object-fit: cover;
+                          margin-bottom: 0;
+                        `}
+                        src="https://abpconsult.com/wp-content/uploads/2017/08/MTN-Head-Ofiice.jpg"
+                      />
+                    )}
+                    <CardInfo>
+                      <div className="card-info__left">
+                        <div className="card-info__image card-info__circle">
+                          <span className="month">
+                            {moment(event.startDate)
+                              .format('MMM')
+                              .toUpperCase()}
+                          </span>
+                          <span className="day">
+                            {moment(event.startDate).format('DD')}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="card-info__right">
+                        <div className="card-info__details">
+                          <h5>{event.title}</h5>
+                          <span>
+                            {moment(event.startDate).format('MMM DD YYYY')} |{' '}
+                            {moment(event.time, 'HH:mm:ss').format('hh:mm A')}
+                          </span>
+                          <span>{event.venue}</span>
+                        </div>
+                      </div>
+                    </CardInfo>
+                    {event.description && (
+                      <div
+                        css={`
+                          display: flex;
+                          justify-content: center;
+                          align-items: center;
+                          height: 100%;
+
+                          border-top: 1px solid #eeeeee;
+                          font-size: 1.2rem;
+                          margin: 0 2rem;
+                        `}
+                      >
+                        <p
+                          css={`
+                            padding: 2rem 1rem;
+                            width: 100%;
+                            text-align: center;
+                          `}
+                        >
+                          {event.description}
+                        </p>
+                      </div>
+                    )}
+                  </DashboardCard>
+                ))
+              ) : (
+                <NoEvents path="/" />
+              )}
+            </div>
+
             {/* <PastEvents path="/dashboard/events/past" /> */}
           </SplitGridRightColumn>
         </SplitGrid>
@@ -72,3 +174,10 @@ export default class Events extends Component {
     )
   }
 }
+Events.propTypes = {
+  token: PropTypes.string
+}
+
+export default connect(state => ({
+  token: state.token
+}))(Events)
