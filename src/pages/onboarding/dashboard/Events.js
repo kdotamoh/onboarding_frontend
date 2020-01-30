@@ -115,7 +115,8 @@ class Events extends Component {
                             object-fit: cover;
                             margin-bottom: 0;
                           `}
-                          src="https://abpconsult.com/wp-content/uploads/2017/08/MTN-Head-Ofiice.jpg"
+                          src={event.picture}
+                          alt=""
                         />
                       )}
                       <CardInfo>
@@ -150,7 +151,6 @@ class Events extends Component {
                             justify-content: center;
                             align-items: center;
                             height: 100%;
-
                             border-top: 1px solid #eeeeee;
                             font-size: 1.2rem;
                             margin: 0 2rem;
