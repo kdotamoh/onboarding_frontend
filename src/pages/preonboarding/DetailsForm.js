@@ -396,132 +396,157 @@ class DetailsForm extends Component {
             newChildren = null
           }
 
-          let formData = new FormData()
+          // let formData = new FormData()
 
-          formData.append('passport_picture', values.passportPhoto)
-          formData.append('employee', this.props.user.id)
-          formData.append('first_name', values.firstName)
-          formData.append('other_names', values.middleName)
-          formData.append('last_name', values.surname)
-          formData.append(
-            'dob',
-            `${values.dob_year}-${values.dob_month}-${values.dob_day}`
-          )
-          formData.append('gender', values.gender)
-          formData.append('nationality', values.nationality)
-          formData.append('region', values.region)
+          // formData.append('passport_picture', values.passportPhoto)
+          // formData.append('employee', this.props.user.id)
+          // formData.append('first_name', values.firstName)
+          // formData.append('other_names', values.middleName)
+          // formData.append('last_name', values.surname)
+          // formData.append(
+          //   'dob',
+          //   `${values.dob_year}-${values.dob_month}-${values.dob_day}`
+          // )
+          // formData.append('gender', values.gender)
+          // formData.append('nationality', values.nationality)
+          // formData.append('region', values.region)
 
-          formData.append('marital_status', values.maritalStatus)
-          formData.append('name_of_spouse', values.spouse_name)
-          formData.append('contact_of_spouse', values.spouse_contactNumber)
+          // formData.append('marital_status', values.maritalStatus)
+          // formData.append('name_of_spouse', values.spouse_name)
+          // formData.append('contact_of_spouse', values.spouse_contactNumber)
 
-          formData.append('children', newChildren)
-          formData.append('name_of_father', values.father)
-          formData.append('name_of_mother', values.mother)
-          formData.append('nok_name', values.nok_name)
-          formData.append(
-            'nok_dob',
-            `${values.nok_dob_year}-${values.nok_dob_month}-${values.nok_dob_day}`
-          )
-          formData.append('nok_address', values.nok_address)
-          formData.append('nok_contact', values.nok_contactNumber)
+          // formData.append('children', newChildren)
+          // formData.append('name_of_father', values.father)
+          // formData.append('name_of_mother', values.mother)
+          // formData.append('nok_name', values.nok_name)
+          // formData.append(
+          //   'nok_dob',
+          //   `${values.nok_dob_year}-${values.nok_dob_month}-${values.nok_dob_day}`
+          // )
+          // formData.append('nok_address', values.nok_address)
+          // formData.append('nok_contact', values.nok_contactNumber)
 
-          formData.append(
-            'nss_start_date',
-            `${values.nationalService_start_year}-${values.nationalService_start_month}-01`
-          )
-          formData.append(
-            'nss_end_date',
-            `${values.nationalService_end_year}-${values.nationalService_end_month}-30`
-          )
+          // formData.append(
+          //   'nss_start_date',
+          //   `${values.nationalService_start_year}-${values.nationalService_start_month}-01`
+          // )
+          // formData.append(
+          //   'nss_end_date',
+          //   `${values.nationalService_end_year}-${values.nationalService_end_month}-30`
+          // )
 
-          formData.append(
-            'res_physical_address',
-            values.residential_address_physical
-          )
-          formData.append(
-            'res_digital_address',
-            values.residential_address_digital
-          )
-          formData.append('res_phone_number', values.residential_phoneNumber)
-          formData.append('postal_address', values.postalAddress)
-          formData.append('ssnit_number', values.socialSecurity)
-          formData.append('tin_number', values.TIN)
-          formData.append('bank_account_number', values.bank_accountNumber)
-          formData.append('bank_branch', values.bank_branch)
-          formData.append('bank_name', values.bank_name)
-          formData.append('sort_code', values.bank_sortCode)
-          formData.append('family_beneficiary', values.family_line_beneficiary)
-          formData.append(
-            'relationship_to_beneficiary',
-            values.family_line_relationship
-          )
-          formData.append('beneficiary_phone_number', values.family_line_number)
-          formData.append(
-            'medical_insurance_provider',
-            Number(values.medicalInsurance_provider)
-          )
-          // TODO: medical insurance forms
-          formData.append('fuel_card_option', Number(values.fuelCard))
+          // formData.append(
+          //   'res_physical_address',
+          //   values.residential_address_physical
+          // )
+          // formData.append(
+          //   'res_digital_address',
+          //   values.residential_address_digital
+          // )
+          // formData.append('res_phone_number', values.residential_phoneNumber)
+          // formData.append('postal_address', values.postalAddress)
+          // formData.append('ssnit_number', values.socialSecurity)
+          // formData.append('tin_number', values.TIN)
+          // formData.append('bank_account_number', values.bank_accountNumber)
+          // formData.append('bank_branch', values.bank_branch)
+          // formData.append('bank_name', values.bank_name)
+          // formData.append('sort_code', values.bank_sortCode)
+          // formData.append('family_beneficiary', values.family_line_beneficiary)
+          // formData.append(
+          //   'relationship_to_beneficiary',
+          //   values.family_line_relationship
+          // )
+          // formData.append('beneficiary_phone_number', values.family_line_number)
+          // formData.append(
+          //   'medical_insurance_provider',
+          //   Number(values.medicalInsurance_provider)
+          // )
+          // // TODO: medical insurance forms
+          // formData.append('fuel_card_option', Number(values.fuelCard))
 
-          // let data = {
-          //   employee: this.props.user.id,
+          let data = {
+            employee: this.props.user.id,
 
-          //   first_name: values.firstName,
-          //   other_names: values.middleName,
-          //   last_name: values.surname,
-          //   dob: `${values.dob_year}-${values.dob_month}-${values.dob_day}`,
-          //   gender: values.gender,
-          //   nationality: values.nationality,
-          //   region: values.region,
-          //   // national_id: values.nationalId,
-          //   marital_status: values.maritalStatus,
-          //   name_of_spouse: values.spouse_name,
-          //   contact_of_spouse: values.spouse_contactNumber,
-          //   // marriage_cert: values.marriageCertificate,
-          //   children: newChildren,
-          //   name_of_father: values.father,
-          //   name_of_mother: values.mother,
-          //   nok_name: values.nok_name,
-          //   nok_dob: `${values.nok_dob_year}-${values.nok_dob_month}-${values.nok_dob_day}`,
-          //   nok_address: values.nok_address,
-          //   nok_contact: values.nok_contactNumber,
-          //   // educational_cert: values.educationalCertificates,
-          //   // professional_body_affiliates: values.professionalBodies,
-          //   nss_start_date: `${values.nationalService_start_year}-${values.nationalService_start_month}-01`,
-          //   nss_end_date: `${values.nationalService_end_year}-${values.nationalService_end_month}-30`, // TODO: fix hardcoded days
-          //   // nss_cert: values.nationalService.certificate,
-          //   res_physical_address: values.residential_address_physical,
-          //   res_digital_address: values.residential_address_digital,
-          //   res_phone_number: values.residential_phoneNumber,
-          //   postal_address: values.postalAddress,
-          //   ssnit_number: values.socialSecurity,
-          //   tin_number: values.TIN,
-          //   bank_account_number: values.bank_accountNumber,
-          //   bank_branch: values.bank_branch,
-          //   bank_name: values.bank_name,
-          //   sort_code: values.bank_sortCode,
-          //   family_beneficiary: values.family_line_beneficiary,
-          //   relationship_to_beneficiary: values.family_line_relationship,
-          //   beneficiary_phone_number: values.family_line_number,
-          //   medical_insurance_provider: Number(
-          //     values.medicalInsurance_provider
-          //   ),
-          //   // TODO: medical insurance forms
-          //   fuel_card_option: Number(values.fuelCard)
-          // }
-          // console.log(data)
+            first_name: values.firstName,
+            other_names: values.middleName,
+            last_name: values.surname,
+            dob: `${values.dob_year}-${values.dob_month}-${values.dob_day}`,
+            gender: values.gender,
+            nationality: values.nationality,
+            region: values.region,
+            // national_id: values.nationalId,
+            marital_status: values.maritalStatus,
+            name_of_spouse: values.spouse_name,
+            contact_of_spouse: values.spouse_contactNumber,
+            // marriage_cert: values.marriageCertificate,
+            children: newChildren,
+            name_of_father: values.father,
+            name_of_mother: values.mother,
+            nok_name: values.nok_name,
+            nok_dob: `${values.nok_dob_year}-${values.nok_dob_month}-${values.nok_dob_day}`,
+            nok_address: values.nok_address,
+            nok_contact: values.nok_contactNumber,
+            // educational_cert: values.educationalCertificates,
+            // professional_body_affiliates: values.professionalBodies,
+            nss_start_date: `${values.nationalService_start_year}-${values.nationalService_start_month}-01`,
+            nss_end_date: `${values.nationalService_end_year}-${values.nationalService_end_month}-30`, // TODO: fix hardcoded days
+            // nss_cert: values.nationalService.certificate,
+            res_physical_address: values.residential_address_physical,
+            res_digital_address: values.residential_address_digital,
+            res_phone_number: values.residential_phoneNumber,
+            postal_address: values.postalAddress,
+            ssnit_number: values.socialSecurity,
+            tin_number: values.TIN,
+            bank_account_number: values.bank_accountNumber,
+            bank_branch: values.bank_branch,
+            bank_name: values.bank_name,
+            sort_code: values.bank_sortCode,
+            family_beneficiary: values.family_line_beneficiary,
+            relationship_to_beneficiary: values.family_line_relationship,
+            beneficiary_phone_number: values.family_line_number,
+            medical_insurance_provider: Number(
+              values.medicalInsurance_provider
+            ),
+            // TODO: medical insurance forms
+            fuel_card_option: Number(values.fuelCard)
+          }
+          console.log(data)
+
+          let imageFiles = new FormData()
+          imageFiles.append('national_id', values.nationalId)
+          imageFiles.append('marriage_cert', values.marriageCertificate)
+          // imageFiles.append('educational_cert', values.educationalCertificates )
+          // imageFiles.append('professional_body_affiliates',  values.professionalBodies)
+          imageFiles.append('nss_cert', values.nationalService_certificate)
+          // imageFiles.append('principal_form', )
+          // imageFiles.append('dependant_form', )
 
           try {
             let res = await axios({
               method: 'post',
               url: `${process.env.REACT_APP_API_BASE}/profiles/`,
-              data: formData,
+              // data: formData,
+              data,
               headers: {
                 Authorization: `JWT ${this.props.token}`
                 // 'Content-Type': 'multipart/form-data'
               }
             })
+            if (res.status === 201) {
+              try {
+                await axios({
+                  method: 'post',
+                  url: `${process.env.REACT_APP_API_BASE}/profiles/${this.props.user.id}/upload/ `,
+                  data: imageFiles,
+                  headers: {
+                    Authorization: `JWT ${this.props.token}`,
+                    'Content-Type': 'multipart/form-data'
+                  }
+                })
+              } catch (err) {
+                console.error(err)
+              }
+            }
             navigate('/preonboarding/conditions-of-service')
             console.log(res)
           } catch (err) {
