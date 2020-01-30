@@ -48,8 +48,13 @@ const NoEvents = () => (
 //   </DashboardCard>
 // )
 
+const Loading = props => (
+  <div>{props.loading ? <p>Loading...</p> : <div>{props.children}</div>}</div>
+)
+
 class Events extends Component {
   state = {
+    loading: true,
     events: []
   }
 
@@ -63,10 +68,11 @@ class Events extends Component {
     })
 
     let { data: events } = res
-    this.setState({ events })
+    this.setState({ events, loading: false })
   }
 
   render() {
+    let { loading } = this.state
     return (
       <>
         <DashboardNav>
@@ -91,80 +97,82 @@ class Events extends Component {
                 flex-wrap: wrap;
               `}
             >
-              {this.state.events.length ? (
-                this.state.events.map(event => (
-                  <DashboardCard
-                    mx="1rem"
-                    my="1rem"
-                    height="unset"
-                    key={event.id}
-                  >
-                    {/* {event.picture && <img src={event.picture} />} */}
-                    {event.picture && (
-                      <img
-                        css={`
-                          height: 20rem;
-                          width: 100%;
-                          object-fit: cover;
-                          margin-bottom: 0;
-                        `}
-                        src="https://abpconsult.com/wp-content/uploads/2017/08/MTN-Head-Ofiice.jpg"
-                      />
-                    )}
-                    <CardInfo>
-                      <div className="card-info__left">
-                        <div className="card-info__image card-info__circle">
-                          <span className="month">
-                            {moment(event.startDate)
-                              .format('MMM')
-                              .toUpperCase()}
-                          </span>
-                          <span className="day">
-                            {moment(event.startDate).format('DD')}
-                          </span>
-                        </div>
-                      </div>
-
-                      <div className="card-info__right">
-                        <div className="card-info__details">
-                          <h5>{event.title}</h5>
-                          <span>
-                            {moment(event.startDate).format('MMM DD YYYY')} |{' '}
-                            {moment(event.time, 'HH:mm:ss').format('hh:mm A')}
-                          </span>
-                          <span>{event.venue}</span>
-                        </div>
-                      </div>
-                    </CardInfo>
-                    {event.description && (
-                      <div
-                        css={`
-                          display: flex;
-                          justify-content: center;
-                          align-items: center;
-                          height: 100%;
-
-                          border-top: 1px solid #eeeeee;
-                          font-size: 1.2rem;
-                          margin: 0 2rem;
-                        `}
-                      >
-                        <p
+              <Loading loading={loading}>
+                {this.state.events.length ? (
+                  this.state.events.map(event => (
+                    <DashboardCard
+                      mx="1rem"
+                      mb="2rem"
+                      height="unset"
+                      key={event.id}
+                    >
+                      {/* {event.picture && <img src={event.picture} />} */}
+                      {event.picture && (
+                        <img
                           css={`
-                            padding: 2rem 1rem;
+                            height: 20rem;
                             width: 100%;
-                            text-align: center;
+                            object-fit: cover;
+                            margin-bottom: 0;
+                          `}
+                          src="https://abpconsult.com/wp-content/uploads/2017/08/MTN-Head-Ofiice.jpg"
+                        />
+                      )}
+                      <CardInfo>
+                        <div className="card-info__left">
+                          <div className="card-info__image card-info__circle">
+                            <span className="month">
+                              {moment(event.startDate)
+                                .format('MMM')
+                                .toUpperCase()}
+                            </span>
+                            <span className="day">
+                              {moment(event.startDate).format('DD')}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="card-info__right">
+                          <div className="card-info__details">
+                            <h5>{event.title}</h5>
+                            <span>
+                              {moment(event.startDate).format('MMM DD YYYY')} |{' '}
+                              {moment(event.time, 'HH:mm:ss').format('hh:mm A')}
+                            </span>
+                            <span>{event.venue}</span>
+                          </div>
+                        </div>
+                      </CardInfo>
+                      {event.description && (
+                        <div
+                          css={`
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 100%;
+
+                            border-top: 1px solid #eeeeee;
+                            font-size: 1.2rem;
+                            margin: 0 2rem;
                           `}
                         >
-                          {event.description}
-                        </p>
-                      </div>
-                    )}
-                  </DashboardCard>
-                ))
-              ) : (
-                <NoEvents path="/" />
-              )}
+                          <p
+                            css={`
+                              padding: 2rem 1rem;
+                              width: 100%;
+                              text-align: center;
+                            `}
+                          >
+                            {event.description}
+                          </p>
+                        </div>
+                      )}
+                    </DashboardCard>
+                  ))
+                ) : (
+                  <NoEvents path="/" />
+                )}
+              </Loading>
             </div>
 
             {/* <PastEvents path="/dashboard/events/past" /> */}
