@@ -15,15 +15,16 @@ const BgImg = styled(Img)`
   z-index: 0;
 `
 
-export default class Overview extends Component {
+export default class MobileFinancial extends Component {
   render() {
     return (
       <>
         <PageStyle>
-          <h3>Overview</h3>
+          <h3>Mobile Financial Services</h3>
           <h4>Text here</h4>
           <p>Text here</p>
-          <Link to="../capital-projects">
+
+          <Link to="../network">
             <Button mt="15rem" textColor="black">
               Next >
             </Button>

@@ -19,7 +19,6 @@ import { SideNav, SmallNav } from 'components/navigation'
 import ControlledLink from './ControlledLink'
 
 import CompanyOverview from './about-mtn/CompanyOverview'
-// import OnboardingLogin from './OnboardingLogin'
 import CEOWelcome from './about-mtn/CEOWelcome'
 import MissionVision from './about-mtn/MissionVision'
 import Organisation from './about-mtn/Organisation'
@@ -27,13 +26,23 @@ import EmployeeValue from './about-mtn/EmployeeValue'
 import StrategicPillars from './about-mtn/StrategicPillars'
 import Tasks from './about-mtn/Tasks'
 import OnboardingLogin from 'pages/onboarding/OnboardingLogin'
-import EmployeeIndustrial from './functional-groups/EmployeeIndustrial'
+// import EmployeeIndustrial from './functional-groups/EmployeeIndustrial'
 import FinanceAndService from './functional-groups/FinanceAndService'
-import LearningDevelopment from './functional-groups/LearningDevelopment'
+// import LearningDevelopment from './functional-groups/LearningDevelopment'
 import Marketing from './functional-groups/Marketing'
 import Overview from './functional-groups/Overview'
 import Sales from './functional-groups/Sales'
 import HRServices from './functional-groups/HRServices'
+import CapitalProjects from './functional-groups/CapitalProjects'
+import CorporateServices from './functional-groups/CorporateServices'
+import CustomerRelations from './functional-groups/CustomerRelations'
+import EnterpriseBusiness from './functional-groups/EnterpriseBusiness'
+import IAForensics from './functional-groups/IAForensics'
+import MobileFinancial from './functional-groups/MobileFinancial'
+import Network from './functional-groups/Network'
+import RiskCompliance from './functional-groups/RiskCompliance'
+import EmployeeUnion from './functional-groups/EmployeeUnion'
+import InfoSys from './functional-groups/InformationSystems'
 
 import Events from './dashboard/Events'
 import UserTasks from './dashboard/Tasks'
@@ -71,24 +80,55 @@ const FunctionalGroups = ({ children }) => {
               <ControlledLink to="/onboarding/functional-groups/overview">
                 Overview
               </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/capital-projects">
+                Capital Projects Group
+              </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/corporate-services">
+                Corporate Services
+              </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/customer-relations">
+                Customer Relations
+              </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/enterprise-business">
+                Enterprise Business
+              </ControlledLink>
               <ControlledLink to="/onboarding/functional-groups/finance-service">
                 Finance &amp; Service
               </ControlledLink>
-              <ControlledLink to="/onboarding/functional-groups/employee-industrial">
-                Employee &amp; Industrial
-              </ControlledLink>
-              <ControlledLink to="/onboarding/functional-groups/learning-development">
-                Learning &amp; Development
-              </ControlledLink>
               <ControlledLink to="/onboarding/functional-groups/hr-service">
-                HR Services
+                Human Resources
+              </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/information-systems">
+                Information Systems
+              </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/internal-audit">
+                Internal Audit and Forensics
               </ControlledLink>
               <ControlledLink to="/onboarding/functional-groups/marketing">
                 Marketing
               </ControlledLink>
-              <ControlledLink to="/onboarding/functional-groups/sales">
-                Sales
+              <ControlledLink to="/onboarding/functional-groups/mobile-finance">
+                Mobile Financial Services
               </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/network">
+                Network Group
+              </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/risk-and-compliance">
+                Risk and Compliance
+              </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/employee-union">
+                Employee Union (SLOSA)
+              </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/sales">
+                Sales and Distribution
+              </ControlledLink>
+
+              {/* <ControlledLink to="/onboarding/functional-groups/employee-industrial">
+                Employee &amp; Industrial
+              </ControlledLink>
+              <ControlledLink to="/onboarding/functional-groups/learning-development">
+                Learning &amp; Development
+              </ControlledLink> */}
             </SideNav>
           </Wrapper>
         </SplitGridLeftColumn>
@@ -195,12 +235,22 @@ class Onboarding extends Component {
               <Scrolltop path="/">
                 <FunctionalGroups path="functional-groups">
                   <Overview path="/overview" />
+                  <CapitalProjects path="/capital-projects" />
+                  <CorporateServices path="/corporate-services" />
+                  <CustomerRelations path="/customer-relations" />
+                  <EnterpriseBusiness path="/enterprise-business" />
                   <FinanceAndService path="/finance-service" />
-                  <EmployeeIndustrial path="/employee-industrial" />
-                  <LearningDevelopment path="/learning-development" />
+                  {/* <EmployeeIndustrial path="/employee-industrial" /> */}
+                  {/* <LearningDevelopment path="/learning-development" /> */}
                   <HRServices path="/hr-service" />
+                  <InfoSys path="/information-systems" />
+                  <IAForensics path="/internal-audit" />
                   <Marketing path="/marketing" />
+                  <MobileFinancial path="/mobile-finance" />
+                  <Network path="/network" />
+                  <RiskCompliance path="/risk-and-compliance" />
                   <Sales path="/sales" />
+                  <EmployeeUnion path="/employee-union" />
                 </FunctionalGroups>
               </Scrolltop>
             </Router>

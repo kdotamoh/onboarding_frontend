@@ -3,9 +3,11 @@ import styled from 'styled-components'
 import { Link } from '@reach/router'
 
 import { Button, Img } from 'components/styled'
+import PDFViewer from 'components/pdf-viewer'
 
 import bgImg from 'images/onboarding/bg_bottomright.svg'
 import PageStyle from '../PageStyle'
+import pdf from 'assets/functional-groups/RAFM.pdf'
 
 const BgImg = styled(Img)`
   position: absolute;
@@ -21,18 +23,9 @@ export default class FinanceAndService extends Component {
       <>
         <PageStyle>
           <h3>Finance &amp; Service</h3>
-          <h4>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-            sint porro nulla officiis, hic aut quam eius, earum eos illum quas,
-            natus ab repellendus assumenda quidem consequatur autem provident
-            iste.
-          </h4>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quis
-            ullam culpa. Aperiam eius repellat alias, placeat illum nemo culpa
-            dicta dolor ex saepe cumque corrupti dolorem corporis fugit iste.
-          </p>
-          <Link to="../employee-industrial">
+          <h4>Text here</h4>
+          <PDFViewer file={pdf} />
+          <Link to="../hr-service">
             <Button mt="15rem" textColor="black">
               Next >
             </Button>

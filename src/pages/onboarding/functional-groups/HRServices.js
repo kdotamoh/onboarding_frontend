@@ -21,18 +21,9 @@ export default class Overview extends Component {
       <>
         <PageStyle>
           <h3>HR Services</h3>
-          <h4>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-            sint porro nulla officiis, hic aut quam eius, earum eos illum quas,
-            natus ab repellendus assumenda quidem consequatur autem provident
-            iste.
-          </h4>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt quis
-            ullam culpa. Aperiam eius repellat alias, placeat illum nemo culpa
-            dicta dolor ex saepe cumque corrupti dolorem corporis fugit iste.
-          </p>
-          <Link to="../marketing">
+          <h4>Text here</h4>
+          <p>Text here</p>
+          <Link to="../information-systems">
             <Button mt="15rem" textColor="black">
               Next >
             </Button>
