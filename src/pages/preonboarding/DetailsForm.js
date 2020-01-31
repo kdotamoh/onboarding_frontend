@@ -181,7 +181,7 @@ const FlexRow = styled.div`
   flex-direction: row;
 `
 
-const phoneRegex = /^(024|054|055|059)([0-9]{7})/g
+const phoneRegex = /^(024|054|055|059)([0-9]{7}$)/g
 
 const ValidationSchema = Yup.object().shape({
   surname: Yup.string().required('Surname is required'),
@@ -393,7 +393,7 @@ class DetailsForm extends Component {
             values.children[0].name === '' &&
             values.children[0].birthCertificate === ''
           ) {
-            newChildren = null
+            newChildren = []
           }
 
           // let formData = new FormData()
@@ -536,7 +536,7 @@ class DetailsForm extends Component {
               try {
                 await axios({
                   method: 'post',
-                  url: `${process.env.REACT_APP_API_BASE}/profiles/${this.props.user.id}/upload/ `,
+                  url: `${process.env.REACT_APP_API_BASE}/profiles/${res.data.id}/upload/ `,
                   data: imageFiles,
                   headers: {
                     Authorization: `JWT ${this.props.token}`,
@@ -1217,6 +1217,7 @@ class DetailsForm extends Component {
                       type="file"
                       name="educationalCertificates"
                       onChange={e => {
+                        // TODO: allow clicking to add files/push files into array
                         if (e.target.files.length) {
                           const arrFiles = Array.from(e.target.files)
                           const files = arrFiles.map((file, index) => {
