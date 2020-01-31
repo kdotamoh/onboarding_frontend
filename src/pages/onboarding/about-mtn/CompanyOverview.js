@@ -21,18 +21,8 @@ export default class Onboarding extends Component {
       <>
         <PageStyle>
           <h3>Company Overview</h3>
-          <h4>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-            sint porro nulla officiis, hic aut quam eius, earum eos illum quas,
-            natus ab repellendus assumenda quidem consequatur autem provident
-            iste.
-          </h4>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas,
-            explicabo? Saepe, velit voluptate pariatur reiciendis molestiae
-            incidunt earum amet aliquam doloribus? Odio quae, fugit asperiores
-            quas molestiae voluptatibus laboriosam doloribus!
-          </p>
+          <h4>Text here</h4>
+          <p>Text here</p>
           <Link to="../ceo-welcome">
             <Button mt="15rem" textColor="black">
               Next >
