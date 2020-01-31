@@ -196,7 +196,7 @@ const ValidationSchema = Yup.object().shape({
     .oneOf(['Ghanaian', 'Other'])
     .required('Nationality is required'),
   maritalStatus: Yup.mixed()
-    .oneOf(['SINGLE', 'MARRIED'])
+    .oneOf(['S', 'M'])
     .required('Marital status is required'),
   father: Yup.string().required('Name of father is required'),
   mother: Yup.string().required('Name of mother is required'),
@@ -297,7 +297,8 @@ const initialValues = {
   family_line_relationship: '',
   family_line_number: '',
   medicalInsurance_provider: '',
-  medicalInsurance_form: [],
+  principal_form: '',
+  dependent_form: '',
   fuelCard: ''
 }
 
@@ -396,74 +397,6 @@ class DetailsForm extends Component {
             newChildren = []
           }
 
-          // let formData = new FormData()
-
-          // formData.append('passport_picture', values.passportPhoto)
-          // formData.append('employee', this.props.user.id)
-          // formData.append('first_name', values.firstName)
-          // formData.append('other_names', values.middleName)
-          // formData.append('last_name', values.surname)
-          // formData.append(
-          //   'dob',
-          //   `${values.dob_year}-${values.dob_month}-${values.dob_day}`
-          // )
-          // formData.append('gender', values.gender)
-          // formData.append('nationality', values.nationality)
-          // formData.append('region', values.region)
-
-          // formData.append('marital_status', values.maritalStatus)
-          // formData.append('name_of_spouse', values.spouse_name)
-          // formData.append('contact_of_spouse', values.spouse_contactNumber)
-
-          // formData.append('children', newChildren)
-          // formData.append('name_of_father', values.father)
-          // formData.append('name_of_mother', values.mother)
-          // formData.append('nok_name', values.nok_name)
-          // formData.append(
-          //   'nok_dob',
-          //   `${values.nok_dob_year}-${values.nok_dob_month}-${values.nok_dob_day}`
-          // )
-          // formData.append('nok_address', values.nok_address)
-          // formData.append('nok_contact', values.nok_contactNumber)
-
-          // formData.append(
-          //   'nss_start_date',
-          //   `${values.nationalService_start_year}-${values.nationalService_start_month}-01`
-          // )
-          // formData.append(
-          //   'nss_end_date',
-          //   `${values.nationalService_end_year}-${values.nationalService_end_month}-30`
-          // )
-
-          // formData.append(
-          //   'res_physical_address',
-          //   values.residential_address_physical
-          // )
-          // formData.append(
-          //   'res_digital_address',
-          //   values.residential_address_digital
-          // )
-          // formData.append('res_phone_number', values.residential_phoneNumber)
-          // formData.append('postal_address', values.postalAddress)
-          // formData.append('ssnit_number', values.socialSecurity)
-          // formData.append('tin_number', values.TIN)
-          // formData.append('bank_account_number', values.bank_accountNumber)
-          // formData.append('bank_branch', values.bank_branch)
-          // formData.append('bank_name', values.bank_name)
-          // formData.append('sort_code', values.bank_sortCode)
-          // formData.append('family_beneficiary', values.family_line_beneficiary)
-          // formData.append(
-          //   'relationship_to_beneficiary',
-          //   values.family_line_relationship
-          // )
-          // formData.append('beneficiary_phone_number', values.family_line_number)
-          // formData.append(
-          //   'medical_insurance_provider',
-          //   Number(values.medicalInsurance_provider)
-          // )
-          // // TODO: medical insurance forms
-          // formData.append('fuel_card_option', Number(values.fuelCard))
-
           let data = {
             employee: this.props.user.id,
 
@@ -474,11 +407,9 @@ class DetailsForm extends Component {
             gender: values.gender,
             nationality: values.nationality,
             region: values.region,
-            // national_id: values.nationalId,
             marital_status: values.maritalStatus,
             name_of_spouse: values.spouse_name,
             contact_of_spouse: values.spouse_contactNumber,
-            // marriage_cert: values.marriageCertificate,
             children: newChildren,
             name_of_father: values.father,
             name_of_mother: values.mother,
@@ -490,7 +421,6 @@ class DetailsForm extends Component {
             // professional_body_affiliates: values.professionalBodies,
             nss_start_date: `${values.nationalService_start_year}-${values.nationalService_start_month}-01`,
             nss_end_date: `${values.nationalService_end_year}-${values.nationalService_end_month}-30`, // TODO: fix hardcoded days
-            // nss_cert: values.nationalService.certificate,
             res_physical_address: values.residential_address_physical,
             res_digital_address: values.residential_address_digital,
             res_phone_number: values.residential_phoneNumber,
@@ -515,21 +445,22 @@ class DetailsForm extends Component {
           let imageFiles = new FormData()
           imageFiles.append('national_id', values.nationalId)
           imageFiles.append('marriage_cert', values.marriageCertificate)
-          // imageFiles.append('educational_cert', values.educationalCertificates )
-          // imageFiles.append('professional_body_affiliates',  values.professionalBodies)
+          imageFiles.append('educational_certs', values.educationalCertificates)
+          imageFiles.append(
+            'professional_body_affiliates',
+            values.professionalBodies
+          )
           imageFiles.append('nss_cert', values.nationalService_certificate)
-          // imageFiles.append('principal_form', )
-          // imageFiles.append('dependant_form', )
+          imageFiles.append('principal_form', values.principal_form)
+          imageFiles.append('dependant_form', values.dependant_form)
 
           try {
             let res = await axios({
               method: 'post',
               url: `${process.env.REACT_APP_API_BASE}/profiles/`,
-              // data: formData,
               data,
               headers: {
                 Authorization: `JWT ${this.props.token}`
-                // 'Content-Type': 'multipart/form-data'
               }
             })
             if (res.status === 201) {
@@ -548,9 +479,9 @@ class DetailsForm extends Component {
               }
             }
             navigate('/preonboarding/conditions-of-service')
-            console.log(res)
+            console.error(res)
           } catch (err) {
-            console.log(err)
+            console.error(err)
             this.setState({
               errorMessage: 'Something went wrong. Please try again.'
             })
@@ -698,17 +629,6 @@ class DetailsForm extends Component {
                   </Select>
                 </SelectRow>
 
-                {/* <input
-                type="text"
-                onChange={props.handleChange}
-                onBlur={props.handleBlur}
-                value={props.values.firstName}
-                name="firstName"
-              />
-              {props.errors.firstName && props.touched.firstName ? (
-                <Error id="feedback">{props.errors.firstName}</Error>
-              ) : null} */}
-
                 <Label htmlFor="gender">Gender</Label>
                 <Select
                   as="select"
@@ -802,8 +722,8 @@ class DetailsForm extends Component {
                   value={props.values.maritalStatus}
                 >
                   <option value=""></option>
-                  <option value="SINGLE">Single</option>
-                  <option value="MARRIED">Married</option>
+                  <option value="S">Single</option>
+                  <option value="M">Married</option>
                 </Select>
                 {props.errors.maritalStatus && props.touched.maritalStatus ? (
                   <Error id="feedback">{props.errors.maritalStatus}</Error>
@@ -984,70 +904,9 @@ class DetailsForm extends Component {
                       </Label>
 
                       <Divider />
-
-                      {/* <label htmlFor="parents.father">Date of Birth</label>
-
-                  <label htmlFor="marriageCertificate">
-                    Upload Birth Certificate (if applicable)
-                    <input
-                      accept="image/jpeg"
-                      type="file"
-                      name="marriageCertificate"
-                      onChange={e => {
-                        // prettier-ignore
-                        props.setFieldValue('marriageCertificate', e.currentTarget.files[0])
-                      }}
-                    />
-                  </label> */}
                     </React.Fragment>
                   )}
                 />
-
-                {/* {props.values.children.map((child, id) => (
-              <React.Fragment key={id}>
-                <label htmlFor="parents.father">Name of Child</label>
-                <input
-                  type="text"
-                  onChange={props.handleChange}
-                  onBlur={props.handleBlur}
-                  value={child.name}
-                  name="child.name"
-                />
-                {props.errors.parents && props.touched.parents ? (
-                  <Error id="feedback">{props.errors.parents.father}</Error>
-                ) : null}
-
-                <label htmlFor="parents.father">Date of Birth</label>
-                
-
-                <label htmlFor="marriageCertificate">
-                  Upload Birth Certificate (if applicable)
-                  <input
-                    accept="image/jpeg"
-                    type="file"
-                    name="marriageCertificate"
-                    onChange={e => {
-                      // prettier-ignore
-                      props.setFieldValue('marriageCertificate', e.currentTarget.files[0])
-                    }}
-                  />
-                </label>
-              </React.Fragment>
-            ))} */}
-
-                {/* <button
-              onClick={e => {
-                e.preventDefault()
-                console.log('i been clicked')
-                initialValues.children.concat([
-                  { name: '', dob: '', birthCertificate: '' }
-                ])
-              }}
-            >
-              Add child
-            </button> */}
-
-                {/* <Divider /> */}
 
                 <Label htmlFor="father">Name of Father</Label>
                 <Input
@@ -1656,43 +1515,54 @@ class DetailsForm extends Component {
                   Insurance Dependent Application Form
                 </Link>
 
-                <Label htmlFor="">Upload the completed forms here</Label>
-                {/* <input
-                  accept="image/jpeg"
-                  type="file"
-                  name="medicalInsurance.form"
-                  onChange={e => {
-                    // prettier-ignore
-                    props.setFieldValue('medicalInsurance.form', e.currentTarget.files[0])
-                  }}
-                /> */}
-
+                <Label htmlFor="">Upload the principal dependent form</Label>
                 <FileInput>
-                  <label htmlFor="medicalInsurance_form">
+                  <label htmlFor="principal_form">
                     Upload
                     <input
                       multiple
-                      id="medicalInsurance_form"
+                      id="principal_form"
                       accept="image/jpeg"
                       type="file"
-                      name="medicalInsurance_form"
+                      name="principal_form"
                       onChange={e => {
-                        if (e.target.files.length) {
-                          const arrFiles = Array.from(e.target.files)
-                          const files = arrFiles.map((file, index) => {
-                            const src = window.URL.createObjectURL(file)
-                            return { file, id: index, src }
-                          })
-                          props.setFieldValue('medicalInsurance_form', files)
-                        }
+                        props.setFieldValue(
+                          'principal_form',
+                          e.currentTarget.files[0]
+                        )
                       }}
                     />
                   </label>
 
                   <p>
-                    {props.values.medicalInsurance_form.length
-                      ? props.values.medicalInsurance_form.length +
-                        ' file(s) uploaded'
+                    {props.values.principal_form.name
+                      ? props.values.principal_form.name
+                      : 'Please upload JPEG format, no larger than 3mb in size'}
+                  </p>
+                </FileInput>
+
+                <Label htmlFor="">Upload the dependent form</Label>
+                <FileInput>
+                  <label htmlFor="dependent_form">
+                    Upload
+                    <input
+                      multiple
+                      id="dependent_form"
+                      accept="image/jpeg"
+                      type="file"
+                      name="dependent_form"
+                      onChange={e => {
+                        props.setFieldValue(
+                          'dependent_form',
+                          e.currentTarget.files[0]
+                        )
+                      }}
+                    />
+                  </label>
+
+                  <p>
+                    {props.values.dependent_form.name
+                      ? props.values.dependent_form.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
                   </p>
                 </FileInput>
