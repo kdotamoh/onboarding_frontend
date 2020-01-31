@@ -164,13 +164,7 @@ class Welcome extends Component {
                       `}
                     >
                       <HeroH1>Welcome back, {first_name}!</HeroH1>
-                      <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing
-                        elit. Consectetur, officiis. Placeat assumenda cum quas
-                        officia, iste veritatis voluptates sit nostrum natus
-                        consectetur voluptas quaerat vel id, voluptate dolor
-                        quidem ut?
-                      </p>
+                      <p>Text here</p>
                     </StepOne>
                   </div>
                 </CenterContent>
@@ -179,10 +173,7 @@ class Welcome extends Component {
                 <CenterContent>
                   <StepTwo p="4rem">
                     <H2>Onboarding</H2>
-                    <p>
-                      Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                      Porro accusantium iure magnam praesentium exercitationem,
-                    </p>
+                    <p>Text here</p>
                     <Button
                       mt="3rem"
                       color="blue"

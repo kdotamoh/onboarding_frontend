@@ -97,13 +97,7 @@ class End extends Component {
                       <HeroH1>
                         Congrats on completing your onboarding, {first_name}
                       </HeroH1>
-                      <p>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing
-                        elit. Consectetur, officiis. Placeat assumenda cum quas
-                        officia, iste veritatis voluptates sit nostrum natus
-                        consectetur voluptas quaerat vel id, voluptate dolor
-                        quidem ut?
-                      </p>
+                      <p>Text here</p>
                     </StepOne>
                   </div>
                 </CenterContent>

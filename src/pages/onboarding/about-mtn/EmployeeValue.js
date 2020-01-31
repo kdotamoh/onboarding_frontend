@@ -60,10 +60,7 @@ export default class EmployeeValue extends Component {
       <>
         <PageStyle>
           <h3>Employee Value Proposition</h3>
-          <h4>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci
-            sint porro nulla officiis
-          </h4>
+          <h4>Text here</h4>
 
           <Values>
             <Value>
