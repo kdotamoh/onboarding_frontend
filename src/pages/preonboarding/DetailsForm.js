@@ -319,7 +319,22 @@ class DetailsForm extends Component {
 
     // Is submitting
     isSubmitting: false,
-    errorMessage: ''
+    errorMessage: '',
+
+    line_manager_details: {}
+  }
+
+  async componentDidMount() {
+    let { line_manager } = this.props.user
+    let { data: line_manager_details } = await axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API_BASE}/line_managers/${line_manager}/`,
+      headers: {
+        Authorization: `JWT ${this.props.token}`
+      }
+    })
+    // console.log(hr_partner_details)
+    this.setState({ line_manager_details })
   }
 
   handleBirthCertificate = (props, event, id) => {
@@ -399,7 +414,6 @@ class DetailsForm extends Component {
 
           let data = {
             employee: this.props.user.id,
-
             first_name: values.firstName,
             other_names: values.middleName,
             last_name: values.surname,
@@ -417,8 +431,6 @@ class DetailsForm extends Component {
             nok_dob: `${values.nok_dob_year}-${values.nok_dob_month}-${values.nok_dob_day}`,
             nok_address: values.nok_address,
             nok_contact: values.nok_contactNumber,
-            // educational_cert: values.educationalCertificates,
-            // professional_body_affiliates: values.professionalBodies,
             nss_start_date: `${values.nationalService_start_year}-${values.nationalService_start_month}-01`,
             nss_end_date: `${values.nationalService_end_year}-${values.nationalService_end_month}-30`, // TODO: fix hardcoded days
             res_physical_address: values.residential_address_physical,
@@ -437,10 +449,8 @@ class DetailsForm extends Component {
             medical_insurance_provider: Number(
               values.medicalInsurance_provider
             ),
-            // TODO: medical insurance forms
             fuel_card_option: Number(values.fuelCard)
           }
-          console.log(data)
 
           let imageFiles = new FormData()
           imageFiles.append('national_id', values.nationalId)
@@ -473,6 +483,13 @@ class DetailsForm extends Component {
                     Authorization: `JWT ${this.props.token}`,
                     'Content-Type': 'multipart/form-data'
                   }
+                })
+
+                // let children = res.data.children
+
+                await axios({
+                  method: 'post',
+                  url: `${process.env.REACT_APP_API_BASE}/profiles/${res}`
                 })
               } catch (err) {
                 console.error(err)
@@ -1631,7 +1648,10 @@ class DetailsForm extends Component {
                 <p css={mutedCss}>{user.location}</p>
 
                 <Label htmlFor="nationalId">Line Manager</Label>
-                <p css={mutedCss}>{user.line_manager}</p>
+                <p css={mutedCss}>
+                  {this.state.line_manager_details.first_name}{' '}
+                  {this.state.line_manager_details.last_name}
+                </p>
               </section>
             </Form>
 
