@@ -66,7 +66,7 @@ class EmployeeDetails extends Component {
         <SmallNav />
         <StepNav />
         <Container>
-          <H3 py="3rem">Help Us Get You Ready for Your First at MTN</H3>
+          <H3 py="3rem">Help Us Get You Ready for Your First Day at MTN</H3>
           <Hero>
             <div className="row">
               <img className="column" src={heroImg} alt="" />

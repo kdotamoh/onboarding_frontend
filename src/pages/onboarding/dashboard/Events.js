@@ -91,13 +91,13 @@ class Events extends Component {
           </SplitGridLeftColumn>
 
           <SplitGridRightColumn p="5rem" background={COLORS.LIGHT_GREY}>
-            <div
-              css={`
-                display: flex;
-                flex-wrap: wrap;
-              `}
-            >
-              <Loading loading={loading}>
+            <Loading loading={loading}>
+              <div
+                css={`
+                  display: flex;
+                  flex-wrap: wrap;
+                `}
+              >
                 {this.state.events.length ? (
                   this.state.events.map(event => (
                     <DashboardCard
@@ -123,12 +123,12 @@ class Events extends Component {
                         <div className="card-info__left">
                           <div className="card-info__image card-info__circle">
                             <span className="month">
-                              {moment(event.startDate)
+                              {moment(event.start_date)
                                 .format('MMM')
                                 .toUpperCase()}
                             </span>
                             <span className="day">
-                              {moment(event.startDate).format('DD')}
+                              {moment(event.start_date).format('DD')}
                             </span>
                           </div>
                         </div>
@@ -137,7 +137,7 @@ class Events extends Component {
                           <div className="card-info__details">
                             <h5>{event.title}</h5>
                             <span>
-                              {moment(event.startDate).format('MMM DD YYYY')} |{' '}
+                              {moment(event.start_date).format('MMM DD YYYY')} |{' '}
                               {moment(event.time, 'HH:mm:ss').format('hh:mm A')}
                             </span>
                             <span>{event.venue}</span>
@@ -172,8 +172,8 @@ class Events extends Component {
                 ) : (
                   <NoEvents path="/" />
                 )}
-              </Loading>
-            </div>
+              </div>
+            </Loading>
 
             {/* <PastEvents path="/dashboard/events/past" /> */}
           </SplitGridRightColumn>
