@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import axios from 'axios'
@@ -11,7 +12,6 @@ import { Button, H3, Container } from 'components/styled'
 
 import { COLORS } from '../../constants'
 import bgImg from 'images/bg_l_bottomright.svg'
-import placeholder from 'images/png/placeholder.png'
 
 const ContainerWithBackground = styled(Container)`
   justify-content: center;
@@ -126,6 +126,15 @@ class Info extends Component {
       </div>
     )
   }
+}
+Info.propTypes = {
+  token: PropTypes.string,
+  user: PropTypes.shape({
+    first_day: PropTypes.string,
+    first_day_reporting_time: PropTypes.string,
+    first_day_location: PropTypes.string,
+    hr_partner: PropTypes.number
+  })
 }
 
 export default connect(state => ({

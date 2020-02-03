@@ -51,6 +51,10 @@ const NoEvents = () => (
 const Loading = props => (
   <div>{props.loading ? <p>Loading...</p> : <div>{props.children}</div>}</div>
 )
+Loading.propTypes = {
+  loading: PropTypes.bool,
+  children: PropTypes.node
+}
 
 class Events extends Component {
   state = {
