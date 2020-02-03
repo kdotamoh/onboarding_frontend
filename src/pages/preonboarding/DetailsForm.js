@@ -1683,7 +1683,7 @@ DetailsForm.propTypes = {
     department: PropTypes.number,
     location: PropTypes.string,
     job_title: PropTypes.string,
-    line_manager: PropTypes.string
+    line_manager: PropTypes.number
   }),
   divisions: PropTypes.array,
   departments: PropTypes.array,
