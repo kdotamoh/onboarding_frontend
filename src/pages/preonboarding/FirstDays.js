@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
+import axios from 'axios'
 import { navigate } from '@reach/router'
 
 import { SmallNav, StepNav } from 'components/navigation'
@@ -43,17 +46,33 @@ const ModalHeading = styled.h3`
   margin-bottom: 2rem;
 `
 
-export default class FirstDays extends Component {
+class FirstDays extends Component {
   state = {
     visible: false,
     rating: 5,
     getFeedback: false,
-    feedBack: ''
+    feedBack: '',
+    errorMessage: ''
   }
 
-  handleRating = rating => {
+  handleRating = async rating => {
     this.setState({ rating })
-    navigate('/preonboarding/end')
+    try {
+      await axios({
+        method: 'post',
+        url: `${process.env.REACT_APP_API_BASE}/feedbacks/`,
+        data: {
+          rating: Number(rating)
+        },
+        headers: {
+          Authorization: `JWT ${this.props.token}`
+        }
+      })
+      navigate('/preonboarding/end')
+    } catch (err) {
+      console.error(err)
+      this.setState({ errorMessage: 'Something went wrong. Please try again.' })
+    }
   }
 
   render() {
@@ -186,6 +205,12 @@ export default class FirstDays extends Component {
                   <Caption>Very Good</Caption>
                 </div>
               </div>
+
+              {this.state.errorMessage && (
+                <p style={{ marginTop: '3rem', color: 'red' }}>
+                  {this.state.errorMessage}
+                </p>
+              )}
             </React.Fragment>
           </Modal>
         </Container>
@@ -193,3 +218,10 @@ export default class FirstDays extends Component {
     )
   }
 }
+FirstDays.propTypes = {
+  token: PropTypes.string
+}
+
+export default connect(state => ({
+  token: state.token
+}))(FirstDays)
