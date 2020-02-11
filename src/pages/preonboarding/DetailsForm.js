@@ -17,6 +17,11 @@ import downArrow from 'images/select/down-arrow.svg'
 import downloadTray from 'images/employee_details/download_tray.svg'
 import { navigate } from '@reach/router'
 
+import acacia_dependant from 'assets/acacia_dependant.pdf'
+import acacia_principal from 'assets/acacia_principal.pdf'
+import nationwide_dependant from 'assets/nationwide_dependant.pdf'
+import nationwide_principal from 'assets/nationwide_principal.pdf'
+
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -1521,16 +1526,16 @@ class DetailsForm extends Component {
                   (where applicable):
                 </p>
 
-                <Link href="/#" download>
+                <Link href={nationwide_principal} download>
                   Nationwide Medical Insurance Principal Application Form
                 </Link>
-                <Link href="/#" download>
+                <Link href={nationwide_dependant} download>
                   Nationwide Medical Insurance Dependent Application Form Acacia
                 </Link>
-                <Link href="/#" download>
+                <Link href={acacia_principal} download>
                   Medical Insurance Principal Application Form Acacia Medical
                 </Link>
-                <Link href="/#" download>
+                <Link href={acacia_dependant} download>
                   Insurance Dependent Application Form
                 </Link>
 
