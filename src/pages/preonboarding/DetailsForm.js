@@ -487,10 +487,12 @@ class DetailsForm extends Component {
 
                 // let children = res.data.children
 
-                await axios({
-                  method: 'post',
-                  url: `${process.env.REACT_APP_API_BASE}/profiles/${res}`
-                })
+                // Todo: Children birth certs
+
+                // await axios({
+                //   method: 'post',
+                //   url: `${process.env.REACT_APP_API_BASE}/profiles/${res}`
+                // })
               } catch (err) {
                 console.error(err)
               }
