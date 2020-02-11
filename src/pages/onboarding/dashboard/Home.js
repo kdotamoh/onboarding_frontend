@@ -163,8 +163,24 @@ class Welcome extends Component {
                         transform: translateY(-10rem);
                       `}
                     >
-                      <HeroH1>Welcome back, {first_name}!</HeroH1>
-                      <p>Text here</p>
+                      <HeroH1>Yello, {first_name}!</HeroH1>
+                      <p>
+                        Congratulations and on behalf of all MTNers, welcome to
+                        the Yello Family.
+                        <br />
+                        <br />
+                        We are truly happy that you have decided to join our
+                        team. We believe that you will be an asset to our
+                        cherished organization.
+                        <br />
+                        <br />
+                        We welcome you to MTN Ghana, we are very glad to have
+                        you with us and look forward to a mutually beneficial
+                        relationship and partnership.
+                        <br />
+                        <br />
+                        Once again, welcome aboard.
+                      </p>
                     </StepOne>
                   </div>
                 </CenterContent>
