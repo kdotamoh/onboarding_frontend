@@ -94,7 +94,7 @@ class Events extends Component {
             <Wrapper pt="5rem">
               <SideNav>
                 <OnboardingLink to="./">Upcoming</OnboardingLink>
-                <OnboardingLink to="./">Past</OnboardingLink>
+                <OnboardingLink to="./#">Past</OnboardingLink>
               </SideNav>
             </Wrapper>
           </SplitGridLeftColumn>
