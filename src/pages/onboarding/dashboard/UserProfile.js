@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { space } from 'styled-system'
@@ -133,8 +134,30 @@ const Avatar = styled.img`
 `
 
 class UserProfile extends Component {
+  state = {
+    line_manager_details: {}
+  }
+
+  async componentDidMount() {
+    let { line_manager } = this.props.user
+    let { data: line_manager_details } = await axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API_BASE}/line_managers/${line_manager}/`,
+      headers: {
+        Authorization: `JWT ${this.props.token}`
+      }
+    })
+    // console.log(hr_partner_details)
+    this.setState({ line_manager_details })
+  }
   render() {
     const { user } = this.props
+    let { departments } = this.props
+    let { divisions } = this.props
+    const {
+      first_name: line_manager_first_name,
+      last_name: line_manager_last_name
+    } = this.state.line_manager_details
     return (
       <>
         <DashboardNav>
@@ -164,10 +187,25 @@ class UserProfile extends Component {
 
             <DashboardCard height="unset" py="3rem" px="2rem" textAlign="left">
               <span>Job Title: {user.job_title}</span>
-              <span>Division: {user.division}</span>
-              <span>Department: {user.department}</span>
+              <span>
+                Division:{' '}
+                {divisions.length
+                  ? divisions.find(division => division.id === user.division)
+                      .title
+                  : 'Loading...'}
+              </span>
+              <span>
+                Department:{' '}
+                {departments.length
+                  ? departments.find(
+                      department => department.id === user.department
+                    ).title
+                  : 'Loading'}
+              </span>
               <span>Location: {user.location}</span>
-              <span>Line Manager: xxxxxxxxxx</span>
+              <span>
+                Line Manager: {line_manager_first_name} {line_manager_last_name}
+              </span>
             </DashboardCard>
           </SplitGridRightColumn>
         </SplitGrid>
@@ -176,10 +214,15 @@ class UserProfile extends Component {
   }
 }
 UserProfile.propTypes = {
-  user: PropTypes.object
+  user: PropTypes.object,
+  token: PropTypes.string,
+  divisions: PropTypes.array,
+  departments: PropTypes.array
 }
 
 export default connect(state => ({
   token: state.token,
-  user: state.user
+  user: state.user,
+  departments: state.organisation.departments,
+  divisions: state.organisation.divisions
 }))(UserProfile)

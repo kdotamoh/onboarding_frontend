@@ -478,7 +478,7 @@ class DetailsForm extends Component {
                 Authorization: `JWT ${this.props.token}`
               }
             })
-            if (res.status === 201) {
+            if (res.status > 199 && res.status <= 299) {
               try {
                 await axios({
                   method: 'post',
