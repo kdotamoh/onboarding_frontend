@@ -422,6 +422,7 @@ class DetailsForm extends Component {
             first_name: values.firstName,
             other_names: values.middleName,
             last_name: values.surname,
+            phone_number: values.contactNumber,
             dob: `${values.dob_year}-${values.dob_month}-${values.dob_day}`,
             gender: values.gender,
             nationality: values.nationality,
