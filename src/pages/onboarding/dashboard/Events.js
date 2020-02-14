@@ -76,7 +76,12 @@ class Events extends Component {
   }
 
   render() {
-    let { loading } = this.state
+    let { loading, events: unsortedEvents } = this.state
+    const sortDates = (a, b) =>
+      moment(b.start_date).format('YYYYMMDD') -
+      moment(a.start_date).format('YYYYMMDD')
+    const events = unsortedEvents.sort(sortDates)
+
     return (
       <>
         <DashboardNav>
@@ -102,8 +107,8 @@ class Events extends Component {
                   flex-wrap: wrap;
                 `}
               >
-                {this.state.events.length ? (
-                  this.state.events.map(event => (
+                {events.length ? (
+                  events.map(event => (
                     <DashboardCard
                       mx="1rem"
                       mb="2rem"
