@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import axios from 'axios'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
 
@@ -37,7 +40,7 @@ const Caption = styled.span`
   cursor: pointer;
 `
 
-export default class Overview extends Component {
+class Sales extends Component {
   state = {
     visible: false,
     rating: 5,
@@ -45,9 +48,32 @@ export default class Overview extends Component {
     feedBack: ''
   }
 
-  handleRating = rating => {
+  handleRating = async rating => {
+    try {
+      let res = await axios({
+        method: 'get',
+        url: `${process.env.REACT_APP_API_BASE}/feedbacks/`,
+        headers: {
+          Authorization: `JWT ${this.props.token}`
+        }
+      })
+      axios({
+        method: 'put',
+        headers: {
+          Authorization: `JWT ${this.props.token}`
+        },
+        data: {
+          onboarding_rating: Number(rating)
+        },
+        url: `${process.env.REACT_APP_API_BASE}/feedbacks/${res.data[0].id}/`
+      })
+      navigate('/preonboarding/end')
+    } catch (err) {
+      console.error(err)
+      this.setState({ errorMessage: 'Something went wrong. Please try again.' })
+    }
     this.setState({ rating })
-    navigate('/onboarding/end')
+    // navigate('/onboarding/end')
   }
 
   render() {
@@ -104,3 +130,10 @@ export default class Overview extends Component {
     )
   }
 }
+Sales.propTypes = {
+  token: PropTypes.string
+}
+
+export default connect(state => ({
+  token: state.token
+}))(Sales)

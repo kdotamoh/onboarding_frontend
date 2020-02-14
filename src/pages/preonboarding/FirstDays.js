@@ -62,7 +62,7 @@ class FirstDays extends Component {
         method: 'post',
         url: `${process.env.REACT_APP_API_BASE}/feedbacks/`,
         data: {
-          rating: Number(rating)
+          preonboarding_rating: Number(rating)
         },
         headers: {
           Authorization: `JWT ${this.props.token}`
