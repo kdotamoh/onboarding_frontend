@@ -67,7 +67,7 @@ class Sales extends Component {
         },
         url: `${process.env.REACT_APP_API_BASE}/feedbacks/${res.data[0].id}/`
       })
-      navigate('/preonboarding/end')
+      navigate('/onboarding/end')
     } catch (err) {
       console.error(err)
       this.setState({ errorMessage: 'Something went wrong. Please try again.' })
