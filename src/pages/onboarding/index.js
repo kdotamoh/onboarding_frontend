@@ -216,7 +216,34 @@ const AboutMTN = ({ children }) => {
 }
 
 class Onboarding extends Component {
+  state = {
+    aboutPages: this.props.aboutPages
+    // overviewPage: {}
+  }
+
+  getPage = slug => {
+    let { aboutPages } = this.props
+    let page = aboutPages.find(page => page.slug === slug)
+    return page
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.aboutPages !== prevProps.aboutPages) {
+      this.setState({ aboutPages: this.props.aboutPages })
+
+      // let overviewPage = this.getPage('company-overview')
+      // this.setState({ overviewPage })
+    }
+  }
   render() {
+    let overviewPage = this.getPage('company-overview')
+    let welcomePage = this.getPage('ceo-welcome')
+    let missionPage = this.getPage('mission-and-vision')
+    let valuePage = this.getPage('employee-value-proposition')
+    let organisationPage = this.getPage('how-we-are-organised')
+    let strategicPage = this.getPage('strategic-pillars-and-priorities')
+    let tasksPage = this.getPage('tasks')
+
     return (
       <>
         {this.props.token ? (
@@ -257,13 +284,28 @@ class Onboarding extends Component {
             <Router>
               <Scrolltop path="/">
                 <AboutMTN path="about-mtn">
-                  <CompanyOverview path="/company-overview" />
-                  <CEOWelcome path="/ceo-welcome" />
-                  <MissionVision path="/mission-and-vision" />
-                  <Organisation path="/how-we-are-organised" />
-                  <EmployeeValue path="/employee-value-proposition" />
-                  <StrategicPillars path="/strategic-pillars-and-priorities" />
-                  <Tasks path="/tasks" />
+                  <CompanyOverview
+                    path="/company-overview"
+                    page={overviewPage}
+                  />
+                  <CEOWelcome path="/ceo-welcome" page={welcomePage} />
+                  <MissionVision
+                    path="/mission-and-vision"
+                    page={missionPage}
+                  />
+                  <Organisation
+                    path="/how-we-are-organised"
+                    page={organisationPage}
+                  />
+                  <EmployeeValue
+                    path="/employee-value-proposition"
+                    page={valuePage}
+                  />
+                  <StrategicPillars
+                    path="/strategic-pillars-and-priorities"
+                    page={strategicPage}
+                  />
+                  <Tasks path="/tasks" page={tasksPage} />
                   <NotFound default />
                 </AboutMTN>
               </Scrolltop>
@@ -279,9 +321,11 @@ class Onboarding extends Component {
   }
 }
 Onboarding.propTypes = {
-  token: PropTypes.string
+  token: PropTypes.string,
+  aboutPages: PropTypes.array
 }
 
 export default connect(state => ({
-  token: state.token
+  token: state.token,
+  aboutPages: state.pages.onboardingPages.aboutPages
 }))(Onboarding)
