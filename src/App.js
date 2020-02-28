@@ -9,7 +9,8 @@ import {
   getInsuranceProviders,
   getFuelProviders,
   getDepartments,
-  getDivisions
+  getDivisions,
+  getOnboardingPages
 } from 'utils/get-thingy'
 
 import PreOnboarding from 'pages/preonboarding'
@@ -22,6 +23,7 @@ class App extends React.Component {
     getFuelProviders(this.props.token)
     getDivisions(this.props.token)
     getDepartments(this.props.token)
+    getOnboardingPages(this.props.token)
   }
 
   render() {
