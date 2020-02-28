@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from '@reach/router'
 
@@ -17,11 +18,14 @@ const BgImg = styled(Img)`
 
 export default class MissionVision extends Component {
   render() {
+    let { title } = this.props.page ? this.props.page : {}
+    let { header } = this.props.page ? this.props.page : {}
+    // let { content } = this.props.page ? this.props.page : {}
     return (
       <>
         <PageStyle>
-          <h3>Mission &amp; Vision</h3>
-          <span>Mission</span>
+          <h3>{title ? title : null}</h3>
+          <h4>{header ? header : null}</h4>
           <h4>To Lead The Delivery Of A Bold, New World To Our Customers</h4>
 
           <span>Vision</span>
@@ -39,4 +43,7 @@ export default class MissionVision extends Component {
       </>
     )
   }
+}
+MissionVision.propTypes = {
+  page: PropTypes.object
 }

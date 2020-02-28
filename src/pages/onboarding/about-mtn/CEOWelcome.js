@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from '@reach/router'
 
@@ -19,10 +20,15 @@ const BgImg = styled(Img)`
 
 export default class CEOWelcome extends Component {
   render() {
+    let { title } = this.props.page ? this.props.page : {}
+    let { header } = this.props.page ? this.props.page : {}
+    let { content } = this.props.page ? this.props.page : {}
     return (
       <>
         <PageStyle>
-          <h3>CEO Welcome</h3>
+          <h3>{title ? title : null}</h3>
+          <h4>{header ? header : null}</h4>
+          <div dangerouslySetInnerHTML={{ __html: content }}></div>
           <video controls>
             <source src={welcome} type="video/mp4" />
             Sorry, your browser doesn't support embedded videos.
@@ -44,4 +50,7 @@ export default class CEOWelcome extends Component {
       </>
     )
   }
+}
+CEOWelcome.propTypes = {
+  page: PropTypes.object
 }
