@@ -17,6 +17,11 @@ const pages = createSlice({
         state.onboardingPages.aboutPages = action.payload
       }
     },
+    setFunctionalPages: {
+      reducer(state, action) {
+        state.onboardingPages.functionalPages = action.payload
+      }
+    },
     setPreonboardingPages: {
       reducer(state, action) {
         state.preonboardingPages = action.payload
@@ -25,6 +30,10 @@ const pages = createSlice({
   }
 })
 
-export const { setAboutPages, setPreonboardingPages } = pages.actions
+export const {
+  setAboutPages,
+  setFunctionalPages,
+  setPreonboardingPages
+} = pages.actions
 
 export default pages.reducer

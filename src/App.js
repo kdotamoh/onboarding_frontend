@@ -10,7 +10,8 @@ import {
   getFuelProviders,
   getDepartments,
   getDivisions,
-  getOnboardingPages
+  getAboutPages,
+  getFunctionalPages
 } from 'utils/get-thingy'
 
 import PreOnboarding from 'pages/preonboarding'
@@ -23,7 +24,8 @@ class App extends React.Component {
     getFuelProviders(this.props.token)
     getDivisions(this.props.token)
     getDepartments(this.props.token)
-    getOnboardingPages(this.props.token)
+    getAboutPages(this.props.token)
+    getFunctionalPages(this.props.token)
   }
 
   render() {
