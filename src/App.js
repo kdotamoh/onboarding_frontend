@@ -11,7 +11,8 @@ import {
   getDepartments,
   getDivisions,
   getAboutPages,
-  getFunctionalPages
+  getFunctionalPages,
+  getPreonboardingPages
 } from 'utils/get-thingy'
 
 import PreOnboarding from 'pages/preonboarding'
@@ -26,6 +27,7 @@ class App extends React.Component {
     getDepartments(this.props.token)
     getAboutPages(this.props.token)
     getFunctionalPages(this.props.token)
+    getPreonboardingPages(this.props.token)
   }
 
   render() {

@@ -2,7 +2,14 @@ import axios from 'axios'
 import store from 'store'
 import { setInsuranceProviders, setFuelProviders } from '../store/providers'
 import { setDivisions, setDepartments } from '../store/organisation'
-import { setAboutPages, setFunctionalPages } from '../store/pages'
+import {
+  setAboutPages,
+  setFunctionalPages,
+  setCompliancePage,
+  setOverviewPage,
+  setIntroductionPage,
+  setFirstDaysPage
+} from '../store/pages'
 
 export const getInsuranceProviders = async token => {
   let res = await axios({
@@ -74,4 +81,39 @@ export const getFunctionalPages = async token => {
   })
   let { data } = res
   store.dispatch(setFunctionalPages(data))
+}
+
+export const getPreonboardingPages = async token => {
+  let { data: compliance } = await axios({
+    method: 'get',
+    url: `${process.env.REACT_APP_API_BASE}/preonboarding/compliance/`,
+    headers: {
+      Authorization: `JWT ${token}`
+    }
+  })
+  let { data: overview } = await axios({
+    method: 'get',
+    url: `${process.env.REACT_APP_API_BASE}/preonboarding/overview/`,
+    headers: {
+      Authorization: `JWT ${token}`
+    }
+  })
+  let { data: introduction } = await axios({
+    method: 'get',
+    url: `${process.env.REACT_APP_API_BASE}/preonboarding/introduction/`,
+    headers: {
+      Authorization: `JWT ${token}`
+    }
+  })
+  let { data: firstDays } = await axios({
+    method: 'get',
+    url: `${process.env.REACT_APP_API_BASE}/preonboarding/first-days/`,
+    headers: {
+      Authorization: `JWT ${token}`
+    }
+  })
+  store.dispatch(setCompliancePage(compliance[0]))
+  store.dispatch(setOverviewPage(overview[0]))
+  store.dispatch(setIntroductionPage(introduction[0]))
+  store.dispatch(setFirstDaysPage(firstDays[0]))
 }

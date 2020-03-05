@@ -5,7 +5,7 @@ const initialState = {
     aboutPages: [],
     functionalPages: []
   },
-  preonboardingPages: []
+  preonboardingPages: {}
 }
 
 const pages = createSlice({
@@ -22,9 +22,24 @@ const pages = createSlice({
         state.onboardingPages.functionalPages = action.payload
       }
     },
-    setPreonboardingPages: {
+    setCompliancePage: {
       reducer(state, action) {
-        state.preonboardingPages = action.payload
+        state.preonboardingPages.compliance = action.payload
+      }
+    },
+    setOverviewPage: {
+      reducer(state, action) {
+        state.preonboardingPages.overview = action.payload
+      }
+    },
+    setIntroductionPage: {
+      reducer(state, action) {
+        state.preonboardingPages.introduction = action.payload
+      }
+    },
+    setFirstDaysPage: {
+      reducer(state, action) {
+        state.preonboardingPages.firstDays = action.payload
       }
     }
   }
@@ -33,7 +48,10 @@ const pages = createSlice({
 export const {
   setAboutPages,
   setFunctionalPages,
-  setPreonboardingPages
+  setCompliancePage,
+  setOverviewPage,
+  setIntroductionPage,
+  setFirstDaysPage
 } = pages.actions
 
 export default pages.reducer
