@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
 import 'react-multi-carousel/lib/styles.css'
 import Carousel from 'react-multi-carousel'
 
 import { SmallNav, StepNav } from 'components/navigation'
-import { H4, H3, Container, Img, UL, Button } from 'components/styled'
+import { H4, H3, Container, Img, Button } from 'components/styled'
 import { Hero } from 'views/layout'
 
 import bgImg from 'images/bg_l_bottomright.svg'
@@ -16,10 +18,10 @@ import trust from 'images/carousel/trust.png'
 import global from 'images/carousel/global.png'
 import reward from 'images/carousel/reward.png'
 
-import vision from 'images/vision_icon.svg'
-import mission from 'images/mission_icon.svg'
-import values from 'images/values_icon.svg'
-import vital from 'images/vital_icon.svg'
+import vision_img from 'images/vision_icon.svg'
+import mission_img from 'images/mission_icon.svg'
+import values_img from 'images/values_icon.svg'
+import vital_img from 'images/vital_icon.svg'
 import valuesPdf from 'assets/values.pdf'
 import behavioursPdf from 'assets/behaviours.pdf'
 
@@ -69,11 +71,33 @@ const BigHero = styled(Hero)`
   }
 `
 
+const HeroList = styled.div`
+  font-size: 1.2rem;
+  text-align: center;
+  ul {
+    li {
+      list-style: none;
+      text-decoration: none;
+    }
+  }
+`
+
 const InfoBox = styled.div`
   background: ${COLORS.PALE_MARIGOLD};
   /* width: 90%; */
   padding: 5rem 15rem;
   z-index: 500;
+
+  h4 {
+    font-size: 2rem;
+    font-family: MTNBrighterSans-Bold;
+  }
+
+  ul {
+    li {
+      margin-left: 2rem;
+    }
+  }
 `
 
 const CarouselSlide = styled.div`
@@ -127,7 +151,7 @@ const CarouselSlide = styled.div`
 //   )
 // }
 
-export default class CompanyOverview extends Component {
+class CompanyOverview extends Component {
   render() {
     const responsive = {
       desktop: {
@@ -147,6 +171,16 @@ export default class CompanyOverview extends Component {
       }
     }
 
+    const { mission } = this.props.pageContent ? this.props.pageContent : {}
+    const { vision } = this.props.pageContent ? this.props.pageContent : {}
+    const { values } = this.props.pageContent ? this.props.pageContent : {}
+    const { vital_behaviours } = this.props.pageContent
+      ? this.props.pageContent
+      : {}
+    const { data_protection_principles } = this.props.pageContent
+      ? this.props.pageContent
+      : {}
+
     return (
       <div>
         <SmallNav />
@@ -161,45 +195,37 @@ export default class CompanyOverview extends Component {
           <BigHero>
             <div className="row">
               <div className="column">
-                <img src={vision} alt="" />
+                <img src={vision_img} alt="" />
                 <H4 color={COLORS.DARKER_GREYISH_BROWN} mt="4rem">
                   Vision
                 </H4>
-                <p>
-                  To lead the delivery of a bold, new, Digital world to our
-                  customers.
-                </p>
+                <p>{vision}</p>
               </div>
               <div className="column">
-                <img src={mission} alt="" />
+                <img src={mission_img} alt="" />
                 <H4 color={COLORS.DARKER_GREYISH_BROWN} mt="4rem">
                   Mission
                 </H4>
-                <p>To make our customers’ lives a whole lot brighter.</p>
+                <p>{mission}</p>
               </div>
               <div className="column">
-                <img src={values} alt="" />
+                <img src={values_img} alt="" />
                 <H4 color={COLORS.DARKER_GREYISH_BROWN} mt="4rem">
                   Values
                 </H4>
-                <span>Leadership</span>
-                <span>Integrity</span>
-                <span>Relationship</span>
-                <span>Innovation</span>
-                <span>Can-do</span>
+                <HeroList dangerouslySetInnerHTML={{ __html: values }} />
                 <a target="_blank" rel="noopener noreferrer" href={valuesPdf}>
                   See full values dictionary
                 </a>
               </div>
               <div className="column">
-                <img src={vital} alt="" />
+                <img src={vital_img} alt="" />
                 <H4 color={COLORS.DARKER_GREYISH_BROWN} mt="4rem">
                   Vital
                 </H4>
-                <span>Active Collaboration</span>
-                <span>Complete Accountability</span>
-                <span>Complete Candor</span>
-                <span>Get-It-Done</span>
+                <HeroList
+                  dangerouslySetInnerHTML={{ __html: vital_behaviours }}
+                />
                 <a
                   target="_blank"
                   rel="noopener noreferrer"
@@ -282,29 +308,9 @@ export default class CompanyOverview extends Component {
         </div>
 
         <Container>
-          <InfoBox>
-            <H4 color="black">Data Protection Principles</H4>
-            <p>
-              Protecting individual data is paramount to us in MTN. Our Data
-              protection principles are meant to protect you, your colleagues
-              and the organization. We ensure all data available to us is:
-            </p>
-            <UL>
-              <li>Used fairly, lawfully and transparently</li>
-              <li>Used for specified, explicit purpose</li>
-              <li>
-                Used in a way that is adequate, relevant and limited to only
-                what is necessary
-              </li>
-              <li>Accurate and, where necessary, kept up to date</li>
-              <li>Kept for no longer than is necessary</li>
-              <li>
-                Handled in a way that ensures appropriate security, including
-                protection against unlawful or unauthorized, access, loss,
-                destruction or damage.
-              </li>
-            </UL>
-          </InfoBox>
+          <InfoBox
+            dangerouslySetInnerHTML={{ __html: data_protection_principles }}
+          />
           <Button
             mt="5rem"
             mb="10rem"
@@ -319,3 +325,10 @@ export default class CompanyOverview extends Component {
     )
   }
 }
+CompanyOverview.propTypes = {
+  pageContent: PropTypes.object
+}
+
+export default connect(state => ({
+  pageContent: state.pages.preonboardingPages.overview
+}))(CompanyOverview)
