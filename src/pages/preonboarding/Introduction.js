@@ -162,18 +162,22 @@ class Introduction extends Component {
     errorMessage: ''
   }
   render() {
+    const { title } = this.props.pageContent ? this.props.pageContent : {}
+    const { hero_text } = this.props.pageContent ? this.props.pageContent : {}
+    const { description } = this.props.pageContent ? this.props.pageContent : {}
+
     return (
       <div>
         <SmallNav />
         <StepNav />
         <Container>
-          <H3 py="3rem">Get Introduced</H3>
+          <H3 py="3rem" dangerouslySetInnerHTML={{ __html: title }}></H3>
           <Hero>
             <div className="row">
-              <p className="column">
-                You’re almost (75%) done but first we’d like to know a bit more
-                about you, so we can introduce you to the rest of the team.
-              </p>
+              <p
+                className="column"
+                dangerouslySetInnerHTML={{ __html: hero_text }}
+              ></p>
               <img className="column" src={heroImg} alt="" />
             </div>
           </Hero>
@@ -255,11 +259,7 @@ class Introduction extends Component {
             {props => (
               <>
                 <Form onSubmit={props.handleSubmit}>
-                  <p>
-                    Please answer the following questions and we’ll send out a
-                    quick introduction email to the people you’ll be working
-                    with.
-                  </p>
+                  <p dangerouslySetInnerHTML={{ __html: description }}></p>
                   <label htmlFor="bio">
                     <span>Tell us a bit more about yourself </span>
                     <small>(750 characters limit)</small>
@@ -641,8 +641,10 @@ class Introduction extends Component {
   }
 }
 Introduction.propTypes = {
-  token: PropTypes.string
+  token: PropTypes.string,
+  pageContent: PropTypes.object
 }
 export default connect(state => ({
-  token: state.token
+  token: state.token,
+  pageContent: state.pages.preonboardingPages.introduction
 }))(Introduction)
