@@ -186,8 +186,8 @@ class CompanyOverview extends Component {
         <SmallNav />
         <StepNav />
         <Container>
-          <H3 py="3rem">Overview</H3>
-          <video controls>
+          <H3 py="3rem">Company Overview</H3>
+          <video controls autoPlay>
             <source src={preonboarding} type="video/mp4" />
             Sorry, your browser doesn't support embedded videos.
           </video>

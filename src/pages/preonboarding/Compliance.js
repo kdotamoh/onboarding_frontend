@@ -209,6 +209,14 @@ class Compliance extends Component {
     this.setState({ [name]: value })
   }
 
+  handleClick = () => {
+    if (!this.state.checked) {
+      alert('Please check the box to proceed.')
+    } else {
+      navigate('/preonboarding/code-of-ethics')
+    }
+  }
+
   render() {
     const { hero_text } = this.props.pageContent ? this.props.pageContent : {}
     const { general_conduct } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
@@ -311,6 +319,8 @@ class Compliance extends Component {
 
             <Section>
               <H4 color={COLORS.DARKER_GREYISH_BROWN}>Our Employees</H4>
+              “We believe in developing our talent, because it’s our people who
+              make us what we are.”
               <img alt="" src={employees_img} />
               <div dangerouslySetInnerHTML={{ __html: our_employees }}></div>
             </Section>
@@ -379,9 +389,9 @@ class Compliance extends Component {
             </div>
           </Wrapper>
           <Button
-            disabled={!this.state.checked}
+            // disabled={!this.state.checked}
             color="blue"
-            onClick={() => navigate('/preonboarding/code-of-ethics')}
+            onClick={this.handleClick}
             my="5rem"
           >
             Next Step >

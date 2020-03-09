@@ -129,7 +129,7 @@ class Welcome extends Component {
 
   handleCompleteTour = () => {
     localStorage.setItem('onboardingTourComplete', 'true')
-    navigate('/onboarding/about-mtn/company-overview')
+    navigate('/onboarding/about-mtn/ceo-welcome')
   }
 
   componentDidMount() {

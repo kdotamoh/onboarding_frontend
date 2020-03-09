@@ -82,7 +82,7 @@ class Sales extends Component {
     return (
       <>
         <PageStyle>
-          <h3>Sales</h3>
+          <h3>Sales &amp; Distribution</h3>
           <h4>Text here</h4>
           <p>Text here</p>
           <Button

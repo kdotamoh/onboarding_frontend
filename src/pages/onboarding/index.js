@@ -165,11 +165,11 @@ const AboutMTN = ({ children }) => {
               About MTN
             </p>
             <SideNav>
-              <ControlledLink to="/onboarding/about-mtn/company-overview">
-                Company Overview
-              </ControlledLink>
               <ControlledLink to="/onboarding/about-mtn/ceo-welcome">
                 CEO Welcome
+              </ControlledLink>
+              <ControlledLink to="/onboarding/about-mtn/company-overview">
+                Company Overview
               </ControlledLink>
               <ControlledLink to="/onboarding/about-mtn/mission-and-vision">
                 Mission &amp; Vision
@@ -183,9 +183,9 @@ const AboutMTN = ({ children }) => {
               <ControlledLink to="/onboarding/about-mtn/strategic-pillars-and-priorities">
                 Strategic Pillars &amp; Priorities
               </ControlledLink>
-              <ControlledLink to="/onboarding/about-mtn/tasks">
+              {/* <ControlledLink to="/onboarding/about-mtn/tasks">
                 Tasks
-              </ControlledLink>
+              </ControlledLink> */}
             </SideNav>
             <p
               css={`
@@ -195,6 +195,15 @@ const AboutMTN = ({ children }) => {
               onClick={() => navigate('/onboarding/functional-groups/overview')}
             >
               Functional Groups
+            </p>
+            <p
+              css={`
+                padding-top: 2rem;
+                cursor: pointer;
+              `}
+              onClick={() => navigate('/onboarding/about-mtn/tasks')}
+            >
+              Tasks
             </p>
           </Wrapper>
         </SplitGridLeftColumn>
@@ -284,11 +293,11 @@ class Onboarding extends Component {
             <Router>
               <Scrolltop path="/">
                 <AboutMTN path="about-mtn">
+                  <CEOWelcome path="/ceo-welcome" page={welcomePage} />
                   <CompanyOverview
                     path="/company-overview"
                     page={overviewPage}
                   />
-                  <CEOWelcome path="/ceo-welcome" page={welcomePage} />
                   <MissionVision
                     path="/mission-and-vision"
                     page={missionPage}

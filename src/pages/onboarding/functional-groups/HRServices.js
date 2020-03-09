@@ -20,7 +20,7 @@ export default class Overview extends Component {
     return (
       <>
         <PageStyle>
-          <h3>HR Services</h3>
+          <h3>Human Resources</h3>
           <h4>Text here</h4>
           <p>Text here</p>
           <Link to="../information-systems">

@@ -138,6 +138,14 @@ export default class CodeEthics extends Component {
     this.setState({ [name]: value })
   }
 
+  handleClick = () => {
+    if (!this.state.checked) {
+      alert('Please check the box to proceed.')
+    } else {
+      navigate('/preonboarding/code-of-ethics')
+    }
+  }
+
   render() {
     return (
       <div>
@@ -1007,9 +1015,9 @@ export default class CodeEthics extends Component {
           </SplitGrid>
 
           <Button
-            disabled={!this.state.checked}
+            // disabled={!this.state.checked}
             color="blue"
-            onClick={() => navigate('/preonboarding/employee-details')}
+            onClick={this.handleClick}
             my="5rem"
           >
             Next Step >
