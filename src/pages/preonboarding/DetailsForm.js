@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Formik, FieldArray, getIn } from 'formik'
+import { Persist } from 'formik-persist'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 import { layout } from 'styled-system'
@@ -1661,6 +1662,7 @@ class DetailsForm extends Component {
                   {this.state.line_manager_details.last_name}
                 </p>
               </section>
+              <Persist name="employee-details-form" />
             </Form>
 
             <Button
