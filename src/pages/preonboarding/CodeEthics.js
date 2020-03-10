@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
 import Scrollspy from 'react-scrollspy'
 import StickyBox from 'react-sticky-box'
 
 import { SmallNav, StepNav } from 'components/navigation'
-import { H3, Container, Img, Button, Small, Section } from 'components/styled'
+import {
+  H3,
+  Container,
+  Img,
+  Button,
+  // Small,
+  Section
+} from 'components/styled'
 import {
   SplitGrid,
   Hero,
@@ -17,6 +25,7 @@ import { Sidebar } from 'components/navigation/SideNav'
 import bgImg from 'images/bg_l_bottomright.svg'
 
 import heroImg from 'images/code_of_ethics_hero.svg'
+import { connect } from 'react-redux'
 
 const BgImg = styled(Img)`
   position: absolute;
@@ -125,7 +134,7 @@ export const LegalSection = styled(Section)`
   }
 `
 
-export default class CodeEthics extends Component {
+class CodeEthics extends Component {
   state = {
     checked: false
   }
@@ -147,21 +156,35 @@ export default class CodeEthics extends Component {
   }
 
   render() {
+    const { title } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
+    const { hero_text } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
+    const { introduction } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
+    const { compliance_with_laws_and_regulations } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
+    const { conflict_of_interest } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
+    const { communication_of_philosophy_to_third_parties } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
+    const { employment_equity } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
+    const { environmental_responsibility } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
+    const { political_support } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
+    const { company_funds_and_property } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
+    const { company_records } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
+    const { dealing_with_outside_persons_and_organisations } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
+    const { privacy_and_confidentiality } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
+    const { contravention_of_the_code } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
+    const { compliance_hotline } = this.props.pageContent ? this.props.pageContent : {} // prettier-ignore
+
     return (
       <div>
         <SmallNav />
         <StepNav />
         <Container>
-          <H3 py="3rem">Code of Ethics</H3>
+          <H3 py="3rem">{title}</H3>
           <Hero>
             <div className="row">
               <img className="column" src={heroImg} alt="" />
-              <p className="column">
-                Workplace ethics leads to happy and satisfied employees. We
-                trust that after reviewing our Code of Ethics, you will develop
-                a feeling of loyalty and attachment towards MTN.
-                <Small mt="5rem">January 2014</Small>
-              </p>
+              <p
+                className="column"
+                dangerouslySetInnerHTML={{ __html: hero_text }}
+              ></p>
             </div>
           </Hero>
           <SplitGrid leftWidth={30} rightWidth={70}>
@@ -233,97 +256,21 @@ export default class CodeEthics extends Component {
             </SplitGridLeftColumn>
             <SplitGridRightColumn>
               <div style={{ width: '60%' }}>
-                <LegalSection id="introduction">
-                  <h2>Introduction</h2>
-                  <h3>Purpose </h3>
-                  <p>
-                    The philosophy of Scancom Ltd. (the “Company”) is to conduct
-                    its affairs with uncompromising honesty, integrity,
-                    diligence and professionalism and to be recognized for these
-                    qualities by all its stakeholders.
-                  </p>
-                  <p>
-                    This Code of Ethics (“Code”) is intended to raise and
-                    maintain ethical awareness and to act as a guide to staff in
-                    all facets of daily decision-making. It contains ethical
-                    guidelines for everyday events that occur in business. It
-                    may be used to help assure clients, shareholders, suppliers,
-                    competitors and other third parties of the integrity of
-                    Scancom Ltd. The moral guidelines and essential principles
-                    as contained in the Code apply equally to all those who form
-                    part of and interact with the Company at all the various
-                    levels of interaction.
-                  </p>
-                  <p>
-                    As a practical matter, ethical conduct cannot be assured by
-                    a written code. Reference to this Code of Ethics should not,
-                    therefore, replace ethical values that form part of the
-                    human character – do unto others, as you would have them do
-                    to you. Rather than seek to act solely according to the
-                    letter of the law, employees should, in addition, be guided
-                    by their consciences as to what is right and wrong (i.e. the
-                    spirit of the law) and should be aware that their actions
-                    serve as examples to others.
-                  </p>
-                  <h3>Policy</h3>
-                  <p>
-                    Scancom Ltd. is committed to a policy of openness and
-                    integrity in its conduct of business. This commitment, which
-                    is actively endorsed by the Company’s Board of Directors, is
-                    based on a fundamental belief that business should be
-                    conducted honestly, fairly and legally. The Board has the
-                    responsibility to formulate and lay down guidelines for the
-                    moral and ethical conduct of those who represent the
-                    Company, conduct business and interact with stakeholders on
-                    its behalf. All people who are bound by the Code shall be
-                    expected to conduct themselves at all times in a manner,
-                    which contributes to the achievement of high standards of
-                    ethical business practices.
-                  </p>
-                  <p>
-                    Scancom Ltd. expects all employees to adhere to the highest
-                    standard of ethics, and to understand that anything less is
-                    unacceptable.
-                  </p>
-                  <h3>Understanding the Code </h3>
-                  <p>
-                    Scancom Ltd’s Code of Ethics, applies equally to all
-                    directors, employees and stakeholders. The Code is designed
-                    to inform employees of the Company’s policies in various
-                    areas. Please study the Code carefully so that you
-                    understand the Company’s expectations and your own
-                    obligations.
-                  </p>
-                  <p>
-                    Compliance with the Code by all directors, employees and
-                    certain other representatives is mandatory throughout the
-                    Company. If employees become aware of, or suspect a
-                    contravention of the Code, they must promptly and
-                    confidentially advise the Company as set out in the section
-                    dealing with Contravention of the Code in this booklet. The
-                    matter will then be investigated and dealt with as set out
-                    in that section.
-                  </p>
-                  <p>
-                    If employees are in doubt about the application of the Code,
-                    they should discuss the matter with the person to whom they
-                    report, or the Company Secretary.
-                  </p>
-                </LegalSection>
-                <LegalSection id="compliance">
-                  <h2>Compliance with Laws and Regulations</h2>
-                  <p>
-                    Employees must comply with all applicable laws and
-                    regulations, which relate to activities for and on behalf of
-                    Scancom Ltd. The Company will not condone any violation of
-                    law or unethical business dealings by any employee,
-                    including any payment for, or other participation in, an
-                    illegal act such as fraud, bribery or money laundering
-                    activities.
-                  </p>
-                </LegalSection>
-                <LegalSection id="conflict-of-interest">
-                  <h2>Conflict of Interest</h2>
+                <LegalSection
+                  id="introduction"
+                  dangerouslySetInnerHTML={{ __html: introduction }}
+                ></LegalSection>
+                <LegalSection
+                  id="compliance"
+                  dangerouslySetInnerHTML={{
+                    __html: compliance_with_laws_and_regulations
+                  }}
+                ></LegalSection>
+                <LegalSection
+                  id="conflict-of-interest"
+                  dangerouslySetInnerHTML={{ __html: conflict_of_interest }}
+                >
+                  {/* <h2>Conflict of Interest</h2>
                   <p>
                     The Company expects the employees to perform their duties
                     conscientiously, honestly and in accordance with the best
@@ -604,10 +551,15 @@ export default class CodeEthics extends Component {
                     management to the extent that the latter are pressurized
                     into acting injudiciously or unethically in any way to the
                     detriment of the Company.
-                  </p>
+                  </p> */}
                 </LegalSection>
-                <LegalSection id="communication-to-third-party">
-                  <h2>Communication of Philosophy to Third Parties</h2>
+                <LegalSection
+                  id="communication-to-third-party"
+                  dangerouslySetInnerHTML={{
+                    __html: communication_of_philosophy_to_third_parties
+                  }}
+                >
+                  {/* <h2>Communication of Philosophy to Third Parties</h2>
                   <p>
                     All suppliers, financiers and customers should be made aware
                     of all aspects of the Code of Ethics and be advised that
@@ -623,10 +575,13 @@ export default class CodeEthics extends Component {
                     community while ensuring maintenance of acceptable standards
                     of both personal and corporate governance so as to benefit
                     all associated entities.
-                  </p>
+                  </p> */}
                 </LegalSection>
-                <LegalSection id="employment-equity">
-                  <h2>Employment Equity</h2>
+                <LegalSection
+                  id="employment-equity"
+                  dangerouslySetInnerHTML={{ __html: employment_equity }}
+                >
+                  {/* <h2>Employment Equity</h2>
                   <p>
                     The Company’s employment equity policy is a system of
                     opportunity for all. Employment equity seeks to identify,
@@ -665,10 +620,15 @@ export default class CodeEthics extends Component {
                     continue to perform their essential duties satisfactorily
                     and do not present a safety or health hazard to themselves
                     or others.
-                  </p>
+                  </p> */}
                 </LegalSection>
-                <LegalSection id="environmental-responsibility">
-                  <h2>Environmental Responsibility </h2>
+                <LegalSection
+                  id="environmental-responsibility"
+                  dangerouslySetInnerHTML={{
+                    __html: environmental_responsibility
+                  }}
+                >
+                  {/* <h2>Environmental Responsibility </h2>
                   <h3>Health and Safety</h3>
                   <p>
                     The Company is committed to taking every reasonable
@@ -690,7 +650,7 @@ export default class CodeEthics extends Component {
                     rehabilitation activities into operating procedures.
                     Employees should give appropriate and timely attention to
                     environmental issues.
-                  </p>
+                  </p> */}
                 </LegalSection>
                 <LegalSection id="political-support">
                   <h2>Political Support</h2>
@@ -739,8 +699,13 @@ export default class CodeEthics extends Component {
                     perception of MTN as a politically neutral Company.
                   </h3>
                 </LegalSection>
-                <LegalSection id="company-funds-and-property">
-                  <h2>Company’s Funds and Property</h2>
+                <LegalSection
+                  id="company-funds-and-property"
+                  dangerouslySetInnerHTML={{
+                    __html: company_funds_and_property
+                  }}
+                >
+                  {/* <h2>Company’s Funds and Property</h2>
                   <p>
                     The Company has developed a number of internal controls to
                     safeguard its assets and imposes strict standards to prevent
@@ -792,10 +757,13 @@ export default class CodeEthics extends Component {
                     improper manner, they should immediately and confidentially
                     advise the Company as set out in the Contravention of the
                     Code section of this booklet.
-                  </p>
+                  </p> */}
                 </LegalSection>
-                <LegalSection id="company-records">
-                  <h2>Company’s Records </h2>
+                <LegalSection
+                  id="company-records"
+                  dangerouslySetInnerHTML={{ __html: company_records }}
+                >
+                  {/* <h2>Company’s Records </h2>
                   <p>
                     Accurate and reliable records of many kinds are necessary to
                     meet the Company’s legal and financial obligations and to
@@ -808,10 +776,15 @@ export default class CodeEthics extends Component {
                     not permissible and the employees responsible for accounting
                     and recording functions are expected to be diligent in
                     enforcing proper practices.
-                  </p>
+                  </p> */}
                 </LegalSection>
-                <LegalSection id="dealing-with-outside-parties">
-                  <h2>Dealing with Outside Persons and Organisations</h2>
+                <LegalSection
+                  id="dealing-with-outside-parties"
+                  dangerouslySetInnerHTML={{
+                    __html: dealing_with_outside_persons_and_organisations
+                  }}
+                >
+                  {/* <h2>Dealing with Outside Persons and Organisations</h2>
                   <h3>Prompt Communications</h3>
                   <p>
                     The Company strives to achieve complete, accurate and timely
@@ -881,10 +854,15 @@ export default class CodeEthics extends Component {
                     <li>Respect the law;</li>
                     <li>Respect the rights and dignity of other persons;</li>
                     <li>Pay all taxes and other duties as required by law.</li>
-                  </ul>
+                  </ul> */}
                 </LegalSection>
-                <LegalSection id="privacy-and-confidentiality">
-                  <h2>Privacy and Confidentiality </h2>
+                <LegalSection
+                  id="privacy-and-confidentiality"
+                  dangerouslySetInnerHTML={{
+                    __html: privacy_and_confidentiality
+                  }}
+                >
+                  {/* <h2>Privacy and Confidentiality </h2>
                   <p>
                     In the regular course of business, the Company accumulates a
                     considerable amount of information. The following principles
@@ -939,10 +917,15 @@ export default class CodeEthics extends Component {
                     Information should only be retained as long as it is needed
                     or as required by law and such information should be
                     physically secured and protected.
-                  </p>
+                  </p> */}
                 </LegalSection>
-                <LegalSection id="contravention-of-code">
-                  <h2>Contravention of the Code</h2>
+                <LegalSection
+                  id="contravention-of-code"
+                  dangerouslySetInnerHTML={{
+                    __html: contravention_of_the_code
+                  }}
+                >
+                  {/* <h2>Contravention of the Code</h2>
                   <p>
                     The Company regards any contravention of the Code as a
                     serious matter, at the same time, any suspected or alleged
@@ -974,10 +957,13 @@ export default class CodeEthics extends Component {
                     result in disciplinary action, including the termination of
                     employment. Certain breaches of the Code could also result
                     in civil or criminal proceedings.
-                  </p>
+                  </p> */}
                 </LegalSection>
-                <section id="compliance-hotline">
-                  <h2>
+                <section
+                  id="compliance-hotline"
+                  dangerouslySetInnerHTML={{ __html: compliance_hotline }}
+                >
+                  {/* <h2>
                     <strong>Compliance Hotline</strong>
                   </h2>
                   <p>
@@ -995,7 +981,7 @@ export default class CodeEthics extends Component {
                     supplement established reporting practices. Employee
                     questions concerning compensation and job performance should
                     be addressed through current HR processes.
-                  </p>
+                  </p> */}
                 </section>
 
                 <div>
@@ -1030,3 +1016,9 @@ export default class CodeEthics extends Component {
     )
   }
 }
+CodeEthics.propTypes = {
+  pageContent: PropTypes.object
+}
+export default connect(state => ({
+  pageContent: state.pages.preonboardingPages.codeOfEthics
+}))(CodeEthics)
