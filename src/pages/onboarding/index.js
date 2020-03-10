@@ -230,9 +230,9 @@ class Onboarding extends Component {
     // overviewPage: {}
   }
 
-  getPage = slug => {
-    let { aboutPages } = this.props
-    let page = aboutPages.find(page => page.slug === slug)
+  getPage = (pageType, slug) => {
+    let pages = this.props[pageType]
+    let page = pages.find(page => page.slug === slug)
     return page
   }
 
@@ -245,13 +245,34 @@ class Onboarding extends Component {
     }
   }
   render() {
-    let overviewPage = this.getPage('company-overview')
-    let welcomePage = this.getPage('ceo-welcome')
-    let missionPage = this.getPage('mission-and-vision')
-    let valuePage = this.getPage('employee-value-proposition')
-    let organisationPage = this.getPage('how-we-are-organised')
-    let strategicPage = this.getPage('strategic-pillars-and-priorities')
-    let tasksPage = this.getPage('tasks')
+    // About MTN pages
+    let overviewPage = this.getPage('aboutPages', 'company-overview')
+    let welcomePage = this.getPage('aboutPages', 'ceo-welcome')
+    let missionPage = this.getPage('aboutPages', 'mission-and-vision')
+    let valuePage = this.getPage('aboutPages', 'employee-value-proposition')
+    let organisationPage = this.getPage('aboutPages', 'how-we-are-organised')
+    let strategicPage = this.getPage(
+      'aboutPages',
+      'strategic-pillars-and-priorities'
+    )
+    let tasksPage = this.getPage('aboutPages', 'tasks')
+
+    // Functional groups pages
+    let capitalProjects = this.getPage('functionalPages', 'capital-projects') // prettier-ignore
+    let functionalOverview = this.getPage('functionalPages', 'overview') // prettier-ignore
+    let corporateServices = this.getPage('functionalPages', 'corporate-services') // prettier-ignore
+    let customerRelations = this.getPage('functionalPages', 'customer-relations') // prettier-ignore
+    let enterpriseBusiness = this.getPage('functionalPages', 'enterprise-business') // prettier-ignore
+    let financeService = this.getPage('functionalPages', 'finance-service') // prettier-ignore
+    let humanResources = this.getPage('functionalPages', 'hr-service') // prettier-ignore
+    let informationSystems = this.getPage('functionalPages', 'information-systems') // prettier-ignore
+    let internalAudit = this.getPage('functionalPages', 'internal-audit') // prettier-ignore
+    let networkGroup = this.getPage('functionalPages', 'network') // prettier-ignore
+    let marketing = this.getPage('functionalPages', 'marketing') // prettier-ignore
+    let mobileFinance = this.getPage('functionalPages', 'mobile-finance') // prettier-ignore
+    let riskCompliance = this.getPage('functionalPages', 'risk-and-compliance') // prettier-ignore
+    let employeeUnion = this.getPage('functionalPages', 'employee-union') // prettier-ignore
+    let sales = this.getPage('functionalPages', 'sales') // prettier-ignore
 
     return (
       <>
@@ -270,23 +291,47 @@ class Onboarding extends Component {
             <Router>
               <Scrolltop path="/">
                 <FunctionalGroups path="functional-groups">
-                  <Overview path="/overview" />
-                  <CapitalProjects path="/capital-projects" />
-                  <CorporateServices path="/corporate-services" />
-                  <CustomerRelations path="/customer-relations" />
-                  <EnterpriseBusiness path="/enterprise-business" />
-                  <FinanceAndService path="/finance-service" />
+                  <Overview path="/overview" page={functionalOverview} />
+                  <CapitalProjects
+                    path="/capital-projects"
+                    page={capitalProjects}
+                  />
+                  <CorporateServices
+                    path="/corporate-services"
+                    page={corporateServices}
+                  />
+                  <CustomerRelations
+                    path="/customer-relations"
+                    page={customerRelations}
+                  />
+                  <EnterpriseBusiness
+                    path="/enterprise-business"
+                    page={enterpriseBusiness}
+                  />
+                  <FinanceAndService
+                    path="/finance-service"
+                    page={financeService}
+                  />
                   {/* <EmployeeIndustrial path="/employee-industrial" /> */}
                   {/* <LearningDevelopment path="/learning-development" /> */}
-                  <HRServices path="/hr-service" />
-                  <InfoSys path="/information-systems" />
-                  <IAForensics path="/internal-audit" />
-                  <Marketing path="/marketing" />
-                  <MobileFinancial path="/mobile-finance" />
-                  <Network path="/network" />
-                  <RiskCompliance path="/risk-and-compliance" />
-                  <Sales path="/sales" />
-                  <EmployeeUnion path="/employee-union" />
+                  <HRServices path="/hr-service" page={humanResources} />
+                  <InfoSys
+                    path="/information-systems"
+                    page={informationSystems}
+                  />
+                  <IAForensics path="/internal-audit" page={internalAudit} />
+                  <Marketing path="/marketing" page={marketing} />
+                  <MobileFinancial
+                    path="/mobile-finance"
+                    page={mobileFinance}
+                  />
+                  <Network path="/network" page={networkGroup} />
+                  <RiskCompliance
+                    path="/risk-and-compliance"
+                    page={riskCompliance}
+                  />
+                  <Sales path="/sales" page={sales} />
+                  <EmployeeUnion path="/employee-union" page={employeeUnion} />
                 </FunctionalGroups>
               </Scrolltop>
             </Router>
@@ -336,5 +381,6 @@ Onboarding.propTypes = {
 
 export default connect(state => ({
   token: state.token,
-  aboutPages: state.pages.onboardingPages.aboutPages
+  aboutPages: state.pages.onboardingPages.aboutPages,
+  functionalPages: state.pages.onboardingPages.functionalPages
 }))(Onboarding)

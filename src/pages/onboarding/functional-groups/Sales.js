@@ -79,12 +79,16 @@ class Sales extends Component {
   render() {
     const { visible } = this.state
 
+    let { title } = this.props.page ? this.props.page : {}
+    let { header } = this.props.page ? this.props.page : {}
+    let { content } = this.props.page ? this.props.page : {}
+    // let { pdf_file } = this.props.page ? this.props.page : {}
     return (
       <>
         <PageStyle>
-          <h3>Sales &amp; Distribution</h3>
-          <h4>Text here</h4>
-          <p>Text here</p>
+          <h3>{title ? title : null}</h3>
+          <h4>{header ? header : null}</h4>
+          <div dangerouslySetInnerHTML={{ __html: content }}></div>
           <Button
             mt="15rem"
             color="blue"
@@ -131,7 +135,8 @@ class Sales extends Component {
   }
 }
 Sales.propTypes = {
-  token: PropTypes.string
+  token: PropTypes.string,
+  page: PropTypes.object
 }
 
 export default connect(state => ({

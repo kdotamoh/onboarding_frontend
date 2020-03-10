@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from '@reach/router'
 
@@ -15,14 +16,18 @@ const BgImg = styled(Img)`
   z-index: 0;
 `
 
-export default class Overview extends Component {
+export default class HRServices extends Component {
   render() {
+    let { title } = this.props.page ? this.props.page : {}
+    let { header } = this.props.page ? this.props.page : {}
+    let { content } = this.props.page ? this.props.page : {}
+    // let { pdf_file } = this.props.page ? this.props.page : {}
     return (
       <>
         <PageStyle>
-          <h3>Human Resources</h3>
-          <h4>Text here</h4>
-          <p>Text here</p>
+          <h3>{title ? title : null}</h3>
+          <h4>{header ? header : null}</h4>
+          <div dangerouslySetInnerHTML={{ __html: content }}></div>
           <Link to="../information-systems">
             <Button mt="15rem" textColor="black">
               Next >
@@ -35,4 +40,7 @@ export default class Overview extends Component {
       </>
     )
   }
+}
+HRServices.propTypes = {
+  page: PropTypes.object
 }

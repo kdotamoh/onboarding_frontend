@@ -38,7 +38,7 @@ export default class CEOWelcome extends Component {
             <source src={induction} type="video/mp4" />
             Sorry, your browser doesn't support embedded videos.
           </video>
-          <Link to="../mission-and-vision">
+          <Link to="../company-overview">
             <Button mt="15rem" textColor="black">
               Next >
             </Button>
