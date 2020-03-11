@@ -204,7 +204,7 @@ class EmployeeDetails extends Component {
                 personal information in Ghana.
               </p>
             </Section>
-            <div>
+            <div style={{ marginBottom: '4rem' }}>
               <label>
                 <input
                   style={{ marginRight: '1rem' }}
@@ -217,12 +217,15 @@ class EmployeeDetails extends Component {
                 information for the sole purpose for which it is intended.
               </label>
             </div>
-            <Section mt="4rem" width="100%">
-              <h3>B. EMPLOYEE DETAILS</h3>
-              <p></p>
-            </Section>
 
-            <DetailsForm />
+            <div hidden={!this.state.checked}>
+              <Section width="100%">
+                <h3>B. EMPLOYEE DETAILS</h3>
+                <p></p>
+              </Section>
+
+              <DetailsForm />
+            </div>
           </Wrapper>
 
           <BgImgContainer>
