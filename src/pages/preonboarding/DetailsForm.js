@@ -211,6 +211,7 @@ const ValidationSchema = Yup.object().shape({
   nok_contactNumber: Yup.string().required(
     'Contact number of next of kin is required'
   ),
+  nok_relationship: Yup.string().required('Relationship is required'),
   nok_dob_day: Yup.string().required('Day is required'),
   nok_dob_month: Yup.string().required('Month is required'),
   nok_dob_year: Yup.string().required('Year is required'),
@@ -262,6 +263,8 @@ const initialValues = {
   nationality: '',
   region: '',
   nationalId: '',
+  nationalIdType: '',
+  nationalIdNumber: '',
   maritalStatus: '',
   spouse_name: '',
   spouse_contactNumber: '',
@@ -275,6 +278,7 @@ const initialValues = {
   nok_name: '',
   nok_address: '',
   nok_contactNumber: '',
+  nok_relationship: '',
   nok_dob_day: '',
   nok_dob_month: '',
   nok_dob_year: '',
@@ -438,6 +442,7 @@ class DetailsForm extends Component {
             nok_dob: `${values.nok_dob_year}-${values.nok_dob_month}-${values.nok_dob_day}`,
             nok_address: values.nok_address,
             nok_contact: values.nok_contactNumber,
+            nok_relation: values.nok_relationship,
             nss_start_date: `${values.nationalService_start_year}-${values.nationalService_start_month}-01`,
             nss_end_date: `${values.nationalService_end_year}-${values.nationalService_end_month}-30`, // TODO: fix hardcoded days
             res_physical_address: values.residential_address_physical,
@@ -738,6 +743,33 @@ class DetailsForm extends Component {
                 {props.errors.nationalId && props.touched.nationalId ? (
                   <Error id="feedback">{props.errors.nationalId}</Error>
                 ) : null}
+
+                <Label htmlFor="nationalIdType">National ID Type</Label>
+                <Select
+                  as="select"
+                  name="nationalIdType"
+                  onChange={props.handleChange}
+                  onBlur={props.handleBlur}
+                  value={props.values.nationalIdType}
+                >
+                  <option value=""></option>
+                  <option value="VOTER ID">Voter's ID</option>
+                  <option value="DRIVER LICENSE">Driver’s License</option>
+                  <option value="PASSPORT">Passport</option>
+                  <option value="GHANA CARD">Ghana Card</option>
+                </Select>
+                {props.errors.nationalIdType && props.touched.nationalIdType ? (
+                  <Error id="feedback">{props.errors.nationalIdType}</Error>
+                ) : null}
+
+                <Label htmlFor="nationalIdNumber">National ID Number</Label>
+                <Input
+                  type="text"
+                  onChange={props.handleChange}
+                  onBlur={props.handleBlur}
+                  value={props.values.nationalIdNumber}
+                  name="nationalIdNumber"
+                />
 
                 <Label htmlFor="maritalStatus">Marital Status</Label>
                 <Select
@@ -1067,6 +1099,20 @@ class DetailsForm extends Component {
                 getIn(props.touched, 'nok_contactNumber') ? (
                   <Error id="feedback">{props.errors.nok_contactNumber}</Error>
                 ) : null}
+
+                <Label htmlFor="nok_address">Relationship</Label>
+                <Input
+                  type="text"
+                  onChange={props.handleChange}
+                  onBlur={props.handleBlur}
+                  value={props.values.nok_relationship}
+                  name="nok_relationship"
+                />
+                {props.errors.nok_relationship &&
+                props.touched.nok_relationship ? (
+                  <Error id="feedback">{props.errors.nok_relationship}</Error>
+                ) : null}
+
                 <ShowSectionButton
                   type="button"
                   onClick={() => this.handleOpenSection('education')}
