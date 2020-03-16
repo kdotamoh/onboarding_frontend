@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
@@ -25,7 +26,6 @@ import { Sidebar } from 'components/navigation/SideNav'
 import bgImg from 'images/bg_l_bottomright.svg'
 
 import heroImg from 'images/code_of_ethics_hero.svg'
-import { connect } from 'react-redux'
 
 const BgImg = styled(Img)`
   position: absolute;
@@ -52,13 +52,63 @@ export const LegalSection = styled(Section)`
 
   h3 {
     font-family: MTNBrighterSans-Regular;
-    counter-reset: h4-counter;
+    /* counter-reset: section; */
 
     &:before {
       counter-increment: h3-counter;
       content: counter(h2-counter) '.' counter(h3-counter) ' ';
     }
   }
+
+  ol {
+    list-style-type: none;
+
+    li {
+    font-family: MTNBrighterSans-Light;
+    font-size: 16px;
+    padding-left: 6rem;
+    margin-left: 0px;
+    position: relative;
+
+    counter-reset: section;
+
+      &:before {
+        display: block;
+        position: absolute;
+        left: 0;
+
+        counter-increment: section;
+        content: counter(h2-counter) "." counter(h3-counter) "." counters(section,".") " ";
+      }
+
+      /* ol {
+        list-style-type: none;
+
+        li {
+        font-family: MTNBrighterSans-Light;
+        font-size: 16px; */
+        /* counter-reset: next-section; */
+        /* padding-left: 6rem;
+        margin-left: 0px;
+        position: relative;
+
+          &:before {
+            display: block;
+            position: absolute;
+            left: 0;
+
+            counter-increment: next-section;
+            content: counter(h2-counter) "." counter(h3-counter) "." counter(section) '.' counter(next-section) ' ';
+          }
+
+          
+        }
+      } */
+
+    }
+  }
+
+
 
   p {
     h3 {
@@ -132,6 +182,22 @@ export const LegalSection = styled(Section)`
         counter(h4-counter) '.' counter(h5-counter) ' ';
     }
   }
+
+  thead tr {
+    background: #ffcb09;
+
+    th {
+      font-weight: normal;
+    }
+  }
+
+  td,
+  th {
+    ${props => (props.rowWidth ? `width: ${props.rowWidth};` : null)}
+
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
 `
 
 class CodeEthics extends Component {
@@ -151,7 +217,7 @@ class CodeEthics extends Component {
     if (!this.state.checked) {
       alert('Please check the box to proceed.')
     } else {
-      navigate('/preonboarding/code-of-ethics')
+      navigate('/preonboarding/employee-details')
     }
   }
 

@@ -9,7 +9,8 @@ import {
   setOverviewPage,
   setIntroductionPage,
   setFirstDaysPage,
-  setCodeOfEthicsPage
+  setCodeOfEthicsPage,
+  setConditionsOfServicePage
 } from '../store/pages'
 
 export const getInsuranceProviders = async token => {
@@ -120,9 +121,17 @@ export const getPreonboardingPages = async token => {
       Authorization: `JWT ${token}`
     }
   })
+  let { data: conditionsOfService } = await axios({
+    method: 'get',
+    url: `${process.env.REACT_APP_API_BASE}/preonboarding/conditions-of-service/`,
+    headers: {
+      Authorization: `JWT ${token}`
+    }
+  })
   store.dispatch(setCompliancePage(compliance[0]))
   store.dispatch(setOverviewPage(overview[0]))
   store.dispatch(setIntroductionPage(introduction[0]))
   store.dispatch(setFirstDaysPage(firstDays[0]))
   store.dispatch(setCodeOfEthicsPage(codeOfEthics[0]))
+  store.dispatch(setConditionsOfServicePage(conditionsOfService[0]))
 }
