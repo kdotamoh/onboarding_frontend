@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import axios from 'axios'
 import { navigate } from '@reach/router'
 import PropTypes from 'prop-types'
@@ -40,7 +41,7 @@ const Caption = styled.span`
   cursor: pointer;
 `
 
-export default class Tasks extends Component {
+class Tasks extends Component {
   state = {
     visible: false,
     rating: 5,
@@ -49,6 +50,7 @@ export default class Tasks extends Component {
   }
 
   handleRating = async rating => {
+    console.log(this.props.token)
     try {
       let res = await axios({
         method: 'get',
@@ -154,3 +156,7 @@ Tasks.propTypes = {
   token: PropTypes.string,
   page: PropTypes.object
 }
+export default connect(state => ({
+  token: state.token,
+  user: state.user
+}))(Tasks)
