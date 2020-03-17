@@ -27,7 +27,7 @@ export default class StrategicPillars extends Component {
           <h3>{title ? title : null}</h3>
           <h4>{header ? header : null}</h4>
           <div dangerouslySetInnerHTML={{ __html: content }}></div>
-          <Link to="../tasks">
+          <Link to="../../functional-groups/overview">
             <Button mt="15rem" textColor="black">
               Next >
             </Button>
