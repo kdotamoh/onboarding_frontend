@@ -431,6 +431,8 @@ class DetailsForm extends Component {
             dob: `${values.dob_year}-${values.dob_month}-${values.dob_day}`,
             gender: values.gender,
             nationality: values.nationality,
+            national_id_type: values.nationalIdType,
+            national_id_number: values.nationalIdNumber,
             region: values.region,
             marital_status: values.maritalStatus,
             name_of_spouse: values.spouse_name,

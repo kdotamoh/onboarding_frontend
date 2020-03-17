@@ -64,13 +64,13 @@ export const LegalSection = styled(Section)`
     list-style-type: none;
 
     li {
-    font-family: MTNBrighterSans-Light;
-    font-size: 16px;
-    padding-left: 6rem;
-    margin-left: 0px;
-    position: relative;
+      font-family: MTNBrighterSans-Light;
+      font-size: 16px;
+      padding-left: 6rem;
+      margin-left: 0px;
+      position: relative;
 
-    counter-reset: section;
+      counter-reset: section;
 
       &:before {
         display: block;
@@ -78,7 +78,8 @@ export const LegalSection = styled(Section)`
         left: 0;
 
         counter-increment: section;
-        content: counter(h2-counter) "." counter(h3-counter) "." counters(section,".") " ";
+        content: counter(h2-counter) '.' counter(h3-counter) '.'
+          counters(section, '.') ' ';
       }
 
       /* ol {
@@ -87,8 +88,8 @@ export const LegalSection = styled(Section)`
         li {
         font-family: MTNBrighterSans-Light;
         font-size: 16px; */
-        /* counter-reset: next-section; */
-        /* padding-left: 6rem;
+      /* counter-reset: next-section; */
+      /* padding-left: 6rem;
         margin-left: 0px;
         position: relative;
 
@@ -104,11 +105,8 @@ export const LegalSection = styled(Section)`
           
         }
       } */
-
     }
   }
-
-
 
   p {
     h3 {
@@ -198,6 +196,7 @@ export const LegalSection = styled(Section)`
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
+  }
 `
 
 class CodeEthics extends Component {
