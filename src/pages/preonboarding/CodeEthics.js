@@ -52,7 +52,7 @@ export const LegalSection = styled(Section)`
 
   h3 {
     font-family: MTNBrighterSans-Regular;
-    /* counter-reset: section; */
+    counter-reset: section;
 
     &:before {
       counter-increment: h3-counter;
@@ -70,7 +70,7 @@ export const LegalSection = styled(Section)`
       margin-left: 0px;
       position: relative;
 
-      counter-reset: section;
+      /* counter-reset: section; */
 
       &:before {
         display: block;
@@ -79,32 +79,8 @@ export const LegalSection = styled(Section)`
 
         counter-increment: section;
         content: counter(h2-counter) '.' counter(h3-counter) '.'
-          counters(section, '.') ' ';
+          counter(section) ' ';
       }
-
-      /* ol {
-        list-style-type: none;
-
-        li {
-        font-family: MTNBrighterSans-Light;
-        font-size: 16px; */
-      /* counter-reset: next-section; */
-      /* padding-left: 6rem;
-        margin-left: 0px;
-        position: relative;
-
-          &:before {
-            display: block;
-            position: absolute;
-            left: 0;
-
-            counter-increment: next-section;
-            content: counter(h2-counter) "." counter(h3-counter) "." counter(section) '.' counter(next-section) ' ';
-          }
-
-          
-        }
-      } */
     }
   }
 

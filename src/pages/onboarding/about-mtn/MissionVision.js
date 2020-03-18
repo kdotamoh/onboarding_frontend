@@ -20,16 +20,13 @@ export default class MissionVision extends Component {
   render() {
     let { title } = this.props.page ? this.props.page : {}
     let { header } = this.props.page ? this.props.page : {}
-    // let { content } = this.props.page ? this.props.page : {}
+    let { content } = this.props.page ? this.props.page : {}
     return (
       <>
         <PageStyle>
           <h3>{title ? title : null}</h3>
           <h4>{header ? header : null}</h4>
-          <h4>To Lead The Delivery Of A Bold, New World To Our Customers</h4>
-
-          <span>Vision</span>
-          <h4>To Make Our Customers' Lives A Whole Lot Brighter</h4>
+          <div dangerouslySetInnerHTML={{ __html: content }}></div>
 
           <Link to="../how-we-are-organised">
             <Button mt="15rem" textColor="black">
