@@ -201,7 +201,7 @@ const AboutMTN = ({ children }) => {
                 padding-top: 2rem;
                 cursor: pointer;
               `}
-              onClick={() => navigate('/onboarding/about-mtn/tasks')}
+              onClick={() => navigate('/onboarding/tasks')}
             >
               Tasks
             </p>
@@ -223,6 +223,42 @@ const AboutMTN = ({ children }) => {
     </div>
   )
 }
+
+// const WrapTasks = ({ children }) => {
+//   return (
+//     <div>
+//       <SmallNav />
+//       <SplitGrid leftWidth={20} rightWidth={80}>
+//         <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
+//           <Wrapper pt="5rem">
+//             <p
+//               css={`
+//                 padding-left: 1.2rem;
+//               `}
+//             >
+//               Tasks
+//             </p>
+//           </Wrapper>
+//         </SplitGridLeftColumn>
+//         <SplitGridRightColumn px="10rem" py="5rem" background={COLORS.WHITE}>
+//           <u style={{ cursor: 'pointer' }} onClick={() => goBack()}>
+//             {'< Back'}
+//           </u>
+//           <div
+//             css={`
+//               width: 600px;
+//             `}
+//           >
+//             <Tasks path="/tasks" page={tasksPage} />
+//           </div>
+//         </SplitGridRightColumn>
+//       </SplitGrid>
+//     </div>
+//   )
+// }
+// WrapTasks.propTypes = {
+//   children: PropTypes.node
+// }
 
 class Onboarding extends Component {
   state = {
@@ -274,6 +310,46 @@ class Onboarding extends Component {
     let employeeUnion = this.getPage('functionalPages', 'employee-union') // prettier-ignore
     let sales = this.getPage('functionalPages', 'sales') // prettier-ignore
 
+    const WrapTasks = () => {
+      return (
+        <div>
+          <SmallNav />
+          <SplitGrid leftWidth={20} rightWidth={80}>
+            <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
+              <Wrapper pt="5rem">
+                <p
+                  css={`
+                    padding-left: 1.2rem;
+                  `}
+                >
+                  Tasks
+                </p>
+              </Wrapper>
+            </SplitGridLeftColumn>
+            <SplitGridRightColumn
+              px="10rem"
+              py="5rem"
+              background={COLORS.WHITE}
+            >
+              <u style={{ cursor: 'pointer' }} onClick={() => goBack()}>
+                {'< Back'}
+              </u>
+              <div
+                css={`
+                  width: 600px;
+                `}
+              >
+                <Tasks path="/tasks" page={tasksPage} />
+              </div>
+            </SplitGridRightColumn>
+          </SplitGrid>
+        </div>
+      )
+    }
+    WrapTasks.propTypes = {
+      children: PropTypes.node
+    }
+
     return (
       <>
         {this.props.token ? (
@@ -286,6 +362,13 @@ class Onboarding extends Component {
                 <Home path="/home" />
                 <UserProfile path="/user-profile" />
                 <End path="/end" />
+              </Scrolltop>
+            </Router>
+            <Router>
+              <Scrolltop path="/">
+                <WrapTasks path="tasks">
+                  <Tasks path="/tasks" page={tasksPage} />
+                </WrapTasks>
               </Scrolltop>
             </Router>
             <Router>
@@ -359,7 +442,7 @@ class Onboarding extends Component {
                     path="/strategic-pillars-and-priorities"
                     page={strategicPage}
                   />
-                  <Tasks path="/tasks" page={tasksPage} />
+                  {/* <Tasks path="/tasks" page={tasksPage} /> */}
                   <NotFound default />
                 </AboutMTN>
               </Scrolltop>

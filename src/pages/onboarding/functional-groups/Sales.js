@@ -32,7 +32,7 @@ class Sales extends Component {
           <h4>{header ? header : null}</h4>
           <div dangerouslySetInnerHTML={{ __html: content }}></div>
 
-          <Link to="../../about-mtn/tasks">
+          <Link to="../../tasks">
             <Button mt="15rem" textColor="black">
               Next >
             </Button>
