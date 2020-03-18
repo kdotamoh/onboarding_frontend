@@ -62,15 +62,14 @@ export const LegalSection = styled(Section)`
 
   ol {
     list-style-type: none;
+    counter-reset: section;
 
     li {
       font-family: MTNBrighterSans-Light;
       font-size: 16px;
-      padding-left: 6rem;
+      padding-left: 6.5rem;
       margin-left: 0px;
       position: relative;
-
-      /* counter-reset: section; */
 
       &:before {
         display: block;
@@ -79,7 +78,7 @@ export const LegalSection = styled(Section)`
 
         counter-increment: section;
         content: counter(h2-counter) '.' counter(h3-counter) '.'
-          counter(section) ' ';
+          counters(section, '.') ' ';
       }
     }
   }
@@ -693,8 +692,17 @@ class CodeEthics extends Component {
                     environmental issues.
                   </p> */}
                 </LegalSection>
-                <LegalSection id="political-support">
-                  <h2>Political Support</h2>
+                <LegalSection
+                  id="political-support"
+                  style={{
+                    fontSize: '16px',
+                    fontFamily: 'MTNBrighterSans-Light'
+                  }}
+                  dangerouslySetInnerHTML={{
+                    __html: political_support
+                  }}
+                >
+                  {/* <h2>Political Support</h2>
                   <h3
                     style={{
                       fontSize: '16px',
@@ -721,12 +729,14 @@ class CodeEthics extends Component {
                     related to business or personal political activity shall
                     NOT:
                   </h3>
-                  <h4>disrupt workplace activities;</h4>
-                  <h4>promote or contribute to industrial unrest; </h4>
-                  <h4>
-                    create or appear to create the perception of affiliation of
-                    the Company to a particular political party.
-                  </h4>
+                  <ol>
+                    <li>disrupt workplace activities;</li>
+                    <li>promote or contribute to industrial unrest;</li>
+                    <li>
+                      create or appear to create the perception of affiliation
+                      of the Company to a particular political party.
+                    </li>
+                  </ol>
                   <h3
                     style={{
                       fontSize: '16px',
@@ -738,7 +748,7 @@ class CodeEthics extends Component {
                     association with the Company shall desist from engaging in
                     personal political activity that detracts from the
                     perception of MTN as a politically neutral Company.
-                  </h3>
+                  </h3> */}
                 </LegalSection>
                 <LegalSection
                   id="company-funds-and-property"
