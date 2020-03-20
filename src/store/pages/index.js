@@ -51,6 +51,11 @@ const pages = createSlice({
       reducer(state, action) {
         state.preonboardingPages.conditionsOfService = action.payload
       }
+    },
+    setEmployeeDetailsPage: {
+      reducer(state, action) {
+        state.preonboardingPages.employeeDetails = action.payload
+      }
     }
   }
 })
@@ -63,7 +68,8 @@ export const {
   setIntroductionPage,
   setFirstDaysPage,
   setCodeOfEthicsPage,
-  setConditionsOfServicePage
+  setConditionsOfServicePage,
+  setEmployeeDetailsPage
 } = pages.actions
 
 export default pages.reducer
