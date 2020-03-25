@@ -12,11 +12,11 @@ import { Hero } from 'views/layout'
 
 import bgImg from 'images/bg_l_bottomright.svg'
 // import heroBg from 'images/bg_yellow_l.svg'
-import brand from 'images/carousel/brand.png'
-import leadership from 'images/carousel/leadership.png'
-import trust from 'images/carousel/trust.png'
-import global from 'images/carousel/global.png'
-import reward from 'images/carousel/reward.png'
+// import brand from 'images/carousel/brand.png'
+// import leadership from 'images/carousel/leadership.png'
+// import trust from 'images/carousel/trust.png'
+// import global from 'images/carousel/global.png'
+// import reward from 'images/carousel/reward.png'
 
 import vision_img from 'images/vision_icon.svg'
 import mission_img from 'images/mission_icon.svg'
@@ -180,6 +180,7 @@ class CompanyOverview extends Component {
     const { data_protection_principles } = this.props.pageContent
       ? this.props.pageContent
       : {}
+    const { employeeValues } = this.props ? this.props : {}
 
     return (
       <div>
@@ -243,21 +244,31 @@ class CompanyOverview extends Component {
         </Container>
 
         <div style={{ width: '75%', margin: '0 auto', marginBottom: '10rem' }}>
-          <Carousel
-            swipeable={false}
-            draggable={false}
-            responsive={responsive}
-            ssr={true} // means to render carousel on server-side.
-            autoPlay={false}
-            autoPlaySpeed={1000}
-            keyBoardControl={true}
-            customTransition="all .5"
-            transitionDuration={500}
-            containerClass="carousel-container"
-            removeArrowOnDeviceType={['tablet', 'mobile']}
-            renderDotsOutside={true}
-          >
-            <CarouselSlide>
+          {employeeValues && (
+            <Carousel
+              swipeable={false}
+              draggable={false}
+              responsive={responsive}
+              ssr={true} // means to render carousel on server-side.
+              autoPlay={false}
+              autoPlaySpeed={1000}
+              keyBoardControl={true}
+              customTransition="all .5"
+              transitionDuration={500}
+              containerClass="carousel-container"
+              removeArrowOnDeviceType={['tablet', 'mobile']}
+              renderDotsOutside={true}
+            >
+              {employeeValues.map(value => (
+                <CarouselSlide key={value.id}>
+                  <img src={value.image} alt="" />
+                  <h5>{value.title}</h5>
+                  <span
+                    dangerouslySetInnerHTML={{ __html: value.content }}
+                  ></span>
+                </CarouselSlide>
+              ))}
+              {/* <CarouselSlide>
               <img src={brand} alt="" />
               <h5>Brand Strength</h5>
               <span>
@@ -303,8 +314,9 @@ class CompanyOverview extends Component {
                 Celebrating our diverse communities &amp; workforce; Each
                 employee has a place and a voice.
               </span>
-            </CarouselSlide>
-          </Carousel>
+            </CarouselSlide> */}
+            </Carousel>
+          )}
         </div>
 
         <Container>
@@ -326,9 +338,11 @@ class CompanyOverview extends Component {
   }
 }
 CompanyOverview.propTypes = {
-  pageContent: PropTypes.object
+  pageContent: PropTypes.object,
+  employeeValues: PropTypes.array
 }
 
 export default connect(state => ({
-  pageContent: state.pages.preonboardingPages.overview
+  pageContent: state.pages.preonboardingPages.overview,
+  employeeValues: state.pages.employeeValues
 }))(CompanyOverview)

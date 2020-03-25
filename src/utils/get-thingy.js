@@ -11,7 +11,8 @@ import {
   setFirstDaysPage,
   setCodeOfEthicsPage,
   setConditionsOfServicePage,
-  setEmployeeDetailsPage
+  setEmployeeDetailsPage,
+  setEmployeeValues
 } from '../store/pages'
 
 export const getInsuranceProviders = async token => {
@@ -86,6 +87,18 @@ export const getFunctionalPages = async token => {
   store.dispatch(setFunctionalPages(data))
 }
 
+export const getValueProposition = async token => {
+  let res = await axios({
+    method: 'get',
+    url: `${process.env.REACT_APP_API_BASE}/employee-value-proposition/`,
+    headers: {
+      Authorization: `JWT ${token}`
+    }
+  })
+  let { data } = res
+  store.dispatch(setEmployeeValues(data))
+}
+
 export const getPreonboardingPages = async token => {
   let { data: compliance } = await axios({
     method: 'get',
@@ -136,7 +149,7 @@ export const getPreonboardingPages = async token => {
       Authorization: `JWT ${token}`
     }
   })
-  store.dispatch(setCompliancePage(compliance[0]))
+  store.dispatch(setCompliancePage(compliance))
   store.dispatch(setOverviewPage(overview[0]))
   store.dispatch(setIntroductionPage(introduction[0]))
   store.dispatch(setFirstDaysPage(firstDays[0]))

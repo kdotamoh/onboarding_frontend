@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Link } from '@reach/router'
@@ -8,11 +9,11 @@ import PageStyle from '../PageStyle'
 
 import bgImg from 'images/onboarding/bg_bottomright.svg'
 
-import brand from 'images/carousel/brand.png'
-import leadership from 'images/carousel/leadership.png'
-import trust from 'images/carousel/trust.png'
-import global from 'images/carousel/global.png'
-import reward from 'images/carousel/reward.png'
+// import brand from 'images/carousel/brand.png'
+// import leadership from 'images/carousel/leadership.png'
+// import trust from 'images/carousel/trust.png'
+// import global from 'images/carousel/global.png'
+// import reward from 'images/carousel/reward.png'
 
 const BgImg = styled(Img)`
   position: absolute;
@@ -55,10 +56,11 @@ const Value = styled.div`
   }
 `
 
-export default class EmployeeValue extends Component {
+class EmployeeValue extends Component {
   render() {
     let { title } = this.props.page ? this.props.page : {}
     let { header } = this.props.page ? this.props.page : {}
+    let { employeeValues } = this.props ? this.props : []
     // let { content } = this.props.page ? this.props.page : {}
     return (
       <>
@@ -67,7 +69,17 @@ export default class EmployeeValue extends Component {
           <h4>{header ? header : null}</h4>
 
           <Values>
-            <Value>
+            {employeeValues &&
+              employeeValues.map(value => (
+                <Value key={value.id}>
+                  <img src={value.image} alt="" />
+                  <h5>{value.title}</h5>
+                  <span
+                    dangerouslySetInnerHTML={{ __html: value.content }}
+                  ></span>
+                </Value>
+              ))}
+            {/* <Value>
               <img src={brand} alt="" />
               <h5>Brand Strength</h5>
               <span>
@@ -113,7 +125,7 @@ export default class EmployeeValue extends Component {
                 Celebrating our diverse communities &amp; workforce; Each
                 employee has a place and a voice.
               </span>
-            </Value>
+            </Value> */}
           </Values>
 
           <Link to="../strategic-pillars-and-priorities">
@@ -130,5 +142,9 @@ export default class EmployeeValue extends Component {
   }
 }
 EmployeeValue.propTypes = {
-  page: PropTypes.object
+  page: PropTypes.object,
+  employeeValues: PropTypes.array
 }
+export default connect(state => ({
+  employeeValues: state.pages.employeeValues
+}))(EmployeeValue)
