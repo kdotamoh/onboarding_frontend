@@ -12,7 +12,8 @@ import {
   getDivisions,
   getAboutPages,
   getFunctionalPages,
-  getPreonboardingPages
+  getPreonboardingPages,
+  getValueProposition
 } from 'utils/get-thingy'
 
 import PreOnboarding from 'pages/preonboarding'
@@ -28,6 +29,7 @@ class App extends React.Component {
     getAboutPages(this.props.token)
     getFunctionalPages(this.props.token)
     getPreonboardingPages(this.props.token)
+    getValueProposition(this.props.token)
   }
 
   render() {

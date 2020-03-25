@@ -73,7 +73,8 @@ export const Hero = styled.div`
     p {
       text-align: left;
       justify-content: center;
-      font-size: 140%;
+      /* font-size: 140%; */
+      font-size: 2.2rem;
     }
 
     img {
