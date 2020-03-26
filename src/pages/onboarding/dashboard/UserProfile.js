@@ -19,7 +19,9 @@ import DashboardNav from 'components/navigation/DashboardNav'
 import DashboardLink from 'pages/onboarding/dashboard/DashboardLink'
 import { DashboardCard } from 'components/card'
 
-import test from 'images/png/placeholder.png'
+// import test from 'images/png/placeholder.png'
+import placeholder from 'images/user-profile/account.jpg'
+
 import arrow from 'images/user-profile/down-arrow.svg'
 
 const UserName = styled.span`
@@ -66,7 +68,7 @@ const _ProfileDropdown = ({ user, unsetToken, unsetUser }) => {
       {/* <span css={``}> */}
       <UserName>{user.first_name}</UserName>
       {/* </span> */}
-      <img src={test} alt="" />
+      <img src={user.avatar_url ? user.avatar_url : placeholder} alt="" />
       <div
         css={`
           background: white;
@@ -101,7 +103,8 @@ const _ProfileDropdown = ({ user, unsetToken, unsetUser }) => {
 }
 _ProfileDropdown.propTypes = {
   user: PropTypes.shape({
-    first_name: PropTypes.string
+    first_name: PropTypes.string,
+    avatar_url: PropTypes.string
   }),
   unsetToken: PropTypes.func,
   unsetUser: PropTypes.func
@@ -128,7 +131,7 @@ const Wrapper = styled.div`
 
 const Avatar = styled.img`
   border-radius: 50%;
-  /* width: 100%; */
+  width: 65%;
   position: absolute;
   right: 0;
 `
@@ -168,7 +171,7 @@ class UserProfile extends Component {
         <SplitGrid leftWidth={20} rightWidth={80}>
           <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
             <Wrapper pt="5rem">
-              <Avatar src={test} />
+              <Avatar src={user.avatar_url ? user.avatar_url : placeholder} />
             </Wrapper>
           </SplitGridLeftColumn>
           <SplitGridRightColumn p="5rem" background={COLORS.LIGHT_GREY}>
