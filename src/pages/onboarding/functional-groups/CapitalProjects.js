@@ -8,7 +8,7 @@ import PDFViewer from 'components/pdf-viewer'
 
 import bgImg from 'images/onboarding/bg_bottomright.svg'
 import PageStyle from '../PageStyle'
-import pdf from 'assets/functional-groups/capitalprojects.pdf'
+// import pdf from 'assets/functional-groups/capitalprojects.pdf'
 
 const BgImg = styled(Img)`
   position: absolute;
@@ -23,14 +23,14 @@ export default class CapitalProjects extends Component {
     let { title } = this.props.page ? this.props.page : {}
     let { header } = this.props.page ? this.props.page : {}
     let { content } = this.props.page ? this.props.page : {}
-    // let { pdf_file } = this.props.page ? this.props.page : {}
+    let { pdf_file } = this.props.page ? this.props.page : {}
     return (
       <>
         <PageStyle>
           <h3>{title ? title : null}</h3>
           <h4>{header ? header : null}</h4>
           <div dangerouslySetInnerHTML={{ __html: content }}></div>
-          <PDFViewer file={pdf} />
+          <PDFViewer file={pdf_file} />
           <Link to="../corporate-services">
             <Button mt="15rem" textColor="black">
               Next >
