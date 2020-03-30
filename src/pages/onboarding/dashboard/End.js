@@ -45,6 +45,9 @@ const HeroH1 = styled(H1)`
 
 // TODO: This is a temp page to card the end of onboarding.
 class End extends Component {
+  componentDidMount() {
+    localStorage.setItem('onboardingComplete', true)
+  }
   state = {
     steps: [
       {
@@ -80,7 +83,7 @@ class End extends Component {
       <React.Fragment>
         <FullPageGrid>
           <StepThree>
-            <DashboardLink to="/onboarding/end">Home</DashboardLink>
+            <DashboardLink to="/onboarding/home">Home</DashboardLink>
             <DashboardLink to="/onboarding/events">Events</DashboardLink>
             <DashboardLink to="/onboarding/user-tasks">Tasks</DashboardLink>
           </StepThree>
