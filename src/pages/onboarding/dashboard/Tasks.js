@@ -48,6 +48,8 @@ const SingleTask = styled.div`
 class Tasks extends Component {
   state = {
     tasks: [],
+    pastTasks: [],
+    upcomingTasks: [],
     status: 'loading'
   }
   async componentDidMount() {
@@ -63,11 +65,104 @@ class Tasks extends Component {
       }
     })
     this.setState({ tasks: data, status: 'loaded' })
+
+    let upcomingTasks = data.filter(task => task.completed === false)
+    let pastTasks = data.filter(task => task.completed === true)
+    this.setState({ upcomingTasks, pastTasks })
+
     if (data.length === 0) {
       this.setState({ status: 'noTasks' })
     }
   }
   render() {
+    // const PastTasks = ({ children }) => {
+    //   return (
+    //     <div>
+    //       {this.state.status === 'loading' && <div>Loading...</div>}
+    //       {this.state.status === 'loaded' && (
+    //         <TaskList>
+    //           {this.state.pastTasks.length &&
+    //             this.state.pastTasks.map(task => (
+    //               <SingleTask key={task.id} mb="2rem">
+    //                 <h3 dangerouslySetInnerHTML={{ __html: task.title }}></h3>
+    //                 <p
+    //                   dangerouslySetInnerHTML={{
+    //                     __html: task.description
+    //                   }}
+    //                 ></p>
+    //                 <a
+    //                   href={task.button_url}
+    //                   target="_blank"
+    //                   rel="noopener noreferrer"
+    //                   // dangerouslySetInnerHTML={{ __html: task.button_text }}
+    //                 >
+    //                   <Button
+    //                     color="blue"
+    //                     dangerouslySetInnerHTML={{
+    //                       __html: task.button_text
+    //                     }}
+    //                   ></Button>
+    //                 </a>
+    //               </SingleTask>
+    //             ))}
+    //         </TaskList>
+    //       )}
+    //       {this.state.status === 'noTasks' && (
+    //         <DashboardCard px="3rem" py="4rem" style={{ textAlign: 'center' }}>
+    //           <img src={noTask} alt="" />
+    //           <p>
+    //             <strong>You don't have any tasks yet</strong>
+    //           </p>
+    //         </DashboardCard>
+    //       )}
+    //     </div>
+    //   )
+    // }
+
+    // const UpcomingTasks = ({ children }) => {
+    //   return (
+    //     <div>
+    //       {this.state.status === 'loading' && <div>Loading...</div>}
+    //       {this.state.status === 'loaded' && (
+    //         <TaskList>
+    //           {this.state.upcomingTasks.length &&
+    //             this.state.upcomingTasks.map(task => (
+    //               <SingleTask key={task.id} mb="2rem">
+    //                 <h3 dangerouslySetInnerHTML={{ __html: task.title }}></h3>
+    //                 <p
+    //                   dangerouslySetInnerHTML={{
+    //                     __html: task.description
+    //                   }}
+    //                 ></p>
+    //                 <a
+    //                   href={task.button_url}
+    //                   target="_blank"
+    //                   rel="noopener noreferrer"
+    //                   // dangerouslySetInnerHTML={{ __html: task.button_text }}
+    //                 >
+    //                   <Button
+    //                     color="blue"
+    //                     dangerouslySetInnerHTML={{
+    //                       __html: task.button_text
+    //                     }}
+    //                   ></Button>
+    //                 </a>
+    //               </SingleTask>
+    //             ))}
+    //         </TaskList>
+    //       )}
+    //       {this.state.status === 'noTasks' && (
+    //         <DashboardCard px="3rem" py="4rem" style={{ textAlign: 'center' }}>
+    //           <img src={noTask} alt="" />
+    //           <p>
+    //             <strong>You don't have any tasks yet</strong>
+    //           </p>
+    //         </DashboardCard>
+    //       )}
+    //     </div>
+    //   )
+    // }
+
     return (
       <>
         {/* <Navigation /> */}
@@ -81,9 +176,9 @@ class Tasks extends Component {
             <Wrapper pt="5rem">
               <SideNav>
                 <OnboardingLink to="/onboarding/user-tasks">New</OnboardingLink>
-                <OnboardingLink to="/onboarding/user-tasks">
+                {/* <OnboardingLink to="/onboarding/user-tasks">
                   Past
-                </OnboardingLink>
+                </OnboardingLink> */}
               </SideNav>
             </Wrapper>
           </SplitGridLeftColumn>
@@ -105,6 +200,7 @@ class Tasks extends Component {
                         // dangerouslySetInnerHTML={{ __html: task.button_text }}
                       >
                         <Button
+                          color="blue"
                           dangerouslySetInnerHTML={{ __html: task.button_text }}
                         ></Button>
                       </a>
