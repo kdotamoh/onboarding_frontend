@@ -231,6 +231,6 @@ Tasks.propTypes = {
 }
 
 export default connect(state => ({
-  token: state.token,
-  tasks: state.user.tasks
+  token: state.token
+  // tasks: state.user.tasks
 }))(Tasks)

@@ -89,6 +89,6 @@ export const DashboardCard = styled(Card)`
   min-height: unset;
 `
 DashboardCard.defaultProps = {
-  height: '30rem',
+  minHheight: '30rem',
   textAlign: 'center'
 }

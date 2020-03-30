@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import styled from 'styled-components'
-// import { navigate } from '@reach/router'
+import { navigate } from '@reach/router'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { DashboardCard } from 'components/card'
+import { Button } from 'components/styled'
 // import Navigation from 'components/navigation'
 import DashboardNav from 'components/navigation/DashboardNav'
 import DashboardLink from 'pages/onboarding/dashboard/DashboardLink'
@@ -45,35 +47,38 @@ const HeroH1 = styled(H1)`
 
 // TODO: This is a temp page to card the end of onboarding.
 class End extends Component {
-  componentDidMount() {
-    localStorage.setItem('onboardingComplete', true)
-  }
   state = {
-    steps: [
-      {
-        target: '.tour-step-1',
-        content: '1. Your welcome message appears here.',
-        disableBeacon: true
-      },
-      {
-        target: '.tour-step-2',
-        content: '2. Your task and event notifications appear here.'
-      },
-      {
-        target: '.tour-step-3',
-        content:
-          '3. Your menu bar with links to view all your events and tasks.'
-      },
-      { target: '.tour-step-4', content: '4. Your log out and profile.' }
-    ],
-    // visible: true,
-    runTour: false
+    tasksLength: '',
+    status: '',
+    upcomingTasks: [],
+    pastTasks: []
   }
 
-  handleStartTour = async () => {
-    this.setState({ visible: false }, () => this.setState({ runTour: true }))
-  }
+  async componentDidMount() {
+    localStorage.setItem('onboardingComplete', true)
 
+    const url = `${process.env.REACT_APP_API_BASE}/tasks/`
+
+    let { token } = this.props
+
+    let { data } = await axios({
+      method: 'get',
+      url,
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+    this.setState({ tasks: data, status: 'hasTasks' })
+
+    let upcomingTasks = data.filter(task => task.completed === false)
+    let pastTasks = data.filter(task => task.completed === true)
+
+    this.setState({ upcomingTasks, pastTasks, tasksLength: data.length })
+
+    if (data.length === 0) {
+      this.setState({ status: 'noTasks' })
+    }
+  }
   render() {
     const {
       user: { first_name }
@@ -115,9 +120,27 @@ class End extends Component {
                     `}
                   >
                     <img src={noTask} alt="" />
-                    <p>
-                      <strong>You don't have any tasks yet</strong>
-                    </p>
+                    {this.state.status === 'noTasks' && (
+                      <p>
+                        <strong>You don't have any tasks yet</strong>
+                      </p>
+                    )}
+                    {this.state.status === 'hasTasks' && (
+                      <>
+                        <p style={{ marginTop: '2rem' }}>
+                          <strong>
+                            You have ({this.state.tasksLength}) task
+                          </strong>
+                        </p>
+                        <Button
+                          mt="1rem"
+                          color="blue"
+                          onClick={() => navigate('./user-tasks')}
+                        >
+                          Go to tasks >
+                        </Button>
+                      </>
+                    )}
                   </DashboardCard>
                 </CenterContent>
                 <BgImg src={bgImg} />
@@ -132,9 +155,11 @@ class End extends Component {
 End.propTypes = {
   user: PropTypes.shape({
     first_name: PropTypes.string
-  })
+  }),
+  token: PropTypes.string
 }
 
 export default connect(state => ({
-  user: state.user
+  user: state.user,
+  token: state.token
 }))(End)
