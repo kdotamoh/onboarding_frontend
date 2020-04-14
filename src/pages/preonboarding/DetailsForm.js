@@ -308,7 +308,7 @@ const initialValues = {
   family_line_number: '',
   medicalInsurance_provider: '',
   principal_form: '',
-  dependent_form: '',
+  dependant_form: '',
   fuelCard: ''
 }
 
@@ -1572,7 +1572,7 @@ class DetailsForm extends Component {
                     ))}
                 </Select>
                 <p>
-                  Download the Principal &amp; Dependent Application Forms
+                  Download the Principal &amp; Dependant Application Forms
                   (where applicable):
                 </p>
 
@@ -1580,16 +1580,16 @@ class DetailsForm extends Component {
                   Nationwide Medical Insurance Principal Application Form
                 </Link>
                 <Link href={nationwide_dependant} download>
-                  Nationwide Medical Insurance Dependent Application Form Acacia
+                  Nationwide Medical Insurance Dependant Application Form Acacia
                 </Link>
                 <Link href={acacia_principal} download>
                   Medical Insurance Principal Application Form Acacia Medical
                 </Link>
                 <Link href={acacia_dependant} download>
-                  Insurance Dependent Application Form
+                  Insurance Dependant Application Form
                 </Link>
 
-                <Label htmlFor="">Upload the principal dependent form</Label>
+                <Label htmlFor="">Upload the principal dependant form</Label>
                 <FileInput>
                   <label htmlFor="principal_form">
                     Upload
@@ -1615,19 +1615,19 @@ class DetailsForm extends Component {
                   </p>
                 </FileInput>
 
-                <Label htmlFor="">Upload the dependent form</Label>
+                <Label htmlFor="">Upload the dependant form</Label>
                 <FileInput>
-                  <label htmlFor="dependent_form">
+                  <label htmlFor="dependant_form">
                     Upload
                     <input
                       multiple
-                      id="dependent_form"
+                      id="dependant_form"
                       accept="image/jpeg"
                       type="file"
-                      name="dependent_form"
+                      name="dependant_form"
                       onChange={e => {
                         props.setFieldValue(
-                          'dependent_form',
+                          'dependant_form',
                           e.currentTarget.files[0]
                         )
                       }}
@@ -1635,8 +1635,8 @@ class DetailsForm extends Component {
                   </label>
 
                   <p>
-                    {props.values.dependent_form.name
-                      ? props.values.dependent_form.name
+                    {props.values.dependant_form.name
+                      ? props.values.dependant_form.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
                   </p>
                 </FileInput>
