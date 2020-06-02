@@ -65,11 +65,12 @@ class LoginForm extends Component {
       await this.props.setToken(token)
       await this.props.setUser(user)
       navigate(`${this.props.next}`)
-      this.setState({ isSubmitting: false })
     } catch (err) {
-      console.log(err)
+      console.log(err.response)
       this.setState({ errorMessage: 'Something went wrong. Please try again.' })
       // navigate(`${this.props.next}`) // Todo: REMOVE THIS
+    } finally {
+      this.setState({ isSubmitting: false })
     }
   }
 
@@ -78,10 +79,8 @@ class LoginForm extends Component {
       <div>
         <Formik
           initialValues={{ username: '', password: '' }}
-          onSubmit={(values, { setSubmitting }) => {
-            setSubmitting(true)
+          onSubmit={values => {
             this.handleSubmit(values)
-            setSubmitting(false)
           }}
           validationSchema={LoginSchema}
         >
@@ -117,6 +116,7 @@ class LoginForm extends Component {
               >
                 {this.state.isSubmitting ? 'SUBMITTING...' : 'LOG IN'}
               </Button>
+              <small style={{ color: 'red' }}>{this.state.errorMessage}</small>
             </Form>
           )}
         </Formik>
