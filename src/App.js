@@ -12,6 +12,9 @@ import {
   // isMobile
 } from 'react-device-detect'
 
+import { COLORS } from './constants'
+import logo from 'images/mtn_logo.svg'
+
 import GlobalStyles from './GlobalStyles'
 import {
   getInsuranceProviders,
@@ -54,14 +57,48 @@ class App extends React.Component {
             {/* <NotFound default /> */}
           </Router>
         </BrowserView>
-        <MobileView>
-          <p>
-            Please access this site on a desktop or laptop for the best
-            experience.
-          </p>
+        <MobileView
+          style={{
+            backgroundColor: COLORS.MARIGOLD,
+            minHeight: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <img
+            style={{ height: '10rem', width: 'auto', marginBottom: '1rem' }}
+            src={logo}
+            alt=""
+          />
+          <div style={{ width: '65vw', textAlign: 'center' }}>
+            <span style={{ color: 'white' }}>
+              Please access this site on a desktop or laptop for the best
+              experience.
+            </span>
+          </div>
         </MobileView>
-        <CustomView condition={browserName === 'Safari'}>
-          Please access this site in Chrome or Firefox for the best experience.
+        <CustomView
+          style={{
+            backgroundColor: COLORS.MARIGOLD,
+            minHeight: '100vh',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+          condition={browserName === 'Safari'}
+        >
+          <img
+            style={{ height: '10rem', width: 'auto', marginBottom: '1rem' }}
+            src={logo}
+            alt=""
+          />
+          <span style={{ color: 'white' }}>
+            Please access this site in Chrome or Firefox for the best
+            experience.
+          </span>
         </CustomView>
       </div>
     )
