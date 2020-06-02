@@ -19,6 +19,7 @@
     "pure-react-carousel": "^1.24.1",
     "react": "^16.12.0",
     "react-datepicker": "^2.10.1",
+    "react-device-detect": "^1.12.1",
     "react-dom": "^16.12.0",
     "react-helmet": "^5.2.1",
     "react-joyride": "^2.2.1",

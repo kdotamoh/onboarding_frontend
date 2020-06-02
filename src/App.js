@@ -3,6 +3,14 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Router } from '@reach/router'
 import { Helmet } from 'react-helmet'
+import {
+  BrowserView,
+  MobileView,
+  CustomView,
+  browserName
+  // isBrowser,
+  // isMobile
+} from 'react-device-detect'
 
 import GlobalStyles from './GlobalStyles'
 import {
@@ -39,11 +47,22 @@ class App extends React.Component {
           <title>MTN</title>
         </Helmet>
         <GlobalStyles />
-        <Router>
-          <Onboarding path="onboarding/*" />
-          <PreOnboarding path="preonboarding/*" />
-          {/* <NotFound default /> */}
-        </Router>
+        <BrowserView>
+          <Router>
+            <Onboarding path="onboarding/*" />
+            <PreOnboarding path="preonboarding/*" />
+            {/* <NotFound default /> */}
+          </Router>
+        </BrowserView>
+        <MobileView>
+          <p>
+            Please access this site on a desktop or laptop for the best
+            experience.
+          </p>
+        </MobileView>
+        <CustomView condition={browserName === 'Safari'}>
+          Please access this site in Chrome or Firefox for the best experience.
+        </CustomView>
       </div>
     )
   }
