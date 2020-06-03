@@ -4,6 +4,7 @@ import userReducer from './user'
 import providerReducer from './providers'
 import organisationReducer from './organisation'
 import pageReducer from './pages'
+import navigationReducer from './navigation'
 
 // export default combineReducers({
 //   token: authReducer,
@@ -16,7 +17,8 @@ const rootReducer = combineReducers({
   user: userReducer,
   providers: providerReducer,
   organisation: organisationReducer,
-  pages: pageReducer
+  pages: pageReducer,
+  navigation: navigationReducer
 })
 
 export default configureStore({

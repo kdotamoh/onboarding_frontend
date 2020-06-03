@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { navigate, Location } from '@reach/router'
+import { connect } from 'react-redux'
+
+import { setCurrentStep } from 'store/navigation'
+import store from 'store/index'
 
 import goBack from 'utils/go-back'
 
@@ -79,26 +84,33 @@ const Step = styled.div`
 
 `
 
-export default class StepNav extends Component {
+class StepNav extends Component {
   state = {
     steps: [
-      { path: '/preonboarding/info', isCurrent: false },
-      { path: '/preonboarding/company-overview', isCurrent: false },
-      { path: '/preonboarding/compliance', isCurrent: false },
-      { path: '/preonboarding/code-of-ethics', isCurrent: false },
-      { path: '/preonboarding/employee-details', isCurrent: false },
-      { path: '/preonboarding/conditions-of-service', isCurrent: false },
-      { path: '/preonboarding/introduce-yourself', isCurrent: false },
-      { path: '/preonboarding/your-first-three-days', isCurrent: false }
+      { id: 1, path: '/preonboarding/info', isCurrent: false },
+      { id: 2, path: '/preonboarding/company-overview', isCurrent: false },
+      { id: 3, path: '/preonboarding/compliance', isCurrent: false },
+      { id: 4, path: '/preonboarding/code-of-ethics', isCurrent: false },
+      { id: 5, path: '/preonboarding/employee-details', isCurrent: false },
+      { id: 6, path: '/preonboarding/conditions-of-service', isCurrent: false },
+      { id: 7, path: '/preonboarding/introduce-yourself', isCurrent: false },
+      { id: 8, path: '/preonboarding/your-first-three-days', isCurrent: false }
     ]
   }
 
   componentDidMount() {
-    console.log(this.props)
+    const currentStep = this.state.steps.find(
+      step => step.path === window.location.pathname
+    ).id
+    store.dispatch(setCurrentStep(currentStep))
   }
 
-  goTo = path => {
-    navigate(path)
+  goTo = async step => {
+    if (step.id > this.props.currentStep) {
+      return
+    }
+    store.dispatch(setCurrentStep(step.id))
+    navigate(step.path)
   }
 
   checkIsCurrent = (location, step) => {
@@ -114,13 +126,13 @@ export default class StepNav extends Component {
             <u onClick={() => goBack()}>{'< Back'}</u>
             <Steps>
               {steps &&
-                steps.map((step, id) => (
+                steps.map(step => (
                   <Step
-                    onClick={() => this.goTo(step.path)}
-                    key={id}
+                    onClick={() => this.goTo(step)}
+                    key={step.id}
                     isCurrent={this.checkIsCurrent(location, step)}
                   >
-                    {id + 1}
+                    {step.id}
                   </Step>
                 ))}
             </Steps>
@@ -131,3 +143,10 @@ export default class StepNav extends Component {
     )
   }
 }
+StepNav.propTypes = {
+  currentStep: PropTypes.number
+}
+
+export default connect(state => ({
+  currentStep: state.navigation.currentStep
+}))(StepNav)
