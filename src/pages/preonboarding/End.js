@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
 import { connect } from 'react-redux'
+import axios from 'axios'
+import moment from 'moment'
 import PropTypes from 'prop-types'
 
 import { COLORS } from '../../constants'
@@ -16,7 +18,7 @@ import { H1, P, Logo } from 'components/styled'
 import { Card, CardInfo } from 'components/card'
 
 import bgImg from 'images/bg_l_bottomleft.svg'
-import placeholder from 'images/png/placeholder.png'
+import account from 'images/user-profile/account.jpg'
 import logo from 'images/mtn_logo.svg'
 
 const HeroH1 = styled(H1)`
@@ -44,12 +46,29 @@ const Paragraph = styled(P)`
 // `
 
 class End extends Component {
+  state = {
+    hr_partner_details: {}
+  }
+  async componentDidMount() {
+    let { hr_partner } = this.props.user
+    let { data: hr_partner_details } = await axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API_BASE}/hr_partners/${hr_partner}/`,
+      headers: {
+        Authorization: `JWT ${this.props.token}`
+      }
+    })
+    // console.log(hr_partner_details)
+    this.setState({ hr_partner_details })
+  }
   nextPage = () => {
     navigate('/preonboarding/info')
   }
 
   render() {
+    const { user } = this.props
     const { first_name } = this.props.user
+    const { hr_partner_details } = this.state
     return (
       <SplitGrid fullPage leftWidth={50} rightWidth={50}>
         <SplitGridLeftColumn background={COLORS.MARIGOLD}>
@@ -71,18 +90,36 @@ class End extends Component {
               <CardInfo>
                 <div className="card-info__left">
                   <div className="card-info__image card-info__circle">
-                    <span className="month">SEP</span>
-                    <span className="day">10</span>
+                    <span className="month">
+                      {' '}
+                      {user.first_day
+                        ? moment(user.first_day)
+                            .format('MMM')
+                            .toUpperCase()
+                        : null}
+                    </span>
+                    <span className="day">
+                      {user.first_day
+                        ? moment(user.first_day)
+                            .format('DD')
+                            .toUpperCase()
+                        : null}
+                    </span>
                   </div>
                 </div>
 
                 <div className="card-info__right">
                   <div className="card-info__details">
                     <h5>Your First Day</h5>
-                    <span>Sep 10 2019 | 11:00 am</span>
-                    <span>MTN House, #6 Independence Avenue,</span>
-                    <span>West Ridge, Accra</span>
-                    <span>GA-052-4025</span>
+                    {user.first_day && (
+                      <span>
+                        {moment(user.first_day).format('MMM DD YYYY')} |{' '}
+                        {moment(
+                          user.first_day_reporting_time,
+                          'HH:mm:ss'
+                        ).format('hh:mm A')}
+                      </span>
+                    )}
                   </div>
                 </div>
               </CardInfo>
@@ -91,14 +128,25 @@ class End extends Component {
 
               <CardInfo>
                 <div className="card-info__left">
-                  <img className="card-info__image" src={placeholder} alt="" />
+                  <img
+                    className="card-info__image"
+                    src={
+                      hr_partner_details.avatar
+                        ? hr_partner_details.avatar
+                        : account
+                    }
+                    alt=""
+                  />
                 </div>
                 <div className="card-info__right">
                   <div className="card-info__details">
                     <h5>Your HR Business Partner</h5>
-                    <span>Esi Amegache</span>
-                    <span>024 412 3456</span>
-                    <span>esi.amegache@company.com</span>
+                    <span>
+                      {hr_partner_details.first_name}{' '}
+                      {hr_partner_details.last_name}
+                    </span>
+                    <span>{hr_partner_details.phone_number} </span>
+                    <span>{hr_partner_details.email}</span>
                   </div>
                 </div>
               </CardInfo>
@@ -110,7 +158,12 @@ class End extends Component {
   }
 }
 End.propTypes = {
+  token: PropTypes.string,
   user: PropTypes.shape({
+    first_day: PropTypes.string,
+    first_day_reporting_time: PropTypes.string,
+    first_day_location: PropTypes.string,
+    hr_partner: PropTypes.number,
     first_name: PropTypes.string
   })
 }

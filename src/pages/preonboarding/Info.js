@@ -12,6 +12,7 @@ import { Button, H3, Container } from 'components/styled'
 
 import { COLORS } from '../../constants'
 import bgImg from 'images/bg_l_bottomright.svg'
+import account from 'images/user-profile/account.jpg'
 
 const ContainerWithBackground = styled(Container)`
   justify-content: center;
@@ -61,14 +62,18 @@ class Info extends Component {
               <div className="card-info__left">
                 <div className="card-info__image card-info__circle">
                   <span className="month">
-                    {moment(user.first_day)
-                      .format('MMM')
-                      .toUpperCase()}
+                    {user.first_day
+                      ? moment(user.first_day)
+                          .format('MMM')
+                          .toUpperCase()
+                      : null}
                   </span>
                   <span className="day">
-                    {moment(user.first_day)
-                      .format('DD')
-                      .toUpperCase()}
+                    {user.first_day
+                      ? moment(user.first_day)
+                          .format('DD')
+                          .toUpperCase()
+                      : null}
                   </span>
                 </div>
               </div>
@@ -76,12 +81,14 @@ class Info extends Component {
               <div className="card-info__right">
                 <div className="card-info__details">
                   <h5>Your First Day</h5>
-                  <span>
-                    {moment(user.first_day).format('MMM DD YYYY')} |{' '}
-                    {moment(user.first_day_reporting_time, 'HH:mm:ss').format(
-                      'hh:mm A'
-                    )}
-                  </span>
+                  {user.first_day && (
+                    <span>
+                      {moment(user.first_day).format('MMM DD YYYY')} |{' '}
+                      {moment(user.first_day_reporting_time, 'HH:mm:ss').format(
+                        'hh:mm A'
+                      )}
+                    </span>
+                  )}
                   <span>{user.first_day_location}</span>
                   {/* <span>MTN House, #6 Independence Avenue,</span>
                   <span>West Ridge, Accra</span>
@@ -96,7 +103,11 @@ class Info extends Component {
               <div className="card-info__left">
                 <img
                   className="card-info__image"
-                  src={hr_partner_details.avatar}
+                  src={
+                    hr_partner_details.avatar
+                      ? hr_partner_details.avatar
+                      : account
+                  }
                   alt=""
                 />
               </div>
