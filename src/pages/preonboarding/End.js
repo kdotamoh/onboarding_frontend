@@ -168,5 +168,6 @@ End.propTypes = {
   })
 }
 export default connect(state => ({
-  user: state.user
+  user: state.user,
+  token: state.token
 }))(End)
