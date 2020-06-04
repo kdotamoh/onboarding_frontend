@@ -4,6 +4,7 @@ import { Formik, FieldArray, getIn } from 'formik'
 import { Persist } from 'formik-persist'
 import * as Yup from 'yup'
 import styled from 'styled-components'
+import { isEmpty } from 'lodash'
 import { layout } from 'styled-system'
 // import { navigate } from '@reach/router'
 import PropTypes from 'prop-types'
@@ -408,7 +409,6 @@ class DetailsForm extends Component {
           console.log(values)
 
           let newChildren = values.children.map(child => ({
-            // ...child,
             name: child.name,
             dob: `${child.dob_year}-${child.dob_month}-${child.dob_day}`,
             birth_certificate: null
@@ -467,16 +467,39 @@ class DetailsForm extends Component {
           }
 
           let imageFiles = new FormData()
-          imageFiles.append('national_id', values.nationalId)
-          imageFiles.append('marriage_cert', values.marriageCertificate)
+          imageFiles.append(
+            'avatar',
+            isEmpty(values.passportPhoto) ? null : values.passportPhoto
+          )
+          imageFiles.append(
+            'national_id',
+            isEmpty(values.nationalId) ? null : values.nationalId
+          )
+          imageFiles.append(
+            'marriage_cert',
+            isEmpty(values.marriageCertificate)
+              ? ''
+              : values.marriageCertificate
+          )
           imageFiles.append('educational_certs', values.educationalCertificates)
           imageFiles.append(
             'professional_body_affiliates',
             values.professionalBodies
           )
-          imageFiles.append('nss_cert', values.nationalService_certificate)
-          imageFiles.append('principal_form', values.principal_form)
-          imageFiles.append('dependant_form', values.dependant_form)
+          imageFiles.append(
+            'nss_cert',
+            isEmpty(values.nationalService_certificate)
+              ? null
+              : values.nationalService_certificate
+          )
+          imageFiles.append(
+            'principal_form',
+            isEmpty(values.principal_form) ? null : values.principal_form
+          )
+          imageFiles.append(
+            'dependant_form',
+            isEmpty(values.dependant_form) ? null : values.dependant_form
+          )
 
           try {
             let res = await axios({
