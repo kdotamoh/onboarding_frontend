@@ -395,8 +395,8 @@ class DetailsForm extends Component {
     }
 
     let { user } = this.props
-    let { departments } = this.props
-    let { divisions } = this.props
+    // let { departments } = this.props
+    // let { divisions } = this.props
 
     return (
       <Formik
@@ -1710,19 +1710,10 @@ class DetailsForm extends Component {
                 <p css={mutedCss}>{user.job_title}</p>
 
                 <Label htmlFor="nationalId">Division</Label>
-                <p css={mutedCss}>
-                  {divisions.length &&
-                    divisions.find(division => division.id === user.division)
-                      .title}
-                </p>
+                <p css={mutedCss}>{user.division.title}</p>
 
                 <Label htmlFor="nationalId">Department</Label>
-                <p css={mutedCss}>
-                  {departments.length &&
-                    departments.find(
-                      department => department.id === user.department
-                    ).title}
-                </p>
+                <p css={mutedCss}>{user.department.title}</p>
 
                 <Label htmlFor="nationalId">Location</Label>
                 <p css={mutedCss}>{user.location}</p>
@@ -1760,8 +1751,8 @@ DetailsForm.propTypes = {
   handleSubmit: PropTypes.func,
   user: PropTypes.shape({
     id: PropTypes.number,
-    division: PropTypes.number,
-    department: PropTypes.number,
+    division: PropTypes.object,
+    department: PropTypes.object,
     location: PropTypes.string,
     job_title: PropTypes.string,
     line_manager: PropTypes.number
