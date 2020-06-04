@@ -37,7 +37,7 @@ class Info extends Component {
     let { hr_partner } = this.props.user
     let { data: hr_partner_details } = await axios({
       method: 'get',
-      url: `${process.env.REACT_APP_API_BASE}/hr_partners/${hr_partner}/`,
+      url: `${process.env.REACT_APP_API_BASE}/hr_partners/${hr_partner.id}/`,
       headers: {
         Authorization: `JWT ${this.props.token}`
       }
