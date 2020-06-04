@@ -339,7 +339,7 @@ class DetailsForm extends Component {
     let { line_manager } = this.props.user
     let { data: line_manager_details } = await axios({
       method: 'get',
-      url: `${process.env.REACT_APP_API_BASE}/line_managers/${line_manager}/`,
+      url: `${process.env.REACT_APP_API_BASE}/line_managers/${line_manager.id}/`,
       headers: {
         Authorization: `JWT ${this.props.token}`
       }
