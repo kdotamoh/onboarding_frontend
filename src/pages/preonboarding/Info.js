@@ -35,15 +35,17 @@ class Info extends Component {
   }
   async componentDidMount() {
     let { hr_partner } = this.props.user
-    let { data: hr_partner_details } = await axios({
-      method: 'get',
-      url: `${process.env.REACT_APP_API_BASE}/hr_partners/${hr_partner.id}/`,
-      headers: {
-        Authorization: `JWT ${this.props.token}`
-      }
-    })
-    // console.log(hr_partner_details)
-    this.setState({ hr_partner_details })
+    if (hr_partner) {
+      let { data: hr_partner_details } = await axios({
+        method: 'get',
+        url: `${process.env.REACT_APP_API_BASE}/hr_partners/${hr_partner.id}/`,
+        headers: {
+          Authorization: `JWT ${this.props.token}`
+        }
+      })
+      // console.log(hr_partner_details)
+      this.setState({ hr_partner_details })
+    }
   }
 
   render() {
