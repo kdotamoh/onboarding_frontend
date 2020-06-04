@@ -1707,16 +1707,24 @@ class DetailsForm extends Component {
               <Heading>10. Functional Information</Heading>
               <section hidden={this.state.functional}>
                 <Label htmlFor="nationalId">Job Title</Label>
-                <p css={mutedCss}>{user.job_title}</p>
+                <p css={mutedCss}>
+                  {user.job_title.title ? user.job_title.title : null}
+                </p>
 
                 <Label htmlFor="nationalId">Division</Label>
-                <p css={mutedCss}>{user.division.title}</p>
+                <p css={mutedCss}>
+                  {user.division.title ? user.division.title : null}
+                </p>
 
                 <Label htmlFor="nationalId">Department</Label>
-                <p css={mutedCss}>{user.department.title}</p>
+                <p css={mutedCss}>
+                  {user.department.title ? user.department.title : null}
+                </p>
 
                 <Label htmlFor="nationalId">Location</Label>
-                <p css={mutedCss}>{user.location}</p>
+                <p css={mutedCss}>
+                  {user.location.title ? user.location.title : null}
+                </p>
 
                 <Label htmlFor="nationalId">Line Manager</Label>
                 <p css={mutedCss}>
