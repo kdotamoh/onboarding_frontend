@@ -25,8 +25,6 @@ import vital_img from 'images/vital_icon.svg'
 import valuesPdf from 'assets/values.pdf'
 import behavioursPdf from 'assets/behaviours.pdf'
 
-import preonboarding from 'assets/preonboarding.mp4'
-
 import { COLORS } from '../../constants'
 
 const BgImg = styled(Img)`
@@ -171,6 +169,7 @@ class CompanyOverview extends Component {
       }
     }
 
+    const { video_file } = this.props.pageContent ? this.props.pageContent : {}
     const { mission } = this.props.pageContent ? this.props.pageContent : {}
     const { vision } = this.props.pageContent ? this.props.pageContent : {}
     const { values } = this.props.pageContent ? this.props.pageContent : {}
@@ -189,7 +188,7 @@ class CompanyOverview extends Component {
         <Container>
           <H3 py="3rem">Company Overview</H3>
           <video controls autoPlay>
-            <source src={preonboarding} type="video/mp4" />
+            <source src={video_file} type="video/mp4" />
             Sorry, your browser doesn't support embedded videos.
           </video>
           <div style={{ marginTop: '10rem' }} />
