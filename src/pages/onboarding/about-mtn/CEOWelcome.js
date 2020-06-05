@@ -7,8 +7,8 @@ import { Button, Img } from 'components/styled'
 import PageStyle from '../PageStyle'
 
 import bgImg from 'images/onboarding/bg_bottomright.svg'
-import welcome from 'assets/welcome.mp4'
-import induction from 'assets/induction.mp4'
+// import welcome from 'assets/welcome.mp4'
+// import induction from 'assets/induction.mp4'
 
 const BgImg = styled(Img)`
   position: absolute;
@@ -23,6 +23,8 @@ export default class CEOWelcome extends Component {
     let { title } = this.props.page ? this.props.page : {}
     let { header } = this.props.page ? this.props.page : {}
     let { content } = this.props.page ? this.props.page : {}
+    let { video_file_1 } = this.props.page ? this.props.page : {}
+    let { video_file_2 } = this.props.page ? this.props.page : {}
     return (
       <>
         <PageStyle>
@@ -30,12 +32,12 @@ export default class CEOWelcome extends Component {
           <h4>{header ? header : null}</h4>
           <div dangerouslySetInnerHTML={{ __html: content }}></div>
           <video controls>
-            <source src={welcome} type="video/mp4" />
+            <source src={video_file_1} type="video/mp4" />
             Sorry, your browser doesn't support embedded videos.
           </video>
           <div style={{ marginTop: '4rem' }} />
           <video controls>
-            <source src={induction} type="video/mp4" />
+            <source src={video_file_2} type="video/mp4" />
             Sorry, your browser doesn't support embedded videos.
           </video>
           <Link to="../company-overview">
