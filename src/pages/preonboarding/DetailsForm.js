@@ -5,6 +5,7 @@ import { Persist } from 'formik-persist'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 import { layout } from 'styled-system'
+import { isEmpty } from 'lodash'
 // import { navigate } from '@reach/router'
 import PropTypes from 'prop-types'
 import moment from 'moment'
@@ -236,7 +237,11 @@ const ValidationSchema = Yup.object().shape({
   family_line_relationship: Yup.string().required('Relationship is required'),
   family_line_number: Yup.string()
     .matches(phoneRegex, 'Must be an MTN number')
-    .required('Number is required')
+    .required('Number is required'),
+  medicalInsurance_provider: Yup.mixed().required(
+    'Please select an insurance provider.'
+  ),
+  fuelCard: Yup.mixed().required('Please select a fuel provider.')
 
   // For when I wanna validate children: https://codesandbox.io/s/myqmyq3plx
 })
@@ -338,7 +343,9 @@ class DetailsForm extends Component {
     let { line_manager } = this.props.user
     let { data: line_manager_details } = await axios({
       method: 'get',
-      url: `${process.env.REACT_APP_API_BASE}/line_managers/${line_manager.id}/`,
+      url: `${process.env.REACT_APP_API_BASE}/line_managers/${
+        line_manager ? line_manager.id : ''
+      }/`,
       headers: {
         Authorization: `JWT ${this.props.token}`
       }
@@ -401,8 +408,8 @@ class DetailsForm extends Component {
       <Formik
         enableReinitialize={true}
         initialValues={initialValues}
-        onSubmit={async (values, props) => {
-          props.setSubmitting(true)
+        onSubmit={async values => {
+          // props.setSubmitting(true)
           this.setState({ isSubmitting: true })
 
           console.log(values)
@@ -520,7 +527,7 @@ class DetailsForm extends Component {
             })
           }
 
-          props.setSubmitting(false)
+          // props.setSubmitting(false)
           this.setState({ isSubmitting: false })
         }}
         validationSchema={ValidationSchema}
@@ -1571,6 +1578,14 @@ class DetailsForm extends Component {
                       </option>
                     ))}
                 </Select>
+
+                {props.errors.medicalInsurance_provider &&
+                props.touched.medicalInsurance_provider ? (
+                  <Error id="feedback">
+                    {props.errors.medicalInsurance_provider}
+                  </Error>
+                ) : null}
+
                 <p>
                   Download the Principal &amp; Dependant Application Forms
                   (where applicable):
@@ -1672,6 +1687,10 @@ class DetailsForm extends Component {
                     ))}
                 </Select>
 
+                {props.errors.fuelCard && props.touched.fuelCard ? (
+                  <Error id="feedback">{props.errors.fuelCard}</Error>
+                ) : null}
+
                 <ShowSectionButton
                   type="button"
                   onClick={() => this.handleOpenSection('functional')}
@@ -1685,7 +1704,7 @@ class DetailsForm extends Component {
               <section hidden={this.state.functional}>
                 <Label htmlFor="nationalId">Job Title</Label>
                 <p css={mutedCss}>
-                  {user.job_title.title ? user.job_title.title : null}
+                  {user.job_title ? user.job_title.title : null}
                 </p>
 
                 <Label htmlFor="nationalId">Division</Label>
@@ -1700,7 +1719,7 @@ class DetailsForm extends Component {
 
                 <Label htmlFor="nationalId">Location</Label>
                 <p css={mutedCss}>
-                  {user.location.title ? user.location.title : null}
+                  {user.location ? user.location.title : null}
                 </p>
 
                 <Label htmlFor="nationalId">Line Manager</Label>
@@ -1718,12 +1737,19 @@ class DetailsForm extends Component {
               type="submit"
               onClick={props.handleSubmit}
             >
-              {props.isSubmitting ? 'Submitting...' : 'Submit and Continue >'}
+              {this.state.isSubmitting
+                ? 'Submitting...'
+                : 'Submit and Continue >'}
             </Button>
 
             {this.state.errorMessage && (
               <p style={{ marginTop: '3rem', color: 'red' }}>
                 {this.state.errorMessage}
+              </p>
+            )}
+            {this.state.isSubmitting === true && !isEmpty(props.errors) && (
+              <p style={{ marginTop: '3rem', color: 'red' }}>
+                Please fill all required fields.
               </p>
             )}
           </>
