@@ -68,7 +68,15 @@ const _ProfileDropdown = ({ user, unsetToken, unsetUser }) => {
       {/* <span css={``}> */}
       <UserName>{user.first_name}</UserName>
       {/* </span> */}
-      <img src={user.avatar_url ? user.avatar_url : placeholder} alt="" />
+      <img
+        css={`
+          object-fit: cover;
+          height: 4.5rem;
+          width: 4.5rem;
+        `}
+        src={user.avatar ? user.avatar : placeholder}
+        alt=""
+      />
       <div
         css={`
           background: white;
@@ -104,7 +112,7 @@ const _ProfileDropdown = ({ user, unsetToken, unsetUser }) => {
 _ProfileDropdown.propTypes = {
   user: PropTypes.shape({
     first_name: PropTypes.string,
-    avatar_url: PropTypes.string
+    avatar: PropTypes.string
   }),
   unsetToken: PropTypes.func,
   unsetUser: PropTypes.func
@@ -131,7 +139,9 @@ const Wrapper = styled.div`
 
 const Avatar = styled.img`
   border-radius: 50%;
-  width: 65%;
+  object-fit: cover;
+  height: 15rem;
+  width: 15rem;
   position: absolute;
   right: 0;
 `
@@ -172,7 +182,7 @@ class UserProfile extends Component {
         <SplitGrid leftWidth={20} rightWidth={80}>
           <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
             <Wrapper pt="5rem">
-              <Avatar src={user.avatar_url ? user.avatar_url : placeholder} />
+              <Avatar src={user.avatar ? user.avatar : placeholder} />
             </Wrapper>
           </SplitGridLeftColumn>
           <SplitGridRightColumn p="5rem" background={COLORS.LIGHT_GREY}>
