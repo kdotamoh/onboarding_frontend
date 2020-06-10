@@ -140,7 +140,24 @@ class Compliance extends Component {
                 .map((section, id) => (
                   <Section key={id}>
                     <H4 color={COLORS.DARKER_GREYISH_BROWN}>{section.title}</H4>
-                    <img alt="" src={section.img} />
+                    <div
+                      css={`
+                        height: 10rem, 
+                        width: 100%;
+
+                        display: flex;
+                        justify-content: center;
+                      `}
+                    >
+                      <img
+                        css={`
+                          height: auto;
+                          max-width: 10rem;
+                        `}
+                        alt=""
+                        src={section.image}
+                      />
+                    </div>
                     <div
                       dangerouslySetInnerHTML={{ __html: section.content }}
                     ></div>

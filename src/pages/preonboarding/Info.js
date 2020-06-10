@@ -146,7 +146,7 @@ Info.propTypes = {
     first_day: PropTypes.string,
     first_day_reporting_time: PropTypes.string,
     first_day_location: PropTypes.string,
-    hr_partner: PropTypes.number
+    hr_partner: PropTypes.object
   })
 }
 

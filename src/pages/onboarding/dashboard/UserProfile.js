@@ -145,7 +145,9 @@ class UserProfile extends Component {
     let { line_manager } = this.props.user
     let { data: line_manager_details } = await axios({
       method: 'get',
-      url: `${process.env.REACT_APP_API_BASE}/line_managers/${line_manager}/`,
+      url: `${process.env.REACT_APP_API_BASE}/line_managers/${
+        line_manager ? line_manager.id : ''
+      }/`,
       headers: {
         Authorization: `JWT ${this.props.token}`
       }
@@ -155,12 +157,11 @@ class UserProfile extends Component {
   }
   render() {
     const { user } = this.props
-    let { departments } = this.props
-    let { divisions } = this.props
     const {
       first_name: line_manager_first_name,
       last_name: line_manager_last_name
     } = this.state.line_manager_details
+
     return (
       <>
         <DashboardNav>
@@ -188,28 +189,41 @@ class UserProfile extends Component {
               <span>Official Mobile No.: {user.phone_number}</span>
             </DashboardCard>
 
-            <DashboardCard height="unset" py="3rem" px="2rem" textAlign="left">
-              <span>Job Title: {user.job_title}</span>
+            <DashboardCard
+              height="unset"
+              py="3rem"
+              px="2rem"
+              mb="2rem"
+              textAlign="left"
+            >
+              <span>
+                Job Title: {user.job_title ? user.job_title.title : null}
+              </span>
               <span>
                 Division:{' '}
-                {divisions.length
-                  ? divisions.find(division => division.id === user.division)
-                      .title
-                  : 'Loading...'}
+                {user.division.title ? user.division.title : 'Loading...'}
               </span>
               <span>
                 Department:{' '}
-                {departments.length
-                  ? departments.find(
-                      department => department.id === user.department
-                    ).title
-                  : 'Loading'}
+                {user.department.title ? user.department.title : 'Loading'}
               </span>
-              <span>Location: {user.location}</span>
+              <span>Location: {user.location.title}</span>
               <span>
                 Line Manager: {line_manager_first_name} {line_manager_last_name}
               </span>
             </DashboardCard>
+
+            {/* <DashboardCard height="unset" py="3rem" px="2rem" textAlign="left">
+              <span>Add signature</span>
+              <canvas
+                style={{
+                  height: '20rem',
+                  width: '20rem',
+                  border: '1px solid black'
+                }}
+                ref={this.signatureRef}
+              ></canvas>
+            </DashboardCard> */}
           </SplitGridRightColumn>
         </SplitGrid>
       </>
