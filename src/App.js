@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { Router } from '@reach/router'
 import { Helmet } from 'react-helmet'
 import {
-  BrowserView,
-  MobileView,
+  // BrowserView,
+  // MobileView,
   CustomView,
   browserName
   // isBrowser,
@@ -50,14 +50,14 @@ class App extends React.Component {
           <title>MTN</title>
         </Helmet>
         <GlobalStyles />
-        <BrowserView>
-          <Router>
-            <Onboarding path="onboarding/*" />
-            <PreOnboarding path="preonboarding/*" />
-            {/* <NotFound default /> */}
-          </Router>
-        </BrowserView>
-        <MobileView
+        {/* <BrowserView> */}
+        <Router>
+          <Onboarding path="onboarding/*" />
+          <PreOnboarding path="preonboarding/*" />
+          {/* <NotFound default /> */}
+        </Router>
+        {/* </BrowserView> */}
+        {/* <MobileView
           style={{
             backgroundColor: COLORS.MARIGOLD,
             minHeight: '100vh',
@@ -78,7 +78,7 @@ class App extends React.Component {
               experience.
             </span>
           </div>
-        </MobileView>
+        </MobileView> */}
         <CustomView
           style={{
             backgroundColor: COLORS.MARIGOLD,

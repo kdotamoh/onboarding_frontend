@@ -5,16 +5,6 @@ import LoginForm from './LoginForm'
 import { COLORS } from '../../constants'
 import logo from 'images/mtn_logo.svg'
 
-import {
-  SplitGrid,
-  SplitGridLeftColumn,
-  SplitGridRightColumn,
-  CenterContent
-} from 'views/layout'
-
-const TranslateCenter = styled(CenterContent)`
-  transform: translateX(-10rem);
-`
 const FormHeading = styled.h2`
   color: ${COLORS.TWILIGHT_BLUE};
   text-align: left;
@@ -22,30 +12,47 @@ const FormHeading = styled.h2`
   font-family: MTNBrighterSans-Regular;
 `
 
+const Layout = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+
+  div {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    div {
+      width: 100%;
+      height: 50%;
+    }
+  }
+`
+
 const Logo = styled.img``
 
 export default class PreOnboardingLogin extends Component {
   render() {
     return (
-      <SplitGrid fullPage leftWidth={50} rightWidth={50}>
-        <SplitGridLeftColumn background={COLORS.MARIGOLD}>
-          <CenterContent>
-            <Logo src={logo} />
-          </CenterContent>
-        </SplitGridLeftColumn>
-        <SplitGridRightColumn>
-          <TranslateCenter>
-            <div>
-              <FormHeading>
-                Pre-onboarding
-                <br />
-                Log In
-              </FormHeading>
-            </div>
-            <LoginForm next="/preonboarding/welcome" />
-          </TranslateCenter>
-        </SplitGridRightColumn>
-      </SplitGrid>
+      <Layout>
+        <div style={{ backgroundColor: COLORS.MARIGOLD }}>
+          <Logo src={logo} />
+        </div>
+        <div>
+          <div>
+            <FormHeading>
+              Pre-onboarding
+              <br />
+              Log In
+            </FormHeading>
+          </div>
+          <LoginForm next="/preonboarding/welcome" />
+        </div>
+      </Layout>
     )
   }
 }
