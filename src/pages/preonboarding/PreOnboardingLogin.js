@@ -28,7 +28,7 @@ const Layout = styled.div`
     flex-direction: column;
     div {
       width: 100%;
-      height: 50%;
+      min-height: 50%;
     }
   }
 `

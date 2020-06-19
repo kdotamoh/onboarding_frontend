@@ -93,6 +93,7 @@ export const Logo = styled.img`
   ${position}
 
   position: absolute;
+  z-index: 1000;
 `
 
 export const Table = styled.table`

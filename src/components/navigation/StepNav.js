@@ -26,6 +26,21 @@ const Container = styled.div`
   p {
     visibility: hidden;
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 0;
+
+    u {
+      white-space: nowrap;
+      font-size: 80%;
+      align-self: flex-start;
+      cursor: pointer;
+      padding-left: 2rem;
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+    }
+  }
 `
 
 const Steps = styled.div`
@@ -53,6 +68,12 @@ const Step = styled.div`
   background-color: ${COLORS.TWILIGHT_BLUE};
   margin-right: 44px;
 
+  @media(max-width: 768px) {
+    margin-right: 15px;
+    width: 3rem;
+    height: 3rem;
+  }
+
   /* Line */
   &::after {
     content: "";
@@ -65,6 +86,11 @@ const Step = styled.div`
     left: 0;
     top: 50%;
     z-index: -1;
+
+    @media(max-width: 768px) {
+      /* margin-left: 2px; */
+      width: 23px;
+    }
   }
 
 &:last-child {
@@ -78,10 +104,6 @@ const Step = styled.div`
   ${props =>
     props.isCurrent ? `box-shadow: 0 0 1px ${COLORS.TWILIGHT_BLUE};` : null}
   opacity: ${props => (props.isCurrent ? '0.9' : '0.5')};
-
-
-
-
 `
 
 class StepNav extends Component {

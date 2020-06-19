@@ -5,7 +5,9 @@ import {
   COLORS,
   SMALL_NAV_HEIGHT,
   PADDING_RIGHT,
-  PADDING_LEFT
+  PADDING_LEFT,
+  SM_PADDING_LEFT,
+  SM_PADDING_RIGHT
 } from '../../constants'
 import MTNLogo from 'images/mtn_logo.svg'
 
@@ -17,6 +19,11 @@ const Nav = styled.nav`
   align-items: center;
   padding-left: ${PADDING_LEFT}rem;
   padding-right: ${PADDING_RIGHT}rem;
+
+  @media (max-width: 768px) {
+    padding-left: ${SM_PADDING_LEFT}rem;
+    padding-right: ${SM_PADDING_RIGHT}rem;
+  }
 `
 
 const Img = styled.img`

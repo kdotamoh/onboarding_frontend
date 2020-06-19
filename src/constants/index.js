@@ -28,6 +28,8 @@ export const NAV_HEIGHT = 7.5
 export const SMALL_NAV_HEIGHT = 6
 export const PADDING_LEFT = 5
 export const PADDING_RIGHT = PADDING_LEFT
+export const SM_PADDING_LEFT = 2
+export const SM_PADDING_RIGHT = SM_PADDING_LEFT
 
 // INPUT
 export const INPUT_WIDTH = 30
