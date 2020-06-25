@@ -28,6 +28,7 @@ export const H3 = styled.h3`
   ${space}
   ${color}
 
+  text-align: center;
   font-size: 2.5rem;
   font-family: MTNBrighterSans-Bold;
 `

@@ -53,6 +53,10 @@ export default createGlobalStyle`
     flex-direction: row;
     flex-wrap: wrap;
     width: 100%;
+
+    @media(max-width: 768px) {
+      flex-direction: column
+    }
   }
 
   .column {

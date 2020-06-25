@@ -33,6 +33,10 @@ const Pane = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `
 Pane.defaultProps = {
   width: '45rem',

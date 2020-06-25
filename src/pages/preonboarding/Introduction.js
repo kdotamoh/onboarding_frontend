@@ -19,13 +19,16 @@ const BgImg = styled(Img)`
   position: absolute;
   bottom: 0;
   left: 0;
+
+  @media (max-width: 768px) {
+    width: 100vw;
+  }
 `
 
 const BgImgContainer = styled.div`
   position: relative;
   min-height: 13rem;
-  width: 100%;
-  z-index: -1;
+  width: 100vw;
 `
 
 const Form = styled.form`
@@ -57,6 +60,10 @@ const Form = styled.form`
     padding-right: 1rem;
     background: transparent;
   }
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
 `
 
 const Textarea = styled.textarea.attrs(() => ({
@@ -66,6 +73,10 @@ const Textarea = styled.textarea.attrs(() => ({
   border-radius: 2px;
   resize: none;
   width: 70%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 
 const Error = styled.div`
@@ -131,30 +142,7 @@ const initialValues = {
 let ValidationSchema = Yup.object().shape({
   bio: Yup.string().required('This field is required'),
   hobbies: Yup.string().required('This field is required')
-  // future_chariy: Yup.object().shape({
-  //   education: Yup.boolean(),
-  //   health: Yup.boolean(),
-  //   economic_empowerment: Yup.boolean(),
-  //   other: Yup.object().shape({
-
-  //   })
-  // })
 })
-
-// ValidationSchema = ValidationSchema.test(
-//   'future_charity_test',
-//   null,
-//   (obj) => {
-//     if (obj.future_charity.education || obj.future_charity.health || obj.future_charity.economic_empowerment) {
-//       return true
-//     }
-
-//     return new Yup.ValidationError(
-//       'Check at least one',
-
-//     )
-//   }
-// )
 
 class Introduction extends Component {
   state = {
@@ -174,11 +162,11 @@ class Introduction extends Component {
           <H3 py="3rem" dangerouslySetInnerHTML={{ __html: title }}></H3>
           <Hero>
             <div className="row">
+              <img className="column hero__image" src={heroImg} alt="" />
               <p
-                className="column"
+                className="column hero__text"
                 dangerouslySetInnerHTML={{ __html: hero_text }}
               ></p>
-              <img className="column" src={heroImg} alt="" />
             </div>
           </Hero>
 

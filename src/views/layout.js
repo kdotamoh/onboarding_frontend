@@ -64,16 +64,37 @@ export const Hero = styled.div`
   width: 100%;
   min-height: 55rem;
   background-size: contain;
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
+
+  @media (max-width: 768px) {
+    padding-top: 8rem;
+    padding-bottom: 5rem;
+
+    .hero__image {
+      width: 60%;
+      margin: 0 auto;
+      padding-bottom: 3rem;
+    }
+
+    .hero__text {
+      width: 80%;
+      margin: 0 auto;
+    }
+  }
 
   div {
     width: 70%;
     transform: translateY(-2.5rem);
 
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+
     p {
       text-align: left;
       justify-content: center;
-      /* font-size: 140%; */
       font-size: 2.2rem;
     }
 

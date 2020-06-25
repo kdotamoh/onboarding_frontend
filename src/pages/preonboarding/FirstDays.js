@@ -7,7 +7,7 @@ import { navigate } from '@reach/router'
 
 import { SmallNav, StepNav } from 'components/navigation'
 import Modal from 'components/modal'
-import { H3, Container, Wrapper, Img, Button, Section } from 'components/styled'
+import { H3, Container, Img, Button, Section } from 'components/styled'
 import { Hero } from 'views/layout'
 
 import bgImg from 'images/bg_l_bottomright.svg'
@@ -23,12 +23,16 @@ const BgImg = styled(Img)`
   position: absolute;
   bottom: 0;
   left: 0;
+
+  @media (max-width: 768px) {
+    width: 100vw;
+  }
 `
 
 const BgImgContainer = styled.div`
   position: relative;
-  min-height: 26.1rem;
-  width: 100%;
+  min-height: 13rem;
+  width: 100vw;
 `
 
 const Emoji = styled.img`
@@ -49,6 +53,17 @@ const ModalHeading = styled.h3`
 const FirstDaysSection = styled(Section)`
   h2: {
     margin-top: 300px;
+  }
+`
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 60%;
+
+  @media (max-width: 768px) {
+    width: 90%;
   }
 `
 
@@ -96,11 +111,11 @@ class FirstDays extends Component {
           <H3 py="3rem" dangerouslySetInnerHTML={{ __html: title }}></H3>
           <Hero>
             <div className="row">
+              <img className="column hero__image" src={heroImg} alt="" />
               <p
-                className="column"
+                className="column hero__text"
                 dangerouslySetInnerHTML={{ __html: hero_text }}
               ></p>
-              <img className="column" src={heroImg} alt="" />
             </div>
           </Hero>
 
@@ -111,7 +126,7 @@ class FirstDays extends Component {
           </Wrapper>
 
           <Button color="blue" onClick={() => this.setState({ visible: true })}>
-            Finish >
+            Finish &gt;
           </Button>
 
           <BgImgContainer>

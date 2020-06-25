@@ -85,6 +85,10 @@ const SelectRow = styled.div`
   select {
     margin-right: 1rem;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 SelectRow.defaultProps = {
   width: '50%'
@@ -1236,7 +1240,7 @@ class DetailsForm extends Component {
                     <Label htmlFor="nationalService_startDate">
                       Start Date
                     </Label>
-                    <SelectRow width="100%">
+                    <SelectRow>
                       <Select
                         as="select"
                         name="nationalService_start_month"

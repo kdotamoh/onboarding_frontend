@@ -201,7 +201,7 @@ class Welcome extends Component {
                         color="blue"
                         onClick={this.handleCompleteTour}
                       >
-                        Start now >
+                        Start now &gt;
                       </Button>
                     </StepTwo>
                   </CenterContent>
@@ -236,7 +236,7 @@ class Welcome extends Component {
               Welcome! Get familiar with your MTN dashboard.
             </p>
             <ButtonGrape onClick={() => this.handleStartTour()}>
-              See how your dashboard works >
+              See how your dashboard works &gt;
             </ButtonGrape>
           </Modal>
         </React.Fragment>

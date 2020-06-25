@@ -5,6 +5,12 @@ import styled from 'styled-components'
 import { navigate } from '@reach/router'
 import 'react-multi-carousel/lib/styles.css'
 import Carousel from 'react-multi-carousel'
+import {
+  BrowserView,
+  MobileView
+  // isBrowser,
+  // isMobile
+} from 'react-device-detect'
 
 import { SmallNav, StepNav } from 'components/navigation'
 import { H4, H3, Container, Img, Button } from 'components/styled'
@@ -53,6 +59,7 @@ const BigHero = styled(Hero)`
 
   .column {
     align-items: center;
+    margin-bottom: 5rem;
     p {
       width: 70%;
     }
@@ -66,6 +73,10 @@ const BigHero = styled(Hero)`
         color: ${COLORS.TWILIGHT_BLUE};
       }
     }
+  }
+
+  @media (max-width: 768px) {
+    padding: 8rem 0;
   }
 `
 
@@ -85,6 +96,10 @@ const InfoBox = styled.div`
   /* width: 90%; */
   padding: 5rem 15rem;
   z-index: 500;
+
+  @media (max-width: 768px) {
+    padding: 5rem;
+  }
 
   h4 {
     font-size: 2rem;
@@ -118,36 +133,6 @@ const CarouselSlide = styled.div`
     text-align: center;
   }
 `
-
-// const CustomLeftArrow = ({ previous }) => {
-//   return (
-//     <div
-//       style={{
-//         textAlign: 'center',
-//         position: 'relative'
-//       }}
-//     >
-//       <button className="fal fa-chevron-left" onClick={previous}>
-//         Left
-//       </button>
-//     </div>
-//   )
-// }
-
-// const CustomRightArrow = ({ next }) => {
-//   return (
-//     <div
-//       style={{
-//         textAlign: 'center',
-//         position: 'relative'
-//       }}
-//     >
-//       <button className="fal fa-chevron-right" onClick={next}>
-//         Right
-//       </button>
-//     </div>
-//   )
-// }
 
 class CompanyOverview extends Component {
   render() {
@@ -242,81 +227,58 @@ class CompanyOverview extends Component {
           <p>We can make your life better.</p>
         </Container>
 
-        <div style={{ width: '75%', margin: '0 auto', marginBottom: '10rem' }}>
-          {employeeValues && (
-            <Carousel
-              swipeable={false}
-              draggable={false}
-              responsive={responsive}
-              ssr={true} // means to render carousel on server-side.
-              autoPlay={false}
-              autoPlaySpeed={1000}
-              keyBoardControl={true}
-              customTransition="all .5"
-              transitionDuration={500}
-              containerClass="carousel-container"
-              removeArrowOnDeviceType={['tablet', 'mobile']}
-              renderDotsOutside={true}
-            >
-              {employeeValues.map(value => (
-                <CarouselSlide key={value.id}>
-                  <img src={value.image} alt="" />
-                  <h5>{value.title}</h5>
-                  <span
-                    dangerouslySetInnerHTML={{ __html: value.content }}
-                  ></span>
-                </CarouselSlide>
-              ))}
-              {/* <CarouselSlide>
-              <img src={brand} alt="" />
-              <h5>Brand Strength</h5>
-              <span>
-                The strength of the MTN Brand; High Performing Culture;
-                Contribute to making a difference; 21 days of Y’ello Care;
-                Challenging &amp; meaningful work.
-              </span>
-            </CarouselSlide>
-            <CarouselSlide>
-              <img src={leadership} alt="" />
-              <h5>Leadership Brand</h5>
-              <span>
-                Bold and inspiring Leadership; Innovation; People, Products
-                &amp; Process Leadership, Aligned leadership; Work with people
-                with exceptional skills.
-              </span>
-            </CarouselSlide>
-            <CarouselSlide>
-              <img src={trust} alt="" />
-              <h5>Investing in our Trust</h5>
-              <span>
-                Unlocking potential; Blended Learning Opportunities; Challenging
-                Work, Job Environment, Rotations, Mentor Access &amp; Global
-                Assignments; Access to tools &amp; technologies that allow for
-                agile, flexible &amp; creative outcomes; Talent &amp; Career
-                Management.
-              </span>
-            </CarouselSlide>
-            <CarouselSlide>
-              <img src={reward} alt="" />
-              <h5>Total Reward &amp; Recognition</h5>
-              <span>
-                Designed to meet every MTners motivation and aspirations; Labour
-                market relevant Cash &amp; Non-cash benefits, Long and short
-                term reward schemes, Life style and wellness schemes to manage
-                life commitments, Recognition on the go &amp; MTN Shine.
-              </span>
-            </CarouselSlide>
-            <CarouselSlide>
-              <img src={global} alt="" />
-              <h5>Globally Diverse Culture</h5>
-              <span>
-                Celebrating our diverse communities &amp; workforce; Each
-                employee has a place and a voice.
-              </span>
-            </CarouselSlide> */}
-            </Carousel>
-          )}
-        </div>
+        <BrowserView>
+          <div
+            style={{ width: '75%', margin: '0 auto', marginBottom: '10rem' }}
+          >
+            {employeeValues && (
+              <Carousel
+                swipeable={false}
+                draggable={false}
+                responsive={responsive}
+                ssr={true} // means to render carousel on server-side.
+                autoPlay={false}
+                autoPlaySpeed={1000}
+                keyBoardControl={true}
+                customTransition="all .5"
+                transitionDuration={500}
+                containerClass="carousel-container"
+                removeArrowOnDeviceType={['tablet', 'mobile']}
+                renderDotsOutside={true}
+              >
+                {employeeValues.map(value => (
+                  <CarouselSlide key={value.id}>
+                    <img src={value.image} alt="" />
+                    <h5>{value.title}</h5>
+                    <span
+                      dangerouslySetInnerHTML={{ __html: value.content }}
+                    ></span>
+                  </CarouselSlide>
+                ))}
+              </Carousel>
+            )}
+          </div>
+        </BrowserView>
+        <MobileView>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              marginBottom: '10rem'
+            }}
+          >
+            {employeeValues.map(value => (
+              <CarouselSlide style={{ marginTop: '3rem' }} key={value.id}>
+                <img src={value.image} alt="" />
+                <h5>{value.title}</h5>
+                <span
+                  dangerouslySetInnerHTML={{ __html: value.content }}
+                ></span>
+              </CarouselSlide>
+            ))}
+          </div>
+        </MobileView>
 
         <Container>
           <InfoBox
@@ -328,7 +290,7 @@ class CompanyOverview extends Component {
             color="blue"
             onClick={() => navigate('/preonboarding/compliance')}
           >
-            Next Step >
+            Next Step &gt;
           </Button>
           <BgImg src={bgImg} />
         </Container>
