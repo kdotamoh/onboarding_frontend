@@ -4,14 +4,7 @@ import styled from 'styled-components'
 
 import { Card } from 'components/card'
 import Navigation from 'components/navigation'
-import {
-  SplitGrid,
-  SplitGridLeftColumn,
-  SplitGridRightColumn,
-  CenterContent,
-  FullPageGrid,
-  GridMain
-} from 'views/layout'
+import { CenterContent } from 'views/layout'
 import { COLORS } from '../../constants'
 import { Img } from 'components/styled'
 import bgImg from 'images/bg_l_h_bottomright.svg'
@@ -38,6 +31,27 @@ const BgImg = styled(Img)`
 // StepFour is the UserProfile component in 'components/navigation',
 // to which I've attached the class '.tour-step-4'
 
+const Layout = styled.div`
+  display: flex;
+  width: 100%;
+  height: 100vh;
+
+  div {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    div {
+      width: 100%;
+      height: 50%;
+    }
+  }
+`
+
 export default class Welcome extends Component {
   state = {
     steps: [
@@ -53,24 +67,20 @@ export default class Welcome extends Component {
 
     return (
       <React.Fragment>
-        <FullPageGrid>
-          <StepThree />
-          <GridMain>
-            <SplitGrid leftWidth={50} rightWidth={50}>
-              <SplitGridLeftColumn background={COLORS.LIGHTER_MARIGOLD}>
-                <CenterContent>
-                  <StepOne></StepOne>
-                </CenterContent>
-              </SplitGridLeftColumn>
-              <SplitGridRightColumn background={COLORS.PALE_MARIGOLD}>
-                <CenterContent>
-                  <StepTwo />
-                </CenterContent>
-                <BgImg src={bgImg} />
-              </SplitGridRightColumn>
-            </SplitGrid>
-          </GridMain>
-        </FullPageGrid>
+        <StepThree />
+        <Layout>
+          <div style={{ background: COLORS.LIGHTER_MARIGOLD }}>
+            <CenterContent>
+              <StepOne></StepOne>
+            </CenterContent>
+          </div>
+          <div style={{ background: COLORS.PALE_MARIGOLD }}>
+            <CenterContent>
+              <StepTwo />
+            </CenterContent>
+            <BgImg src={bgImg} />
+          </div>
+        </Layout>
         <Joyride continuous steps={steps} />
       </React.Fragment>
     )

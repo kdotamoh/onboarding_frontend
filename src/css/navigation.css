@@ -49,17 +49,36 @@
 }
 
 .dashboard-navigation {
-  /* grid-area: nav; */
+  display: grid;
+  grid-template-areas: 'logo links profile';
   padding-left: 5rem;
   padding-right: 5rem;
-  display: flex;
-  height: 7.5rem;
+  /* display: flex; */
+  /* height: 7.5rem; */
   justify-content: space-between;
   align-items: center;
   background: #ffcb09;
 }
+@media (max-width: 768px) {
+  .dashboard-navigation {
+    grid-template-areas:
+      'logo profile'
+      'links links';
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+.dashboard-navigation__logo {
+  grid-area: logo;
+}
+
+.dashboard-navigation__profile {
+  grid-area: profile;
+}
 
 .dashboard-navigation__items {
+  grid-area: links;
   display: flex;
   justify-content: space-between;
   align-items: center;

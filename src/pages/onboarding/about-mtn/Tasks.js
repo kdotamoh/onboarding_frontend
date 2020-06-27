@@ -41,6 +41,14 @@ const Caption = styled.span`
   cursor: pointer;
 `
 
+const Video = styled.video`
+  width: 65rem;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`
+
 class Tasks extends Component {
   state = {
     visible: false,
@@ -90,22 +98,17 @@ class Tasks extends Component {
           <h3>{title ? title : null}</h3>
           <h4>{header ? header : null}</h4>
           <div dangerouslySetInnerHTML={{ __html: content }}></div>
-          <video
-            controls
-            css={`
-              width: 65rem;
-            `}
-          >
+          <Video controls>
             <source src={codeofethics} type="video/mp4" />
             Sorry, your browser doesn't support embedded videos.
-          </video>
+          </Video>
 
           <Button
             mt="15rem"
             color="blue"
             onClick={() => this.setState({ visible: true })}
           >
-            Finish >
+            Finish &gt;
           </Button>
 
           {/* <Link to="../../functional-groups/overview">

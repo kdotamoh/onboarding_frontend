@@ -8,7 +8,6 @@ export const Card = styled.div`
   flex-direction: column;
 
   min-height: 350px;
-  min-width: 350px;
   width: 350px;
   background: white;
   z-index: 500;
@@ -85,10 +84,16 @@ export const DashboardCard = styled(Card)`
   ${layout}
   ${space}
 
+  padding: 3rem;
+  justify-content: center;
   box-shadow: unset;
   min-height: unset;
+
+  @media (max-width: 768px) {
+    width: 300px;
+  }
 `
 DashboardCard.defaultProps = {
-  minHheight: '30rem',
+  minHeight: '30rem',
   textAlign: 'center'
 }

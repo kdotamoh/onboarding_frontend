@@ -26,6 +26,10 @@ const Values = styled.div`
   display: flex;
   flex-flow: row wrap;
   width: 70rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `
 const Value = styled.div`
   border: 0.5px solid #d1d1d1;
@@ -130,7 +134,7 @@ class EmployeeValue extends Component {
 
           <Link to="../strategic-pillars-and-priorities">
             <Button mt="15rem" textColor="black">
-              Next >
+              Next &gt;
             </Button>
           </Link>
         </PageStyle>

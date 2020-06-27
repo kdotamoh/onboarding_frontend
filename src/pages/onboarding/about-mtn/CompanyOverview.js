@@ -29,7 +29,7 @@ export default class CompanyOverview extends Component {
           <div dangerouslySetInnerHTML={{ __html: content }}></div>
           <Link to="../mission-and-vision">
             <Button mt="15rem" textColor="black">
-              Next >
+              Next &gt;
             </Button>
           </Link>
         </PageStyle>

@@ -8,11 +8,6 @@ import { space } from 'styled-system'
 import goBack from 'utils/go-back'
 import Scrolltop from 'utils/scrolltop'
 
-import {
-  SplitGrid,
-  SplitGridLeftColumn,
-  SplitGridRightColumn
-} from 'views/layout'
 import { COLORS } from '../../constants'
 import { SideNav, SmallNav } from 'components/navigation'
 
@@ -61,14 +56,50 @@ export const Wrapper = styled.div`
   right: 0;
 `
 
+const Layout = styled.div`
+  display: flex;
+  width: 100%;
+
+  .onboarding__menu {
+    position: relative;
+    min-height: 100vh;
+    width: 20%;
+    background-color: ${COLORS.LIGHT_GREY};
+
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+
+  .onboarding__main {
+    padding: 5rem 10rem;
+    background-color: #fff;
+    width: 80%;
+    min-height: 100vh;
+    position: relative;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 5rem 2rem;
+    }
+  }
+`
+
 // eslint-disable-next-line
 const FunctionalGroups = ({ children }) => {
   return (
     <div>
       <SmallNav />
-      <SplitGrid leftWidth={20} rightWidth={80}>
-        <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
-          <Wrapper pt="5rem">
+      <Layout>
+        <div className="onboarding__menu">
+          <div
+            css={`
+              height: 300px;
+              width: 250px;
+              position: absolute;
+              right: 0;
+            `}
+          >
             <p
               css={`
                 padding-left: 1.2rem;
@@ -122,29 +153,27 @@ const FunctionalGroups = ({ children }) => {
               <ControlledLink to="/onboarding/functional-groups/sales">
                 Sales and Distribution
               </ControlledLink>
-
-              {/* <ControlledLink to="/onboarding/functional-groups/employee-industrial">
-                Employee &amp; Industrial
-              </ControlledLink>
-              <ControlledLink to="/onboarding/functional-groups/learning-development">
-                Learning &amp; Development
-              </ControlledLink> */}
             </SideNav>
-          </Wrapper>
-        </SplitGridLeftColumn>
-        <SplitGridRightColumn px="10rem" py="5rem" background={COLORS.WHITE}>
+          </div>
+        </div>
+        <div className="onboarding__main">
           <u style={{ cursor: 'pointer' }} onClick={() => goBack()}>
             {'< Back'}
           </u>
           <div
             css={`
               width: 600px;
+              height: 100%;
+
+              @media (max-width: 768px) {
+                width: 100%;
+              }
             `}
           >
             {children}
           </div>
-        </SplitGridRightColumn>
-      </SplitGrid>
+        </div>
+      </Layout>
     </div>
   )
 }
@@ -154,9 +183,16 @@ const AboutMTN = ({ children }) => {
   return (
     <div>
       <SmallNav />
-      <SplitGrid leftWidth={20} rightWidth={80}>
-        <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
-          <Wrapper pt="5rem">
+      <Layout>
+        <div className="onboarding__menu">
+          <div
+            css={`
+              height: 300px;
+              width: 250px;
+              position: absolute;
+              right: 0;
+            `}
+          >
             <p
               css={`
                 padding-left: 1.2rem;
@@ -205,60 +241,28 @@ const AboutMTN = ({ children }) => {
             >
               Tasks
             </p>
-          </Wrapper>
-        </SplitGridLeftColumn>
-        <SplitGridRightColumn px="10rem" py="5rem" background={COLORS.WHITE}>
+          </div>
+        </div>
+        <div className="onboarding__main">
           <u style={{ cursor: 'pointer' }} onClick={() => goBack()}>
             {'< Back'}
           </u>
           <div
             css={`
               width: 600px;
+
+              @media (max-width: 768px) {
+                width: 100%;
+              }
             `}
           >
             {children}
           </div>
-        </SplitGridRightColumn>
-      </SplitGrid>
+        </div>
+      </Layout>
     </div>
   )
 }
-
-// const WrapTasks = ({ children }) => {
-//   return (
-//     <div>
-//       <SmallNav />
-//       <SplitGrid leftWidth={20} rightWidth={80}>
-//         <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
-//           <Wrapper pt="5rem">
-//             <p
-//               css={`
-//                 padding-left: 1.2rem;
-//               `}
-//             >
-//               Tasks
-//             </p>
-//           </Wrapper>
-//         </SplitGridLeftColumn>
-//         <SplitGridRightColumn px="10rem" py="5rem" background={COLORS.WHITE}>
-//           <u style={{ cursor: 'pointer' }} onClick={() => goBack()}>
-//             {'< Back'}
-//           </u>
-//           <div
-//             css={`
-//               width: 600px;
-//             `}
-//           >
-//             <Tasks path="/tasks" page={tasksPage} />
-//           </div>
-//         </SplitGridRightColumn>
-//       </SplitGrid>
-//     </div>
-//   )
-// }
-// WrapTasks.propTypes = {
-//   children: PropTypes.node
-// }
 
 class Onboarding extends Component {
   state = {
@@ -314,9 +318,16 @@ class Onboarding extends Component {
       return (
         <div>
           <SmallNav />
-          <SplitGrid leftWidth={20} rightWidth={80}>
-            <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
-              <Wrapper pt="5rem">
+          <Layout>
+            <div className="onboarding__menu">
+              <div
+                css={`
+                  height: 300px;
+                  width: 250px;
+                  position: absolute;
+                  right: 0;
+                `}
+              >
                 <p
                   css={`
                     padding-left: 1.2rem;
@@ -324,25 +335,25 @@ class Onboarding extends Component {
                 >
                   Tasks
                 </p>
-              </Wrapper>
-            </SplitGridLeftColumn>
-            <SplitGridRightColumn
-              px="10rem"
-              py="5rem"
-              background={COLORS.WHITE}
-            >
+              </div>
+            </div>
+            <div className="onboarding__main">
               <u style={{ cursor: 'pointer' }} onClick={() => goBack()}>
                 {'< Back'}
               </u>
               <div
                 css={`
                   width: 600px;
+
+                  @media (max-width: 768px) {
+                    width: 100%;
+                  }
                 `}
               >
                 <Tasks path="/tasks" page={tasksPage} />
               </div>
-            </SplitGridRightColumn>
-          </SplitGrid>
+            </div>
+          </Layout>
         </div>
       )
     }

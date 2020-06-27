@@ -13,19 +13,15 @@ export default class DashboardNav extends Component {
 
     return (
       <nav className="dashboard-navigation tour-step-3">
-        <Img src={logo} />
+        <Img src={logo} className="dashboard-navigation__logo" />
         <ul className="dashboard-navigation__items">
           {React.Children.map(children, child => (
             <DashboardLink to={child.props.to}>
               {child.props.children}
             </DashboardLink>
           ))}
-          {/* <DashboardLink to="/onboarding/home">Home</DashboardLink>
-          <DashboardLink to="/onboarding/events">Events</DashboardLink>
-          <DashboardLink to="/onboarding/user-tasks">Tasks</DashboardLink> */}
         </ul>
-        {/* <UserProfile className="tour-step-4">user profile</UserProfile> */}
-        <ProfileDropdown />
+        <ProfileDropdown className="dashboard-navigation__profile" />
       </nav>
     )
   }

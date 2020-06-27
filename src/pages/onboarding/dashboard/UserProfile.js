@@ -54,6 +54,7 @@ const _ProfileDropdown = ({ user, unsetToken, unsetUser }) => {
         align-items: center;
         cursor: pointer;
         position: relative;
+        margin-left: auto;
 
         img {
           border-radius: 50%;

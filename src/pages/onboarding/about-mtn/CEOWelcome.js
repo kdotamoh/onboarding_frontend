@@ -42,7 +42,7 @@ export default class CEOWelcome extends Component {
           </video>
           <Link to="../company-overview">
             <Button mt="15rem" textColor="black">
-              Next >
+              Next &gt;
             </Button>
           </Link>
         </PageStyle>

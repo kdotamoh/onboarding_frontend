@@ -6,11 +6,6 @@ import { space } from 'styled-system'
 import axios from 'axios'
 import moment from 'moment'
 
-import {
-  SplitGrid,
-  SplitGridLeftColumn,
-  SplitGridRightColumn
-} from 'views/layout'
 import { COLORS } from '../../../constants'
 import { SideNav } from 'components/navigation'
 import DashboardNav from 'components/navigation/DashboardNav'
@@ -27,7 +22,48 @@ export const Wrapper = styled.div`
   width: 250px;
   position: absolute;
   right: 0;
+
+  @media (max-width: 768px) {
+    height: unset;
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
   /* transform: translateY(10rem); */
+`
+
+const Layout = styled.div`
+  display: flex;
+  width: 100%;
+
+  .events__menu {
+    position: relative;
+    min-height: 100vh;
+    width: 20%;
+    background-color: ${COLORS.LIGHT_GREY};
+
+    @media (max-width: 768px) {
+      width: 100%;
+      min-height: 10rem;
+    }
+  }
+
+  .events__main {
+    padding: 5rem 10rem;
+    background-color: #fff;
+    width: 80%;
+    min-height: 100vh;
+    position: relative;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 5rem 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `
 
 const NoEvents = () => (
@@ -89,17 +125,21 @@ class Events extends Component {
           <DashboardLink to="/onboarding/events">Events</DashboardLink>
           <DashboardLink to="/onboarding/user-tasks">Tasks</DashboardLink>
         </DashboardNav>
-        <SplitGrid leftWidth={20} rightWidth={80}>
-          <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
+        <Layout>
+          <div className="events__menu">
             <Wrapper pt="5rem">
               <SideNav>
                 <OnboardingLink to="./">Upcoming</OnboardingLink>
                 <OnboardingLink to="./#">Past</OnboardingLink>
               </SideNav>
             </Wrapper>
-          </SplitGridLeftColumn>
+          </div>
 
-          <SplitGridRightColumn p="5rem" background={COLORS.LIGHT_GREY}>
+          <div
+            className="events__main"
+            p="5rem"
+            style={{ background: COLORS.LIGHT_GREY }}
+          >
             <Loading loading={loading}>
               <div
                 css={`
@@ -185,8 +225,8 @@ class Events extends Component {
             </Loading>
 
             {/* <PastEvents path="/dashboard/events/past" /> */}
-          </SplitGridRightColumn>
-        </SplitGrid>
+          </div>
+        </Layout>
       </>
     )
   }

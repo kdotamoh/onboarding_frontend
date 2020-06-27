@@ -13,14 +13,6 @@ import DashboardLink from 'pages/onboarding/dashboard/DashboardLink'
 
 import noTask from 'images/no_task.svg'
 
-import {
-  SplitGrid,
-  SplitGridLeftColumn,
-  SplitGridRightColumn,
-  CenterContent,
-  FullPageGrid,
-  GridMain
-} from 'views/layout'
 import { COLORS } from '../../../constants'
 import { Img, H1 } from 'components/styled'
 import bgImg from 'images/bg_l_h_bottomright.svg'
@@ -43,6 +35,29 @@ const BgImg = styled(Img)`
 const HeroH1 = styled(H1)`
   color: ${COLORS.DARKER_GREYISH_BROWN};
   z-index: 1000;
+`
+
+const Layout = styled.div`
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 7rem);
+
+  .layout__section {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    .layout__section {
+      padding: 3rem;
+      width: 100%;
+      height: 100%;
+    }
+  }
 `
 
 // TODO: This is a temp page to card the end of onboarding.
@@ -86,68 +101,68 @@ class End extends Component {
 
     return (
       <React.Fragment>
-        <FullPageGrid>
-          <StepThree>
-            <DashboardLink to="/onboarding/home">Home</DashboardLink>
-            <DashboardLink to="/onboarding/events">Events</DashboardLink>
-            <DashboardLink to="/onboarding/user-tasks">Tasks</DashboardLink>
-          </StepThree>
-          <GridMain>
-            <SplitGrid leftWidth={50} rightWidth={50}>
-              <SplitGridLeftColumn background={COLORS.LIGHTER_MARIGOLD}>
-                <CenterContent>
-                  <div style={{ width: '50rem' }}>
-                    <StepOne
-                      css={`
-                        transform: translateY(-10rem);
-                      `}
-                    >
-                      <HeroH1>
-                        Congrats on completing your onboarding, {first_name}
-                      </HeroH1>
-                      <p>Text here</p>
-                    </StepOne>
-                  </div>
-                </CenterContent>
-              </SplitGridLeftColumn>
-              <SplitGridRightColumn background={COLORS.PALE_MARIGOLD}>
-                <CenterContent>
-                  <DashboardCard
-                    px="3rem"
-                    py="4rem"
-                    css={`
-                      transform: translateY(-10rem);
-                    `}
+        <StepThree>
+          <DashboardLink to="/onboarding/home">Home</DashboardLink>
+          <DashboardLink to="/onboarding/events">Events</DashboardLink>
+          <DashboardLink to="/onboarding/user-tasks">Tasks</DashboardLink>
+        </StepThree>
+        <Layout>
+          <div
+            className="layout__section"
+            style={{ background: COLORS.LIGHTER_MARIGOLD }}
+          >
+            {/* <CenterContent> */}
+            <div>
+              <StepOne
+              // css={`
+              //   transform: translateY(-10rem);
+              // `}
+              >
+                <HeroH1>
+                  Congrats on completing your onboarding, {first_name}
+                </HeroH1>
+                <p>Text here</p>
+              </StepOne>
+            </div>
+            {/* </CenterContent> */}
+          </div>
+          <div
+            className="layout__section"
+            style={{ background: COLORS.PALE_MARIGOLD }}
+          >
+            {/* <CenterContent> */}
+            <DashboardCard
+              // px="3rem"
+              py="4rem"
+              // css={`
+              //   transform: translateY(-10rem);
+              // `}
+            >
+              <img src={noTask} alt="" />
+              {this.state.status === 'noTasks' && (
+                <p>
+                  <strong>You don't have any tasks yet</strong>
+                </p>
+              )}
+              {this.state.status === 'hasTasks' && (
+                <>
+                  <p style={{ marginTop: '2rem' }}>
+                    <strong>You have ({this.state.tasksLength}) task</strong>
+                  </p>
+                  <Button
+                    mt="1rem"
+                    color="blue"
+                    onClick={() => navigate('./user-tasks')}
                   >
-                    <img src={noTask} alt="" />
-                    {this.state.status === 'noTasks' && (
-                      <p>
-                        <strong>You don't have any tasks yet</strong>
-                      </p>
-                    )}
-                    {this.state.status === 'hasTasks' && (
-                      <>
-                        <p style={{ marginTop: '2rem' }}>
-                          <strong>
-                            You have ({this.state.tasksLength}) task
-                          </strong>
-                        </p>
-                        <Button
-                          mt="1rem"
-                          color="blue"
-                          onClick={() => navigate('./user-tasks')}
-                        >
-                          Go to tasks >
-                        </Button>
-                      </>
-                    )}
-                  </DashboardCard>
-                </CenterContent>
-                <BgImg src={bgImg} />
-              </SplitGridRightColumn>
-            </SplitGrid>
-          </GridMain>
-        </FullPageGrid>
+                    Go to tasks &gt;
+                  </Button>
+                </>
+              )}
+            </DashboardCard>
+            {/* </CenterContent> */}
+            <BgImg src={bgImg} />
+          </div>
+        </Layout>
       </React.Fragment>
     )
   }

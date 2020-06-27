@@ -57,7 +57,7 @@ const LinkWrapper = styled.li`
 `
 
 export const Img = styled.img`
-  height: 65%;
+  height: 5rem;
 `
 
 export const UserProfile = styled.div``

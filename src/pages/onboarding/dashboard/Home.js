@@ -151,95 +151,98 @@ class Welcome extends Component {
 
     return (
       <div>
-        {this.state.onboardingComplete && <End />}
-        <React.Fragment>
-          <FullPageGrid>
-            <StepThree>
-              <DashboardLink to="/onboarding/home">Home</DashboardLink>
-              <DashboardLink to="/onboarding/events">Events</DashboardLink>
-              <DashboardLink to="/onboarding/user-tasks">Tasks</DashboardLink>
-            </StepThree>
-            <GridMain>
-              <SplitGrid leftWidth={50} rightWidth={50}>
-                <SplitGridLeftColumn background={COLORS.LIGHTER_MARIGOLD}>
-                  <CenterContent>
-                    <div style={{ width: '50rem' }}>
-                      <StepOne
-                        css={`
-                          transform: translateY(-10rem);
-                        `}
-                      >
-                        <HeroH1>Yello, {first_name}!</HeroH1>
-                        <p>
-                          Congratulations and on behalf of all MTNers, welcome
-                          to the Yello Family.
-                          <br />
-                          <br />
-                          We are truly happy that you have decided to join our
-                          team. We believe that you will be an asset to our
-                          cherished organization.
-                          <br />
-                          <br />
-                          We welcome you to MTN Ghana, we are very glad to have
-                          you with us and look forward to a mutually beneficial
-                          relationship and partnership.
-                          <br />
-                          <br />
-                          Once again, welcome aboard.
-                        </p>
-                      </StepOne>
-                    </div>
-                  </CenterContent>
-                </SplitGridLeftColumn>
-                <SplitGridRightColumn background={COLORS.PALE_MARIGOLD}>
-                  <CenterContent>
-                    <StepTwo p="4rem">
-                      <H2>Onboarding</H2>
-                      <p>Text here</p>
-                      <Button
-                        mt="3rem"
-                        color="blue"
-                        onClick={this.handleCompleteTour}
-                      >
-                        Start now &gt;
-                      </Button>
-                    </StepTwo>
-                  </CenterContent>
-                  <BgImg src={bgImg} />
-                </SplitGridRightColumn>
-              </SplitGrid>
-            </GridMain>
-          </FullPageGrid>
-          <Joyride
-            continuous
-            steps={steps}
-            skipBeason={true}
-            run={runTour}
-            beaconComponent={null}
-            showSkipButton={true}
-            callback={this.handleJoyrideCallback}
-          />
-          <Modal visible={visible}>
-            <img
-              src={lightBulb}
-              alt=""
-              css={`
-                margin-bottom: 2rem;
-              `}
+        {this.state.onboardingComplete ? (
+          <End />
+        ) : (
+          <React.Fragment>
+            <FullPageGrid>
+              <StepThree>
+                <DashboardLink to="/onboarding/home">Home</DashboardLink>
+                <DashboardLink to="/onboarding/events">Events</DashboardLink>
+                <DashboardLink to="/onboarding/user-tasks">Tasks</DashboardLink>
+              </StepThree>
+              <GridMain>
+                <SplitGrid leftWidth={50} rightWidth={50}>
+                  <SplitGridLeftColumn background={COLORS.LIGHTER_MARIGOLD}>
+                    <CenterContent>
+                      <div style={{ width: '50rem' }}>
+                        <StepOne
+                          css={`
+                            transform: translateY(-10rem);
+                          `}
+                        >
+                          <HeroH1>Yello, {first_name}!</HeroH1>
+                          <p>
+                            Congratulations and on behalf of all MTNers, welcome
+                            to the Yello Family.
+                            <br />
+                            <br />
+                            We are truly happy that you have decided to join our
+                            team. We believe that you will be an asset to our
+                            cherished organization.
+                            <br />
+                            <br />
+                            We welcome you to MTN Ghana, we are very glad to
+                            have you with us and look forward to a mutually
+                            beneficial relationship and partnership.
+                            <br />
+                            <br />
+                            Once again, welcome aboard.
+                          </p>
+                        </StepOne>
+                      </div>
+                    </CenterContent>
+                  </SplitGridLeftColumn>
+                  <SplitGridRightColumn background={COLORS.PALE_MARIGOLD}>
+                    <CenterContent>
+                      <StepTwo p="4rem">
+                        <H2>Onboarding</H2>
+                        <p>Text here</p>
+                        <Button
+                          mt="3rem"
+                          color="blue"
+                          onClick={this.handleCompleteTour}
+                        >
+                          Start now &gt;
+                        </Button>
+                      </StepTwo>
+                    </CenterContent>
+                    <BgImg src={bgImg} />
+                  </SplitGridRightColumn>
+                </SplitGrid>
+              </GridMain>
+            </FullPageGrid>
+            <Joyride
+              continuous
+              steps={steps}
+              skipBeason={true}
+              run={runTour}
+              beaconComponent={null}
+              showSkipButton={true}
+              callback={this.handleJoyrideCallback}
             />
-            <p
-              css={`
-                font-size: 2rem;
-                font-family: MTNBrighterSans-Regular;
-              `}
-            >
-              Welcome! Get familiar with your MTN dashboard.
-            </p>
-            <ButtonGrape onClick={() => this.handleStartTour()}>
-              See how your dashboard works &gt;
-            </ButtonGrape>
-          </Modal>
-        </React.Fragment>
+            <Modal visible={visible}>
+              <img
+                src={lightBulb}
+                alt=""
+                css={`
+                  margin-bottom: 2rem;
+                `}
+              />
+              <p
+                css={`
+                  font-size: 2rem;
+                  font-family: MTNBrighterSans-Regular;
+                `}
+              >
+                Welcome! Get familiar with your MTN dashboard.
+              </p>
+              <ButtonGrape onClick={() => this.handleStartTour()}>
+                See how your dashboard works &gt;
+              </ButtonGrape>
+            </Modal>
+          </React.Fragment>
+        )}
       </div>
     )
   }

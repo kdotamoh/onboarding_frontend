@@ -33,7 +33,15 @@ class PDFViewer extends Component {
 
     return (
       <div>
-        <div style={{ width: 800 }}>
+        <div
+          css={`
+            width: 800px;
+
+            @media (max-width: 768px) {
+              width: 90%;
+            }
+          `}
+        >
           <Document
             file={file}
             onLoadSuccess={this.onDocumentLoadSuccess}
