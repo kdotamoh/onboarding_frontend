@@ -105,7 +105,7 @@ class Welcome extends Component {
     const { first_name } = this.props.user
     return (
       <Layout fullPage leftWidth={40} rightWidth={60}>
-        <Logo maxWidth="6rem" left="8rem" top="1rem" src={logo} alt="" />
+        <Logo src={logo} alt="" />
         <div className="section" style={{ backgroundColor: COLORS.MARIGOLD }}>
           <Content>
             <HeroH1>

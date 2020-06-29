@@ -9,11 +9,6 @@ import { connect } from 'react-redux'
 import { unsetToken } from 'store/auth'
 import { unsetUser } from 'store/user'
 
-import {
-  SplitGrid,
-  SplitGridLeftColumn,
-  SplitGridRightColumn
-} from 'views/layout'
 import { COLORS } from '../../../constants'
 import DashboardNav from 'components/navigation/DashboardNav'
 import DashboardLink from 'pages/onboarding/dashboard/DashboardLink'
@@ -129,13 +124,55 @@ export const ProfileDropdown = connect(
 
 const Wrapper = styled.div`
   ${space}
-
+  display: flex;
   height: 300px;
   width: 250px;
-  position: absolute;
-  right: 0;
-  /* display: flex; */
+  margin-left: auto;
+
+  @media (max-width: 768px) {
+    height: 100%;
+    min-height: fit-content;
+    width: 100%;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
   /* transform: translateY(10rem); */
+`
+
+const Layout = styled.div`
+  display: flex;
+  width: 100%;
+
+  .profile__avatar {
+    position: relative;
+    /* min-height: 100vh; */
+    width: 20%;
+    /* height: 100%; */
+    background-color: ${COLORS.LIGHT_GREY};
+
+    @media (max-width: 768px) {
+      width: 100%;
+      min-height: 10rem;
+      height: 100%;
+    }
+  }
+
+  .profile__main {
+    padding: 5rem 10rem;
+    background-color: ${COLORS.LIGHT_GREY};
+    width: 80%;
+    min-height: 100vh;
+    position: relative;
+
+    @media (max-width: 768px) {
+      width: 100%;
+      padding: 5rem 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `
 
 const Avatar = styled.img`
@@ -143,8 +180,10 @@ const Avatar = styled.img`
   object-fit: cover;
   height: 15rem;
   width: 15rem;
-  position: absolute;
-  right: 0;
+  margin-left: auto;
+  @media (max-width: 768px) {
+    margin-left: 0;
+  }
 `
 
 class UserProfile extends Component {
@@ -180,13 +219,17 @@ class UserProfile extends Component {
           <DashboardLink to="/onboarding/events">Events</DashboardLink>
           <DashboardLink to="/onboarding/user-tasks">Tasks</DashboardLink>
         </DashboardNav>
-        <SplitGrid leftWidth={20} rightWidth={80}>
-          <SplitGridLeftColumn background={COLORS.LIGHT_GREY}>
+        <Layout>
+          <div className="profile__avatar" background={COLORS.LIGHT_GREY}>
             <Wrapper pt="5rem">
               <Avatar src={user.avatar ? user.avatar : placeholder} />
             </Wrapper>
-          </SplitGridLeftColumn>
-          <SplitGridRightColumn p="5rem" background={COLORS.LIGHT_GREY}>
+          </div>
+          <div
+            className="profile__main"
+            p="5rem"
+            background={COLORS.LIGHT_GREY}
+          >
             <DashboardCard
               height="unset"
               py="3rem"
@@ -218,7 +261,9 @@ class UserProfile extends Component {
                 Department:{' '}
                 {user.department.title ? user.department.title : 'Loading'}
               </span>
-              <span>Location: {user.location.title}</span>
+              <span>
+                Location: {user.location ? user.location.title : 'Loading'}
+              </span>
               <span>
                 Line Manager: {line_manager_first_name} {line_manager_last_name}
               </span>
@@ -235,8 +280,8 @@ class UserProfile extends Component {
                 ref={this.signatureRef}
               ></canvas>
             </DashboardCard> */}
-          </SplitGridRightColumn>
-        </SplitGrid>
+          </div>
+        </Layout>
       </>
     )
   }

@@ -20,11 +20,10 @@ export const Wrapper = styled.div`
 
   height: 300px;
   width: 250px;
-  position: absolute;
-  right: 0;
+  margin-left: auto;
 
   @media (max-width: 768px) {
-    height: unset;
+    height: 100%;
     width: 100%;
     padding-left: 2rem;
     padding-right: 2rem;
@@ -38,13 +37,15 @@ const Layout = styled.div`
 
   .events__menu {
     position: relative;
-    min-height: 100vh;
+    /* min-height: 100vh; */
     width: 20%;
+    /* height: 100%; */
     background-color: ${COLORS.LIGHT_GREY};
 
     @media (max-width: 768px) {
       width: 100%;
       min-height: 10rem;
+      height: 100%;
     }
   }
 

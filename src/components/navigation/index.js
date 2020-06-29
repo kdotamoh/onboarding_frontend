@@ -58,6 +58,10 @@ const LinkWrapper = styled.li`
 
 export const Img = styled.img`
   height: 5rem;
+
+  @media (max-width: 768px) {
+    padding-top: 1rem;
+  }
 `
 
 export const UserProfile = styled.div``

@@ -2,6 +2,11 @@
   display: flex;
   flex-direction: column;
 }
+@media (max-width: 768px) {
+  .onboarding-navigation {
+    height: 100%;
+  }
+}
 
 .onboarding-navigation__items {
   display: flex;

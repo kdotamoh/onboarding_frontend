@@ -12,14 +12,6 @@ import DashboardNav from 'components/navigation/DashboardNav'
 import DashboardLink from 'pages/onboarding/dashboard/DashboardLink'
 import End from './End'
 
-import {
-  SplitGrid,
-  SplitGridLeftColumn,
-  SplitGridRightColumn,
-  CenterContent,
-  FullPageGrid,
-  GridMain
-} from 'views/layout'
 import { COLORS } from '../../../constants'
 import { Img, H1, H2, Button } from 'components/styled'
 import bgImg from 'images/bg_l_h_bottomright.svg'
@@ -42,6 +34,7 @@ const BgImg = styled(Img)`
   bottom: 0;
   right: 0;
   align-self: flex-end;
+  max-height: 80%;
 `
 
 // const PaddedContent = styled(CenterContent)`
@@ -101,6 +94,31 @@ const ButtonGrape = styled(Button)`
 //   </TooltipBody>
 // )
 
+const Layout = styled.div`
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 7rem);
+
+  .layout__section {
+    width: 50%;
+    display: flex;
+    padding: 10rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    .layout__section {
+      padding: 3rem;
+      width: 100%;
+      height: 100%;
+    }
+  }
+`
+
 class Welcome extends Component {
   state = {
     steps: [
@@ -155,63 +173,55 @@ class Welcome extends Component {
           <End />
         ) : (
           <React.Fragment>
-            <FullPageGrid>
-              <StepThree>
-                <DashboardLink to="/onboarding/home">Home</DashboardLink>
-                <DashboardLink to="/onboarding/events">Events</DashboardLink>
-                <DashboardLink to="/onboarding/user-tasks">Tasks</DashboardLink>
-              </StepThree>
-              <GridMain>
-                <SplitGrid leftWidth={50} rightWidth={50}>
-                  <SplitGridLeftColumn background={COLORS.LIGHTER_MARIGOLD}>
-                    <CenterContent>
-                      <div style={{ width: '50rem' }}>
-                        <StepOne
-                          css={`
-                            transform: translateY(-10rem);
-                          `}
-                        >
-                          <HeroH1>Yello, {first_name}!</HeroH1>
-                          <p>
-                            Congratulations and on behalf of all MTNers, welcome
-                            to the Yello Family.
-                            <br />
-                            <br />
-                            We are truly happy that you have decided to join our
-                            team. We believe that you will be an asset to our
-                            cherished organization.
-                            <br />
-                            <br />
-                            We welcome you to MTN Ghana, we are very glad to
-                            have you with us and look forward to a mutually
-                            beneficial relationship and partnership.
-                            <br />
-                            <br />
-                            Once again, welcome aboard.
-                          </p>
-                        </StepOne>
-                      </div>
-                    </CenterContent>
-                  </SplitGridLeftColumn>
-                  <SplitGridRightColumn background={COLORS.PALE_MARIGOLD}>
-                    <CenterContent>
-                      <StepTwo p="4rem">
-                        <H2>Onboarding</H2>
-                        <p>Text here</p>
-                        <Button
-                          mt="3rem"
-                          color="blue"
-                          onClick={this.handleCompleteTour}
-                        >
-                          Start now &gt;
-                        </Button>
-                      </StepTwo>
-                    </CenterContent>
-                    <BgImg src={bgImg} />
-                  </SplitGridRightColumn>
-                </SplitGrid>
-              </GridMain>
-            </FullPageGrid>
+            <StepThree>
+              <DashboardLink to="/onboarding/home">Home</DashboardLink>
+              <DashboardLink to="/onboarding/events">Events</DashboardLink>
+              <DashboardLink to="/onboarding/user-tasks">Tasks</DashboardLink>
+            </StepThree>
+            <Layout>
+              <div
+                className="layout__section"
+                style={{ background: COLORS.LIGHTER_MARIGOLD }}
+              >
+                <StepOne>
+                  <HeroH1>Yello, {first_name}!</HeroH1>
+                  <p>
+                    Congratulations and on behalf of all MTNers, welcome to the
+                    Yello Family.
+                    <br />
+                    <br />
+                    We are truly happy that you have decided to join our team.
+                    We believe that you will be an asset to our cherished
+                    organization.
+                    <br />
+                    <br />
+                    We welcome you to MTN Ghana, we are very glad to have you
+                    with us and look forward to a mutually beneficial
+                    relationship and partnership.
+                    <br />
+                    <br />
+                    Once again, welcome aboard.
+                  </p>
+                </StepOne>
+              </div>
+              <div
+                className="layout__section"
+                style={{ background: COLORS.PALE_MARIGOLD }}
+              >
+                <StepTwo p="4rem">
+                  <H2>Onboarding</H2>
+                  <p>Text here</p>
+                  <Button
+                    mt="3rem"
+                    color="blue"
+                    onClick={this.handleCompleteTour}
+                  >
+                    Start now &gt;
+                  </Button>
+                </StepTwo>
+                <BgImg src={bgImg} />
+              </div>
+            </Layout>
             <Joyride
               continuous
               steps={steps}
@@ -220,6 +230,11 @@ class Welcome extends Component {
               beaconComponent={null}
               showSkipButton={true}
               callback={this.handleJoyrideCallback}
+              styles={{
+                options: {
+                  zIndex: 1000
+                }
+              }}
             />
             <Modal visible={visible}>
               <img

@@ -30,6 +30,7 @@ const BgImg = styled(Img)`
   bottom: 0;
   right: 0;
   align-self: flex-end;
+  max-height: 80%;
 `
 
 const HeroH1 = styled(H1)`
@@ -45,9 +46,11 @@ const Layout = styled.div`
   .layout__section {
     width: 50%;
     display: flex;
+    padding: 10rem;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
   }
 
   @media (max-width: 768px) {
@@ -55,7 +58,8 @@ const Layout = styled.div`
     .layout__section {
       padding: 3rem;
       width: 100%;
-      height: 100%;
+      /* height: 100%; */
+      min-height: fit-content;
     }
   }
 `
@@ -114,9 +118,10 @@ class End extends Component {
             {/* <CenterContent> */}
             <div>
               <StepOne
-              // css={`
-              //   transform: translateY(-10rem);
-              // `}
+                css={`
+                  position: relative;
+                  z-index: 20;
+                `}
               >
                 <HeroH1>
                   Congrats on completing your onboarding, {first_name}

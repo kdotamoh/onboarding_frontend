@@ -81,7 +81,15 @@ export default class Welcome extends Component {
             <BgImg src={bgImg} />
           </div>
         </Layout>
-        <Joyride continuous steps={steps} />
+        <Joyride
+          continuous
+          steps={steps}
+          styles={{
+            options: {
+              zIndex: 1000
+            }
+          }}
+        />
       </React.Fragment>
     )
   }

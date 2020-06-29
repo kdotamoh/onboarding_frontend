@@ -20,11 +20,10 @@ export const Wrapper = styled.div`
 
   height: 300px;
   width: 250px;
-  position: absolute;
-  right: 0;
+  margin-left: auto;
 
   @media (max-width: 768px) {
-    height: unset;
+    height: 100%;
     width: 100%;
     padding-left: 2rem;
     padding-right: 2rem;

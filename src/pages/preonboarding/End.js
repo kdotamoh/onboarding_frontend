@@ -8,7 +8,7 @@ import PropTypes from 'prop-types'
 
 import { COLORS } from '../../constants'
 import { Img } from 'components/styled'
-import { H1, P, Logo } from 'components/styled'
+import { H1, P } from 'components/styled'
 import { Card, CardInfo } from 'components/card'
 
 import bgImg from 'images/bg_l_bottomleft.svg'
@@ -38,6 +38,18 @@ const Paragraph = styled(P)`
   line-height: 1.8;
 
   z-index: 5;
+`
+
+const Logo = styled.img`
+  position: absolute;
+  z-index: 1000;
+  max-width: 6rem;
+  left: 8rem;
+  top: 1rem;
+
+  @media (max-width: 768px) {
+    left: 2rem;
+  }
 `
 
 const Layout = styled.div`
@@ -87,7 +99,7 @@ class End extends Component {
     let { data: hr_partner_details } = await axios({
       method: 'get',
       url: `${process.env.REACT_APP_API_BASE}/hr_partners/${
-        hr_partner.id ? hr_partner.id : null
+        hr_partner ? hr_partner.id : null
       }/`,
       headers: {
         Authorization: `JWT ${this.props.token}`
@@ -106,7 +118,7 @@ class End extends Component {
     const { hr_partner_details } = this.state
     return (
       <Layout>
-        <Logo maxWidth="6rem" left="8rem" top="1rem" src={logo} alt="" />
+        <Logo src={logo} alt="" />
         <div className="section" style={{ backgroundColor: COLORS.MARIGOLD }}>
           <Content>
             <HeroH1>
