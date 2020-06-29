@@ -13,6 +13,8 @@ import bgImg from 'images/bg_topright.svg'
 import heroImg from 'images/silhouettes.svg'
 import logo from 'images/mtn_logo.svg'
 
+import { getPreonboardingPages } from 'utils/get-thingy'
+
 const HeroH1 = styled(H1)`
   position: relative;
   z-index: 500;
@@ -101,6 +103,12 @@ class Welcome extends Component {
     navigate('/preonboarding/info')
   }
 
+  componentDidMount() {
+    if (!this.props.loaded) {
+      getPreonboardingPages(this.props.token)
+    }
+  }
+
   render() {
     const { first_name } = this.props.user
     return (
@@ -138,8 +146,12 @@ class Welcome extends Component {
 Welcome.propTypes = {
   user: PropTypes.shape({
     first_name: PropTypes.string
-  })
+  }),
+  token: PropTypes.string,
+  loaded: PropTypes.bool
 }
 export default connect(state => ({
-  user: state.user
+  user: state.user,
+  token: state.token,
+  loaded: state.pages.preonboardingPages.loaded
 }))(Welcome)

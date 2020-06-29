@@ -2,10 +2,14 @@ import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   onboardingPages: {
+    aboutLoaded: false,
+    functionalLoaded: false,
     aboutPages: [],
     functionalPages: []
   },
-  preonboardingPages: {},
+  preonboardingPages: {
+    loaded: false
+  },
   employeeValues: []
 }
 
@@ -13,6 +17,21 @@ const pages = createSlice({
   name: 'onboardingPages',
   initialState,
   reducers: {
+    setAboutLoaded: {
+      reducer(state) {
+        state.onboardingPages.aboutLoaded = true
+      }
+    },
+    setFunctionalLoaded: {
+      reducer(state) {
+        state.onboardingPages.functionalLoaded = true
+      }
+    },
+    setPrenboardingLoaded: {
+      reducer(state) {
+        state.preonboardingPages.loaded = true
+      }
+    },
     setAboutPages: {
       reducer(state, action) {
         state.onboardingPages.aboutPages = action.payload
@@ -76,7 +95,10 @@ export const {
   setCodeOfEthicsPage,
   setConditionsOfServicePage,
   setEmployeeDetailsPage,
-  setEmployeeValues
+  setEmployeeValues,
+  setPrenboardingLoaded,
+  setFunctionalLoaded,
+  setAboutLoaded
 } = pages.actions
 
 export default pages.reducer

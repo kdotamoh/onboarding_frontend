@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import Joyride from 'react-joyride' //,
 import styled from 'styled-components'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import { Card } from 'components/card'
 import Navigation from 'components/navigation'
@@ -8,6 +10,8 @@ import { CenterContent } from 'views/layout'
 import { COLORS } from '../../constants'
 import { Img } from 'components/styled'
 import bgImg from 'images/bg_l_h_bottomright.svg'
+
+import { getFunctionalPages, getAboutPages } from 'utils/get-thingy'
 
 const StepOne = styled.div.attrs({
   className: 'tour-step-1'
@@ -52,7 +56,7 @@ const Layout = styled.div`
   }
 `
 
-export default class Welcome extends Component {
+class Welcome extends Component {
   state = {
     steps: [
       { target: '.tour-step-1', content: 'First step' },
@@ -60,6 +64,13 @@ export default class Welcome extends Component {
       { target: '.tour-step-3', content: 'Third step' },
       { target: '.tour-step-4', content: 'Fourth step' }
     ]
+  }
+
+  componentDidMount() {
+    if (!this.props.aboutLoaded || !this.props.functionalLoaded) {
+      getFunctionalPages(this.props.token)
+      getAboutPages(this.props.token)
+    }
   }
 
   render() {
@@ -94,3 +105,17 @@ export default class Welcome extends Component {
     )
   }
 }
+Welcome.propTypes = {
+  user: PropTypes.shape({
+    first_name: PropTypes.string
+  }),
+  token: PropTypes.string,
+  aboutLoaded: PropTypes.bool,
+  functionalLoaded: PropTypes.bool
+}
+export default connect(state => ({
+  user: state.user,
+  token: state.token,
+  aboutLoaded: state.pages.onboardingPages.aboutLoaded,
+  functionalLoaded: state.pages.onboardingPages.functionalLoaded
+}))(Welcome)

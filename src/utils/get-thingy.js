@@ -12,7 +12,10 @@ import {
   setCodeOfEthicsPage,
   setConditionsOfServicePage,
   setEmployeeDetailsPage,
-  setEmployeeValues
+  setEmployeeValues,
+  setPrenboardingLoaded,
+  setFunctionalLoaded,
+  setAboutLoaded
 } from '../store/pages'
 
 export const getInsuranceProviders = async token => {
@@ -90,6 +93,7 @@ export const getAboutPages = async token => {
     })
     let { data } = res
     store.dispatch(setAboutPages(data))
+    store.dispatch(setAboutLoaded())
   } catch (err) {
     console.error(err)
   }
@@ -106,6 +110,7 @@ export const getFunctionalPages = async token => {
     })
     let { data } = res
     store.dispatch(setFunctionalPages(data))
+    store.dispatch(setFunctionalLoaded())
   } catch (err) {
     console.error(err)
   }
@@ -185,6 +190,7 @@ export const getPreonboardingPages = async token => {
     store.dispatch(setCodeOfEthicsPage(codeOfEthics[0]))
     store.dispatch(setConditionsOfServicePage(conditionsOfService[0]))
     store.dispatch(setEmployeeDetailsPage(employeeDetails[0]))
+    store.dispatch(setPrenboardingLoaded())
   } catch (err) {
     console.error(err)
   }
