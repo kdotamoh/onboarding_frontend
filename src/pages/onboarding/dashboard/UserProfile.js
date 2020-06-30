@@ -53,7 +53,13 @@ const _ProfileDropdown = ({ user, unsetToken, unsetUser }) => {
 
         img {
           border-radius: 50%;
-          height: 60%;
+          height: 4.5rem;
+          /* width: auto; */
+
+          @media (max-width: 768px) {
+            height: 3rem;
+            width: 3rem;
+          }
         }
       `}
       onClick={() => setIsOpen(!isOpen)}

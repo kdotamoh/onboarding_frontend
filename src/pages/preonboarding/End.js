@@ -96,17 +96,21 @@ class End extends Component {
   }
   async componentDidMount() {
     let { hr_partner } = this.props.user
-    let { data: hr_partner_details } = await axios({
-      method: 'get',
-      url: `${process.env.REACT_APP_API_BASE}/hr_partners/${
-        hr_partner ? hr_partner.id : null
-      }/`,
-      headers: {
-        Authorization: `JWT ${this.props.token}`
-      }
-    })
-    // console.log(hr_partner_details)
-    this.setState({ hr_partner_details })
+    try {
+      let { data: hr_partner_details } = await axios({
+        method: 'get',
+        url: `${process.env.REACT_APP_API_BASE}/hr_partners/${
+          hr_partner ? hr_partner.id : null
+        }/`,
+        headers: {
+          Authorization: `JWT ${this.props.token}`
+        }
+      })
+      // console.log(hr_partner_details)
+      this.setState({ hr_partner_details })
+    } catch (err) {
+      console.error(err)
+    }
   }
   nextPage = () => {
     navigate('/preonboarding/info')

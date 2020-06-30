@@ -345,17 +345,22 @@ class DetailsForm extends Component {
 
   async componentDidMount() {
     let { line_manager } = this.props.user
-    let { data: line_manager_details } = await axios({
-      method: 'get',
-      url: `${process.env.REACT_APP_API_BASE}/line_managers/${
-        line_manager ? line_manager.id : ''
-      }/`,
-      headers: {
-        Authorization: `JWT ${this.props.token}`
-      }
-    })
+    try {
+      let { data: line_manager_details } = await axios({
+        method: 'get',
+        url: `${process.env.REACT_APP_API_BASE}/line_managers/${
+          line_manager ? line_manager.id : ''
+        }/`,
+        headers: {
+          Authorization: `JWT ${this.props.token}`
+        }
+      })
+      this.setState({ line_manager_details })
+    } catch (err) {
+      console.error(err)
+    }
+
     // console.log(hr_partner_details)
-    this.setState({ line_manager_details })
   }
 
   handleBirthCertificate = (props, event, id) => {

@@ -26,14 +26,19 @@ const Layout = styled.div`
   }
   @media (max-width: 768px) {
     flex-direction: column;
+    justify-content: center;
+
     div {
       width: 100%;
-      height: 50%;
+      height: 100%;
     }
   }
 `
 
-const Logo = styled.img``
+const Logo = styled.img`
+  width: 30%;
+  height: auto;
+`
 
 export default class PreOnboardingLogin extends Component {
   render() {

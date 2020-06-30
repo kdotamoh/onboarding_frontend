@@ -76,7 +76,7 @@ class LoginForm extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ paddingBottom: '2rem' }}>
         <Formik
           initialValues={{ username: '', password: '' }}
           onSubmit={values => {

@@ -132,7 +132,7 @@ class Info extends Component {
             fontSize={1.6}
             p="4rem"
           >
-            Next Step >
+            Next Step &gt;
           </Button>
           <BgImg src={bgImg} />
         </ContainerWithBackground>
