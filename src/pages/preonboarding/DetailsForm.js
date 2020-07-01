@@ -199,7 +199,9 @@ const ValidationSchema = Yup.object().shape({
   middleName: Yup.string(),
   firstName: Yup.string().required('First name is required'),
   contactNumber: Yup.number().required('Contact number is required'),
-  // dob
+  dob_day: Yup.string().required('Day is required'),
+  dob_month: Yup.string().required('Month is required'),
+  dob_year: Yup.string().required('Year is required'),
   gender: Yup.mixed()
     .oneOf(['M', 'F'])
     .required('Gender is required'),
@@ -211,6 +213,28 @@ const ValidationSchema = Yup.object().shape({
     .required('Marital status is required'),
   father: Yup.string().required('Name of father is required'),
   mother: Yup.string().required('Name of mother is required'),
+
+  // password_confirmation: Yup.string().when('password', {
+  //   is: value => value && value.length > 0,
+  //   then: Yup.string()
+  //     .required('Confirm password is required when setting new password.')
+  //     .oneOf([Yup.ref('password'), null], 'Must match new password.'),
+  //   otherwise: Yup.string()
+  // }),
+  // old_password: Yup.string().when('password', {
+  //   is: value => value && value.length > 0,
+  //   then: Yup.string().required(
+  //     'Old password is required when setting new password'
+  //   ),
+  //   otherwise: Yup.string()
+  // }),
+  // children: Yup.array().of(Yup.object().shape({
+  //   name: Yup.string().strict(),
+  //   dob_day: Yup.string().when('name', {
+
+  //   })
+  // })),
+
   nok_name: Yup.string().required('Name of next of kin is required'),
   nok_address: Yup.string().required('Address of next of kin is required'),
   nok_contactNumber: Yup.string().required(
@@ -220,10 +244,12 @@ const ValidationSchema = Yup.object().shape({
   nok_dob_day: Yup.string().required('Day is required'),
   nok_dob_month: Yup.string().required('Month is required'),
   nok_dob_year: Yup.string().required('Year is required'),
+
   nationalService_start_month: Yup.string().required('Month is required'),
   nationalService_start_year: Yup.string().required('Year is required'),
   nationalService_end_year: Yup.string().required('Year is required'),
   nationalService_end_month: Yup.string().required('Month is required'),
+
   residential_address_physical: Yup.string().required(
     'Physical address is required'
   ),
@@ -231,12 +257,14 @@ const ValidationSchema = Yup.object().shape({
     'Digital address is required'
   ),
   postalAddress: Yup.string(),
+
   socialSecurity: Yup.string().required('Social Security Number is required'),
   TIN: Yup.string().required('TIN is required'),
   bank_name: Yup.string().required('Bank name is required'),
   bank_branch: Yup.string().required('Bank branch is required'),
   bank_accountNumber: Yup.string().required('Bank account number is required'),
   bank_sortCode: Yup.string().required('Bank sort code is required'),
+
   family_line_beneficiary: Yup.string().required('Name is required'),
   family_line_relationship: Yup.string().required('Relationship is required'),
   family_line_number: Yup.string()
@@ -425,7 +453,10 @@ class DetailsForm extends Component {
 
           let newChildren = values.children.map(child => ({
             name: child.name,
-            dob: `${child.dob_year}-${child.dob_month}-${child.dob_day}`,
+            dob:
+              child.dob_year && child.dob_month && child.dob_day
+                ? `${child.dob_year}-${child.dob_month}-${child.dob_day}`
+                : '2000-01-01', // TODO: do proper validation
             birth_certificate: null
           }))
 
@@ -514,15 +545,7 @@ class DetailsForm extends Component {
                     'Content-Type': 'multipart/form-data'
                   }
                 })
-
-                // let children = res.data.children
-
                 // Todo: Children birth certs
-
-                // await axios({
-                //   method: 'post',
-                //   url: `${process.env.REACT_APP_API_BASE}/profiles/${res}`
-                // })
               } catch (err) {
                 console.error(err)
               }
@@ -573,7 +596,7 @@ class DetailsForm extends Component {
                       }}
                     />
                   </label>
-                  <p>
+                  <p style={{ wordBreak: 'break-all' }}>
                     {props.values.passportPhoto.name
                       ? props.values.passportPhoto.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
@@ -678,6 +701,16 @@ class DetailsForm extends Component {
                   </Select>
                 </SelectRow>
 
+                {props.errors.dob_day && props.touched.dob_day ? (
+                  <Error id="feedback">{props.errors.dob_day}</Error>
+                ) : null}
+                {props.errors.dob_month && props.touched.dob_month ? (
+                  <Error id="feedback">{props.errors.dob_month}</Error>
+                ) : null}
+                {props.errors.dob_year && props.touched.dob_year ? (
+                  <Error id="feedback">{props.errors.dob_year}</Error>
+                ) : null}
+
                 <Label htmlFor="gender">Gender</Label>
                 <Select
                   as="select"
@@ -752,7 +785,7 @@ class DetailsForm extends Component {
                       }}
                     />
                   </label>
-                  <p>
+                  <p style={{ wordBreak: 'break-all' }}>
                     {props.values.nationalId.name
                       ? props.values.nationalId.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
@@ -851,7 +884,7 @@ class DetailsForm extends Component {
                       }}
                     />
                   </label>
-                  <p>
+                  <p style={{ wordBreak: 'break-all' }}>
                     {props.values.marriageCertificate.name
                       ? props.values.marriageCertificate.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
@@ -949,7 +982,7 @@ class DetailsForm extends Component {
                                 }
                               />
                             </label>
-                            <p>
+                            <p style={{ wordBreak: 'break-all' }}>
                               {props.values.children[id].birthCertificate.name
                                 ? props.values.children[id].birthCertificate
                                     .name
@@ -1179,7 +1212,7 @@ class DetailsForm extends Component {
                     />
                   </label>
 
-                  <p>
+                  <p style={{ wordBreak: 'break-all' }}>
                     {props.values.educationalCertificates.length
                       ? props.values.educationalCertificates.length +
                         ' file(s) uploaded'
@@ -1221,7 +1254,7 @@ class DetailsForm extends Component {
                     />
                   </label>
 
-                  <p>
+                  <p style={{ wordBreak: 'break-all' }}>
                     {props.values.professionalBodies.length
                       ? props.values.professionalBodies.length +
                         ' file(s) uploaded'
@@ -1331,7 +1364,7 @@ class DetailsForm extends Component {
                       }}
                     />
                   </label>
-                  <p>
+                  <p style={{ wordBreak: 'break-all' }}>
                     {props.values.nationalService_certificate.name
                       ? props.values.nationalService_certificate.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
@@ -1632,7 +1665,7 @@ class DetailsForm extends Component {
                     />
                   </label>
 
-                  <p>
+                  <p style={{ wordBreak: 'break-all' }}>
                     {props.values.principal_form.name
                       ? props.values.principal_form.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
@@ -1658,7 +1691,7 @@ class DetailsForm extends Component {
                     />
                   </label>
 
-                  <p>
+                  <p style={{ wordBreak: 'break-all' }}>
                     {props.values.dependant_form.name
                       ? props.values.dependant_form.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
@@ -1773,9 +1806,9 @@ DetailsForm.propTypes = {
     id: PropTypes.number,
     division: PropTypes.object,
     department: PropTypes.object,
-    location: PropTypes.string,
-    job_title: PropTypes.string,
-    line_manager: PropTypes.number
+    location: PropTypes.object,
+    job_title: PropTypes.object,
+    line_manager: PropTypes.object
   }),
   divisions: PropTypes.array,
   departments: PropTypes.array,
