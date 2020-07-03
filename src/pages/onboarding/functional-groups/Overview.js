@@ -33,7 +33,7 @@ export default class Overview extends Component {
 
           <Link to="../capital-projects">
             <Button mt="15rem" textColor="black">
-              Next >
+              Next &gt;
             </Button>
           </Link>
         </PageStyle>

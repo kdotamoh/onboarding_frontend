@@ -18,6 +18,14 @@ const BgImg = styled(Img)`
   z-index: 0;
 `
 
+const Video = styled.video`
+  width: 65rem;
+
+  @media (max-width: 768px) {
+    width: 95%;
+  }
+`
+
 export default class CEOWelcome extends Component {
   render() {
     let { title } = this.props.page ? this.props.page : {}
@@ -31,15 +39,15 @@ export default class CEOWelcome extends Component {
           <h3>{title ? title : null}</h3>
           <h4>{header ? header : null}</h4>
           <div dangerouslySetInnerHTML={{ __html: content }}></div>
-          <video controls>
+          <Video controls>
             <source src={video_file_1} type="video/mp4" />
             Sorry, your browser doesn't support embedded videos.
-          </video>
+          </Video>
           <div style={{ marginTop: '4rem' }} />
-          <video controls>
+          <Video controls>
             <source src={video_file_2} type="video/mp4" />
             Sorry, your browser doesn't support embedded videos.
-          </video>
+          </Video>
           <Link to="../company-overview">
             <Button mt="15rem" textColor="black">
               Next &gt;

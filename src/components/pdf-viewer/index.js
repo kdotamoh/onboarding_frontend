@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Document, Page, pdfjs } from 'react-pdf'
+import { BrowserView, MobileView } from 'react-device-detect'
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`
 
 class PDFViewer extends Component {
@@ -47,11 +48,20 @@ class PDFViewer extends Component {
             onLoadSuccess={this.onDocumentLoadSuccess}
             onLoadError={console.error}
           >
-            <Page
-              pageNumber={pageNumber}
-              width={800}
-              height={this.state.height}
-            />
+            <BrowserView>
+              <Page
+                pageNumber={pageNumber}
+                width={800}
+                height={this.state.height}
+              />
+            </BrowserView>
+            <MobileView>
+              <Page
+                pageNumber={pageNumber}
+                width={300}
+                height={this.state.height}
+              />
+            </MobileView>
           </Document>
         </div>
         <p>

@@ -134,6 +134,14 @@ const CarouselSlide = styled.div`
   }
 `
 
+const Video = styled.video`
+  width: 65rem;
+
+  @media (max-width: 768px) {
+    width: 95%;
+  }
+`
+
 class CompanyOverview extends Component {
   render() {
     const responsive = {
@@ -172,10 +180,10 @@ class CompanyOverview extends Component {
         <StepNav />
         <Container>
           <H3 py="3rem">Company Overview</H3>
-          <video controls autoPlay>
+          <Video controls autoPlay>
             <source src={video_file} type="video/mp4" />
             Sorry, your browser doesn't support embedded videos.
-          </video>
+          </Video>
           <div style={{ marginTop: '10rem' }} />
           <BigHero>
             <div className="row">

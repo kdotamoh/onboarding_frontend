@@ -63,7 +63,7 @@ const Section = styled.section`
 
   @media (max-width: 768px) {
     width: 85%;
-    margin: 0 auto;
+    margin: 2rem auto;
   }
 `
 
