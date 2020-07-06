@@ -368,7 +368,17 @@ class DetailsForm extends Component {
     isSubmitting: false,
     errorMessage: '',
 
-    line_manager_details: {}
+    line_manager_details: {},
+
+    // Image fields
+    avatar: null,
+    national_id: null,
+    marriage_cert: null,
+    educational_certs: [],
+    professional_body_affiliates: [],
+    nss_cert: null,
+    principal_form: null,
+    dependant_form: null
   }
 
   async componentDidMount() {
@@ -438,15 +448,12 @@ class DetailsForm extends Component {
     }
 
     let { user } = this.props
-    // let { departments } = this.props
-    // let { divisions } = this.props
 
     return (
       <Formik
         enableReinitialize={true}
         initialValues={initialValues}
         onSubmit={async values => {
-          // props.setSubmitting(true)
           this.setState({ isSubmitting: true })
 
           console.log(values)
@@ -468,88 +475,95 @@ class DetailsForm extends Component {
             newChildren = []
           }
 
-          let data = {
-            employee: this.props.user.id,
-            first_name: values.firstName,
-            other_names: values.middleName,
-            last_name: values.surname,
-            phone_number: values.contactNumber,
-            dob: `${values.dob_year}-${values.dob_month}-${values.dob_day}`,
-            gender: values.gender,
-            nationality: values.nationality,
-            national_id_type: values.nationalIdType,
-            national_id_number: values.nationalIdNumber,
-            region: values.region,
-            marital_status: values.maritalStatus,
-            name_of_spouse: values.spouse_name,
-            contact_of_spouse: values.spouse_contactNumber,
-            children: newChildren,
-            name_of_father: values.father,
-            name_of_mother: values.mother,
-            nok_name: values.nok_name,
-            nok_dob: `${values.nok_dob_year}-${values.nok_dob_month}-${values.nok_dob_day}`,
-            nok_address: values.nok_address,
-            nok_contact: values.nok_contactNumber,
-            nok_relation: values.nok_relationship,
-            nss_start_date: `${values.nationalService_start_year}-${values.nationalService_start_month}-01`,
-            nss_end_date: `${values.nationalService_end_year}-${values.nationalService_end_month}-30`, // TODO: fix hardcoded days
-            res_physical_address: values.residential_address_physical,
-            res_digital_address: values.residential_address_digital,
-            res_phone_number: values.residential_phoneNumber,
-            postal_address: values.postalAddress,
-            ssnit_number: values.socialSecurity,
-            tin_number: values.TIN,
-            bank_account_number: values.bank_accountNumber,
-            bank_branch: values.bank_branch,
-            bank_name: values.bank_name,
-            sort_code: values.bank_sortCode,
-            family_beneficiary: values.family_line_beneficiary,
-            relationship_to_beneficiary: values.family_line_relationship,
-            beneficiary_phone_number: values.family_line_number,
-            medical_insurance_provider: Number(
-              values.medicalInsurance_provider
-            ),
-            fuel_card_option: Number(values.fuelCard)
-          }
-
-          let imageFiles = new FormData()
-          imageFiles.append('avatar', values.passportPhoto)
-          imageFiles.append('national_id', values.nationalId)
-          imageFiles.append('marriage_cert', values.marriageCertificate)
-          imageFiles.append('educational_certs', values.educationalCertificates)
-          imageFiles.append(
-            'professional_body_affiliates',
-            values.professionalBodies
+          let formData = new FormData()
+          formData.append('employee', Number(this.props.user.id))
+          formData.append('first_name', values.firstName)
+          formData.append('other_names', values.middleName)
+          formData.append('last_name', values.surname)
+          formData.append('phone_number', values.contactNumber)
+          formData.append(
+            'dob',
+            `${values.dob_year}-${values.dob_month}-${values.dob_day}`
           )
-          imageFiles.append('nss_cert', values.nationalService_certificate)
-          imageFiles.append('principal_form', values.principal_form)
-          imageFiles.append('dependant_form', values.dependant_form)
+          formData.append('gender', values.gender)
+          formData.append('nationality', values.nationality)
+          formData.append('national_id_type', values.nationalIdType)
+          formData.append('national_id_number', values.nationalIdNumber)
+          formData.append('region', values.region)
+          formData.append('marital_status', values.maritalStatus)
+          formData.append('name_of_spouse', values.spouse_name)
+          formData.append('contact_of_spouse', values.spouse_contactNumber)
+          formData.append('children', newChildren)
+          formData.append('name_of_father', values.father)
+          formData.append('name_of_mother', values.mother)
+          formData.append('nok_name', values.nok_name)
+          formData.append(
+            'nok_dob',
+            `${values.nok_dob_year}-${values.nok_dob_month}-${values.nok_dob_day}`
+          )
+          formData.append('nok_address', values.nok_address)
+          formData.append('nok_contact', values.nok_contactNumber)
+          formData.append('nok_relation', values.nok_relationship)
+          formData.append(
+            'nss_start_date',
+            `${values.nationalService_start_year}-${values.nationalService_start_month}-01`
+          )
+          formData.append(
+            'nss_end_date',
+            `${values.nationalService_end_year}-${values.nationalService_end_month}-30`
+          )
+          formData.append(
+            'res_physical_address',
+            values.residential_address_physical
+          )
+          formData.append(
+            'res_digital_address',
+            values.residential_address_digital
+          )
+          formData.append('res_phone_number', values.residential_phoneNumber)
+          formData.append('postal_address', values.postalAddress)
+          formData.append('ssnit_number', values.socialSecurity)
+          formData.append('tin_number', values.TIN)
+          formData.append('bank_account_number', values.bank_accountNumber)
+          formData.append('bank_branch', values.bank_branch)
+          formData.append('bank_name', values.bank_name)
+          formData.append('sort_code', values.bank_sortCode)
+          formData.append('family_beneficiary', values.family_line_beneficiary)
+          formData.append(
+            'relationship_to_beneficiary',
+            values.family_line_relationship
+          )
+          formData.append('beneficiary_phone_number', values.family_line_number)
+          formData.append(
+            'medical_insurance_provider',
+            Number(values.medicalInsurance_provider)
+          )
+          formData.append('fuel_card_option', Number(values.fuelCard))
+
+          // Images
+          formData.append('avatar', this.state.avatar)
+          formData.append('national_id', this.state.national_id)
+          formData.append('marriage_cert', this.state.marriage_cert)
+          formData.append('educational_certs', this.state.educational_certs)
+          formData.append(
+            'professional_body_affiliates',
+            this.state.professional_body_affiliates
+          )
+          formData.append('nss_cert', this.state.nss_cert)
+          formData.append('principal_form', this.state.principal_form)
+          formData.append('dependant_form', this.state.dependant_form)
 
           try {
             let res = await axios({
               method: 'post',
               url: `${process.env.REACT_APP_API_BASE}/profiles/`,
-              data,
+              data: formData,
               headers: {
-                Authorization: `JWT ${this.props.token}`
+                Authorization: `JWT ${this.props.token}`,
+                'Content-Type': 'multipart/form-data'
               }
             })
-            if (res.status > 199 && res.status <= 299) {
-              try {
-                await axios({
-                  method: 'post',
-                  url: `${process.env.REACT_APP_API_BASE}/profiles/${res.data.id}/upload/ `,
-                  data: imageFiles,
-                  headers: {
-                    Authorization: `JWT ${this.props.token}`,
-                    'Content-Type': 'multipart/form-data'
-                  }
-                })
-                // Todo: Children birth certs
-              } catch (err) {
-                console.error(err)
-              }
-            }
+
             navigate('/preonboarding/conditions-of-service')
             console.error(res)
           } catch (err) {
@@ -558,8 +572,6 @@ class DetailsForm extends Component {
               errorMessage: 'Something went wrong. Please try again.'
             })
           }
-
-          // props.setSubmitting(false)
           this.setState({ isSubmitting: false })
         }}
         validationSchema={ValidationSchema}
@@ -568,16 +580,6 @@ class DetailsForm extends Component {
           <>
             <Form onSubmit={props.handleSubmit}>
               <Heading>1. Personal Information</Heading>
-
-              {/* <HorizontalSelect
-                options={options}
-                name="test"
-                value={props.values.test}
-                onChange={e => {
-                  props.setFieldValue('test', e.target.value)
-                }}
-              /> */}
-
               <section>
                 <Label>Upload your passport photograph here</Label>
                 <FileInput>
@@ -589,16 +591,13 @@ class DetailsForm extends Component {
                       type="file"
                       name="passportPhoto"
                       onChange={e => {
-                        props.setFieldValue(
-                          'passportPhoto',
-                          e.currentTarget.files[0]
-                        )
+                        this.setState({ avatar: e.currentTarget.files[0] })
                       }}
                     />
                   </label>
                   <p style={{ wordBreak: 'break-all' }}>
-                    {props.values.passportPhoto.name
-                      ? props.values.passportPhoto.name
+                    {this.state.avatar
+                      ? this.state.avatar.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
                   </p>
                 </FileInput>
@@ -778,22 +777,19 @@ class DetailsForm extends Component {
                       type="file"
                       name="nationalId"
                       onChange={e => {
-                        props.setFieldValue(
-                          'nationalId',
-                          e.currentTarget.files[0]
-                        )
+                        this.setState({ national_id: e.currentTarget.files[0] })
                       }}
                     />
                   </label>
                   <p style={{ wordBreak: 'break-all' }}>
-                    {props.values.nationalId.name
-                      ? props.values.nationalId.name
+                    {this.state.national_id
+                      ? this.state.national_id.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
                   </p>
                 </FileInput>
-                {props.errors.nationalId && props.touched.nationalId ? (
+                {/* {props.errors.nationalId && props.touched.nationalId ? (
                   <Error id="feedback">{props.errors.nationalId}</Error>
-                ) : null}
+                ) : null} */}
 
                 <Label htmlFor="nationalIdType">National ID Type</Label>
                 <Select
@@ -881,23 +877,24 @@ class DetailsForm extends Component {
                       type="file"
                       name="marriageCertificate"
                       onChange={e => {
-                        // prettier-ignore
-                        props.setFieldValue('marriageCertificate', e.currentTarget.files[0])
+                        this.setState({
+                          marriage_cert: e.currentTarget.files[0]
+                        })
                       }}
                     />
                   </label>
                   <p style={{ wordBreak: 'break-all' }}>
-                    {props.values.marriageCertificate.name
-                      ? props.values.marriageCertificate.name
+                    {this.state.marriage_cert
+                      ? this.state.marriage_cert.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
                   </p>
                 </FileInput>
-                {props.errors.marriageCertificate &&
+                {/* {props.errors.marriageCertificate &&
                 props.touched.marriageCertificate ? (
                   <Error id="feedback">
                     {props.errors.marriageCertificate}
                   </Error>
-                ) : null}
+                ) : null} */}
 
                 {/* CHILDREN */}
                 <Divider />
@@ -1204,19 +1201,21 @@ class DetailsForm extends Component {
                         // TODO: allow clicking to add files/push files into array
                         if (e.target.files.length) {
                           const arrFiles = Array.from(e.target.files)
-                          const files = arrFiles.map((file, index) => {
-                            const src = window.URL.createObjectURL(file)
-                            return { file, id: index, src }
+                          const files = arrFiles.map(file => {
+                            // const src = window.URL.createObjectURL(file)
+                            return file
                           })
-                          props.setFieldValue('educationalCertificates', files)
+                          this.setState({ educational_certs: files })
+                          // props.setFieldValue('educationalCertificates', files)
                         }
                       }}
                     />
                   </label>
 
                   <p style={{ wordBreak: 'break-all' }}>
-                    {props.values.educationalCertificates.length
-                      ? props.values.educationalCertificates.length +
+                    {/* {props.values.educationalCertificates.length */}
+                    {this.state.educational_certs.length
+                      ? this.state.educational_certs.length +
                         ' file(s) uploaded'
                       : 'Please upload JPEG format, no larger than 3mb in size'}
                   </p>
@@ -1246,19 +1245,22 @@ class DetailsForm extends Component {
                       onChange={e => {
                         if (e.target.files.length) {
                           const arrFiles = Array.from(e.target.files)
-                          const files = arrFiles.map((file, index) => {
-                            const src = window.URL.createObjectURL(file)
-                            return { file, id: index, src }
+                          const files = arrFiles.map(file => {
+                            // const src = window.URL.createObjectURL(file)
+                            return file
                           })
-                          props.setFieldValue('professionalBodies', files)
+                          this.setState({ professional_body_affiliates: files })
+                          // props.setFieldValue('professionalBodies', files)
                         }
                       }}
                     />
                   </label>
 
                   <p style={{ wordBreak: 'break-all' }}>
-                    {props.values.professionalBodies.length
-                      ? props.values.professionalBodies.length +
+                    {/* {props.values.professionalBodies.length
+                      ? props.values.professionalBodies.length + */}
+                    {this.state.professional_body_affiliates.length
+                      ? this.state.professional_body_affiliates.length +
                         ' file(s) uploaded'
                       : 'Please upload JPEG format, no larger than 3mb in size'}
                   </p>
@@ -1362,13 +1364,14 @@ class DetailsForm extends Component {
                       name="nationalService_certificate"
                       onChange={e => {
                         // prettier-ignore
-                        props.setFieldValue('nationalService_certificate', e.currentTarget.files[0])
+                        // props.setFieldValue('nationalService_certificate', e.currentTarget.files[0])
+                        this.setState({nss_cert: e.currentTarget.files[0]})
                       }}
                     />
                   </label>
                   <p style={{ wordBreak: 'break-all' }}>
-                    {props.values.nationalService_certificate.name
-                      ? props.values.nationalService_certificate.name
+                    {this.state.nss_cert
+                      ? this.state.nss_cert.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
                   </p>
                 </FileInput>
@@ -1659,17 +1662,20 @@ class DetailsForm extends Component {
                       type="file"
                       name="principal_form"
                       onChange={e => {
-                        props.setFieldValue(
-                          'principal_form',
-                          e.currentTarget.files[0]
-                        )
+                        // props.setFieldValue(
+                        //   'principal_form',
+                        //   e.currentTarget.files[0]
+                        // )
+                        this.setState({
+                          principal_form: e.currentTarget.files[0]
+                        })
                       }}
                     />
                   </label>
 
                   <p style={{ wordBreak: 'break-all' }}>
-                    {props.values.principal_form.name
-                      ? props.values.principal_form.name
+                    {this.state.principal_form
+                      ? this.state.principal_form.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
                   </p>
                 </FileInput>
@@ -1685,17 +1691,20 @@ class DetailsForm extends Component {
                       type="file"
                       name="dependant_form"
                       onChange={e => {
-                        props.setFieldValue(
-                          'dependant_form',
-                          e.currentTarget.files[0]
-                        )
+                        // props.setFieldValue(
+                        //   'dependant_form',
+                        //   e.currentTarget.files[0]
+                        // )
+                        this.setState({
+                          dependant_form: e.currentTarget.files[0]
+                        })
                       }}
                     />
                   </label>
 
                   <p style={{ wordBreak: 'break-all' }}>
-                    {props.values.dependant_form.name
-                      ? props.values.dependant_form.name
+                    {this.state.dependant_form
+                      ? this.state.dependant_form.name
                       : 'Please upload JPEG format, no larger than 3mb in size'}
                   </p>
                 </FileInput>
