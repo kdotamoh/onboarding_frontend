@@ -17,6 +17,7 @@ import { H4, H3, Container, Img, Button } from 'components/styled'
 import { Hero } from 'views/layout'
 
 import bgImg from 'images/bg_l_bottomright.svg'
+import scrollArrow from 'images/scroll_arrow.svg'
 // import heroBg from 'images/bg_yellow_l.svg'
 // import brand from 'images/carousel/brand.png'
 // import leadership from 'images/carousel/leadership.png'
@@ -81,7 +82,7 @@ const BigHero = styled(Hero)`
 `
 
 const HeroList = styled.div`
-  font-size: 1.2rem;
+  font-size: 1.6rem;
   text-align: center;
   ul {
     li {
@@ -184,6 +185,12 @@ class CompanyOverview extends Component {
             <source src={video_file} type="video/mp4" />
             Sorry, your browser doesn't support embedded videos.
           </Video>
+
+          <img
+            style={{ marginTop: '3rem', width: '5rem', height: '5rem' }}
+            src={scrollArrow}
+            alt=""
+          />
           <div style={{ marginTop: '10rem' }} />
           <BigHero>
             <div className="row">
@@ -192,14 +199,14 @@ class CompanyOverview extends Component {
                 <H4 color={COLORS.DARKER_GREYISH_BROWN} mt="4rem">
                   Vision
                 </H4>
-                <p>{vision}</p>
+                <p style={{ fontSize: '1.6rem' }}>{vision}</p>
               </div>
               <div className="column">
                 <img src={mission_img} alt="" />
                 <H4 color={COLORS.DARKER_GREYISH_BROWN} mt="4rem">
                   Mission
                 </H4>
-                <p>{mission}</p>
+                <p style={{ fontSize: '1.6rem' }}>{mission}</p>
               </div>
               <div className="column">
                 <img src={values_img} alt="" />

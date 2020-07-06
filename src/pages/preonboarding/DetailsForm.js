@@ -744,7 +744,7 @@ class DetailsForm extends Component {
                   <Error id="feedback">{props.errors.nationality}</Error>
                 ) : null}
 
-                <Label htmlFor="region">Region</Label>
+                <Label htmlFor="region">Hometown Region</Label>
                 <Select
                   as="select"
                   type="text"
@@ -766,8 +766,8 @@ class DetailsForm extends Component {
                 ) : null}
 
                 <Label htmlFor="nationalId">
-                  National ID details (Voters ID/Passport/Driver’s
-                  License/Ghana)
+                  National ID details (Voters ID/Passport/Driver’s License/Ghana
+                  Card)
                 </Label>
                 <FileInput>
                   <label htmlFor="nationalId">
@@ -852,7 +852,9 @@ class DetailsForm extends Component {
                   <Error id="feedback">{props.errors.spouse_name}</Error>
                 ) : null}
 
-                <Label htmlFor="spouse_contactNumber">Contact Number</Label>
+                <Label htmlFor="spouse_contactNumber">
+                  Contact Number of Spouse
+                </Label>
                 <Input
                   type="number"
                   onChange={props.handleChange}
@@ -1637,13 +1639,13 @@ class DetailsForm extends Component {
                   Nationwide Medical Insurance Principal Application Form
                 </Link>
                 <Link href={nationwide_dependant} download>
-                  Nationwide Medical Insurance Dependant Application Form Acacia
+                  Nationwide Medical Insurance Dependant Application Form
                 </Link>
                 <Link href={acacia_principal} download>
-                  Medical Insurance Principal Application Form Acacia Medical
+                  Acacia Medical Insurance Principal Application Form
                 </Link>
                 <Link href={acacia_dependant} download>
-                  Insurance Dependant Application Form
+                  Acacia Medical Insurance Dependant Application Form
                 </Link>
 
                 <Label htmlFor="">Upload the principal dependant form</Label>
