@@ -11,6 +11,7 @@ import PropTypes from 'prop-types'
 import moment from 'moment'
 import axios from 'axios'
 import { regions } from '../../constants'
+import { isoCountries } from 'utils/countries'
 
 import { Button } from 'components/styled'
 // import HorizontalSelect from 'components/horizontal-select'
@@ -737,7 +738,11 @@ class DetailsForm extends Component {
                 >
                   <option value=""></option>
                   <option value="Ghanaian">Ghanaian</option>
-                  <option value="Other">Other</option>
+                  {Object.keys(isoCountries).map(key => (
+                    <option key={key} value={isoCountries[key]}>
+                      {isoCountries[key]}
+                    </option>
+                  ))}
                 </Select>
                 {props.errors.nationality && props.touched.nationality ? (
                   <Error id="feedback">{props.errors.nationality}</Error>
@@ -1221,6 +1226,26 @@ class DetailsForm extends Component {
                   </p>
                 </FileInput>
 
+                <Label htmlFor="">
+                  <AddButton
+                    type="button"
+                    onClick={e => {
+                      e.preventDefault()
+                      console.log('i been clicked')
+                      // arrayHelpers.push({
+                      //   name: '',
+                      //   birthCertificate: '',
+                      //   dob_day: '',
+                      //   dob_month: '',
+                      //   dob_year: ''
+                      // })
+                    }}
+                  >
+                    +
+                  </AddButton>
+                  Add certificate
+                </Label>
+
                 <Label htmlFor="professionalBodies">
                   Upload Evidence of Professional Body Affliations
                 </Label>
@@ -1265,6 +1290,26 @@ class DetailsForm extends Component {
                       : 'Please upload JPEG format, no larger than 3mb in size'}
                   </p>
                 </FileInput>
+
+                <Label htmlFor="">
+                  <AddButton
+                    type="button"
+                    onClick={e => {
+                      e.preventDefault()
+                      console.log('i been clicked')
+                      // arrayHelpers.push({
+                      //   name: '',
+                      //   birthCertificate: '',
+                      //   dob_day: '',
+                      //   dob_month: '',
+                      //   dob_year: ''
+                      // })
+                    }}
+                  >
+                    +
+                  </AddButton>
+                  Add certificate
+                </Label>
                 <ShowSectionButton
                   type="button"
                   onClick={() => this.handleOpenSection('nationalService')}
