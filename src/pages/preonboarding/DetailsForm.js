@@ -494,7 +494,7 @@ class DetailsForm extends Component {
           formData.append('marital_status', values.maritalStatus)
           formData.append('name_of_spouse', values.spouse_name)
           formData.append('contact_of_spouse', values.spouse_contactNumber)
-          formData.append('children', newChildren)
+          formData.append('children', JSON.stringify(newChildren))
           formData.append('name_of_father', values.father)
           formData.append('name_of_mother', values.mother)
           formData.append('nok_name', values.nok_name)
