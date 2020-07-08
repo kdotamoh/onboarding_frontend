@@ -206,9 +206,7 @@ const ValidationSchema = Yup.object().shape({
   gender: Yup.mixed()
     .oneOf(['M', 'F'])
     .required('Gender is required'),
-  nationality: Yup.mixed()
-    .oneOf(['Ghanaian', 'Other'])
-    .required('Nationality is required'),
+  nationality: Yup.string().required('Nationality is required'),
   maritalStatus: Yup.mixed()
     .oneOf(['S', 'M'])
     .required('Marital status is required'),
@@ -376,7 +374,7 @@ class DetailsForm extends Component {
     national_id: null,
     marriage_cert: null,
     educational_certs: [],
-    professional_body_affiliates: [],
+    // professional_body_affiliates: [],
     nss_cert: null,
     principal_form: null,
     dependant_form: null
@@ -398,18 +396,61 @@ class DetailsForm extends Component {
     } catch (err) {
       console.error(err)
     }
-
-    // console.log(hr_partner_details)
   }
 
-  handleBirthCertificate = (props, event, id) => {
-    const newChildren = props.values.children.map((child, childId) => {
-      if (id !== childId) return child
-      return {
-        ...child,
-        birthCertificate: event.currentTarget.files[0]
-      }
+  handleAddProfessionalCert = () => {
+    this.setState({
+      professional_body_affiliates: this.state.professional_body_affiliates.concat(
+        [{}]
+      )
     })
+  }
+
+  handleUpdateProfessionalCert = () => {}
+
+  handleAddEducationalCert = () => {
+    this.setState({
+      educational_certs: this.state.educational_certs.concat([{}])
+    })
+  }
+
+  handleUpdateEducationalCert = (event, index) => {
+    const newCerts = this.state.educational_certs.map((cert, certId) => {
+      if (index !== certId) return cert
+      return { ...cert, ...event.target.files[0] }
+    })
+
+    this.setState({ educational_certs: newCerts })
+    console.log(this.state.educational_certs)
+  }
+
+  handleInputUpdate = (stateName, id) => event => {
+    const newClients = this.state.clients.map((client, clientId) => {
+      if (id !== clientId) return client
+      return { ...client, [stateName]: event.target.value }
+    })
+
+    this.setState({ clients: newClients })
+  }
+
+  handleBirthCertificate = async (props, event, id) => {
+    const newChildren = await Promise.all(
+      props.values.children.map(async (child, childId) => {
+        if (id !== childId) return child
+        const toBase64 = file =>
+          new Promise((resolve, reject) => {
+            const reader = new FileReader()
+            reader.readAsDataURL(file)
+            reader.onload = () => resolve(reader.result)
+            reader.onerror = error => reject(error)
+          })
+        let birthCert = await toBase64(event.currentTarget.files[0])
+        return {
+          ...child,
+          birthCertificate: birthCert
+        }
+      })
+    )
     // Todo: Fix `birthCertificate: undefined` if user cancels from input dialog
     props.setValues({
       ...props.values,
@@ -459,13 +500,16 @@ class DetailsForm extends Component {
 
           console.log(values)
 
+          // let certFile = file
+          // let reader = new FileReader()
           let newChildren = values.children.map(child => ({
             name: child.name,
             dob:
               child.dob_year && child.dob_month && child.dob_day
                 ? `${child.dob_year}-${child.dob_month}-${child.dob_day}`
                 : '2000-01-01', // TODO: do proper validation
-            birth_certificate: null
+            birth_certificate: child.birthCertificate
+            // birth_certificate: reader.readAsDataURL(child.birthCertificate)
           }))
 
           if (
@@ -495,6 +539,7 @@ class DetailsForm extends Component {
           formData.append('name_of_spouse', values.spouse_name)
           formData.append('contact_of_spouse', values.spouse_contactNumber)
           formData.append('children', JSON.stringify(newChildren))
+          // formData.append('children', JSON.stringify([]))
           formData.append('name_of_father', values.father)
           formData.append('name_of_mother', values.mother)
           formData.append('nok_name', values.nok_name)
@@ -545,10 +590,13 @@ class DetailsForm extends Component {
           formData.append('avatar', this.state.avatar)
           formData.append('national_id', this.state.national_id)
           formData.append('marriage_cert', this.state.marriage_cert)
-          formData.append('educational_certs', this.state.educational_certs)
+          formData.append(
+            'educational_certs',
+            JSON.stringify(values.educationalCertificates)
+          )
           formData.append(
             'professional_body_affiliates',
-            this.state.professional_body_affiliates
+            JSON.stringify(values.professionalBodies)
           )
           formData.append('nss_cert', this.state.nss_cert)
           formData.append('principal_form', this.state.principal_form)
@@ -564,7 +612,8 @@ class DetailsForm extends Component {
                 'Content-Type': 'multipart/form-data'
               }
             })
-
+            values.firstName = ''
+            values.surname = ''
             navigate('/preonboarding/conditions-of-service')
             console.error(res)
           } catch (err) {
@@ -737,7 +786,10 @@ class DetailsForm extends Component {
                   name="nationality"
                 >
                   <option value=""></option>
-                  <option value="Ghanaian">Ghanaian</option>
+                  <option value="Ghana">Ghana</option>
+                  <option disabled value="">
+                    -------------------------------
+                  </option>
                   {Object.keys(isoCountries).map(key => (
                     <option key={key} value={isoCountries[key]}>
                       {isoCountries[key]}
@@ -987,9 +1039,10 @@ class DetailsForm extends Component {
                               />
                             </label>
                             <p style={{ wordBreak: 'break-all' }}>
-                              {props.values.children[id].birthCertificate.name
-                                ? props.values.children[id].birthCertificate
-                                    .name
+                              {!isEmpty(
+                                props.values.children[id].birthCertificate
+                              ) || props.values.children[id].birthCertificate
+                                ? 'File uploaded'
                                 : 'Please upload JPEG format, no larger than 3mb in size'}
                             </p>
                           </FileInput>
@@ -1180,136 +1233,149 @@ class DetailsForm extends Component {
               <Heading>3. Educational Information</Heading>
 
               <section hidden={this.state.education}>
-                {/* // Todo: handle multiple file upload  */}
                 <Label htmlFor="educationalCertificates">
                   Upload Educational Certificates
                 </Label>
-                {/* <input
-                  accept="image/jpeg"
-                  type="file"
+                <FieldArray
                   name="educationalCertificates"
-                  onChange={e => {
-                    // prettier-ignore
-                    props.setFieldValue('educationalCertificates', e.currentTarget.files)
-                  }}
-                /> */}
-                <FileInput>
-                  <label htmlFor="educationalCertificates">
-                    Upload
-                    <input
-                      multiple
-                      id="educationalCertificates"
-                      accept="image/jpeg"
-                      type="file"
-                      name="educationalCertificates"
-                      onChange={e => {
-                        // TODO: allow clicking to add files/push files into array
-                        if (e.target.files.length) {
-                          const arrFiles = Array.from(e.target.files)
-                          const files = arrFiles.map(file => {
-                            // const src = window.URL.createObjectURL(file)
-                            return file
-                          })
-                          this.setState({ educational_certs: files })
-                          // props.setFieldValue('educationalCertificates', files)
-                        }
-                      }}
-                    />
-                  </label>
+                  render={arrayHelpers => (
+                    <React.Fragment>
+                      {props.values.educationalCertificates.map((cert, id) => (
+                        <FileInput key={id} style={{ marginTop: '1.5rem' }}>
+                          <label htmlFor={`educationalCertificates.${id}`}>
+                            Upload
+                            <input
+                              // multiple
+                              id={`educationalCertificates.${id}`}
+                              accept="image/jpeg"
+                              type="file"
+                              name={`educationalCertificates.${id}`}
+                              onChange={async e => {
+                                const newCerts = await Promise.all(
+                                  props.values.educationalCertificates.map(
+                                    async (cert, certId) => {
+                                      if (id !== certId) return cert
+                                      const toBase64 = file =>
+                                        new Promise((resolve, reject) => {
+                                          const reader = new FileReader()
+                                          reader.readAsDataURL(file)
+                                          reader.onload = () =>
+                                            resolve(reader.result)
+                                          reader.onerror = error =>
+                                            reject(error)
+                                        })
+                                      let eduCert = await toBase64(
+                                        e.currentTarget.files[0]
+                                      )
+                                      return eduCert
+                                    }
+                                  )
+                                )
+                                props.setValues({
+                                  ...props.values,
+                                  educationalCertificates: newCerts
+                                })
+                              }}
+                            />
+                          </label>
 
-                  <p style={{ wordBreak: 'break-all' }}>
-                    {/* {props.values.educationalCertificates.length */}
-                    {this.state.educational_certs.length
-                      ? this.state.educational_certs.length +
-                        ' file(s) uploaded'
-                      : 'Please upload JPEG format, no larger than 3mb in size'}
-                  </p>
-                </FileInput>
+                          <p style={{ wordBreak: 'break-all' }}>
+                            {props.values.educationalCertificates[id]
+                              ? 'File uploaded'
+                              : 'Please upload JPEG format, no larger than 3mb in size'}
+                          </p>
+                        </FileInput>
+                      ))}
 
-                <Label htmlFor="">
-                  <AddButton
-                    type="button"
-                    onClick={e => {
-                      e.preventDefault()
-                      console.log('i been clicked')
-                      // arrayHelpers.push({
-                      //   name: '',
-                      //   birthCertificate: '',
-                      //   dob_day: '',
-                      //   dob_month: '',
-                      //   dob_year: ''
-                      // })
-                    }}
-                  >
-                    +
-                  </AddButton>
-                  Add certificate
-                </Label>
+                      <Label htmlFor="">
+                        <AddButton
+                          type="button"
+                          // onClick={() => this.handleAddEducationalCert()}
+                          onClick={e => {
+                            e.preventDefault()
+                            console.log('i been clicked')
+                            arrayHelpers.push('')
+                          }}
+                        >
+                          +
+                        </AddButton>
+                        Add certificate
+                      </Label>
+                    </React.Fragment>
+                  )}
+                />
 
                 <Label htmlFor="professionalBodies">
                   Upload Evidence of Professional Body Affliations
                 </Label>
-                {/* <input
-                  accept="image/jpeg"
-                  type="file"
+                <FieldArray
                   name="professionalBodies"
-                  onChange={e => {
-                    // prettier-ignore
-                    props.setFieldValue('professionalBodies', e.currentTarget.files)
-                  }}
-                /> */}
-                <FileInput>
-                  <label htmlFor="professionalBodies">
-                    Upload
-                    <input
-                      multiple
-                      id="professionalBodies"
-                      accept="image/jpeg"
-                      type="file"
-                      name="professionalBodies"
-                      onChange={e => {
-                        if (e.target.files.length) {
-                          const arrFiles = Array.from(e.target.files)
-                          const files = arrFiles.map(file => {
-                            // const src = window.URL.createObjectURL(file)
-                            return file
-                          })
-                          this.setState({ professional_body_affiliates: files })
-                          // props.setFieldValue('professionalBodies', files)
-                        }
-                      }}
-                    />
-                  </label>
+                  render={arrayHelpers => (
+                    <React.Fragment>
+                      {props.values.professionalBodies.map((cert, id) => (
+                        <FileInput key={id} style={{ marginTop: '1.5rem' }}>
+                          <label htmlFor={`professionalBodies.${id}`}>
+                            Upload
+                            <input
+                              // multiple
+                              id={`professionalBodies.${id}`}
+                              accept="image/jpeg"
+                              type="file"
+                              name={`professionalBodies.${id}`}
+                              onChange={async e => {
+                                const newCerts = await Promise.all(
+                                  props.values.professionalBodies.map(
+                                    async (cert, certId) => {
+                                      if (id !== certId) return cert
+                                      const toBase64 = file =>
+                                        new Promise((resolve, reject) => {
+                                          const reader = new FileReader()
+                                          reader.readAsDataURL(file)
+                                          reader.onload = () =>
+                                            resolve(reader.result)
+                                          reader.onerror = error =>
+                                            reject(error)
+                                        })
+                                      let profCert = await toBase64(
+                                        e.currentTarget.files[0]
+                                      )
+                                      return profCert
+                                    }
+                                  )
+                                )
+                                props.setValues({
+                                  ...props.values,
+                                  professionalBodies: newCerts
+                                })
+                              }}
+                            />
+                          </label>
 
-                  <p style={{ wordBreak: 'break-all' }}>
-                    {/* {props.values.professionalBodies.length
-                      ? props.values.professionalBodies.length + */}
-                    {this.state.professional_body_affiliates.length
-                      ? this.state.professional_body_affiliates.length +
-                        ' file(s) uploaded'
-                      : 'Please upload JPEG format, no larger than 3mb in size'}
-                  </p>
-                </FileInput>
+                          <p style={{ wordBreak: 'break-all' }}>
+                            {props.values.professionalBodies[id]
+                              ? 'File uploaded'
+                              : 'Please upload JPEG format, no larger than 3mb in size'}
+                          </p>
+                        </FileInput>
+                      ))}
 
-                <Label htmlFor="">
-                  <AddButton
-                    type="button"
-                    onClick={e => {
-                      e.preventDefault()
-                      console.log('i been clicked')
-                      // arrayHelpers.push({
-                      //   name: '',
-                      //   birthCertificate: '',
-                      //   dob_day: '',
-                      //   dob_month: '',
-                      //   dob_year: ''
-                      // })
-                    }}
-                  >
-                    +
-                  </AddButton>
-                  Add certificate
-                </Label>
+                      <Label htmlFor="">
+                        <AddButton
+                          type="button"
+                          // onClick={() => this.handleAddEducationalCert()}
+                          onClick={e => {
+                            e.preventDefault()
+                            console.log('i been clicked')
+                            arrayHelpers.push('')
+                          }}
+                        >
+                          +
+                        </AddButton>
+                        Add certificate
+                      </Label>
+                    </React.Fragment>
+                  )}
+                />
                 <ShowSectionButton
                   type="button"
                   onClick={() => this.handleOpenSection('nationalService')}
