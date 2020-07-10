@@ -348,6 +348,8 @@ const initialValues = {
   fuelCard: ''
 }
 
+const MAX_FILE_SIZE = 3145728
+
 class DetailsForm extends Component {
   state = {
     currentSection: 'this one',
@@ -434,6 +436,10 @@ class DetailsForm extends Component {
   }
 
   handleBirthCertificate = async (props, event, id) => {
+    if (event.currentTarget.files[0].size > MAX_FILE_SIZE) {
+      alert('File is too big!')
+      return
+    }
     const newChildren = await Promise.all(
       props.values.children.map(async (child, childId) => {
         if (id !== childId) return child
@@ -508,8 +514,8 @@ class DetailsForm extends Component {
               child.dob_year && child.dob_month && child.dob_day
                 ? `${child.dob_year}-${child.dob_month}-${child.dob_day}`
                 : '2000-01-01', // TODO: do proper validation
-            birth_certificate: child.birthCertificate
-            // birth_certificate: reader.readAsDataURL(child.birthCertificate)
+            // birth_certificate: child.birthCertificate
+            birth_certificate: ''
           }))
 
           if (
@@ -590,14 +596,14 @@ class DetailsForm extends Component {
           formData.append('avatar', this.state.avatar)
           formData.append('national_id', this.state.national_id)
           formData.append('marriage_cert', this.state.marriage_cert)
-          formData.append(
-            'educational_certs',
-            JSON.stringify(values.educationalCertificates)
-          )
-          formData.append(
-            'professional_body_affiliates',
-            JSON.stringify(values.professionalBodies)
-          )
+          // formData.append(
+          //   'educational_certs',
+          //   JSON.stringify(values.educationalCertificates)
+          // )
+          // formData.append(
+          //   'professional_body_affiliates',
+          //   JSON.stringify(values.professionalBodies)
+          // )
           formData.append('nss_cert', this.state.nss_cert)
           formData.append('principal_form', this.state.principal_form)
           formData.append('dependant_form', this.state.dependant_form)
@@ -641,6 +647,10 @@ class DetailsForm extends Component {
                       type="file"
                       name="passportPhoto"
                       onChange={e => {
+                        if (e.currentTarget.files[0].size > MAX_FILE_SIZE) {
+                          alert('File is too big!')
+                          return
+                        }
                         this.setState({ avatar: e.currentTarget.files[0] })
                       }}
                     />
@@ -834,6 +844,10 @@ class DetailsForm extends Component {
                       type="file"
                       name="nationalId"
                       onChange={e => {
+                        if (e.currentTarget.files[0].size > MAX_FILE_SIZE) {
+                          alert('File is too big!')
+                          return
+                        }
                         this.setState({ national_id: e.currentTarget.files[0] })
                       }}
                     />
@@ -934,6 +948,10 @@ class DetailsForm extends Component {
                       type="file"
                       name="marriageCertificate"
                       onChange={e => {
+                        if (e.currentTarget.files[0].size > MAX_FILE_SIZE) {
+                          alert('File is too big!')
+                          return
+                        }
                         this.setState({
                           marriage_cert: e.currentTarget.files[0]
                         })
@@ -1255,6 +1273,7 @@ class DetailsForm extends Component {
                                   props.values.educationalCertificates.map(
                                     async (cert, certId) => {
                                       if (id !== certId) return cert
+
                                       const toBase64 = file =>
                                         new Promise((resolve, reject) => {
                                           const reader = new FileReader()
@@ -1476,7 +1495,11 @@ class DetailsForm extends Component {
                       onChange={e => {
                         // prettier-ignore
                         // props.setFieldValue('nationalService_certificate', e.currentTarget.files[0])
-                        this.setState({nss_cert: e.currentTarget.files[0]})
+                        if (e.currentTarget.files[0].size > MAX_FILE_SIZE) {
+                          alert('File is too big!')
+                          return
+                        }
+                        this.setState({ nss_cert: e.currentTarget.files[0] })
                       }}
                     />
                   </label>
@@ -1777,6 +1800,10 @@ class DetailsForm extends Component {
                         //   'principal_form',
                         //   e.currentTarget.files[0]
                         // )
+                        if (e.currentTarget.files[0].size > MAX_FILE_SIZE) {
+                          alert('File is too big!')
+                          return
+                        }
                         this.setState({
                           principal_form: e.currentTarget.files[0]
                         })
@@ -1806,6 +1833,10 @@ class DetailsForm extends Component {
                         //   'dependant_form',
                         //   e.currentTarget.files[0]
                         // )
+                        if (e.currentTarget.files[0].size > MAX_FILE_SIZE) {
+                          alert('File is too big!')
+                          return
+                        }
                         this.setState({
                           dependant_form: e.currentTarget.files[0]
                         })
