@@ -5,7 +5,7 @@ import { Persist } from 'formik-persist'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 import { layout } from 'styled-system'
-import { isEmpty } from 'lodash'
+import { isEmpty, flatten } from 'lodash'
 // import { navigate } from '@reach/router'
 import PropTypes from 'prop-types'
 import moment from 'moment'
@@ -596,10 +596,17 @@ class DetailsForm extends Component {
           formData.append('avatar', this.state.avatar)
           formData.append('national_id', this.state.national_id)
           formData.append('marriage_cert', this.state.marriage_cert)
+          // let educationalCerts = values.educationalCertificates.map()
+          values.educationalCertificates.forEach(elem => {
+            formData.append('educational_certs', elem.file)
+          })
           // formData.append(
           //   'educational_certs',
           //   JSON.stringify(values.educationalCertificates)
           // )
+          values.professionalBodies.forEach(elem => {
+            formData.append('professional_body_affiliates', elem.file)
+          })
           // formData.append(
           //   'professional_body_affiliates',
           //   JSON.stringify(values.professionalBodies)
@@ -1263,7 +1270,7 @@ class DetailsForm extends Component {
                           <label htmlFor={`educationalCertificates.${id}`}>
                             Upload
                             <input
-                              // multiple
+                              multiple
                               id={`educationalCertificates.${id}`}
                               accept="image/jpeg"
                               type="file"
@@ -1274,35 +1281,88 @@ class DetailsForm extends Component {
                                     async (cert, certId) => {
                                       if (id !== certId) return cert
 
-                                      const toBase64 = file =>
-                                        new Promise((resolve, reject) => {
-                                          const reader = new FileReader()
-                                          reader.readAsDataURL(file)
-                                          reader.onload = () =>
-                                            resolve(reader.result)
-                                          reader.onerror = error =>
-                                            reject(error)
+                                      // const toBase64 = file =>
+                                      //   new Promise((resolve, reject) => {
+                                      //     const reader = new FileReader()
+                                      //     reader.readAsDataURL(file)
+                                      //     reader.onload = () =>
+                                      //       resolve(reader.result)
+                                      //     reader.onerror = error =>
+                                      //       reject(error)
+                                      //   })
+                                      if (e.target.files.length) {
+                                        const arrFiles = Array.from(
+                                          e.target.files
+                                        )
+                                        const files = arrFiles.map(file => {
+                                          // const src = window.URL.createObjectURL(file)
+                                          return { file }
                                         })
-                                      let eduCert = await toBase64(
-                                        e.currentTarget.files[0]
-                                      )
-                                      return eduCert
+                                        // props.setFieldValue(
+                                        //   'educationalCertificates',
+                                        //   files
+                                        // )
+                                        return files
+                                      }
+                                      // let eduCert = await toBase64(
+                                      //   e.currentTarget.files[0]
+                                      // )
                                     }
                                   )
                                 )
+                                const flatCerts = flatten(newCerts)
                                 props.setValues({
                                   ...props.values,
-                                  educationalCertificates: newCerts
+                                  educationalCertificates: flatCerts
                                 })
                               }}
+                              // onChange={e =>
+                              //   arrayHelpers.push(e.currentTarget.files[0])
+                              // }
+                              // onChange={e => {
+                              //   // let newCerts = this.state.educational_certs.map(
+                              //   //   (cert, certId) => {
+                              //   //     if (id !== certId) return cert
+                              //   //     // return e.target.files[0]
+                              //   //     return id
+                              //   //   }
+                              //   // )
+                              //   // this.setState({
+                              //   //   educational_certs: newCerts
+                              //   // })
+                              //   console.log(id)
+                              //   this.state.educational_certs.concat(id)
+                              // }}
+                              // onChange={e => {
+                              //   // TODO: allow clicking to add files/push files into array
+                              //   if (e.target.files.length) {
+                              //     const arrFiles = Array.from(e.target.files)
+                              //     const files = arrFiles.map((file, index) => {
+                              //       // const src = window.URL.createObjectURL(file)
+                              //       return { file }
+                              //     })
+                              //     props.setFieldValue(
+                              //       'educationalCertificates',
+                              //       files
+                              //     )
+                              //   }
+                              // }}
                             />
                           </label>
 
                           <p style={{ wordBreak: 'break-all' }}>
-                            {props.values.educationalCertificates[id]
-                              ? 'File uploaded'
+                            {props.values.educationalCertificates[id].file
+                              ? props.values.educationalCertificates[id].file
+                                  .name
                               : 'Please upload JPEG format, no larger than 3mb in size'}
                           </p>
+
+                          <span
+                            style={{ marginLeft: '10rem' }}
+                            onClick={() => arrayHelpers.remove(id)}
+                          >
+                            Remove
+                          </span>
                         </FileInput>
                       ))}
 
@@ -1313,7 +1373,7 @@ class DetailsForm extends Component {
                           onClick={e => {
                             e.preventDefault()
                             console.log('i been clicked')
-                            arrayHelpers.push('')
+                            arrayHelpers.push({})
                           }}
                         >
                           +
@@ -1336,7 +1396,6 @@ class DetailsForm extends Component {
                           <label htmlFor={`professionalBodies.${id}`}>
                             Upload
                             <input
-                              // multiple
                               id={`professionalBodies.${id}`}
                               accept="image/jpeg"
                               type="file"
@@ -1346,35 +1405,40 @@ class DetailsForm extends Component {
                                   props.values.professionalBodies.map(
                                     async (cert, certId) => {
                                       if (id !== certId) return cert
-                                      const toBase64 = file =>
-                                        new Promise((resolve, reject) => {
-                                          const reader = new FileReader()
-                                          reader.readAsDataURL(file)
-                                          reader.onload = () =>
-                                            resolve(reader.result)
-                                          reader.onerror = error =>
-                                            reject(error)
+
+                                      if (e.target.files.length) {
+                                        const arrFiles = Array.from(
+                                          e.target.files
+                                        )
+                                        const files = arrFiles.map(file => {
+                                          return { file }
                                         })
-                                      let profCert = await toBase64(
-                                        e.currentTarget.files[0]
-                                      )
-                                      return profCert
+
+                                        return files
+                                      }
                                     }
                                   )
                                 )
+                                const flatCerts = flatten(newCerts)
                                 props.setValues({
                                   ...props.values,
-                                  professionalBodies: newCerts
+                                  professionalBodies: flatCerts
                                 })
                               }}
                             />
                           </label>
 
                           <p style={{ wordBreak: 'break-all' }}>
-                            {props.values.professionalBodies[id]
-                              ? 'File uploaded'
+                            {props.values.professionalBodies[id].file
+                              ? props.values.professionalBodies[id].file.name
                               : 'Please upload JPEG format, no larger than 3mb in size'}
                           </p>
+                          <span
+                            style={{ marginLeft: '10rem' }}
+                            onClick={() => arrayHelpers.remove(id)}
+                          >
+                            Remove
+                          </span>
                         </FileInput>
                       ))}
 
@@ -1385,7 +1449,7 @@ class DetailsForm extends Component {
                           onClick={e => {
                             e.preventDefault()
                             console.log('i been clicked')
-                            arrayHelpers.push('')
+                            arrayHelpers.push({})
                           }}
                         >
                           +
