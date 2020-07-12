@@ -597,20 +597,17 @@ class DetailsForm extends Component {
           formData.append('national_id', this.state.national_id)
           formData.append('marriage_cert', this.state.marriage_cert)
           // let educationalCerts = values.educationalCertificates.map()
-          values.educationalCertificates.forEach(elem => {
-            formData.append('educational_certs', elem.file)
-          })
-          // formData.append(
-          //   'educational_certs',
-          //   JSON.stringify(values.educationalCertificates)
-          // )
-          values.professionalBodies.forEach(elem => {
-            formData.append('professional_body_affiliates', elem.file)
-          })
-          // formData.append(
-          //   'professional_body_affiliates',
-          //   JSON.stringify(values.professionalBodies)
-          // )
+          // values.educationalCertificates.forEach(elem => {
+          //   formData.append('educational_certs', elem.file)
+          // })
+          formData.append('educational_certs', values.educationalCertificates)
+          // values.professionalBodies.forEach(elem => {
+          //   formData.append('professional_body_affiliates', elem.file)
+          // })
+          formData.append(
+            'professional_body_affiliates',
+            values.professionalBodies
+          )
           formData.append('nss_cert', this.state.nss_cert)
           formData.append('principal_form', this.state.principal_form)
           formData.append('dependant_form', this.state.dependant_form)
