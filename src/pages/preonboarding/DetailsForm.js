@@ -600,17 +600,23 @@ class DetailsForm extends Component {
           // values.educationalCertificates.forEach(elem => {
           //   formData.append('educational_certs', elem.file)
           // })
-          formData.append('educational_certs', values.educationalCertificates)
+          formData.append(
+            'educational_certs',
+            flatten(values.educationalCertificates)
+          )
           // values.professionalBodies.forEach(elem => {
           //   formData.append('professional_body_affiliates', elem.file)
           // })
           formData.append(
             'professional_body_affiliates',
-            values.professionalBodies
+            flatten(values.professionalBodies)
           )
           formData.append('nss_cert', this.state.nss_cert)
           formData.append('principal_form', this.state.principal_form)
           formData.append('dependant_form', this.state.dependant_form)
+
+          console.log(values.educationalCertificates)
+          console.log(values.professionalBodies)
 
           try {
             let res = await axios({
@@ -622,12 +628,14 @@ class DetailsForm extends Component {
                 'Content-Type': 'multipart/form-data'
               }
             })
-            values.firstName = ''
-            values.surname = ''
+            values.professionalBodies = []
+            values.educationalCertificates = []
             navigate('/preonboarding/conditions-of-service')
             console.error(res)
           } catch (err) {
             console.error(err)
+            values.professionalBodies = []
+            values.educationalCertificates = []
             this.setState({
               errorMessage: 'Something went wrong. Please try again.'
             })
