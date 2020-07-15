@@ -5,7 +5,7 @@ import { Persist } from 'formik-persist'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 import { layout } from 'styled-system'
-import { isEmpty, flatten } from 'lodash'
+import { isEmpty } from 'lodash'
 // import { navigate } from '@reach/router'
 import PropTypes from 'prop-types'
 import moment from 'moment'
@@ -600,16 +600,13 @@ class DetailsForm extends Component {
           // values.educationalCertificates.forEach(elem => {
           //   formData.append('educational_certs', elem.file)
           // })
-          formData.append(
-            'educational_certs',
-            flatten(values.educationalCertificates)
-          )
+          formData.append('educational_certs', values.educationalCertificates)
           // values.professionalBodies.forEach(elem => {
           //   formData.append('professional_body_affiliates', elem.file)
           // })
           formData.append(
             'professional_body_affiliates',
-            flatten(values.professionalBodies)
+            values.professionalBodies
           )
           formData.append('nss_cert', this.state.nss_cert)
           formData.append('principal_form', this.state.principal_form)
@@ -1264,206 +1261,71 @@ class DetailsForm extends Component {
 
               <section hidden={this.state.education}>
                 <Label htmlFor="educationalCertificates">
-                  Upload Educational Certificates
+                  Upload Educational Certificates (Hold Cmd or Ctrl + click to
+                  select multiple files)
                 </Label>
-                <FieldArray
-                  name="educationalCertificates"
-                  render={arrayHelpers => (
-                    <React.Fragment>
-                      {props.values.educationalCertificates.map((cert, id) => (
-                        <FileInput key={id} style={{ marginTop: '1.5rem' }}>
-                          <label htmlFor={`educationalCertificates.${id}`}>
-                            Upload
-                            <input
-                              multiple
-                              id={`educationalCertificates.${id}`}
-                              accept="image/jpeg"
-                              type="file"
-                              name={`educationalCertificates.${id}`}
-                              onChange={async e => {
-                                const newCerts = await Promise.all(
-                                  props.values.educationalCertificates.map(
-                                    async (cert, certId) => {
-                                      if (id !== certId) return cert
+                <FileInput>
+                  <label htmlFor="educationalCertificates">
+                    Upload
+                    <input
+                      multiple
+                      id="educationalCertificates"
+                      accept="image/jpeg"
+                      type="file"
+                      name="educationalCertificates"
+                      onChange={e => {
+                        // TODO: allow clicking to add files/push files into array
+                        if (e.target.files.length) {
+                          const arrFiles = Array.from(e.target.files)
+                          const files = arrFiles.map(file => {
+                            return { file }
+                          })
+                          props.setFieldValue('educationalCertificates', files)
+                        }
+                      }}
+                    />
+                  </label>
 
-                                      // const toBase64 = file =>
-                                      //   new Promise((resolve, reject) => {
-                                      //     const reader = new FileReader()
-                                      //     reader.readAsDataURL(file)
-                                      //     reader.onload = () =>
-                                      //       resolve(reader.result)
-                                      //     reader.onerror = error =>
-                                      //       reject(error)
-                                      //   })
-                                      if (e.target.files.length) {
-                                        const arrFiles = Array.from(
-                                          e.target.files
-                                        )
-                                        const files = arrFiles.map(file => {
-                                          // const src = window.URL.createObjectURL(file)
-                                          return { file }
-                                        })
-                                        // props.setFieldValue(
-                                        //   'educationalCertificates',
-                                        //   files
-                                        // )
-                                        return files
-                                      }
-                                      // let eduCert = await toBase64(
-                                      //   e.currentTarget.files[0]
-                                      // )
-                                    }
-                                  )
-                                )
-                                const flatCerts = flatten(newCerts)
-                                props.setValues({
-                                  ...props.values,
-                                  educationalCertificates: flatCerts
-                                })
-                              }}
-                              // onChange={e =>
-                              //   arrayHelpers.push(e.currentTarget.files[0])
-                              // }
-                              // onChange={e => {
-                              //   // let newCerts = this.state.educational_certs.map(
-                              //   //   (cert, certId) => {
-                              //   //     if (id !== certId) return cert
-                              //   //     // return e.target.files[0]
-                              //   //     return id
-                              //   //   }
-                              //   // )
-                              //   // this.setState({
-                              //   //   educational_certs: newCerts
-                              //   // })
-                              //   console.log(id)
-                              //   this.state.educational_certs.concat(id)
-                              // }}
-                              // onChange={e => {
-                              //   // TODO: allow clicking to add files/push files into array
-                              //   if (e.target.files.length) {
-                              //     const arrFiles = Array.from(e.target.files)
-                              //     const files = arrFiles.map((file, index) => {
-                              //       // const src = window.URL.createObjectURL(file)
-                              //       return { file }
-                              //     })
-                              //     props.setFieldValue(
-                              //       'educationalCertificates',
-                              //       files
-                              //     )
-                              //   }
-                              // }}
-                            />
-                          </label>
-
-                          <p style={{ wordBreak: 'break-all' }}>
-                            {props.values.educationalCertificates[id].file
-                              ? props.values.educationalCertificates[id].file
-                                  .name
-                              : 'Please upload JPEG format, no larger than 3mb in size'}
-                          </p>
-
-                          <span
-                            style={{ marginLeft: '10rem' }}
-                            onClick={() => arrayHelpers.remove(id)}
-                          >
-                            Remove
-                          </span>
-                        </FileInput>
-                      ))}
-
-                      <Label htmlFor="">
-                        <AddButton
-                          type="button"
-                          // onClick={() => this.handleAddEducationalCert()}
-                          onClick={e => {
-                            e.preventDefault()
-                            console.log('i been clicked')
-                            arrayHelpers.push({})
-                          }}
-                        >
-                          +
-                        </AddButton>
-                        Add certificate
-                      </Label>
-                    </React.Fragment>
-                  )}
-                />
+                  <p style={{ wordBreak: 'break-all' }}>
+                    {props.values.educationalCertificates.length
+                      ? props.values.educationalCertificates.length +
+                        ' file(s) uploaded'
+                      : 'Please upload JPEG format, no larger than 3mb in size'}
+                  </p>
+                </FileInput>
 
                 <Label htmlFor="professionalBodies">
-                  Upload Evidence of Professional Body Affliations
+                  Upload Evidence of Professional Body Affliations (Hold Cmd or
+                  Ctrl + click to select multiple files)
                 </Label>
-                <FieldArray
-                  name="professionalBodies"
-                  render={arrayHelpers => (
-                    <React.Fragment>
-                      {props.values.professionalBodies.map((cert, id) => (
-                        <FileInput key={id} style={{ marginTop: '1.5rem' }}>
-                          <label htmlFor={`professionalBodies.${id}`}>
-                            Upload
-                            <input
-                              id={`professionalBodies.${id}`}
-                              accept="image/jpeg"
-                              type="file"
-                              name={`professionalBodies.${id}`}
-                              onChange={async e => {
-                                const newCerts = await Promise.all(
-                                  props.values.professionalBodies.map(
-                                    async (cert, certId) => {
-                                      if (id !== certId) return cert
+                <FileInput>
+                  <label htmlFor="professionalBodies">
+                    Upload
+                    <input
+                      multiple
+                      id="professionalBodies"
+                      accept="image/jpeg"
+                      type="file"
+                      name="professionalBodies"
+                      onChange={e => {
+                        if (e.target.files.length) {
+                          const arrFiles = Array.from(e.target.files)
+                          const files = arrFiles.map(file => {
+                            return { file }
+                          })
+                          props.setFieldValue('professionalBodies', files)
+                        }
+                      }}
+                    />
+                  </label>
 
-                                      if (e.target.files.length) {
-                                        const arrFiles = Array.from(
-                                          e.target.files
-                                        )
-                                        const files = arrFiles.map(file => {
-                                          return { file }
-                                        })
-
-                                        return files
-                                      }
-                                    }
-                                  )
-                                )
-                                const flatCerts = flatten(newCerts)
-                                props.setValues({
-                                  ...props.values,
-                                  professionalBodies: flatCerts
-                                })
-                              }}
-                            />
-                          </label>
-
-                          <p style={{ wordBreak: 'break-all' }}>
-                            {props.values.professionalBodies[id].file
-                              ? props.values.professionalBodies[id].file.name
-                              : 'Please upload JPEG format, no larger than 3mb in size'}
-                          </p>
-                          <span
-                            style={{ marginLeft: '10rem' }}
-                            onClick={() => arrayHelpers.remove(id)}
-                          >
-                            Remove
-                          </span>
-                        </FileInput>
-                      ))}
-
-                      <Label htmlFor="">
-                        <AddButton
-                          type="button"
-                          // onClick={() => this.handleAddEducationalCert()}
-                          onClick={e => {
-                            e.preventDefault()
-                            console.log('i been clicked')
-                            arrayHelpers.push({})
-                          }}
-                        >
-                          +
-                        </AddButton>
-                        Add certificate
-                      </Label>
-                    </React.Fragment>
-                  )}
-                />
+                  <p style={{ wordBreak: 'break-all' }}>
+                    {props.values.professionalBodies.length
+                      ? props.values.professionalBodies.length +
+                        ' file(s) uploaded'
+                      : 'Please upload JPEG format, no larger than 3mb in size'}
+                  </p>
+                </FileInput>
                 <ShowSectionButton
                   type="button"
                   onClick={() => this.handleOpenSection('nationalService')}
