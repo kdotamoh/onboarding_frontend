@@ -5,7 +5,7 @@ import { Persist } from 'formik-persist'
 import * as Yup from 'yup'
 import styled from 'styled-components'
 import { layout } from 'styled-system'
-import { isEmpty } from 'lodash'
+import { isEmpty, forEach } from 'lodash'
 // import { navigate } from '@reach/router'
 import PropTypes from 'prop-types'
 import moment from 'moment'
@@ -600,14 +600,26 @@ class DetailsForm extends Component {
           // values.educationalCertificates.forEach(elem => {
           //   formData.append('educational_certs', elem.file)
           // })
-          formData.append('educational_certs', values.educationalCertificates)
+          formData.append(
+            'educational_certs',
+            values.educationalCertificates.length
+          )
+          forEach(values.educationalCertificates, function(cert, index) {
+            formData.append(`educational_cert${index + 1}`, cert.file)
+          })
           // values.professionalBodies.forEach(elem => {
           //   formData.append('professional_body_affiliates', elem.file)
           // })
           formData.append(
             'professional_body_affiliates',
-            values.professionalBodies
+            values.professionalBodies.length
           )
+          forEach(values.professionalBodies, function(cert, index) {
+            formData.append(
+              `professional_body_affiliate${index + 1}`,
+              cert.file
+            )
+          })
           formData.append('nss_cert', this.state.nss_cert)
           formData.append('principal_form', this.state.principal_form)
           formData.append('dependant_form', this.state.dependant_form)
