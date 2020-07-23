@@ -39,15 +39,19 @@ export default class CEOWelcome extends Component {
           <h3>{title ? title : null}</h3>
           <h4>{header ? header : null}</h4>
           <div dangerouslySetInnerHTML={{ __html: content }}></div>
-          <Video controls>
-            <source src={video_file_1} type="video/mp4" />
-            Sorry, your browser doesn't support embedded videos.
-          </Video>
+          {video_file_1 && (
+            <Video controls>
+              <source src={video_file_1} type="video/mp4" />
+              Sorry, your browser doesn't support embedded videos.
+            </Video>
+          )}
           <div style={{ marginTop: '4rem' }} />
-          <Video controls>
-            <source src={video_file_2} type="video/mp4" />
-            Sorry, your browser doesn't support embedded videos.
-          </Video>
+          {video_file_2 && (
+            <Video controls>
+              <source src={video_file_2} type="video/mp4" />
+              Sorry, your browser doesn't support embedded videos.
+            </Video>
+          )}
           <Link to="../company-overview">
             <Button mt="15rem" textColor="black">
               Next &gt;

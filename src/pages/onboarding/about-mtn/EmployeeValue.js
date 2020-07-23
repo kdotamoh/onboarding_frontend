@@ -61,12 +61,22 @@ const Value = styled.div`
   }
 `
 
+const Video = styled.video`
+  width: 65rem;
+
+  @media (max-width: 768px) {
+    width: 100%;
+  }
+`
+
 class EmployeeValue extends Component {
   render() {
     let { title } = this.props.page ? this.props.page : {}
     let { header } = this.props.page ? this.props.page : {}
     let { employeeValues } = this.props ? this.props : []
-    // let { content } = this.props.page ? this.props.page : {}
+    let { content } = this.props.page ? this.props.page : {}
+    let { video_file_1 } = this.props.page ? this.props.page : {}
+    let { video_file_2 } = this.props.page ? this.props.page : {}
     return (
       <>
         <PageStyle>
@@ -84,54 +94,23 @@ class EmployeeValue extends Component {
                   ></span>
                 </Value>
               ))}
-            {/* <Value>
-              <img src={brand} alt="" />
-              <h5>Brand Strength</h5>
-              <span>
-                The strength of the MTN Brand; High Performing Culture;
-                Contribute to making a difference; 21 days of Y’ello Care;
-                Challenging &amp; meaningful work.
-              </span>
-            </Value>
-            <Value>
-              <img src={leadership} alt="" />
-              <h5>Leadership Brand</h5>
-              <span>
-                Bold and inspiring Leadership; Innovation; People, Products
-                &amp; Process Leadership, Aligned leadership; Work with people
-                with exceptional skills.
-              </span>
-            </Value>
-            <Value>
-              <img src={trust} alt="" />
-              <h5>Investing in our Trust</h5>
-              <span>
-                Unlocking potential; Blended Learning Opportunities; Challenging
-                Work, Job Environment, Rotations, Mentor Access &amp; Global
-                Assignments; Access to tools &amp; technologies that allow for
-                agile, flexible &amp; creative outcomes; Talent &amp; Career
-                Management.
-              </span>
-            </Value>
-            <Value>
-              <img src={reward} alt="" />
-              <h5>Total Reward &amp; Recognition</h5>
-              <span>
-                Designed to meet every MTners motivation and aspirations; Labour
-                market relevant Cash &amp; Non-cash benefits, Long and short
-                term reward schemes, Life style and wellness schemes to manage
-                life commitments, Recognition on the go &amp; MTN Shine.
-              </span>
-            </Value>
-            <Value>
-              <img src={global} alt="" />
-              <h5>Globally Diverse Culture</h5>
-              <span>
-                Celebrating our diverse communities &amp; workforce; Each
-                employee has a place and a voice.
-              </span>
-            </Value> */}
           </Values>
+
+          {video_file_1 && (
+            <Video controls>
+              <source src={video_file_1} type="video/mp4" />
+              Sorry, your browser doesn't support embedded videos.
+            </Video>
+          )}
+          <div style={{ marginTop: '4rem' }} />
+          {video_file_2 && (
+            <Video controls>
+              <source src={video_file_2} type="video/mp4" />
+              Sorry, your browser doesn't support embedded videos.
+            </Video>
+          )}
+
+          <div dangerouslySetInnerHTML={{ __html: content }}></div>
 
           <Link to="../strategic-pillars-and-priorities">
             <Button mt="15rem" textColor="black">

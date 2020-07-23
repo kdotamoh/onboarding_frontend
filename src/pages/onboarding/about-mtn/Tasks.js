@@ -16,7 +16,6 @@ import satisfactory from 'images/emoji/satisfactory.svg'
 import good from 'images/emoji/good.svg'
 import verygood from 'images/emoji/verygood.svg'
 import bgImg from 'images/onboarding/bg_bottomright.svg'
-import codeofethics from 'assets/codeofethics.mp4'
 
 const BgImg = styled(Img)`
   position: absolute;
@@ -92,16 +91,27 @@ class Tasks extends Component {
     let { title } = this.props.page ? this.props.page : {}
     let { header } = this.props.page ? this.props.page : {}
     let { content } = this.props.page ? this.props.page : {}
+    let { video_file_1 } = this.props.page ? this.props.page : {}
+    let { video_file_2 } = this.props.page ? this.props.page : {}
     return (
       <>
         <PageStyle>
           <h3>{title ? title : null}</h3>
           <h4>{header ? header : null}</h4>
           <div dangerouslySetInnerHTML={{ __html: content }}></div>
-          <Video controls>
-            <source src={codeofethics} type="video/mp4" />
-            Sorry, your browser doesn't support embedded videos.
-          </Video>
+          {video_file_1 && (
+            <Video controls>
+              <source src={video_file_1} type="video/mp4" />
+              Sorry, your browser doesn't support embedded videos.
+            </Video>
+          )}
+          <div style={{ marginTop: '4rem' }} />
+          {video_file_2 && (
+            <Video controls>
+              <source src={video_file_2} type="video/mp4" />
+              Sorry, your browser doesn't support embedded videos.
+            </Video>
+          )}
 
           <Button
             mt="15rem"
