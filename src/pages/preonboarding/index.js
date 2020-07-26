@@ -17,6 +17,40 @@ import FirstDays from './FirstDays'
 import End from './End'
 import EmployeeDetails from './EmployeeDetails'
 
+// const routes = [
+//   { key: '/', path: '/', component: <PreOnboardingLogin /> },
+//   { key: 'welcome', path: 'welcome', component: <Welcome /> },
+//   { key: 'info', path: 'info', component: <Info /> },
+//   {
+//     key: 'company-overview',
+//     path: 'company-overview',
+//     component: <CompanyOverview />
+//   },
+//   { key: 'compliance', path: 'compliance', component: <Compliance /> },
+//   { key: 'code-of-ethics', path: 'code-of-ethics', component: <CodeEthics /> },
+//   {
+//     key: 'employee-details',
+//     path: 'employee-details',
+//     component: <EmployeeDetails />
+//   },
+//   {
+//     key: 'conditions-of-service',
+//     path: 'conditions-of-service',
+//     component: <ConditionsService />
+//   },
+//   {
+//     key: 'introduce-yoursel',
+//     path: 'introduce-yoursel',
+//     component: <Introduction />
+//   },
+//   {
+//     key: 'your-first-three-days',
+//     path: 'your-first-three-days',
+//     component: <FirstDays />
+//   },
+//   { key: 'end', path: 'end', component: <End /> }
+// ]
+
 class PreOnboarding extends Component {
   render() {
     return (
@@ -27,6 +61,9 @@ class PreOnboarding extends Component {
 
         {this.props.token ? (
           <Router>
+            {/* {routes.map(route => (
+
+            ))} */}
             <Scrolltop path="/">
               <PreOnboardingLogin path="/" />
               <Welcome path="welcome" />

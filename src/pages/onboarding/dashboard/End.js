@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import styled from 'styled-components'
 import { navigate } from '@reach/router'
 import { connect } from 'react-redux'
@@ -16,6 +15,8 @@ import noTask from 'images/no_task.svg'
 import { COLORS } from '../../../constants'
 import { Img, H1 } from 'components/styled'
 import bgImg from 'images/bg_l_h_bottomright.svg'
+
+import { getTasks } from 'utils/get-thingy'
 
 const StepOne = styled.div.attrs({
   className: 'tour-step-1'
@@ -67,36 +68,39 @@ const Layout = styled.div`
 // TODO: This is a temp page to card the end of onboarding.
 class End extends Component {
   state = {
-    tasksLength: '',
-    status: '',
-    upcomingTasks: [],
-    pastTasks: []
+    // tasksLength: '',
+    status: ''
+    // upcomingTasks: [],
+    // pastTasks: []
   }
 
   async componentDidMount() {
     localStorage.setItem('onboardingComplete', true)
 
-    const url = `${process.env.REACT_APP_API_BASE}/tasks/`
+    getTasks(this.props.token)
 
-    let { token } = this.props
+    // const url = `${process.env.REACT_APP_API_BASE}/tasks/`
 
-    let { data } = await axios({
-      method: 'get',
-      url,
-      headers: {
-        Authorization: `JWT ${token}`
-      }
-    })
-    this.setState({ tasks: data, status: 'hasTasks' })
+    // let { token } = this.props
 
-    let upcomingTasks = data.filter(task => task.completed === false)
-    let pastTasks = data.filter(task => task.completed === true)
+    // let { data } = await axios({
+    //   method: 'get',
+    //   url,
+    //   headers: {
+    //     Authorization: `JWT ${token}`
+    //   }
+    // })
+    // this.props.tasks.completed.length
+    // this.setState({ tasks: data, status: 'hasTasks' })
 
-    this.setState({ upcomingTasks, pastTasks, tasksLength: data.length })
+    // let upcomingTasks = data.filter(task => task.completed === false)
+    // let pastTasks = data.filter(task => task.completed === true)
 
-    if (data.length === 0) {
-      this.setState({ status: 'noTasks' })
-    }
+    // this.setState({ upcomingTasks, pastTasks, tasksLength: data.length })
+
+    // if (data.length === 0) {
+    //   this.setState({ status: 'noTasks' })
+    // }
   }
   render() {
     const {
@@ -126,7 +130,7 @@ class End extends Component {
                 <HeroH1>
                   Congrats on completing your onboarding, {first_name}
                 </HeroH1>
-                <p>Text here</p>
+                {/* <p>Text here</p> */}
               </StepOne>
             </div>
             {/* </CenterContent> */}
@@ -144,15 +148,18 @@ class End extends Component {
               // `}
             >
               <img src={noTask} alt="" />
-              {this.state.status === 'noTasks' && (
+              {this.props.tasks.uncompleted.length === 0 && (
                 <p>
-                  <strong>You don't have any tasks yet</strong>
+                  <strong>You have no new tasks</strong>
                 </p>
               )}
-              {this.state.status === 'hasTasks' && (
+              {this.props.tasks.uncompleted.length > 0 && (
                 <>
                   <p style={{ marginTop: '2rem' }}>
-                    <strong>You have ({this.state.tasksLength}) task</strong>
+                    <strong>
+                      You have ({this.props.tasks.uncompleted.length}) new
+                      task(s)
+                    </strong>
                   </p>
                   <Button
                     mt="1rem"
@@ -181,5 +188,6 @@ End.propTypes = {
 
 export default connect(state => ({
   user: state.user,
-  token: state.token
+  token: state.token,
+  tasks: state.tasks
 }))(End)

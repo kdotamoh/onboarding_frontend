@@ -1273,8 +1273,9 @@ class DetailsForm extends Component {
 
               <section hidden={this.state.education}>
                 <Label htmlFor="educationalCertificates">
-                  Upload Educational Certificates (Hold Cmd or Ctrl + click to
-                  select multiple files)
+                  Upload Educational Certificates (To select multiple files,
+                  hold down the "Control" key, or "Command" on a Mac, and click
+                  on all the files you would like to upload)
                 </Label>
                 <FileInput>
                   <label htmlFor="educationalCertificates">
@@ -1307,8 +1308,9 @@ class DetailsForm extends Component {
                 </FileInput>
 
                 <Label htmlFor="professionalBodies">
-                  Upload Evidence of Professional Body Affliations (Hold Cmd or
-                  Ctrl + click to select multiple files)
+                  Upload Evidence of Professional Body Affliations (To select
+                  multiple files, hold down the "Control" key, or "Command" on a
+                  Mac, and click on all the files you would like to upload)
                 </Label>
                 <FileInput>
                   <label htmlFor="professionalBodies">
@@ -1728,7 +1730,9 @@ class DetailsForm extends Component {
                   Acacia Medical Insurance Dependant Application Form
                 </Link>
 
-                <Label htmlFor="">Upload the principal dependant form</Label>
+                <Label htmlFor="">
+                  Upload the filled Principal Application form
+                </Label>
                 <FileInput>
                   <label htmlFor="principal_form">
                     Upload
@@ -1761,7 +1765,9 @@ class DetailsForm extends Component {
                   </p>
                 </FileInput>
 
-                <Label htmlFor="">Upload the dependant form</Label>
+                <Label htmlFor="">
+                  Upload the filled Dependent Application from
+                </Label>
                 <FileInput>
                   <label htmlFor="dependant_form">
                     Upload

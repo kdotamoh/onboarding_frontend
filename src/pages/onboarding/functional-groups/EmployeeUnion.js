@@ -56,7 +56,7 @@ export default class EmployeeUnion extends Component {
               Sorry, your browser doesn't support embedded videos.
             </Video>
           )}
-          <p>Text here</p>
+          {/* <p>Text here</p> */}
           <Link to="../sales">
             <Button mt="15rem" textColor="black">
               Next &gt;

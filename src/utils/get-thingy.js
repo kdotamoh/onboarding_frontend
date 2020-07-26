@@ -17,6 +17,31 @@ import {
   setFunctionalLoaded,
   setAboutLoaded
 } from '../store/pages'
+import { setUncompletedTasks, setCompletedTasks } from '../store/tasks'
+
+export const getTasks = async token => {
+  try {
+    let res = await axios({
+      method: 'get',
+      url: `${process.env.REACT_APP_API_BASE}/tasks/`,
+      headers: {
+        Authorization: `JWT ${token}`
+      }
+    })
+    let { data } = res
+    let uncompleted = data.filter(function(task) {
+      if (task.task_status.length)
+        return task.task_status[0].completed === false
+    })
+    let completed = data.filter(function(task) {
+      if (task.task_status.length) return task.task_status[0].completed === true
+    })
+    store.dispatch(setUncompletedTasks(uncompleted))
+    store.dispatch(setCompletedTasks(completed))
+  } catch (err) {
+    console.error(err)
+  }
+}
 
 export const getInsuranceProviders = async token => {
   try {

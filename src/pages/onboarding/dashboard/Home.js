@@ -17,6 +17,8 @@ import { Img, H1, H2, Button } from 'components/styled'
 import bgImg from 'images/bg_l_h_bottomright.svg'
 import lightBulb from 'images/light_bulb.svg'
 
+import { getTasks } from 'utils/get-thingy'
+
 const StepOne = styled.div.attrs({
   className: 'tour-step-1'
 })``
@@ -159,6 +161,8 @@ class Welcome extends Component {
     }
     let onboardingComplete = localStorage.getItem('onboardingComplete')
     this.setState({ onboardingComplete })
+
+    getTasks(this.props.token)
   }
 
   render() {
@@ -210,7 +214,7 @@ class Welcome extends Component {
               >
                 <StepTwo p="4rem">
                   <H2>Onboarding</H2>
-                  <p>Text here</p>
+                  {/* <p>Text here</p> */}
                   <Button
                     mt="3rem"
                     color="blue"
@@ -265,9 +269,11 @@ class Welcome extends Component {
 Welcome.propTypes = {
   user: PropTypes.shape({
     first_name: PropTypes.string
-  })
+  }),
+  token: PropTypes.string
 }
 
 export default connect(state => ({
-  user: state.user
+  user: state.user,
+  token: state.token
 }))(Welcome)

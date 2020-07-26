@@ -221,7 +221,7 @@ class CompanyOverview extends Component {
               <div className="column">
                 <img src={vital_img} alt="" />
                 <H4 color={COLORS.DARKER_GREYISH_BROWN} mt="4rem">
-                  Vital
+                  Vital Behaviours
                 </H4>
                 <HeroList
                   dangerouslySetInnerHTML={{ __html: vital_behaviours }}

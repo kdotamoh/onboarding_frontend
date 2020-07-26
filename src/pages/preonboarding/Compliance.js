@@ -158,7 +158,8 @@ class Compliance extends Component {
                     id="checked"
                     onChange={this.handleInput}
                   />
-                  I have read and fully understood the MTN Code of Ethics.
+                  I have read and fully understood the MTN Compliance &amp;
+                  Governance.
                 </label>
               </div>
             </Section>

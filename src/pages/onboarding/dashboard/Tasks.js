@@ -13,6 +13,8 @@ import { DashboardCard } from 'components/card'
 import OnboardingLink from 'pages/onboarding/OnboardingLink'
 import DashboardLink from 'pages/onboarding/dashboard/DashboardLink'
 
+import { getTasks } from 'utils/get-thingy'
+
 import noTask from 'images/no_task.svg'
 
 export const Wrapper = styled.div`
@@ -88,25 +90,45 @@ class Tasks extends Component {
     status: 'loading'
   }
   async componentDidMount() {
-    const url = `${process.env.REACT_APP_API_BASE}/tasks/`
+    // const url = `${process.env.REACT_APP_API_BASE}/tasks/`
 
-    let { token } = this.props
+    // let { token } = this.props
 
-    let { data } = await axios({
-      method: 'get',
-      url,
-      headers: {
-        Authorization: `JWT ${token}`
-      }
-    })
-    this.setState({ tasks: data, status: 'loaded' })
+    // let { data } = await axios({
+    //   method: 'get',
+    //   url,
+    //   headers: {
+    //     Authorization: `JWT ${token}`
+    //   }
+    // })
+    // this.setState({ tasks: data, status: 'loaded' })
 
-    let upcomingTasks = data.filter(task => task.completed === false)
-    let pastTasks = data.filter(task => task.completed === true)
-    this.setState({ upcomingTasks, pastTasks })
+    // let upcomingTasks = data.filter(task => task.completed === false)
+    // let pastTasks = data.filter(task => task.completed === true)
+    // this.setState({ upcomingTasks, pastTasks })
 
-    if (data.length === 0) {
-      this.setState({ status: 'noTasks' })
+    // if (data.length === 0) {
+    //   this.setState({ status: 'noTasks' })
+    // }
+    await getTasks(this.props.token)
+    this.setState({ status: 'loaded' })
+  }
+
+  markCompleted = async task => {
+    // /tasks/task_id/ with a PUT method and payload: {completed: true}
+    try {
+      await axios({
+        method: 'put',
+        url: `${process.env.REACT_APP_API_BASE}/tasks/${task.id}/`,
+        data: { completed: true },
+        headers: {
+          Authorization: `JWT ${this.props.token}`
+        }
+      })
+      getTasks(this.props.token)
+    } catch (err) {
+      alert('Oops, something went wrong, please try again.')
+      console.error(err)
     }
   }
   render() {
@@ -224,8 +246,8 @@ class Tasks extends Component {
             {this.state.status === 'loading' && <div>Loading...</div>}
             {this.state.status === 'loaded' && (
               <TaskList>
-                {this.state.tasks.length &&
-                  this.state.tasks.map(task => (
+                {this.props.tasks.uncompleted.length ? (
+                  this.props.tasks.uncompleted.map(task => (
                     <SingleTask key={task.id} mb="2rem">
                       <h3 dangerouslySetInnerHTML={{ __html: task.title }}></h3>
                       <p
@@ -239,24 +261,68 @@ class Tasks extends Component {
                       >
                         <Button
                           color="blue"
-                          dangerouslySetInnerHTML={{ __html: task.button_text }}
+                          dangerouslySetInnerHTML={{
+                            __html: task.button_text
+                          }}
                         ></Button>
                       </a>
+                      <div style={{ marginTop: '2rem' }}>
+                        <Button
+                          onClick={() => this.markCompleted(task)}
+                          color="blue"
+                        >
+                          Mark as completed
+                        </Button>
+                      </div>
                     </SingleTask>
-                  ))}
+                  ))
+                ) : (
+                  <DashboardCard
+                    px="3rem"
+                    py="4rem"
+                    style={{ textAlign: 'center' }}
+                  >
+                    <img src={noTask} alt="" />
+                    <p>
+                      <strong>You have no pending tasks</strong>
+                    </p>
+                  </DashboardCard>
+                )}
               </TaskList>
             )}
-            {this.state.status === 'noTasks' && (
-              <DashboardCard
-                px="3rem"
-                py="4rem"
-                style={{ textAlign: 'center' }}
-              >
-                <img src={noTask} alt="" />
-                <p>
-                  <strong>You don't have any tasks yet</strong>
-                </p>
-              </DashboardCard>
+
+            <div style={{ marginTop: '10rem' }}></div>
+
+            {this.state.status === 'loaded' && (
+              <>
+                {this.props.tasks.completed.length && <p>Completed tasks</p>}
+                <TaskList>
+                  {this.props.tasks.completed.length &&
+                    this.props.tasks.completed.map(task => (
+                      <SingleTask key={task.id} mb="2rem">
+                        <h3
+                          dangerouslySetInnerHTML={{ __html: task.title }}
+                        ></h3>
+                        <p
+                          dangerouslySetInnerHTML={{ __html: task.description }}
+                        ></p>
+                        <a
+                          href={task.button_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          // dangerouslySetInnerHTML={{ __html: task.button_text }}
+                        >
+                          <Button
+                            color="blue"
+                            dangerouslySetInnerHTML={{
+                              __html: task.button_text
+                            }}
+                          ></Button>
+                        </a>
+                      </SingleTask>
+                    ))}
+                </TaskList>
+              </>
             )}
           </div>
         </Layout>
@@ -265,10 +331,11 @@ class Tasks extends Component {
   }
 }
 Tasks.propTypes = {
-  token: PropTypes.string
+  token: PropTypes.string,
+  tasks: PropTypes.array
 }
 
 export default connect(state => ({
-  token: state.token
-  // tasks: state.user.tasks
+  token: state.token,
+  tasks: state.tasks
 }))(Tasks)
