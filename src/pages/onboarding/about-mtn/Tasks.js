@@ -123,7 +123,7 @@ class Tasks extends Component {
 
           {/* <Link to="../../functional-groups/overview">
             <Button mt="15rem" color="blue">
-              Functional Groups >
+              Divisions >
             </Button>
           </Link> */}
         </PageStyle>

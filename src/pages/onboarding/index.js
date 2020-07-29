@@ -105,7 +105,7 @@ const FunctionalGroups = ({ children }) => {
                 padding-left: 1.2rem;
               `}
             >
-              Functional Groups
+              Divisions
             </p>
             <SideNav>
               <ControlledLink to="/onboarding/functional-groups/overview">
@@ -230,7 +230,7 @@ const AboutMTN = ({ children }) => {
               `}
               onClick={() => navigate('/onboarding/functional-groups/overview')}
             >
-              Functional Groups
+              Divisions
             </p>
             <p
               css={`
@@ -297,7 +297,7 @@ class Onboarding extends Component {
     )
     let tasksPage = this.getPage('aboutPages', 'tasks')
 
-    // Functional groups pages
+    // Divisions pages
     let capitalProjects = this.getPage('functionalPages', 'capital-projects') // prettier-ignore
     let functionalOverview = this.getPage('functionalPages', 'overview') // prettier-ignore
     let corporateServices = this.getPage('functionalPages', 'corporate-services') // prettier-ignore
