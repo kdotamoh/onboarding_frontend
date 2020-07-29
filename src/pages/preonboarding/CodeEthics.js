@@ -41,27 +41,27 @@ const BgImgContainer = styled.div`
 export const LegalSection = styled(Section)`
   h2 {
     font-family: MTNBrighterSans-Regular;
-    counter-reset: h3-counter;
+    /* counter-reset: h3-counter; */
 
-    &:before {
+    /* &:before {
       counter-increment: h2-counter;
       content: counter(h2-counter) '. ';
-    }
+    } */
   }
 
   h3 {
     font-family: MTNBrighterSans-Regular;
-    counter-reset: section;
+    /* counter-reset: section; */
 
-    &:before {
+    /* &:before {
       counter-increment: h3-counter;
       content: counter(h2-counter) '.' counter(h3-counter) ' ';
-    }
+    } */
   }
 
   ol {
     list-style-type: none;
-    counter-reset: section;
+    /* counter-reset: section; */
 
     li {
       font-family: MTNBrighterSans-Light;
@@ -70,7 +70,7 @@ export const LegalSection = styled(Section)`
       margin-left: 0px;
       position: relative;
 
-      &:before {
+      /* &:before {
         display: block;
         position: absolute;
         left: 0;
@@ -78,7 +78,7 @@ export const LegalSection = styled(Section)`
         counter-increment: section;
         content: counter(h2-counter) '.' counter(h3-counter) '.'
           counters(section, '.') ' ';
-      }
+      } */
     }
   }
 
@@ -86,30 +86,30 @@ export const LegalSection = styled(Section)`
     h3 {
       font-family: MTNBrighterSans-Light;
       font-size: 16px;
-      counter-reset: h4-counter;
+      /* counter-reset: h4-counter; */
       padding-left: 6rem;
       position: relative;
 
-      &:before {
+      /* &:before {
         display: block;
         position: absolute;
         left: 0;
 
         counter-increment: h3-counter;
         content: counter(h2-counter) '.' counter(h3-counter) ' ';
-      }
+      } */
     }
   }
 
   p {
     h4 {
       font-family: MTNBrighterSans-Regular;
-      counter-reset: h5-counter;
+      /* counter-reset: h5-counter; */
       padding-left: unset;
       position: unset;
       color: #666666;
 
-      &:before {
+      /* &:before {
         display: unset;
         position: unset;
         left: unset;
@@ -117,17 +117,17 @@ export const LegalSection = styled(Section)`
         counter-increment: h4-counter;
         content: counter(h2-counter) '.' counter(h3-counter) '.'
           counter(h4-counter) ' ';
-      }
+      } */
     }
   }
 
   h4 {
     font-family: MTNBrighterSans-Light;
-    counter-reset: h5-counter;
+    /* counter-reset: h5-counter; */
     padding-left: 6rem;
     position: relative;
 
-    &:before {
+    /* &:before {
       display: block;
       position: absolute;
       left: 0;
@@ -135,7 +135,7 @@ export const LegalSection = styled(Section)`
       counter-increment: h4-counter;
       content: counter(h2-counter) '.' counter(h3-counter) '.'
         counter(h4-counter) ' ';
-    }
+    } */
   }
 
   h5 {
@@ -144,7 +144,7 @@ export const LegalSection = styled(Section)`
     padding-left: 7rem;
     position: relative;
 
-    &:before {
+    /* &:before {
       display: block;
       position: absolute;
       left: 0;
@@ -152,7 +152,7 @@ export const LegalSection = styled(Section)`
       counter-increment: h5-counter;
       content: counter(h2-counter) '.' counter(h3-counter) '.'
         counter(h4-counter) '.' counter(h5-counter) ' ';
-    }
+    } */
   }
 
   thead tr {
