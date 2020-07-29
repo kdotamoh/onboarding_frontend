@@ -52,8 +52,6 @@ export default class MissionVision extends Component {
             </Video>
           )}
 
-          <div dangerouslySetInnerHTML={{ __html: content }}></div>
-
           <Link to="../how-we-are-organised">
             <Button mt="15rem" textColor="black">
               Next &gt;

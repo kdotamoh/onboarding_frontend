@@ -10,7 +10,7 @@ import bgImg from 'images/onboarding/group-1.svg'
 
 const BgImg = styled(Img)`
   position: absolute;
-  bottom: 5vw;
+  bottom: 0;
   right: 7.5vw;
   align-self: flex-end;
   z-index: 0;
