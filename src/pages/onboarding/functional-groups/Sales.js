@@ -42,7 +42,7 @@ class Sales extends Component {
           <h3>{title ? title : null}</h3>
           <h4>{header ? header : null}</h4>
           <div dangerouslySetInnerHTML={{ __html: content }}></div>
-          <PDFViewer file={pdf_file} />
+          {pdf_file && <PDFViewer file={pdf_file} />}
 
           {video_file_1 && (
             <Video controls>

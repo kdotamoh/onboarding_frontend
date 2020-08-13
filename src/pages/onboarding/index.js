@@ -7,6 +7,7 @@ import { space } from 'styled-system'
 
 import goBack from 'utils/go-back'
 import Scrolltop from 'utils/scrolltop'
+import { Button } from 'components/styled'
 
 import { COLORS } from '../../constants'
 import { SideNav, SmallNav } from 'components/navigation'
@@ -157,9 +158,12 @@ const FunctionalGroups = ({ children }) => {
           </div>
         </div>
         <div className="onboarding__main">
-          <u style={{ cursor: 'pointer' }} onClick={() => goBack()}>
+          {/* <u style={{ cursor: 'pointer' }} onClick={() => goBack()}>
             {'< Back'}
-          </u>
+          </u> */}
+          <Button color="blue" textColor="white" onClick={() => goBack}>
+            &lt; Back
+          </Button>
           <div
             css={`
               width: 600px;
